@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -42,6 +51,7 @@
         "logo-gq"
       ],
       "settings": {
+        "image": "shopify://shop_images/ChatGPT_Image_Aug_27_2026_05_17_39_PM.png",
         "height": "large",
         "overlay_opacity": 35,
         "content_position": "bottom-left",
@@ -78,22 +88,22 @@
         "badge-1": {
           "type": "badge",
           "settings": {
-            "label": "Scientifically Proven",
-            "icon_type": "atom"
+            "icon_type": "atom",
+            "label": "Scientifically Proven"
           }
         },
         "badge-2": {
           "type": "badge",
           "settings": {
-            "label": "Dermatologically Tested",
-            "icon_type": "droplet"
+            "icon_type": "droplet",
+            "label": "Dermatologically Tested"
           }
         },
         "badge-3": {
           "type": "badge",
           "settings": {
-            "label": "Cruelty-Free & Vegan",
-            "icon_type": "paw"
+            "icon_type": "paw",
+            "label": "Cruelty-Free & Vegan"
           }
         }
       },
@@ -114,7 +124,8 @@
           "settings": {
             "heading": "Product Selection",
             "icon": "box",
-            "row_content": "<p>A focused range built around specific hair and scalp concerns, so you can choose the care you need without unnecessary complexity.</p>"
+            "row_content": "<p>A focused range built around specific hair and scalp concerns, so you can choose the care you need without unnecessary complexity.</p>",
+            "page": ""
           }
         },
         "row-ingredients": {
@@ -122,7 +133,8 @@
           "settings": {
             "heading": "Core Ingredient Philosophy",
             "icon": "leaf",
-            "row_content": "<p>We target concerns at the root using proven actives and dermatological insight, for lasting scalp and hair strength rather than cosmetic cover-up.</p>"
+            "row_content": "<p>We target concerns at the root using proven actives and dermatological insight, for lasting scalp and hair strength rather than cosmetic cover-up.</p>",
+            "page": ""
           }
         },
         "row-formulated": {
@@ -130,7 +142,8 @@
           "settings": {
             "heading": "Consciously Formulated",
             "icon": "check_mark",
-            "row_content": "<p>Every formula is refined and re-tested until it earns its place on the shelf — no shortcuts, no filler actives.</p>"
+            "row_content": "<p>Every formula is refined and re-tested until it earns its place on the shelf — no shortcuts, no filler actives.</p>",
+            "page": ""
           }
         },
         "row-performance": {
@@ -138,7 +151,8 @@
           "settings": {
             "heading": "Measuring Performance",
             "icon": "stopwatch",
-            "row_content": "<p>Results are tracked over real usage windows, not one-off lab conditions, so what we claim is what you'll actually see.</p>"
+            "row_content": "<p>Results are tracked over real usage windows, not one-off lab conditions, so what we claim is what you'll actually see.</p>",
+            "page": ""
           }
         },
         "row-indian-hair": {
@@ -146,7 +160,8 @@
           "settings": {
             "heading": "Made for Indian Hair and Scalp",
             "icon": "map_pin",
-            "row_content": "<p>Engineered specifically against the hard water, humidity and pollution profile of Indian cities — not adapted from a formula built for somewhere else.</p>"
+            "row_content": "<p>Engineered specifically against the hard water, humidity and pollution profile of Indian cities — not adapted from a formula built for somewhere else.</p>",
+            "page": ""
           }
         }
       },
@@ -160,6 +175,7 @@
       "settings": {
         "caption": "",
         "heading": "",
+        "heading_size": "h1",
         "heading_alignment": "left",
         "layout": "section",
         "container_color_scheme": "scheme-3",
