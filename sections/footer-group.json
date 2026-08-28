@@ -15,7 +15,8 @@
         "about": {
           "type": "nav_link",
           "settings": {
-            "label": "About Us"
+            "label": "About Us",
+            "url": "shopify://pages/about-us"
           }
         },
         "lab_notes": {
