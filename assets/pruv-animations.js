@@ -217,4 +217,20 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   }
+
+  /* PDP Section Card Entrance Reveals */
+  var pdpCards = document.querySelectorAll('.pruv-pdp-benefits__card, .pruv-pdp-ingredients__card, .pruv-pdp-how-to-use__card');
+  if (pdpCards.length && hasScrollTrigger) {
+    pdpCards.forEach(function (card) {
+      gsap.set(card, { opacity: 0, y: 30 });
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 86%',
+        once: true,
+        onEnter: function () {
+          gsap.to(card, { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' });
+        },
+      });
+    });
+  }
 });

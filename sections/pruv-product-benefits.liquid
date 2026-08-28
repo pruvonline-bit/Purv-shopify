@@ -1,0 +1,73 @@
+{{ 'section-pruv-product-benefits.css' | asset_url | stylesheet_tag }}
+
+<section class="pruv-pdp-benefits color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="pruv-pdp-benefits__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pruv-pdp-benefits__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="pruv-pdp-benefits__title">{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="pruv-pdp-benefits__grid">
+      <div class="pruv-pdp-benefits__card">
+        <div class="pruv-pdp-benefits__stat">84 DAYS</div>
+        <h3 class="pruv-pdp-benefits__card-title">Visible New Hair Growth</h3>
+        <p class="pruv-pdp-benefits__card-text">Reactivates dormant stem cells to trigger new hair growth cycles and increase follicle density.</p>
+      </div>
+
+      <div class="pruv-pdp-benefits__card">
+        <div class="pruv-pdp-benefits__stat">94%</div>
+        <h3 class="pruv-pdp-benefits__card-title">Keratin Root Strength</h3>
+        <p class="pruv-pdp-benefits__card-text">Fortifies structural hair proteins to prevent breakage and significantly reduce daily hair fall.</p>
+      </div>
+
+      <div class="pruv-pdp-benefits__card">
+        <div class="pruv-pdp-benefits__stat">WATER-BASE</div>
+        <h3 class="pruv-pdp-benefits__card-title">Fast-Absorbing & Non-Greasy</h3>
+        <p class="pruv-pdp-benefits__card-text">Weightless formula penetrates scalp deeply without leaving sticky residues or greasy buildup.</p>
+      </div>
+
+      <div class="pruv-pdp-benefits__card">
+        <div class="pruv-pdp-benefits__stat">100% CLEAN</div>
+        <h3 class="pruv-pdp-benefits__card-title">Dermatologically Certified</h3>
+        <p class="pruv-pdp-benefits__card-text">Formulated without sulphates, parabens, silicones, or synthetic toxins. Safe for daily scalp care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv product benefits",
+  "tag": "section",
+  "class": "section pruv-product-benefits-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLINICALLY PROVEN"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Designed for Real Hair & Scalp Transformation"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv product benefits"
+    }
+  ]
+}
+{% endschema %}

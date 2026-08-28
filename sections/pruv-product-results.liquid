@@ -1,0 +1,79 @@
+{{ 'section-pruv-results.css' | asset_url | stylesheet_tag }}
+
+<section class="pruv-pdp-results color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="pruv-pdp-results__inner">
+      <div class="pruv-pdp-results__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pruv-pdp-results__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="pruv-pdp-results__title">{{ section.settings.heading }}</h2>
+        <p class="pruv-pdp-results__desc">Based on a 12-week consumer perception study with 120 male & female participants suffering from early-stage hair thinning and excessive shedding.</p>
+        
+        <div class="pruv-pdp-results__guarantee">
+          <svg class="pruv-pdp-results__guarantee-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>Dermatologist Formulated & Tested</span>
+        </div>
+      </div>
+
+      <div class="pruv-pdp-results__stats">
+        <div class="pruv-pdp-results__stat-item">
+          <div class="pruv-pdp-results__stat-head">
+            <span class="pruv-pdp-results__stat-val">89%</span>
+            <span class="pruv-pdp-results__stat-label">Noticed Reduced Hair Fall & Shedding</span>
+          </div>
+          <div class="pruv-pdp-results__bar"><div class="pruv-pdp-results__fill" style="width: 89%;"></div></div>
+        </div>
+
+        <div class="pruv-pdp-results__stat-item">
+          <div class="pruv-pdp-results__stat-head">
+            <span class="pruv-pdp-results__stat-val">92%</span>
+            <span class="pruv-pdp-results__stat-label">Reported Thicker Hair Volume & Density</span>
+          </div>
+          <div class="pruv-pdp-results__bar"><div class="pruv-pdp-results__fill" style="width: 92%;"></div></div>
+        </div>
+
+        <div class="pruv-pdp-results__stat-item">
+          <div class="pruv-pdp-results__stat-head">
+            <span class="pruv-pdp-results__stat-val">95%</span>
+            <span class="pruv-pdp-results__stat-label">Agreed Scalp Feels Healthier & Non-Sticky</span>
+          </div>
+          <div class="pruv-pdp-results__bar"><div class="pruv-pdp-results__fill" style="width: 95%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv clinical results",
+  "tag": "section",
+  "class": "section pruv-product-results-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLINICAL STUDY PROOF"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Proven Results You Can See & Feel"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv clinical results"
+    }
+  ]
+}
+{% endschema %}

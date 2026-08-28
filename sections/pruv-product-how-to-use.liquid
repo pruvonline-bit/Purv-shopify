@@ -1,0 +1,66 @@
+{{ 'section-pruv-how-to-use.css' | asset_url | stylesheet_tag }}
+
+<section class="pruv-pdp-how-to-use color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="pruv-pdp-how-to-use__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-pdp-how-to-use__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="pruv-pdp-how-to-use__title">{{ section.settings.heading }}</h2>
+      <p class="pruv-pdp-how-to-use__subtitle">3 simple steps every night for maximum scalp absorption and results.</p>
+    </div>
+
+    <div class="pruv-pdp-how-to-use__grid">
+      <div class="pruv-pdp-how-to-use__card">
+        <span class="pruv-pdp-how-to-use__step-num">STEP 01</span>
+        <h3 class="pruv-pdp-how-to-use__step-title">Section Scalp</h3>
+        <p class="pruv-pdp-how-to-use__step-text">Part dry or towel-dried hair into clean sections using your fingers or comb for direct scalp access.</p>
+      </div>
+
+      <div class="pruv-pdp-how-to-use__card">
+        <span class="pruv-pdp-how-to-use__step-num">STEP 02</span>
+        <h3 class="pruv-pdp-how-to-use__step-title">Apply Dropper</h3>
+        <p class="pruv-pdp-how-to-use__step-text">Dispense 1-2 full droppers of serum evenly across scalp areas experiencing hair thinning or loss.</p>
+      </div>
+
+      <div class="pruv-pdp-how-to-use__card">
+        <span class="pruv-pdp-how-to-use__step-num">STEP 03</span>
+        <h3 class="pruv-pdp-how-to-use__step-title">Ritual Massage</h3>
+        <p class="pruv-pdp-how-to-use__step-text">Gently massage with fingertips for 2 minutes in circular motions. Leave in overnight. Do not rinse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv how to use ritual",
+  "tag": "section",
+  "class": "section pruv-product-how-to-use-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "DAILY APPLICATION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The 3-Step Daily Ritual"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv how to use ritual"
+    }
+  ]
+}
+{% endschema %}

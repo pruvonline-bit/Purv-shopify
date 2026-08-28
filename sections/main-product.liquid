@@ -99,30 +99,24 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    <h1>{{ product.title | escape }}</h1>
-                    <a href="{{ product.url }}" class="product__title">
-                      <h2 class="h1">
-                        {{ product.title | escape }}
-                      </h2>
-                    </a>
+                    <h1 class="pruv-pdp-title-text">{{ product.title | escape }}</h1>
+                    <div class="pruv-pdp-rating-row">
+                      <span class="pruv-pdp-stars">★★★★★</span>
+                      <span class="pruv-pdp-rating-divider">|</span>
+                      <span class="pruv-pdp-rating-count">474 REVIEWS</span>
+                    </div>
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" class="pruv-pdp-price-wrapper" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      use_variant: true,
-                      show_badges: true,
-                      price_class: 'price--large'
-                    -%}
-                    {%- if product.compare_at_price > product.price -%}
-                      {%- assign pruv_pdp_savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                      <span class="pruv-pdp-save">SAVE {{ pruv_pdp_savings }}%</span>
-                    {%- endif -%}
-                  </div>
-
-                  <div class="pruv-pdp-promo">
-                    <span class="pruv-pdp-promo__badge">PROMO</span>
-                    <span class="pruv-pdp-promo__text">Use code <strong>BEYONDDOUBT</strong> for 15% OFF your first ritual</span>
+                  <div id="price-{{ section.id }}" class="pruv-pdp-price-card" role="status" {{ block.shopify_attributes }}>
+                    <div class="pruv-pdp-mrp-row">
+                      <span class="pruv-pdp-mrp">MRP <s>{{ product.compare_at_price | money }}</s></span>
+                      {%- if product.compare_at_price > product.price -%}
+                        {%- assign pruv_pdp_savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                        <span class="pruv-pdp-save-badge">SAVE {{ pruv_pdp_savings }}%</span>
+                      {%- endif -%}
+                    </div>
+                    <div class="pruv-pdp-final-price">{{ product.price | money }}</div>
+                    <div class="pruv-pdp-tax-label">(Incl of all Taxes)</div>
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -703,9 +697,60 @@
               {{ 'products.product.view_full_details' | t }}
               {{- 'icon-arrow.svg' | inline_asset_content -}}
             </a>
-          </section>
         </div>
       </div>
+
+      <!-- Sticky Bottom Action Bar for Mobile -->
+      <div class="pruv-pdp-sticky-bar">
+        <div class="pruv-pdp-sticky-bar__qty">
+          <button type="button" class="pruv-pdp-sticky-bar__qty-btn" id="StickyQtyMinus" aria-label="Decrease quantity">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <span class="pruv-pdp-sticky-bar__qty-val" id="StickyQtyVal">1</span>
+          <button type="button" class="pruv-pdp-sticky-bar__qty-btn" id="StickyQtyPlus" aria-label="Increase quantity">
+            <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+        <button type="button" class="pruv-pdp-sticky-bar__add button" id="StickyAddToCartBtn">
+          <span>ADD TO CART</span>
+        </button>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          var minusBtn = document.getElementById('StickyQtyMinus');
+          var plusBtn = document.getElementById('StickyQtyPlus');
+          var qtyVal = document.getElementById('StickyQtyVal');
+          var stickyAdd = document.getElementById('StickyAddToCartBtn');
+
+          if (minusBtn && plusBtn && qtyVal) {
+            minusBtn.addEventListener('click', function () {
+              var current = parseInt(qtyVal.textContent, 10) || 1;
+              if (current > 1) {
+                var nextVal = current - 1;
+                qtyVal.textContent = nextVal;
+                var mainInput = document.querySelector('.quantity__input');
+                if (mainInput) mainInput.value = nextVal;
+              }
+            });
+
+            plusBtn.addEventListener('click', function () {
+              var current = parseInt(qtyVal.textContent, 10) || 1;
+              var nextVal = current + 1;
+              qtyVal.textContent = nextVal;
+              var mainInput = document.querySelector('.quantity__input');
+              if (mainInput) mainInput.value = nextVal;
+            });
+          }
+
+          if (stickyAdd) {
+            stickyAdd.addEventListener('click', function () {
+              var mainSubmit = document.querySelector('.product-form__submit');
+              if (mainSubmit) mainSubmit.click();
+            });
+          }
+        });
+      </script>
 
       {% render 'product-media-modal', variant_images: variant_images %}
 

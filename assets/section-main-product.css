@@ -1642,3 +1642,212 @@ a.product__text {
   color: #a85f2e;
   flex: none;
 }
+
+/* Reference Landing Section Styles (Mobile & Desktop) */
+.pruv-pdp-title-text {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #191712;
+  line-height: 1.2;
+  margin: 0 0 0.8rem;
+}
+
+.pruv-pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.pruv-pdp-stars {
+  color: #ffc107;
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+}
+
+.pruv-pdp-rating-divider {
+  color: rgba(25, 23, 18, 0.25);
+  font-size: 1.4rem;
+}
+
+.pruv-pdp-rating-count {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(25, 23, 18, 0.6);
+  text-transform: uppercase;
+}
+
+.pruv-pdp-price-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.pruv-pdp-mrp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 32rem;
+}
+
+.pruv-pdp-mrp {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgba(25, 23, 18, 0.65);
+}
+
+.pruv-pdp-mrp s {
+  color: rgba(25, 23, 18, 0.5);
+  text-decoration: line-through;
+}
+
+.pruv-pdp-save-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  border: 1px solid #a85f2e;
+  background-color: rgba(168, 95, 46, 0.08);
+  padding: 0.3rem 1.4rem;
+  border-radius: 100px;
+}
+
+.pruv-pdp-final-price {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: #191712;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin-top: 0.2rem;
+}
+
+.pruv-pdp-tax-label {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.2rem;
+  color: rgba(25, 23, 18, 0.5);
+  margin-top: 0.2rem;
+}
+
+.pruv-pdp-bestseller-badge {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  z-index: 5;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: rgba(168, 95, 46, 0.15);
+  border: 1px solid rgba(168, 95, 46, 0.3);
+  color: #a85f2e;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+}
+
+/* Mobile Layout & Sticky Bottom Action Bar (<749px) */
+@media screen and (max-width: 749px) {
+  .product__media-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .product-form__quantity,
+  .product-form__buttons {
+    display: none !important;
+  }
+
+  .pruv-pdp-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(25, 23, 18, 0.08);
+    padding: 1.2rem 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  body {
+    padding-bottom: 7.6rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-pdp-sticky-bar {
+    display: none !important;
+  }
+}
+
+.pruv-pdp-sticky-bar__qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(168, 95, 46, 0.12);
+  border: 1px solid rgba(168, 95, 46, 0.3);
+  border-radius: 100px;
+  padding: 0.4rem 0.8rem;
+  min-width: 11rem;
+  height: 4.8rem;
+}
+
+.pruv-pdp-sticky-bar__qty-btn {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background-color: #a85f2e;
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.2s ease;
+}
+
+.pruv-pdp-sticky-bar__qty-btn:hover {
+  background-color: #191712;
+}
+
+.pruv-pdp-sticky-bar__qty-val {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #191712;
+  padding: 0 0.6rem;
+}
+
+.pruv-pdp-sticky-bar__add {
+  flex: 1;
+  height: 4.8rem;
+  border-radius: 100px !important;
+  background-color: #191712 !important;
+  color: #f5f0e6 !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(25, 23, 18, 0.2) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.pruv-pdp-sticky-bar__add:hover {
+  background-color: #a85f2e !important;
+}

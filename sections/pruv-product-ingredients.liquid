@@ -1,0 +1,76 @@
+{{ 'section-pruv-ingredients.css' | asset_url | stylesheet_tag }}
+
+<section class="pruv-pdp-ingredients color-{{ section.settings.color_scheme }} gradient">
+  <div class="page-width">
+    <div class="pruv-pdp-ingredients__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-pdp-ingredients__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="pruv-pdp-ingredients__title">{{ section.settings.heading }}</h2>
+      <p class="pruv-pdp-ingredients__subtitle">Powered by clinical actives and botanical extracts for maximum scalp vitality.</p>
+    </div>
+
+    <div class="pruv-pdp-ingredients__grid">
+      <div class="pruv-pdp-ingredients__card">
+        <div class="pruv-pdp-ingredients__badge">3% ACTIVE</div>
+        <h3 class="pruv-pdp-ingredients__name">Redensyl™</h3>
+        <p class="pruv-pdp-ingredients__role">Stem Cell Reactivator</p>
+        <p class="pruv-pdp-ingredients__desc">Targets hair follicle stem cells to awaken dormant roots, driving new hair growth phase and boosting hair density.</p>
+      </div>
+
+      <div class="pruv-pdp-ingredients__card">
+        <div class="pruv-pdp-ingredients__badge">4% ACTIVE</div>
+        <h3 class="pruv-pdp-ingredients__name">Anagain™</h3>
+        <p class="pruv-pdp-ingredients__role">Organic Pea Sprout Extract</p>
+        <p class="pruv-pdp-ingredients__desc">Stimulates signal molecules in the dermal papilla to prolong the hair life cycle and restore vitality to thinning strands.</p>
+      </div>
+
+      <div class="pruv-pdp-ingredients__card">
+        <div class="pruv-pdp-ingredients__badge">BIO-PHYTO</div>
+        <h3 class="pruv-pdp-ingredients__name">Capilia Longa™</h3>
+        <p class="pruv-pdp-ingredients__role">Turmeric Stem Cell Complex</p>
+        <p class="pruv-pdp-ingredients__desc">Nourishes hair bulbs and resets the scalp micro-environment for stronger, resilient hair shaft anchoring.</p>
+      </div>
+
+      <div class="pruv-pdp-ingredients__card">
+        <div class="pruv-pdp-ingredients__badge">ESSENTIAL OIL</div>
+        <h3 class="pruv-pdp-ingredients__name">Rosemary & Peppermint</h3>
+        <p class="pruv-pdp-ingredients__role">Micro-Circulation Boosters</p>
+        <p class="pruv-pdp-ingredients__desc">Natural essential oils that invigorate blood flow to scalp follicles, soothing irritation and refreshing roots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv active ingredients",
+  "tag": "section",
+  "class": "section pruv-product-ingredients-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "FORMULA SCIENCE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "High-Performance Bio-Actives"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv active ingredients"
+    }
+  ]
+}
+{% endschema %}
