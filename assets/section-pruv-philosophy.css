@@ -1,0 +1,74 @@
+/* Prüv — philosophy: two text columns */
+
+.pruv-philosophy__row {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-philosophy__row {
+    flex-direction: row;
+    align-items: center;
+    gap: 5.4rem;
+  }
+}
+
+.pruv-philosophy__col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.pruv-philosophy__eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  margin: 0 0 1.4rem;
+}
+
+.pruv-philosophy__heading {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #191712;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.pruv-philosophy__heading strong {
+  font-weight: 600;
+  display: block;
+}
+
+.pruv-philosophy__text {
+  font-size: 1.6rem;
+  line-height: 1.65;
+  color: #6e6759;
+  margin: 0 0 2.4rem;
+}
+
+.pruv-philosophy__button {
+  display: inline-flex;
+  align-items: center;
+  border: 0.1rem solid rgba(25, 23, 18, 0.35);
+  border-radius: 100px;
+  padding: 1rem 3.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #191712;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pruv-philosophy__button:hover {
+  background-color: #191712;
+  color: #f5f0e6;
+}

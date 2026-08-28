@@ -1,0 +1,188 @@
+{{ 'section-pruv-timeline.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pruv-timeline color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-timeline__header page-width page-width--narrow" data-animate="fade-up">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pruv-timeline__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pruv-timeline__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="pruv-timeline__text rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="pruv-timeline__list page-width page-width--narrow" data-animate="stagger">
+      {%- for block in section.blocks -%}
+        <div class="pruv-timeline__item" {{ block.shopify_attributes }}>
+          <div class="pruv-timeline__date">
+            {%- if block.settings.year != blank -%}
+              <span class="pruv-timeline__year">{{ block.settings.year | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.label != blank -%}
+              <span class="pruv-timeline__label">{{ block.settings.label | escape }}</span>
+            {%- endif -%}
+          </div>
+          <div class="pruv-timeline__marker" aria-hidden="true"></div>
+          <div class="pruv-timeline__content">
+            {%- if block.settings.title != blank -%}
+              <h3 class="pruv-timeline__item-title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <p class="pruv-timeline__item-description">{{ block.settings.description }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Prüv timeline",
+  "tag": "section",
+  "class": "section pruv-timeline-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Journey So Far"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shaped by curiosity, <strong>built for Indian hair.</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "milestone",
+      "name": "Milestone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2024"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Month / label",
+          "default": "January"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The beginning"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A short description of this milestone."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Prüv timeline",
+      "blocks": [
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "label": "January",
+            "title": "The beginning",
+            "description": "It started with a simple realisation: hair care built for Indian water and weather barely existed."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2024",
+            "label": "June",
+            "title": "From one solution to many",
+            "description": "The first ritual grew into a focused range built around specific hair and scalp concerns."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2025",
+            "label": "January",
+            "title": "Scaling with intent",
+            "description": "As trust grew, so did the team and the processes behind every batch."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2026",
+            "label": "March",
+            "title": "Advancing further",
+            "description": "Today, the focus stays the same: real science, real results, for real Indian hair."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

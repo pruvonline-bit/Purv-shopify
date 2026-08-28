@@ -1,0 +1,245 @@
+/* Prüv — footer: bordered tinted panel, 55/45 columns with a real divider,
+   pill newsletter button, centered logo lockup below the panel. */
+
+.pruv-footer {
+  display: block;
+  color: rgb(var(--color-foreground));
+}
+
+.pruv-footer__panel {
+  position: relative;
+  border-top: 0.1rem solid rgba(25, 23, 18, 0.15);
+  border-bottom: 0.1rem solid rgba(25, 23, 18, 0.15);
+  background-color: rgba(92, 110, 82, 0.08);
+}
+
+.pruv-footer__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  padding-block: 5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-footer__row {
+    grid-template-columns: 55fr 45fr;
+    gap: 0;
+    padding-block: 6rem;
+  }
+
+  .pruv-footer__col--links {
+    padding-inline-start: 6rem;
+    border-inline-start: 0.1rem solid rgba(25, 23, 18, 0.15);
+  }
+}
+
+.pruv-footer__col--newsletter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 46rem;
+}
+
+.pruv-footer__eyebrow {
+  margin: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a85f2e;
+}
+
+.pruv-footer__heading {
+  margin: 0 0 0.8rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 3vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: #191712;
+}
+
+/* pill the newsletter field + inset the round submit button, on top of Dawn's
+   real newsletter-form markup/behavior */
+.pruv-footer .newsletter-form__field-wrapper .field {
+  --inputs-radius: 3.2rem;
+}
+
+.pruv-footer .field__input {
+  padding-inline-end: 5.6rem;
+}
+
+.pruv-footer .newsletter-form__button {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a85f2e;
+  color: #fbf8f2;
+}
+
+.pruv-footer .newsletter-form__button:focus-visible {
+  outline: 0.2rem solid #191712;
+  outline-offset: 0.2rem;
+}
+
+.pruv-footer__subtext {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: rgba(25, 23, 18, 0.6);
+  max-width: 42ch;
+}
+
+.pruv-footer__contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+.pruv-footer__contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem 2.4rem;
+}
+
+.pruv-footer__contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.3rem;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.pruv-footer__contact-item:hover {
+  text-decoration: underline;
+}
+
+.pruv-footer__contact-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  flex: none;
+  color: #a85f2e;
+}
+
+.pruv-footer__social .list-social__link {
+  border: 0.1rem solid rgba(25, 23, 18, 0.2);
+  border-radius: 0.6rem;
+}
+
+.pruv-footer__col--links {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.pruv-footer__link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.pruv-footer__link-item {
+  border-bottom: 0.1rem solid rgba(25, 23, 18, 0.15);
+  padding-bottom: 1rem;
+}
+
+.pruv-footer__link {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #191712;
+  text-decoration: none;
+}
+
+.pruv-footer__link[aria-disabled='true'] {
+  color: rgba(25, 23, 18, 0.35);
+  cursor: default;
+}
+
+.pruv-footer__link:not([aria-disabled='true']):hover {
+  color: #a85f2e;
+}
+
+.pruv-footer__help-heading {
+  margin: 0 0 1.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #191712;
+}
+
+.pruv-footer__help-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  font-size: 1.35rem;
+}
+
+.pruv-footer__help-list a {
+  color: rgba(25, 23, 18, 0.75);
+  text-decoration: none;
+}
+
+.pruv-footer__help-list a[aria-disabled='true'] {
+  color: rgba(25, 23, 18, 0.35);
+  cursor: default;
+}
+
+.pruv-footer__help-list a:not([aria-disabled='true']):hover {
+  color: #a85f2e;
+}
+
+.pruv-footer__payment .list-payment {
+  padding: 0;
+}
+
+/* brand lockup, below the panel */
+.pruv-footer__brand {
+  text-align: center;
+  padding-block: 4.8rem;
+}
+
+.pruv-footer__logo {
+  display: inline-block;
+  width: 18rem;
+  height: auto;
+}
+
+.pruv-footer__logo-text {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #191712;
+}
+
+.pruv-footer__tagline {
+  margin: 0.8rem 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(25, 23, 18, 0.55);
+}
+
+.pruv-footer__copyright {
+  margin: 2rem 0 0;
+  font-size: 1.15rem;
+  color: rgba(25, 23, 18, 0.5);
+}

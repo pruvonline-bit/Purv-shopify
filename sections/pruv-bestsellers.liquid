@@ -1,0 +1,215 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+  rel="stylesheet"
+>
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-pruv-bestsellers.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pruv-bestsellers color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-bestsellers__layout page-width">
+
+    <div class="pruv-bestsellers__intro" data-animate="fade-up">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-bestsellers__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-bestsellers__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="pruv-bestsellers__description rte">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="pruv-bestsellers__panel">
+        <div class="pruv-bestsellers__products" data-animate="stagger">
+          {%- assign shown_products = section.settings.collection.products -%}
+          {%- if shown_products.size > 0 -%}
+            {%- for product in shown_products limit: section.settings.products_to_show -%}
+              <div class="pruv-bestsellers__product">
+                {%- if section.settings.badge_text != blank -%}
+                  <span class="pruv-bestsellers__badge">{{ section.settings.badge_text | escape }}</span>
+                {%- endif -%}
+                <a href="{{ product.url }}" class="pruv-bestsellers__image-link">
+                  <span class="pruv-bestsellers__shadow" aria-hidden="true"></span>
+                  {%- if product.featured_image != blank -%}
+                    {{
+                      product.featured_image
+                      | image_url: width: 600
+                      | image_tag: loading: 'lazy', widths: '300, 450, 600', class: 'pruv-bestsellers__image', alt: product.featured_image.alt | default: product.title | escape
+                    }}
+                  {%- else -%}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-bestsellers__image placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+                <div class="pruv-bestsellers__info">
+                  <a href="{{ product.url }}" class="pruv-bestsellers__title">{{ product.title }}</a>
+                  {%- liquid
+                    assign highlight = product.metafields.custom.highlight
+                    if highlight == blank
+                      assign highlight = product.description | strip_html | truncate: 64
+                    endif
+                  -%}
+                  {%- if highlight != blank -%}
+                    <p class="pruv-bestsellers__highlight">{{ highlight }}</p>
+                  {%- endif -%}
+                  <div class="pruv-bestsellers__price">
+                    {%- render 'price', product: product, show_compare_at_price: true -%}
+                  </div>
+                  <product-form class="pruv-bestsellers__form" data-hide-errors="true">
+                    {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
+                    {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
+                      <input
+                        type="hidden"
+                        name="id"
+                        value="{{ product.selected_or_first_available_variant.id }}"
+                        {% if product.selected_or_first_available_variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                      <button
+                        type="submit"
+                        name="add"
+                        class="button pruv-bestsellers__add"
+                        {% if product.selected_or_first_available_variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                        <span>
+                          {%- if product.selected_or_first_available_variant.available == false -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- else -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- endif -%}
+                        </span>
+                        {%- render 'loading-spinner' -%}
+                      </button>
+                    {%- endform -%}
+                  </product-form>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for i in (1..4) -%}
+              <div class="pruv-bestsellers__product pruv-bestsellers__product--placeholder">
+                <a href="#" class="pruv-bestsellers__image-link">
+                  <span class="pruv-bestsellers__shadow" aria-hidden="true"></span>
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-bestsellers__image placeholder-svg' }}
+                </a>
+                <div class="pruv-bestsellers__info">
+                  <span class="pruv-bestsellers__title">Add a collection to show products here</span>
+                </div>
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prüv bestsellers",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Products to show"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Product badge",
+      "default": "Bestseller",
+      "info": "Shown as a small pill on every product. Leave blank to hide."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our Bestsellers"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Proven favourites. <strong>Beyond doubt, always.</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Our most repurchased rituals — tested against hard water, pollution and everyday buildup, not just marketing claims.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv bestsellers",
+      "settings": {
+        "collection": "all"
+      }
+    }
+  ]
+}
+{% endschema %}

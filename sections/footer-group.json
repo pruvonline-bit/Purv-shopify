@@ -3,22 +3,57 @@
   "type": "footer",
   "sections": {
     "footer": {
-      "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "type": "pruv-footer",
+      "blocks": {
+        "shop": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Shop",
+            "url": "shopify://collections/all"
+          }
+        },
+        "about": {
+          "type": "nav_link",
+          "settings": {
+            "label": "About Us"
+          }
+        },
+        "lab_notes": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Lab Notes"
+          }
+        },
+        "contact": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Contact Us"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "about",
+        "lab_notes",
+        "contact"
+      ],
       "settings": {
         "color_scheme": "scheme-1",
         "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
+        "newsletter_eyebrow": "Stay in the loop",
+        "newsletter_heading": "Subscribe to our newsletter",
+        "newsletter_subtext": "<p>We won't spam you, promise. Just useful hair and hard-water science, occasionally.</p>",
+        "phone": "",
+        "email": "",
         "show_social": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "payment_enable": true,
-        "show_policy": true,
-        "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "help_heading": "Need help?",
+        "show_policies": true,
+        "contact_link_label": "Contact Us",
+        "contact_link_url": "",
+        "payment_enable": false,
+        "tagline": "Beyond Doubt",
+        "legal_entity": "",
+        "registration_number": ""
       }
     }
   },

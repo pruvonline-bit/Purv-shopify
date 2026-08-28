@@ -1,0 +1,56 @@
+/* Prüv — trust badges strip */
+
+.pruv-trust__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pruv-trust__item {
+  flex: 1 1 0;
+  min-width: 16rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 4rem 3rem;
+}
+
+.pruv-trust__item:not(:first-child) {
+  border-left: 0.1rem solid rgba(25, 23, 18, 0.12);
+}
+
+.pruv-trust__icon {
+  height: 5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.pruv-trust__icon--svg {
+  color: #191712;
+}
+
+.pruv-trust__label {
+  margin: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: #3a3a34;
+  max-width: 18ch;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-trust__item {
+    min-width: 100%;
+    padding: 2.8rem 1.5rem;
+  }
+
+  .pruv-trust__item:not(:first-child) {
+    border-left: none;
+    border-top: 0.1rem solid rgba(25, 23, 18, 0.12);
+  }
+}

@@ -1,6 +1,7 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-pruv-collection.css' | asset_url | stylesheet_tag }}
 
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
@@ -42,6 +43,9 @@
 >
   <div class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}">
     {%- paginate collection.products by section.settings.products_per_page -%}
+      {%- if section.settings.enable_filtering -%}
+        {% render 'pruv-collection-pills', results: collection %}
+      {%- endif -%}
       {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
       {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
         <facet-filters-form class="facets facets-vertical-sort page-width small-hide">
@@ -180,7 +184,8 @@
                       skip_styles: skip_card_product_styles,
                       quick_add: section.settings.quick_add,
                       section_id: section.id,
-                      product_view_context: 'collection'
+                      product_view_context: 'collection',
+                      show_free_shipping_tag: section.settings.show_free_shipping_tag
                     %}
                   </li>
                   {%- assign skip_card_product_styles = true -%}
@@ -329,6 +334,12 @@
       "default": false,
       "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
       "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_free_shipping_tag",
+      "default": false,
+      "label": "Show \"Free shipping\" tag on cards"
     },
     {
       "type": "select",

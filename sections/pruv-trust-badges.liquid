@@ -1,0 +1,116 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@600&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-trust-badges.css' | asset_url | stylesheet_tag }}
+
+<div class="pruv-trust color-{{ section.settings.color_scheme }} gradient">
+  <div class="pruv-trust__row page-width" data-animate="stagger">
+    {%- for block in section.blocks -%}
+      <div class="pruv-trust__item" {{ block.shopify_attributes }}>
+        {%- if block.settings.icon != blank -%}
+          {{
+            block.settings.icon
+            | image_url: width: 120
+            | image_tag: loading: 'lazy', widths: '60, 90, 120', class: 'pruv-trust__icon', alt: block.settings.label | escape
+          }}
+        {%- elsif block.settings.icon_type == 'atom' -%}
+          <svg class="pruv-trust__icon pruv-trust__icon--svg" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <circle cx="28" cy="28" r="26.5" stroke="currentColor" stroke-width="1.2"/>
+            <circle cx="28" cy="28" r="2.4" fill="currentColor"/>
+            <ellipse cx="28" cy="28" rx="15" ry="6.4" stroke="currentColor" stroke-width="1.2"/>
+            <ellipse cx="28" cy="28" rx="15" ry="6.4" stroke="currentColor" stroke-width="1.2" transform="rotate(60 28 28)"/>
+            <ellipse cx="28" cy="28" rx="15" ry="6.4" stroke="currentColor" stroke-width="1.2" transform="rotate(120 28 28)"/>
+          </svg>
+        {%- elsif block.settings.icon_type == 'droplet' -%}
+          <svg class="pruv-trust__icon pruv-trust__icon--svg" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <circle cx="28" cy="28" r="26.5" stroke="currentColor" stroke-width="1.2"/>
+            <path
+              d="M28 15C28 15 20 25.5 20 32C20 36.4183 23.5817 40 28 40C32.4183 40 36 36.4183 36 32C36 25.5 28 15 28 15Z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+            <path d="M23.5 31.5L26.5 34.5L33 27" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        {%- elsif block.settings.icon_type == 'paw' -%}
+          <svg class="pruv-trust__icon pruv-trust__icon--svg" viewBox="0 0 56 56" fill="none" aria-hidden="true">
+            <circle cx="28" cy="28" r="26.5" stroke="currentColor" stroke-width="1.2"/>
+            <ellipse cx="19.5" cy="20" rx="2.6" ry="3.4" stroke="currentColor" stroke-width="1.2"/>
+            <ellipse cx="27" cy="16.5" rx="2.6" ry="3.4" stroke="currentColor" stroke-width="1.2"/>
+            <ellipse cx="34.5" cy="20" rx="2.6" ry="3.4" stroke="currentColor" stroke-width="1.2"/>
+            <path
+              d="M27 26C21 26 18 30 18 34C18 37.5 20.5 40 24 40C25.7 40 26.5 39 27 38.5C27.5 39 28.3 40 30 40C33.5 40 36 37.5 36 34C36 30 33 26 27 26Z"
+              stroke="currentColor"
+              stroke-width="1.2"
+              stroke-linejoin="round"
+            />
+          </svg>
+        {%- endif -%}
+        <p class="pruv-trust__label">{{ block.settings.label }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prüv trust badges",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Default icon",
+          "info": "Used only if no custom icon image is uploaded below.",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "atom", "label": "Atom (science)" },
+            { "value": "droplet", "label": "Droplet check (tested)" },
+            { "value": "paw", "label": "Paw (cruelty-free)" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Custom icon image",
+          "info": "Overrides the default icon above."
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Scientifically Proven"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Prüv trust badges",
+      "blocks": [
+        { "type": "badge", "settings": { "label": "Scientifically Proven", "icon_type": "atom" } },
+        { "type": "badge", "settings": { "label": "Dermatologically Tested", "icon_type": "droplet" } },
+        { "type": "badge", "settings": { "label": "Cruelty-Free & Vegan", "icon_type": "paw" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

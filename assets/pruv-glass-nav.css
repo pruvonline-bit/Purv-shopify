@@ -1,0 +1,23 @@
+/* Prüv — glassmorphism header, layered over the offer strip */
+
+.shopify-section-group-header-group .header-wrapper {
+  background-color: rgba(var(--color-background), 0.66);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.shopify-section-group-header-group .header-wrapper--border-bottom {
+  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.shopify-section-header-sticky .header-wrapper {
+  background-color: rgba(var(--color-background), 0.78);
+  box-shadow: 0 8px 24px rgba(25, 23, 18, 0.06);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .shopify-section-group-header-group .header-wrapper {
+    background-color: rgb(var(--color-background));
+  }
+}

@@ -1,0 +1,84 @@
+/* Prüv — process steps: numbered list, one column mobile, two-column grid desktop */
+
+.pruv-process__header {
+  text-align: center;
+  margin: 0 auto 4.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.pruv-process__eyebrow {
+  margin: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a85f2e;
+}
+
+.pruv-process__heading {
+  margin: 0;
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
+  line-height: 1.12;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #191712;
+  text-wrap: balance;
+}
+
+.pruv-process__heading strong {
+  font-weight: 700;
+}
+
+.pruv-process__text {
+  max-width: 48ch;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #6e6759;
+  margin: 0;
+}
+
+.pruv-process__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.6rem 4.8rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-process__list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pruv-process__step {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.pruv-process__number {
+  flex: none;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #a85f2e;
+  padding-top: 0.2rem;
+}
+
+.pruv-process__step-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #191712;
+}
+
+.pruv-process__step-description {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #6e6759;
+}

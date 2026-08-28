@@ -1,0 +1,208 @@
+/* Prüv — reviews: fixed 3-slot rotator (no scroll container, no scroll-snap).
+   Cards sit at a constant intrinsic width and are purely transform-driven between
+   four slot states (center / left / right / hidden), each a set of CSS custom
+   properties. Because translateX(%) resolves against the moving element's own
+   (constant, unscaled) width, none of this needs offsetWidth/offsetLeft/clientWidth
+   — it's correct the instant the DOM exists, before any script runs. */
+
+.pruv-reviews__header {
+  max-width: 52rem;
+  margin: 0 0 2.4rem;
+}
+
+.pruv-reviews__eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  margin: 0 0 1.4rem;
+}
+
+.pruv-reviews__heading {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #191712;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.pruv-reviews__heading strong {
+  font-weight: 600;
+}
+
+/* carousel */
+.pruv-reviews__carousel {
+  display: block;
+  /* Establish this as its own stacking context and clip both axes: cards use
+     `transform`, which creates a local stacking context per card, and if the
+     scaled-up center card ever renders taller than the stage's min-height, clipped
+     overflow keeps it contained here instead of spilling into the sticky header
+     above (which it did — z-index alone doesn't stop visual overflow escaping the
+     section entirely). */
+  isolation: isolate;
+  overflow: hidden;
+  --card-w: 37rem;
+  --scale-center: 1.5;
+  --scale-side: 0.65;
+  --scale-hidden: 0.5;
+  /* Half of scaled center width + a gap + half of the (unscaled, since that's what
+     translateX(%) resolves against) side card width, expressed as a percentage of
+     the side card's own width. Tune by eye against the live preview if the side
+     cards ever visually clip into the center card or sit too far apart. */
+  --slot-shift: 114%;
+}
+
+.pruv-reviews__track {
+  position: relative;
+  min-height: 50rem;
+  padding-block: 2rem;
+}
+
+.pruv-reviews__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--card-w);
+  --slot-x: 0%;
+  --slot-scale: var(--scale-hidden);
+  --slot-opacity: 0;
+  transform: translate(-50%, -50%) translateX(var(--slot-x)) scale(var(--slot-scale));
+  opacity: var(--slot-opacity);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, visibility 0.6s;
+  border-radius: 1.8rem;
+  padding: 2.6rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border: 0.1rem solid rgba(25, 23, 18, 0.08);
+  background-color: #fdfbf7;
+}
+
+.pruv-reviews__card[data-slot='center'] {
+  --slot-x: 0%;
+  --slot-scale: var(--scale-center);
+  --slot-opacity: 1;
+  z-index: 3;
+  border: 0.1rem solid transparent;
+  background:
+    linear-gradient(rgba(253, 251, 247, 0.82), rgba(253, 251, 247, 0.82)) padding-box,
+    linear-gradient(135deg, rgba(168, 95, 46, 0.65), rgba(198, 138, 85, 0.2) 45%, rgba(168, 95, 46, 0.5)) border-box;
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  box-shadow:
+    inset 0 0 3.2rem rgba(168, 95, 46, 0.14),
+    inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.6),
+    0 2.8rem 6rem rgba(25, 23, 18, 0.14);
+}
+
+.pruv-reviews__card[data-slot='left'] {
+  --slot-x: calc(-1 * var(--slot-shift));
+  --slot-scale: var(--scale-side);
+  --slot-opacity: 0.45;
+  z-index: 2;
+}
+
+.pruv-reviews__card[data-slot='right'] {
+  --slot-x: var(--slot-shift);
+  --slot-scale: var(--scale-side);
+  --slot-opacity: 0.45;
+  z-index: 2;
+}
+
+.pruv-reviews__card[data-slot='hidden'] {
+  --slot-x: 0%;
+  --slot-scale: var(--scale-hidden);
+  --slot-opacity: 0;
+  z-index: 1;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-reviews__card {
+    transition: none;
+  }
+}
+
+.pruv-reviews__card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.pruv-reviews__stars {
+  font-size: 1.4rem;
+  letter-spacing: 0.15em;
+  color: rgba(25, 23, 18, 0.18);
+  line-height: 1;
+}
+
+.pruv-reviews__star--full {
+  color: #f0ad3f;
+}
+
+.pruv-reviews__tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  white-space: nowrap;
+}
+
+.pruv-reviews__title {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #191712;
+  line-height: 1.2;
+}
+
+.pruv-reviews__quote {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: rgba(25, 23, 18, 0.68);
+  flex-grow: 1;
+  max-height: 9.6rem;
+  overflow: hidden;
+}
+
+.pruv-reviews__name {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #191712;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .pruv-reviews__card[data-slot='center'] {
+    background-color: #fdfbf7;
+    background-image: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-reviews__carousel {
+    --card-w: 27rem;
+    --scale-center: 1.18;
+  }
+
+  .pruv-reviews__track {
+    min-height: 38rem;
+  }
+
+  .pruv-reviews__card {
+    padding: 2rem 2.2rem;
+  }
+}

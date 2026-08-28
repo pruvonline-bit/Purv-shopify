@@ -1,0 +1,42 @@
+{% comment %}
+  Renders a horizontal, scrollable row of quick-filter pills built from the collection's
+  list-type filters (e.g. "Concerns", "Product type"), configured in Shopify Admin under
+  Search & Discovery. Each pill links straight into Dawn's existing filtering engine, so no
+  extra JS/state is needed.
+
+  Accepts:
+  - results: {Object} Collection or Search object
+
+  Usage:
+  {% render 'pruv-collection-pills', results: collection %}
+{% endcomment %}
+
+{%- liquid
+  assign list_filters = results.filters | where: 'type', 'list'
+-%}
+
+{%- if list_filters.size > 0 -%}
+  <div class="pruv-pills-container page-width">
+    <div class="pruv-pills" role="list">
+      {%- for filter in list_filters -%}
+        <span class="pruv-pills__group-label">{{ filter.label | escape }}</span>
+        {%- for value in filter.values -%}
+          {%- unless value.count == 0 and value.active == false -%}
+            {%- if value.active -%}
+              {%- assign pill_url = value.url_to_remove -%}
+            {%- else -%}
+              {%- assign pill_url = value.url_to_add -%}
+            {%- endif -%}
+            <a
+              href="{{ pill_url }}"
+              class="pruv-pills__pill{% if value.active %} pruv-pills__pill--active{% endif %}"
+              role="listitem"
+            >
+              {{ value.label | escape }}
+            </a>
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

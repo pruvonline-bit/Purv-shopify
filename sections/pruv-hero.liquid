@@ -1,0 +1,330 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+{{ 'section-pruv-hero.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #PruvHero-{{ section.id }} .pruv-hero__media::after {
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign widths = '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+  assign fetch_priority = 'auto'
+  if section.index == 1
+    assign fetch_priority = 'high'
+  endif
+  if section.settings.image != blank
+    assign hero_image_height = section.settings.image.width | divided_by: section.settings.image.aspect_ratio
+  endif
+
+  assign v_align = 'end'
+  assign h_align = 'start'
+  assign text_align = 'left'
+  case section.settings.content_position
+    when 'top-left'
+      assign v_align = 'start'
+      assign h_align = 'start'
+      assign text_align = 'left'
+    when 'top-center'
+      assign v_align = 'start'
+      assign h_align = 'center'
+      assign text_align = 'center'
+    when 'top-right'
+      assign v_align = 'start'
+      assign h_align = 'end'
+      assign text_align = 'right'
+    when 'middle-left'
+      assign v_align = 'center'
+      assign h_align = 'start'
+      assign text_align = 'left'
+    when 'middle-center'
+      assign v_align = 'center'
+      assign h_align = 'center'
+      assign text_align = 'center'
+    when 'middle-right'
+      assign v_align = 'center'
+      assign h_align = 'end'
+      assign text_align = 'right'
+    when 'bottom-left'
+      assign v_align = 'end'
+      assign h_align = 'start'
+      assign text_align = 'left'
+    when 'bottom-center'
+      assign v_align = 'end'
+      assign h_align = 'center'
+      assign text_align = 'center'
+    when 'bottom-right'
+      assign v_align = 'end'
+      assign h_align = 'end'
+      assign text_align = 'right'
+  endcase
+-%}
+
+<section
+  id="PruvHero-{{ section.id }}"
+  class="pruv-hero pruv-hero--{{ section.settings.height }} color-{{ section.settings.color_scheme }}"
+>
+  <div class="pruv-hero__visual">
+    <div class="pruv-hero__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 3840
+          | image_tag:
+            width: section.settings.image.width,
+            height: hero_image_height,
+            sizes: '100vw',
+            widths: widths,
+            fetchpriority: fetch_priority,
+            class: 'pruv-hero__image',
+            loading: 'eager'
+        }}
+      {%- else -%}
+        {{ 'hero-apparel-1' | placeholder_svg_tag: 'pruv-hero__image placeholder-svg' }}
+      {%- endif -%}
+    </div>
+
+    <div
+      class="pruv-hero__content pruv-hero__content--align-{{ text_align }}"
+      style="align-self: {{ v_align }}; justify-self: {{ h_align }}; text-align: {{ text_align }}; transform: translate({{ section.settings.offset_x }}px, {{ section.settings.offset_y }}px);"
+    >
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="pruv-hero__heading">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <div class="pruv-hero__subheading rte">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+        <div class="pruv-hero__buttons">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a
+              {% if section.settings.button_link_1 == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link_1 }}"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.button_label_1 | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.button_label_2 != blank -%}
+            <a
+              {% if section.settings.button_link_2 == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link_2 }}"
+              {% endif %}
+              class="button button--secondary"
+            >
+              {{- section.settings.button_label_2 | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="pruv-hero__press">
+      {%- if section.settings.press_heading != blank -%}
+        <p class="pruv-hero__press-eyebrow">{{ section.settings.press_heading | escape }}</p>
+      {%- endif -%}
+      <div class="pruv-hero__marquee">
+        <div class="pruv-hero__marquee-track">
+          {%- for i in (1..2) -%}
+            {%- for block in section.blocks -%}
+              <div class="pruv-hero__logo" {% if i == 1 %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endif %}>
+                {%- if block.settings.logo != blank -%}
+                  {{
+                    block.settings.logo
+                    | image_url: width: 300
+                    | image_tag: loading: 'lazy', widths: '150, 200, 300', alt: block.settings.name | escape
+                  }}
+                {%- else -%}
+                  <span class="pruv-hero__logo-text">{{ block.settings.name }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Prüv hero",
+  "tag": "section",
+  "class": "section pruv-hero-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Image overlay opacity",
+      "default": 35
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "top-left", "label": "Top left" },
+        { "value": "top-center", "label": "Top center" },
+        { "value": "top-right", "label": "Top right" },
+        { "value": "middle-left", "label": "Middle left" },
+        { "value": "middle-center", "label": "Middle center" },
+        { "value": "middle-right", "label": "Middle right" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-center", "label": "Bottom center" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "range",
+      "id": "offset_x",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Nudge horizontally",
+      "info": "Fine-tune position beyond the anchor above. Positive moves right.",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "offset_y",
+      "min": -150,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Nudge vertically",
+      "info": "Positive moves down.",
+      "default": 0
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Beyond Doubt"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Beyond doubt, beyond hard water."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Scalp-focused hair rituals engineered for the water, pollution and buildup your city actually throws at your hair.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "First button label",
+      "default": "Shop TriShield"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "First button link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second button label",
+      "default": "View ingredients"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second button link"
+    },
+    {
+      "type": "header",
+      "content": "Press carousel"
+    },
+    {
+      "type": "text",
+      "id": "press_heading",
+      "label": "Press strip label",
+      "default": "As seen in"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Press logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Publication name",
+          "default": "Publication",
+          "info": "Shown as a wordmark if no logo image is uploaded."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Prüv hero",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Vogue India" } },
+        { "type": "logo", "settings": { "name": "Elle India" } },
+        { "type": "logo", "settings": { "name": "Grazia India" } },
+        { "type": "logo", "settings": { "name": "Femina" } },
+        { "type": "logo", "settings": { "name": "GQ India" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,121 @@
+/* Prüv — shop-all: quick-filter pills, facets/toolbar restyle, product card additions */
+
+/* Quick-filter pill bar */
+.pruv-pills-container {
+  margin-bottom: 1.6rem;
+}
+
+.pruv-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 0.4rem;
+}
+
+.pruv-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.pruv-pills__group-label {
+  flex: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-right: 0.2rem;
+}
+
+.pruv-pills__group-label:not(:first-child) {
+  margin-left: 1.2rem;
+}
+
+.pruv-pills__pill {
+  flex: none;
+  white-space: nowrap;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(25, 23, 18, 0.15);
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: currentColor;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.pruv-pills__pill:hover {
+  border-color: rgba(25, 23, 18, 0.4);
+}
+
+.pruv-pills__pill--active {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  border-color: rgb(var(--color-foreground));
+}
+
+/* Toolbar: product count + filter/sort trigger */
+.product-count {
+  font-size: 1.3rem;
+}
+
+.mobile-facets__open-wrapper {
+  border-radius: 999px;
+  border: 1px solid rgba(25, 23, 18, 0.2);
+  padding: 0.6rem 1.6rem;
+}
+
+.facets-container-drawer .mobile-facets__open-wrapper {
+  gap: 0.6rem;
+}
+
+/* Filter drawer contents */
+.mobile-facets__inner {
+  --pruv-accent: #a85f2e;
+}
+
+.facets__summary {
+  font-weight: 500;
+}
+
+.facet-checkbox.active .facet-checkbox__text-label {
+  font-weight: 600;
+}
+
+price-range input[type='range'] {
+  accent-color: var(--pruv-accent, #a85f2e);
+}
+
+.mobile-facets__footer .button--primary {
+  border-radius: 999px;
+}
+
+/* Product card additions (tagline, savings badge, free-shipping tag) */
+.pruv-card-tagline {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+.pruv-card-save {
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  background-color: #a85f2e;
+  color: #fbf8f2;
+  font-size: 1.1rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.pruv-card-shipping {
+  margin: 0.6rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}

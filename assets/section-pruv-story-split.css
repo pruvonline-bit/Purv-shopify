@@ -1,0 +1,104 @@
+/* Prüv — story split: image + text two-column block, or a centered text-only variant */
+
+.pruv-story-split__row {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-story-split__row {
+    flex-direction: row;
+    align-items: center;
+    gap: 6rem;
+  }
+
+  .pruv-story-split--image-left .pruv-story-split__row {
+    flex-direction: row-reverse;
+  }
+}
+
+.pruv-story-split__media,
+.pruv-story-split__content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.pruv-story-split__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.6rem;
+}
+
+.pruv-story-split__eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  margin: 0 0 1.4rem;
+}
+
+.pruv-story-split__heading {
+  font-size: clamp(2.6rem, 3.4vw, 3.6rem);
+  line-height: 1.15;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #191712;
+  margin: 0 0 1.6rem;
+  text-wrap: balance;
+}
+
+.pruv-story-split__heading strong {
+  font-weight: 700;
+}
+
+.pruv-story-split__text {
+  font-size: 1.5rem;
+  line-height: 1.65;
+  color: #6e6759;
+  margin: 0 0 2rem;
+}
+
+.pruv-story-split__text > * + * {
+  margin-top: 1.2rem;
+}
+
+.pruv-story-split__button {
+  display: inline-flex;
+  align-items: center;
+  border: 0.1rem solid rgba(25, 23, 18, 0.35);
+  border-radius: 100px;
+  padding: 1rem 3.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #191712;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pruv-story-split__button:hover {
+  background-color: #191712;
+  color: #f5f0e6;
+}
+
+/* Text-only variant: centered narrow column, no image */
+.pruv-story-split--text-only .pruv-story-split__row {
+  justify-content: center;
+}
+
+.pruv-story-split--text-only .pruv-story-split__content {
+  max-width: 68rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pruv-story-split--text-only .pruv-story-split__text {
+  margin-left: auto;
+  margin-right: auto;
+}

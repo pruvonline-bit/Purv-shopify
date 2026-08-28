@@ -1,0 +1,327 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@600&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pruv-reviews color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-reviews__header page-width" data-animate="fade-up">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="pruv-reviews__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pruv-reviews__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <pruv-reviews-carousel class="pruv-reviews__carousel">
+      <div class="pruv-reviews__track">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign slot = 'hidden'
+            if forloop.first
+              assign slot = 'center'
+            elsif forloop.index0 == 1
+              assign slot = 'right'
+            elsif forloop.last and section.blocks.size > 1
+              assign slot = 'left'
+            endif
+          -%}
+          <div class="pruv-reviews__card" data-slot="{{ slot }}" {{ block.shopify_attributes }}>
+            <div class="pruv-reviews__card-top">
+              <div class="pruv-reviews__stars" aria-hidden="true">
+                {%- assign rating = block.settings.rating | plus: 0 -%}
+                {%- for i in (1..5) -%}
+                  {%- if i <= rating -%}
+                    <span class="pruv-reviews__star pruv-reviews__star--full">★</span>
+                  {%- else -%}
+                    <span class="pruv-reviews__star">★</span>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <span class="visually-hidden">{{ block.settings.rating }} out of 5 stars</span>
+              {%- if block.settings.product_tag != blank -%}
+                <span class="pruv-reviews__tag">{{ block.settings.product_tag | escape }}</span>
+              {%- endif -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <p class="pruv-reviews__title">&ldquo;{{ block.settings.title | escape }}&rdquo;</p>
+            {%- endif -%}
+            <p class="pruv-reviews__quote">{{ block.settings.quote }}</p>
+            <p class="pruv-reviews__name">{{ block.settings.name }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </pruv-reviews-carousel>
+  {%- endif -%}
+</div>
+
+{% javascript %}
+  class PruvReviewsCarousel extends HTMLElement {
+    connectedCallback() {
+      this.cards = Array.from(this.querySelectorAll('.pruv-reviews__card'));
+      this.activeIndex = 0;
+      this.autoplayDelay = 2200;
+      this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      this.addEventListener('mouseenter', () => this.stopAutoplay());
+      this.addEventListener('mouseleave', () => this.maybeStartAutoplay());
+      this.addEventListener('touchstart', () => this.stopAutoplay(), { passive: true });
+
+      // Slot count (3 on desktop, 1 on mobile) is purely a media-query check — no
+      // layout measurement of any kind, so this is always correct the instant it runs.
+      this.sideSlotsQuery = window.matchMedia('(min-width: 750px)');
+      this.showSideSlots = this.sideSlotsQuery.matches;
+      const onSideSlotsChange = (e) => {
+        this.showSideSlots = e.matches;
+        this.setSlots();
+      };
+      if (this.sideSlotsQuery.addEventListener) {
+        this.sideSlotsQuery.addEventListener('change', onSideSlotsChange);
+      } else {
+        // Safari < 14 fallback.
+        this.sideSlotsQuery.addListener(onSideSlotsChange);
+      }
+
+      this.isInView = false;
+      this._observer = new IntersectionObserver(
+        (entries) => {
+          this.isInView = entries[0].isIntersecting;
+          if (this.isInView) {
+            this.maybeStartAutoplay();
+          } else {
+            this.stopAutoplay();
+          }
+        },
+        { threshold: 0.4 }
+      );
+      this._observer.observe(this);
+
+      // Slot assignment is pure index arithmetic — no offsetWidth/offsetLeft reads, so
+      // this is correct synchronously, before first paint. The Liquid template already
+      // pre-renders the matching data-slot values for index 0, so this call is mostly a
+      // no-op confirmation pass, not a correction.
+      this.setSlots();
+    }
+
+    go(delta) {
+      const n = this.cards.length;
+      this.activeIndex = (this.activeIndex + delta + n) % n;
+      this.setSlots();
+    }
+
+    setSlots() {
+      const n = this.cards.length;
+      this.cards.forEach((card, i) => {
+        let slot = 'hidden';
+        if (i === this.activeIndex) {
+          slot = 'center';
+        } else if (this.showSideSlots && n > 2 && i === (this.activeIndex - 1 + n) % n) {
+          slot = 'left';
+        } else if (this.showSideSlots && n > 1 && i === (this.activeIndex + 1) % n) {
+          slot = 'right';
+        }
+        card.dataset.slot = slot;
+      });
+    }
+
+    maybeStartAutoplay() {
+      if (this.isInView) this.startAutoplay();
+    }
+
+    startAutoplay() {
+      if (this.reducedMotion || this.cards.length < 2) return;
+      this.stopAutoplay();
+      this._autoplay = setInterval(() => this.go(1), this.autoplayDelay);
+    }
+
+    stopAutoplay() {
+      if (this._autoplay) clearInterval(this._autoplay);
+    }
+
+    disconnectedCallback() {
+      this.stopAutoplay();
+      if (this._observer) this._observer.disconnect();
+    }
+  }
+
+  customElements.define('pruv-reviews-carousel', PruvReviewsCarousel);
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Prüv reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What you say <strong>matters the most.</strong>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Rating"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Short title",
+          "default": "Wonderful"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review text",
+          "default": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo that's done that."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name",
+          "default": "Ananya S."
+        },
+        {
+          "type": "text",
+          "id": "product_tag",
+          "label": "Product tag",
+          "default": "TRISHIELD_SHAMPOO"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [
+    {
+      "name": "Prüv reviews",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Wonderful",
+            "quote": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo that's done that.",
+            "name": "Ananya S.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Most effective",
+            "quote": "Switched after years of trying imported brands. The difference with Delhi's water was obvious in two washes.",
+            "name": "Kabir M.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Effective",
+            "quote": "Lightweight, doesn't weigh my hair down, and the scent isn't overpowering. Repurchasing already.",
+            "name": "Riya T.",
+            "product_tag": "KERATIN_CERAMIDE_MASK"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Game changer",
+            "quote": "Living in Mumbai, my hair used to feel coated by evening. Three washes in and that's gone completely.",
+            "name": "Devika R.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Worth it",
+            "quote": "Detangles my hair in seconds flat. Smells incredible without being overpowering, and a little goes a long way.",
+            "name": "Arjun K.",
+            "product_tag": "KERATIN_CERAMIDE_MASK"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Impressed",
+            "quote": "My scalp used to get itchy within a day of washing. Hasn't happened once since I switched three weeks ago.",
+            "name": "Meera P.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,75 +1,276 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "pruv-hero",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "logo-vogue": {
+          "type": "logo",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "name": "Vogue India"
           }
         },
-        "button": {
-          "type": "buttons",
+        "logo-elle": {
+          "type": "logo",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "name": "Elle India"
+          }
+        },
+        "logo-grazia": {
+          "type": "logo",
+          "settings": {
+            "name": "Grazia India"
+          }
+        },
+        "logo-femina": {
+          "type": "logo",
+          "settings": {
+            "name": "Femina"
+          }
+        },
+        "logo-gq": {
+          "type": "logo",
+          "settings": {
+            "name": "GQ India"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "logo-vogue",
+        "logo-elle",
+        "logo-grazia",
+        "logo-femina",
+        "logo-gq"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "height": "large",
+        "overlay_opacity": 35,
+        "content_position": "bottom-left",
+        "offset_x": 0,
+        "offset_y": 0,
+        "color_scheme": "scheme-4",
+        "eyebrow": "Beyond Doubt",
+        "heading": "Beyond doubt, beyond hard water.",
+        "subheading": "<p>Scalp-focused hair rituals engineered for the water, pollution and buildup your city actually throws at your hair.</p>",
+        "button_label_1": "Shop TriShield",
+        "button_link_1": "shopify://collections/all",
+        "button_label_2": "View ingredients",
+        "button_link_2": "",
+        "press_heading": "As seen in"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "bestsellers": {
+      "type": "pruv-bestsellers",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
         "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
+        "products_to_show": 4,
+        "badge_text": "Bestseller",
+        "eyebrow": "Our Bestsellers",
+        "heading": "Proven favourites. <strong>Beyond doubt, always.</strong>",
+        "description": "<p>Our most repurchased rituals — tested against hard water, pollution and everyday buildup, not just marketing claims.</p>",
         "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "trust_badges": {
+      "type": "pruv-trust-badges",
+      "blocks": {
+        "badge-1": {
+          "type": "badge",
+          "settings": {
+            "label": "Scientifically Proven",
+            "icon_type": "atom"
+          }
+        },
+        "badge-2": {
+          "type": "badge",
+          "settings": {
+            "label": "Dermatologically Tested",
+            "icon_type": "droplet"
+          }
+        },
+        "badge-3": {
+          "type": "badge",
+          "settings": {
+            "label": "Cruelty-Free & Vegan",
+            "icon_type": "paw"
+          }
+        }
+      },
+      "block_order": [
+        "badge-1",
+        "badge-2",
+        "badge-3"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1"
+      }
+    },
+    "product_details": {
+      "type": "collapsible-content",
+      "blocks": {
+        "row-selection": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Product Selection",
+            "icon": "box",
+            "row_content": "<p>A focused range built around specific hair and scalp concerns, so you can choose the care you need without unnecessary complexity.</p>"
+          }
+        },
+        "row-ingredients": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Core Ingredient Philosophy",
+            "icon": "leaf",
+            "row_content": "<p>We target concerns at the root using proven actives and dermatological insight, for lasting scalp and hair strength rather than cosmetic cover-up.</p>"
+          }
+        },
+        "row-formulated": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Consciously Formulated",
+            "icon": "check_mark",
+            "row_content": "<p>Every formula is refined and re-tested until it earns its place on the shelf — no shortcuts, no filler actives.</p>"
+          }
+        },
+        "row-performance": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Measuring Performance",
+            "icon": "stopwatch",
+            "row_content": "<p>Results are tracked over real usage windows, not one-off lab conditions, so what we claim is what you'll actually see.</p>"
+          }
+        },
+        "row-indian-hair": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Made for Indian Hair and Scalp",
+            "icon": "map_pin",
+            "row_content": "<p>Engineered specifically against the hard water, humidity and pollution profile of Indian cities — not adapted from a formula built for somewhere else.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "row-selection",
+        "row-ingredients",
+        "row-formulated",
+        "row-performance",
+        "row-indian-hair"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "",
+        "heading_alignment": "left",
+        "layout": "section",
+        "container_color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": true,
+        "image_ratio": "large",
+        "desktop_layout": "image_first",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "philosophy": {
+      "type": "pruv-philosophy",
+      "settings": {
+        "eyebrow": "Our Philosophy",
+        "heading": "Hair and scalp science <strong>meets everyday care.</strong>",
+        "text": "<p>We approach hair and scalp care as systems, not symptoms. Our formulations are engineered through dermatological insight to address concerns at their origin, delivering measured results that endure.</p>",
+        "button_label": "Know more",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "reviews": {
+      "type": "pruv-reviews",
+      "blocks": {
+        "review-1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Wonderful",
+            "quote": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo that's done that.",
+            "name": "Ananya S.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        "review-2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Most effective",
+            "quote": "Switched after years of trying imported brands. The difference with Delhi's water was obvious in two washes.",
+            "name": "Kabir M.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        "review-3": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Effective",
+            "quote": "Lightweight, doesn't weigh my hair down, and the scent isn't overpowering. Repurchasing already.",
+            "name": "Riya T.",
+            "product_tag": "KERATIN_CERAMIDE_MASK"
+          }
+        },
+        "review-4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Game changer",
+            "quote": "Living in Mumbai, my hair used to feel coated by evening. Three washes in and that's gone completely.",
+            "name": "Devika R.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        },
+        "review-5": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Worth it",
+            "quote": "Detangles my hair in seconds flat. Smells incredible without being overpowering, and a little goes a long way.",
+            "name": "Arjun K.",
+            "product_tag": "KERATIN_CERAMIDE_MASK"
+          }
+        },
+        "review-6": {
+          "type": "review",
+          "settings": {
+            "rating": 4,
+            "title": "Impressed",
+            "quote": "My scalp used to get itchy within a day of washing. Hasn't happened once since I switched three weeks ago.",
+            "name": "Meera P.",
+            "product_tag": "TRISHIELD_SHAMPOO"
+          }
+        }
+      },
+      "block_order": [
+        "review-1",
+        "review-2",
+        "review-3",
+        "review-4",
+        "review-5",
+        "review-6"
+      ],
+      "settings": {
+        "eyebrow": "Customer Reviews",
+        "heading": "What you say <strong>matters the most.</strong>",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "hero",
+    "bestsellers",
+    "trust_badges",
+    "product_details",
+    "philosophy",
+    "reviews"
   ]
 }

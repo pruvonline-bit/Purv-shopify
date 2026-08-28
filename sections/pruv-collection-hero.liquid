@@ -1,0 +1,134 @@
+{{ 'section-pruv-collection-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="pruv-collection-hero pruv-collection-hero--{{ section.settings.height }} color-{{ section.settings.color_scheme }} gradient">
+  <div class="pruv-collection-hero__inner page-width">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="pruv-collection-hero__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pruv-collection-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h1 class="pruv-collection-hero__heading">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="pruv-collection-hero__subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.promo_code != blank or section.settings.button_label != blank -%}
+          <div class="pruv-collection-hero__actions">
+            {%- if section.settings.promo_code != blank -%}
+              <span class="pruv-collection-hero__code">
+                Use code: {{ section.settings.promo_code | escape }}
+              </span>
+            {%- endif -%}
+            {%- if section.settings.button_label != blank -%}
+              <a
+                {% if section.settings.button_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="button pruv-collection-hero__button"
+              >
+                {{- section.settings.button_label | escape -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_breadcrumb -%}
+    <nav class="pruv-collection-hero__breadcrumb page-width" aria-label="breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">
+        {%- if collection.title -%}
+          {{- collection.title -}}
+        {%- else -%}
+          {{- 'sections.collection_template.title' | t -}}
+        {%- endif -%}
+      </span>
+    </nav>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Prüv collection hero",
+  "tag": "section",
+  "class": "section pruv-collection-hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Section height",
+      "options": [
+        { "value": "compact", "label": "Compact" },
+        { "value": "regular", "label": "Regular" }
+      ],
+      "default": "regular"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-5"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Limited Time"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Sale is live! Grab your essentials"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Save on your favourite hair and scalp rituals, for a limited time only."
+    },
+    {
+      "type": "header",
+      "content": "Actions"
+    },
+    {
+      "type": "text",
+      "id": "promo_code",
+      "label": "Promo code",
+      "info": "Leave blank to hide. Shown as \"Use code: XXXX\"."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Breadcrumb"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "Show breadcrumb",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv collection hero"
+    }
+  ]
+}
+{% endschema %}

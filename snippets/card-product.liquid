@@ -16,6 +16,7 @@
   - horizontal_class: {Boolean} Add a card--horizontal class if set to true. Default: false (optional)
   - horizontal_quick_add: {Boolean} Changes the quick add button styles when set to true. Default: false (optional)
   - placeholder_image: {String} The placeholder image to use when no product exists. Default: 'product-apparel-2' (optional)
+  - show_free_shipping_tag: {Boolean} Show a "Free shipping" tag below the add to cart button. Default: false (optional)
 
   Usage:
   {% render 'card-product', show_vendor: section.settings.show_vendor %}
@@ -162,6 +163,10 @@
                 {{ card_product.title | escape }}
               </a>
             </h3>
+            {%- assign pruv_highlight = card_product.metafields.custom.highlight -%}
+            {%- if pruv_highlight != blank -%}
+              <p class="pruv-card-tagline">{{ pruv_highlight }}</p>
+            {%- endif -%}
             <div class="card-information">
               {%- if show_vendor -%}
                 <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
@@ -207,6 +212,15 @@
               {%- endif -%}
 
               {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+              {%- if card_product.compare_at_price > card_product.price and card_product.available -%}
+                {%- assign pruv_save_percent = card_product.compare_at_price
+                  | minus: card_product.price
+                  | times: 100.0
+                  | divided_by: card_product.compare_at_price
+                  | round
+                -%}
+                <span class="pruv-card-save">Save {{ pruv_save_percent }}%</span>
+              {%- endif -%}
               {%- if card_product.quantity_price_breaks_configured? -%}
                 {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                   {% liquid
@@ -550,6 +564,9 @@
               </div>
             {% endif %}
           {% endif %}
+          {%- if show_free_shipping_tag -%}
+            <p class="pruv-card-shipping">Free shipping</p>
+          {%- endif -%}
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}
               <span
