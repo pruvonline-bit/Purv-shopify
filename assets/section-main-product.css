@@ -1492,3 +1492,153 @@ a.product__text {
     border: none;
   }
 }
+
+/* Prüv PDP — luxury theme restyle */
+.product__title h1,
+.product__title h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(3rem, 4.5vw, 4.4rem);
+  line-height: 1.08;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #191712;
+  margin-bottom: 0.8rem;
+}
+
+.product__text {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  margin-bottom: 0.6rem;
+}
+
+.pruv-pdp-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.price--large .price-item--regular,
+.price--large .price-item--sale {
+  font-family: 'Geist Mono', monospace;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #191712;
+  line-height: 1.1;
+}
+
+.pruv-pdp-save {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #a85f2e;
+  background-color: rgba(168, 95, 46, 0.12);
+  border: 0.1rem solid rgba(168, 95, 46, 0.3);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Promo offer box */
+.pruv-pdp-promo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.2rem;
+  background-color: rgba(242, 228, 212, 0.5);
+  border: 1.5px dashed #a85f2e;
+  margin: 1.4rem 0 2rem;
+}
+
+.pruv-pdp-promo__badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background-color: #a85f2e;
+  color: #ffffff;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+}
+
+.pruv-pdp-promo__text {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.3rem;
+  color: #3a3a34;
+}
+
+.pruv-pdp-promo__text strong {
+  color: #191712;
+  font-weight: 700;
+}
+
+/* Media gallery radius */
+.product__media-wrapper .media {
+  border-radius: 2rem;
+  overflow: hidden;
+  border: 1px solid rgba(25, 23, 18, 0.08);
+}
+
+/* Buy buttons capsule redesign */
+.product-form__submit,
+.shopify-payment-button__button--unbranded {
+  border-radius: 100px !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 1.4rem 2.4rem !important;
+  min-height: 4.8rem !important;
+  background-color: #191712 !important;
+  color: #f5f0e6 !important;
+  border: none !important;
+  box-shadow: 0 4px 16px rgba(25, 23, 18, 0.15) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.product-form__submit:hover,
+.shopify-payment-button__button--unbranded:hover {
+  background-color: #a85f2e !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.3) !important;
+}
+
+/* Trust Badges Strip */
+.pruv-pdp-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid rgba(25, 23, 18, 0.08);
+}
+
+.pruv-pdp-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #524d43;
+}
+
+.pruv-pdp-trust__icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: #a85f2e;
+  flex: none;
+}

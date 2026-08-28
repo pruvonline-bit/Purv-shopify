@@ -97,8 +97,22 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
-      {%- endform -%}
     </product-form>
+
+    <div class="pruv-pdp-trust">
+      <div class="pruv-pdp-trust__item">
+        <svg class="pruv-pdp-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Dermatologically Tested</span>
+      </div>
+      <div class="pruv-pdp-trust__item">
+        <svg class="pruv-pdp-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        <span>Sulphate Free</span>
+      </div>
+      <div class="pruv-pdp-trust__item">
+        <svg class="pruv-pdp-trust__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg>
+        <span>Cruelty-Free</span>
+      </div>
+    </div>
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">

@@ -2,7 +2,7 @@
 
 /* Quick-filter pill bar */
 .pruv-pills-container {
-  margin-bottom: 1.6rem;
+  margin-bottom: 2rem;
 }
 
 .pruv-pills {
@@ -11,7 +11,8 @@
   gap: 0.8rem;
   overflow-x: auto;
   scrollbar-width: none;
-  padding-bottom: 0.4rem;
+  -ms-overflow-style: none;
+  padding-bottom: 0.6rem;
 }
 
 .pruv-pills::-webkit-scrollbar {
@@ -20,50 +21,65 @@
 
 .pruv-pills__group-label {
   flex: none;
+  font-family: 'Geist Mono', monospace;
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.55;
-  margin-right: 0.2rem;
+  color: #a85f2e;
+  margin-right: 0.4rem;
 }
 
 .pruv-pills__group-label:not(:first-child) {
-  margin-left: 1.2rem;
+  margin-left: 1.4rem;
 }
 
 .pruv-pills__pill {
   flex: none;
   white-space: nowrap;
-  padding: 0.7rem 1.6rem;
-  border-radius: 999px;
+  padding: 0.8rem 1.8rem;
+  border-radius: 100px;
   border: 1px solid rgba(25, 23, 18, 0.15);
+  font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.3rem;
   font-weight: 500;
   text-decoration: none;
-  color: currentColor;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  color: #191712;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pruv-pills__pill:hover {
-  border-color: rgba(25, 23, 18, 0.4);
+  border-color: #a85f2e;
+  background-color: rgba(168, 95, 46, 0.08);
+  color: #a85f2e;
+  transform: translateY(-1px);
 }
 
 .pruv-pills__pill--active {
-  background-color: rgb(var(--color-foreground));
-  color: rgb(var(--color-background));
-  border-color: rgb(var(--color-foreground));
+  background-color: #191712;
+  color: #f5f0e6;
+  border-color: #191712;
+  box-shadow: 0 4px 12px rgba(25, 23, 18, 0.15);
 }
 
 /* Toolbar: product count + filter/sort trigger */
 .product-count {
-  font-size: 1.3rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
 }
 
 .mobile-facets__open-wrapper {
-  border-radius: 999px;
+  border-radius: 100px;
   border: 1px solid rgba(25, 23, 18, 0.2);
-  padding: 0.6rem 1.6rem;
+  padding: 0.8rem 1.8rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.mobile-facets__open-wrapper:hover {
+  border-color: #191712;
+  background-color: rgba(25, 23, 18, 0.04);
 }
 
 .facets-container-drawer .mobile-facets__open-wrapper {
@@ -88,34 +104,84 @@ price-range input[type='range'] {
 }
 
 .mobile-facets__footer .button--primary {
-  border-radius: 999px;
+  border-radius: 100px;
 }
 
 /* Product card additions (tagline, savings badge, free-shipping tag) */
+.card-information {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
 .pruv-card-tagline {
-  margin: 0.2rem 0 0.4rem;
-  font-size: 1.2rem;
-  line-height: 1.4;
-  opacity: 0.7;
+  display: inline-block;
+  background-color: rgba(25, 23, 18, 0.05);
+  color: #524d43;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.8rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0.4rem 0 0.2rem;
+  width: fit-content;
 }
 
 .pruv-card-save {
   display: inline-block;
   margin-left: 0.6rem;
-  padding: 0.15rem 0.7rem;
-  border-radius: 999px;
-  background-color: #a85f2e;
-  color: #fbf8f2;
-  font-size: 1.1rem;
-  font-weight: 600;
+  padding: 0.2rem 0.7rem;
+  border-radius: 100px;
+  background-color: rgba(168, 95, 46, 0.1);
+  border: 0.1rem solid rgba(168, 95, 46, 0.3);
+  color: #a85f2e;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   vertical-align: middle;
 }
 
 .pruv-card-shipping {
-  margin: 0.6rem 0 0;
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.6;
+  color: rgba(25, 23, 18, 0.55);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 0.4rem;
+  padding: 0.5rem 0;
+  margin: 0.6rem 0 0;
+}
+
+/* Quick Add button override for collection grid */
+.quick-add__submit,
+.quick-add .button {
+  border-radius: 100px !important;
+  font-family: 'Geist Mono', monospace !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 1.1rem 2rem !important;
+  background-color: #191712 !important;
+  color: #f5f0e6 !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(25, 23, 18, 0.12) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.quick-add__submit:hover,
+.quick-add .button:hover {
+  background-color: #a85f2e !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 18px rgba(168, 95, 46, 0.28) !important;
 }

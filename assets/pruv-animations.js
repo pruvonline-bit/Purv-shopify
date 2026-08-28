@@ -195,4 +195,26 @@ document.addEventListener('DOMContentLoaded', function () {
       },
     });
   });
+
+  /* Collection Grid Items Stagger Entrance */
+  var collectionGridItems = document.querySelectorAll('.product-grid .grid__item');
+  if (collectionGridItems.length && hasScrollTrigger) {
+    collectionGridItems.forEach(function (item, i) {
+      gsap.set(item, { opacity: 0, y: 28 });
+      ScrollTrigger.create({
+        trigger: item,
+        start: 'top 88%',
+        once: true,
+        onEnter: function () {
+          gsap.to(item, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out',
+            delay: (i % 4) * 0.08,
+          });
+        },
+      });
+    });
+  }
 });

@@ -107,13 +107,22 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  <div id="price-{{ section.id }}" class="pruv-pdp-price-wrapper" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
                       use_variant: true,
                       show_badges: true,
                       price_class: 'price--large'
                     -%}
+                    {%- if product.compare_at_price > product.price -%}
+                      {%- assign pruv_pdp_savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                      <span class="pruv-pdp-save">SAVE {{ pruv_pdp_savings }}%</span>
+                    {%- endif -%}
+                  </div>
+
+                  <div class="pruv-pdp-promo">
+                    <span class="pruv-pdp-promo__badge">PROMO</span>
+                    <span class="pruv-pdp-promo__text">Use code <strong>BEYONDDOUBT</strong> for 15% OFF your first ritual</span>
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">

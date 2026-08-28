@@ -1,13 +1,13 @@
 /* Prüv — collection hero: bold promo banner + breadcrumb, sits above the shop-all grid */
 
 .pruv-collection-hero {
-  padding-top: 4.8rem;
-  padding-bottom: 2.4rem;
+  padding-top: 3.6rem;
+  padding-bottom: 2rem;
   text-align: center;
 }
 
 .pruv-collection-hero--compact {
-  padding-top: 3.2rem;
+  padding-top: 2.8rem;
   padding-bottom: 1.6rem;
 }
 
@@ -17,37 +17,51 @@
 }
 
 .pruv-collection-hero__content {
-  max-width: 60rem;
+  max-width: 64rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
+  gap: 1.2rem;
+  padding: 3.6rem 2.8rem;
+  border-radius: 2.4rem;
+  background-color: #f2e4d4;
+  background-image: linear-gradient(rgba(168, 95, 46, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 95, 46, 0.1) 1px, transparent 1px);
+  background-size: 28px 28px;
+  border: 1px solid rgba(168, 95, 46, 0.2);
+  box-shadow: 0 8px 32px -4px rgba(25, 23, 18, 0.04);
 }
 
 .pruv-collection-hero__eyebrow {
   margin: 0;
+  font-family: 'Geist Mono', monospace;
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  opacity: 0.85;
+  color: #a85f2e;
 }
 
 .pruv-collection-hero__heading {
   margin: 0;
-  font-size: clamp(2.6rem, 4vw, 4rem);
-  line-height: 1.1;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(3.2rem, 5vw, 4.8rem);
+  line-height: 1.05;
   font-weight: 400;
   letter-spacing: -0.01em;
+  color: #191712;
   text-wrap: balance;
 }
 
 .pruv-collection-hero__subheading {
   margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.5rem;
-  line-height: 1.5;
-  opacity: 0.85;
-  max-width: 46ch;
+  line-height: 1.55;
+  color: #524d43;
+  max-width: 48ch;
 }
 
 .pruv-collection-hero__actions {
@@ -60,37 +74,62 @@
 }
 
 .pruv-collection-hero__code {
-  font-size: 1.3rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.7rem 1.6rem;
-  border: 1px dashed currentColor;
-  border-radius: 999px;
-  opacity: 0.9;
+  letter-spacing: 0.06em;
+  padding: 0.8rem 1.8rem;
+  border: 1.5px dashed #a85f2e;
+  border-radius: 100px;
+  color: #a85f2e;
+  background-color: rgba(255, 255, 255, 0.75);
 }
 
 .pruv-collection-hero__button {
-  border-radius: 999px;
+  border-radius: 100px;
+  background-color: #191712;
+  color: #f5f0e6;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1rem 2.4rem;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pruv-collection-hero__button:hover {
+  background-color: #a85f2e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(168, 95, 46, 0.25);
 }
 
 .pruv-collection-hero__breadcrumb {
-  margin-top: 2.4rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid rgba(127, 127, 127, 0.25);
+  margin-top: 2rem;
+  padding-top: 1.4rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 1.2rem;
-  letter-spacing: 0.02em;
-  opacity: 0.75;
+  justify-content: center;
+  gap: 0.8rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(25, 23, 18, 0.6);
 }
 
 .pruv-collection-hero__breadcrumb a {
-  color: currentColor;
+  color: #191712;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.pruv-collection-hero__breadcrumb a:hover {
+  color: #a85f2e;
   text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .pruv-collection-hero__breadcrumb [aria-current='page'] {
-  text-transform: capitalize;
+  color: #a85f2e;
+  font-weight: 600;
 }
