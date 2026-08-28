@@ -69,6 +69,18 @@
           </div>
         {%- endfor -%}
       </div>
+      {%- if section.blocks.size > 1 -%}
+        <div class="pruv-reviews__dots" aria-label="Review pagination">
+          {%- for block in section.blocks -%}
+            <button
+              type="button"
+              class="pruv-reviews__dot{% if forloop.first %} is-active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
     </pruv-reviews-carousel>
   {%- endif -%}
 </div>
@@ -77,16 +89,46 @@
   class PruvReviewsCarousel extends HTMLElement {
     connectedCallback() {
       this.cards = Array.from(this.querySelectorAll('.pruv-reviews__card'));
+      this.dots = Array.from(this.querySelectorAll('.pruv-reviews__dot'));
       this.activeIndex = 0;
-      this.autoplayDelay = 2200;
+      this.autoplayDelay = 2800;
       this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       this.addEventListener('mouseenter', () => this.stopAutoplay());
       this.addEventListener('mouseleave', () => this.maybeStartAutoplay());
-      this.addEventListener('touchstart', () => this.stopAutoplay(), { passive: true });
 
-      // Slot count (3 on desktop, 1 on mobile) is purely a media-query check — no
-      // layout measurement of any kind, so this is always correct the instant it runs.
+      // Touch swipe gestures for mobile right-to-left sliding
+      let touchStartX = 0;
+      let touchEndX = 0;
+      this.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        this.stopAutoplay();
+      }, { passive: true });
+
+      this.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 35) {
+          if (diff > 0) {
+            this.go(1);
+          } else {
+            this.go(-1);
+          }
+        }
+        this.maybeStartAutoplay();
+      }, { passive: true });
+
+      // Dot click handling
+      this.dots.forEach((dot) => {
+        dot.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.dataset.index, 10);
+          if (!isNaN(idx)) {
+            this.activeIndex = idx;
+            this.setSlots();
+          }
+        });
+      });
+
       this.sideSlotsQuery = window.matchMedia('(min-width: 750px)');
       this.showSideSlots = this.sideSlotsQuery.matches;
       const onSideSlotsChange = (e) => {
@@ -96,7 +138,6 @@
       if (this.sideSlotsQuery.addEventListener) {
         this.sideSlotsQuery.addEventListener('change', onSideSlotsChange);
       } else {
-        // Safari < 14 fallback.
         this.sideSlotsQuery.addListener(onSideSlotsChange);
       }
 
@@ -110,14 +151,10 @@
             this.stopAutoplay();
           }
         },
-        { threshold: 0.4 }
+        { threshold: 0.3 }
       );
       this._observer.observe(this);
 
-      // Slot assignment is pure index arithmetic — no offsetWidth/offsetLeft reads, so
-      // this is correct synchronously, before first paint. The Liquid template already
-      // pre-renders the matching data-slot values for index 0, so this call is mostly a
-      // no-op confirmation pass, not a correction.
       this.setSlots();
     }
 
@@ -133,12 +170,16 @@
         let slot = 'hidden';
         if (i === this.activeIndex) {
           slot = 'center';
-        } else if (this.showSideSlots && n > 2 && i === (this.activeIndex - 1 + n) % n) {
-          slot = 'left';
-        } else if (this.showSideSlots && n > 1 && i === (this.activeIndex + 1) % n) {
+        } else if (n > 1 && i === (this.activeIndex + 1) % n) {
           slot = 'right';
+        } else if (n > 1 && i === (this.activeIndex - 1 + n) % n) {
+          slot = 'left';
         }
         card.dataset.slot = slot;
+      });
+
+      this.dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === this.activeIndex);
       });
     }
 

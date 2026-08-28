@@ -63,15 +63,24 @@
                   {%- liquid
                     assign highlight = product.metafields.custom.highlight
                     if highlight == blank
-                      assign highlight = product.description | strip_html | truncate: 64
+                      assign highlight = product.description | strip_html | truncate: 50
                     endif
                   -%}
                   {%- if highlight != blank -%}
-                    <p class="pruv-bestsellers__highlight">{{ highlight }}</p>
+                    <span class="pruv-bestsellers__highlight-badge">{{ highlight }}</span>
                   {%- endif -%}
-                  <div class="pruv-bestsellers__price">
-                    {%- render 'price', product: product, show_compare_at_price: true -%}
+
+                  <div class="pruv-bestsellers__price-stack">
+                    {%- if product.compare_at_price > product.price -%}
+                      <div class="pruv-bestsellers__price-top">
+                        <span class="pruv-bestsellers__mrp">MRP {{ product.compare_at_price | money }}</span>
+                        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                        <span class="pruv-bestsellers__save-badge">SAVE {{ savings }}%</span>
+                      </div>
+                    {%- endif -%}
+                    <span class="pruv-bestsellers__final-price">{{ product.price | money }}</span>
                   </div>
+
                   <product-form class="pruv-bestsellers__form" data-hide-errors="true">
                     {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
                     {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
@@ -102,6 +111,7 @@
                       </button>
                     {%- endform -%}
                   </product-form>
+                  <span class="pruv-bestsellers__shipping-tag">FREE SHIPPING</span>
                 </div>
               </div>
             {%- endfor -%}

@@ -185,6 +185,34 @@
   color: #191712;
 }
 
+/* Pagination dots */
+.pruv-reviews__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  position: relative;
+  z-index: 4;
+}
+
+.pruv-reviews__dot {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(25, 23, 18, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition: background-color 0.3s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.3s ease;
+}
+
+.pruv-reviews__dot.is-active {
+  background-color: #a85f2e;
+  width: 2.4rem;
+  border-radius: 100px;
+}
+
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .pruv-reviews__card[data-slot='center'] {
     background-color: #fdfbf7;
@@ -192,17 +220,55 @@
   }
 }
 
+/* Mobile: expanded card width and right-to-left sliding carousel */
 @media screen and (max-width: 749px) {
   .pruv-reviews__carousel {
-    --card-w: 27rem;
-    --scale-center: 1.18;
+    --card-w: min(88vw, 36rem);
+    --scale-center: 1;
   }
 
   .pruv-reviews__track {
-    min-height: 38rem;
+    min-height: 32rem;
   }
 
   .pruv-reviews__card {
-    padding: 2rem 2.2rem;
+    padding: 2.4rem 2.2rem;
+    border-radius: 1.8rem;
+    transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.55s ease, visibility 0.55s;
+  }
+
+  .pruv-reviews__card[data-slot='center'] {
+    transform: translate(-50%, -50%) translateX(0) scale(1);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  .pruv-reviews__card[data-slot='right'] {
+    transform: translate(-50%, -50%) translateX(115vw) scale(1);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .pruv-reviews__card[data-slot='left'] {
+    transform: translate(-50%, -50%) translateX(-115vw) scale(1);
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .pruv-reviews__card[data-slot='hidden'] {
+    transform: translate(-50%, -50%) translateX(115vw) scale(0.9);
+    opacity: 0;
+    z-index: 1;
+    visibility: hidden;
+  }
+
+  .pruv-reviews__title {
+    font-size: 1.8rem;
+  }
+
+  .pruv-reviews__quote {
+    font-size: 1.35rem;
+    line-height: 1.6;
+    max-height: 11rem;
   }
 }
