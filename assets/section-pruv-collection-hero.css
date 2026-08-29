@@ -1,135 +1,680 @@
-/* Prüv — collection hero: bold promo banner + breadcrumb, sits above the shop-all grid */
+/* ==========================================================================
+   Prüv — Collection / Catalog Hero Section
+   ========================================================================== */
+
+.pruv-collection-hero-section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 .pruv-collection-hero {
-  padding-top: 3.6rem;
-  padding-bottom: 2rem;
-  text-align: center;
-}
-
-.pruv-collection-hero--compact {
-  padding-top: 2.8rem;
-  padding-bottom: 1.6rem;
-}
-
-.pruv-collection-hero__inner {
+  position: relative;
   display: flex;
+  flex-direction: column;
+  color: rgb(var(--color-foreground));
+  overflow: hidden;
+}
+
+.pruv-collection-hero__visual {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Layout Styles: Full Width vs Contained Box
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero--layout-contained {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.pruv-collection-hero--layout-contained .pruv-collection-hero__visual {
+  max-width: 136rem;
+  margin: 0 auto;
+  border-radius: 2.4rem;
+  border: 1px solid rgba(var(--color-foreground), 0.12);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop Heights
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 750px) {
+  .pruv-collection-hero--desk-compact .pruv-collection-hero__visual {
+    min-height: 42vh;
+  }
+  .pruv-collection-hero--desk-regular .pruv-collection-hero__visual,
+  .pruv-collection-hero--desk-medium .pruv-collection-hero__visual {
+    min-height: 58vh;
+  }
+  .pruv-collection-hero--desk-large .pruv-collection-hero__visual {
+    min-height: 74vh;
+  }
+  .pruv-collection-hero--desk-adapt .pruv-collection-hero__visual {
+    min-height: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Heights
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .pruv-collection-hero--mob-compact .pruv-collection-hero__visual {
+    min-height: 36vh;
+  }
+  .pruv-collection-hero--mob-regular .pruv-collection-hero__visual,
+  .pruv-collection-hero--mob-medium .pruv-collection-hero__visual {
+    min-height: 50vh;
+  }
+  .pruv-collection-hero--mob-large .pruv-collection-hero__visual {
+    min-height: 65vh;
+  }
+  .pruv-collection-hero--mob-adapt .pruv-collection-hero__visual {
+    min-height: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Background Media & Picture Art Direction
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pruv-collection-hero__picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pruv-collection-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.pruv-collection-hero__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Content Container & Grid Layout
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 3rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-collection-hero__container {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
 }
 
 .pruv-collection-hero__content {
-  max-width: 64rem;
+  position: relative;
+  z-index: 2;
+  max-width: 66rem;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1.2rem;
-  padding: 3.6rem 2.8rem;
-  border-radius: 2.4rem;
-  background-color: #f2e4d4;
-  background-image: linear-gradient(rgba(168, 95, 46, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 95, 46, 0.1) 1px, transparent 1px);
-  background-size: 28px 28px;
-  border: 1px solid rgba(168, 95, 46, 0.2);
-  box-shadow: 0 8px 32px -4px rgba(25, 23, 18, 0.04);
 }
 
+/* Content Positioning */
+.pruv-collection-hero__content--pos-center {
+  margin-inline: auto;
+  text-align: center;
+  align-items: center;
+}
+
+.pruv-collection-hero__content--pos-left {
+  margin-inline: 0 auto;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.pruv-collection-hero__content--pos-right {
+  margin-inline: auto 0;
+  text-align: right;
+  align-items: flex-end;
+}
+
+/* --------------------------------------------------------------------------
+   Freeform Canvas Positioning Mode
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero--mode-canvas .pruv-collection-hero__visual {
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.pruv-collection-hero--mode-canvas .pruv-collection-hero__container {
+  position: absolute;
+  inset: 0;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+  pointer-events: none;
+  display: block !important;
+}
+
+.pruv-collection-hero--mode-canvas .pruv-collection-hero__content {
+  position: absolute;
+  pointer-events: auto;
+  left: var(--hero-pos-x);
+  top: var(--hero-pos-y);
+  transform: translate(calc(-1 * var(--hero-pos-x)), calc(-1 * var(--hero-pos-y))) !important;
+  max-width: var(--hero-max-width);
+  width: 100%;
+  padding: 2.5rem 3.5rem !important;
+  z-index: 2;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-collection-hero--mode-canvas .pruv-collection-hero__content {
+    left: var(--hero-mob-pos-x) !important;
+    top: var(--hero-mob-pos-y) !important;
+    transform: translate(calc(-1 * var(--hero-mob-pos-x)), calc(-1 * var(--hero-mob-pos-y))) !important;
+    max-width: var(--hero-mob-max-width) !important;
+    width: 92% !important;
+    padding: 1.5rem !important;
+  }
+
+  /* Grid Mode - Mobile Vertical Placement Options */
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-top .pruv-collection-hero__visual {
+    align-items: flex-start !important;
+  }
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-top .pruv-collection-hero__container {
+    justify-content: flex-start !important;
+  }
+
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-middle .pruv-collection-hero__visual {
+    align-items: center !important;
+  }
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-middle .pruv-collection-hero__container {
+    justify-content: center !important;
+  }
+
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-bottom .pruv-collection-hero__visual {
+    align-items: flex-end !important;
+  }
+  .pruv-collection-hero--mode-grid.pruv-collection-hero--mob-pos-bottom .pruv-collection-hero__container {
+    justify-content: flex-end !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
 .pruv-collection-hero__eyebrow {
-  margin: 0;
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
+  opacity: 0.9;
+  margin: 0 0 1.2rem;
 }
 
 .pruv-collection-hero__heading {
-  margin: 0;
   font-family: 'Instrument Serif', Georgia, serif;
   font-style: italic;
-  font-size: clamp(3.2rem, 5vw, 4.8rem);
-  line-height: 1.05;
   font-weight: 400;
-  letter-spacing: -0.01em;
-  color: #191712;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.6rem;
   text-wrap: balance;
 }
 
-.pruv-collection-hero__subheading {
-  margin: 0;
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 1.5rem;
-  line-height: 1.55;
-  color: #524d43;
-  max-width: 48ch;
+.pruv-collection-hero__heading strong,
+.pruv-collection-hero__heading b {
+  font-style: normal;
+  font-weight: 700;
+  font-family: inherit;
 }
 
-.pruv-collection-hero__actions {
-  margin-top: 0.8rem;
+.pruv-collection-hero__heading--small {
+  font-size: clamp(2.6rem, 3.8vw, 3.8rem);
+}
+
+.pruv-collection-hero__heading--medium {
+  font-size: clamp(3.2rem, 4.8vw, 5rem);
+}
+
+.pruv-collection-hero__heading--large {
+  font-size: clamp(3.8rem, 5.8vw, 6.2rem);
+}
+
+.pruv-collection-hero__heading--xlarge {
+  font-size: clamp(4.4rem, 7vw, 7.4rem);
+}
+
+.pruv-collection-hero__subheading {
+  font-size: 1.65rem;
+  line-height: 1.55;
+  max-width: 52ch;
+  opacity: 0.94;
+  margin: 0 0 2.4rem;
+}
+
+/* Promo code tag */
+.pruv-collection-hero__code-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.4rem;
+  background: rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  border-radius: 9999px;
+  margin-bottom: 2.2rem;
+  width: fit-content;
+}
+
+.pruv-collection-hero__code-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__buttons {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: 1.4rem;
+}
+
+.pruv-collection-hero__content--pos-center .pruv-collection-hero__buttons {
   justify-content: center;
-  gap: 1.2rem;
 }
 
-.pruv-collection-hero__code {
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 0.8rem 1.8rem;
-  border: 1.5px dashed #a85f2e;
-  border-radius: 100px;
-  color: #a85f2e;
-  background-color: rgba(255, 255, 255, 0.75);
+.pruv-collection-hero__content--pos-left .pruv-collection-hero__buttons {
+  justify-content: flex-start;
 }
 
-.pruv-collection-hero__button {
-  border-radius: 100px;
-  background-color: #191712;
-  color: #f5f0e6;
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.2rem;
-  font-weight: 600;
+.pruv-collection-hero__content--pos-right .pruv-collection-hero__buttons {
+  justify-content: flex-end;
+}
+
+.pruv-collection-hero .button.button--hero,
+.pruv-collection-hero a.button.button--hero,
+.pruv-collection-hero .button--hero {
+  position: relative;
+  z-index: 2;
+  font-size: 1.35rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 1rem 2.4rem;
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.pruv-collection-hero__button:hover {
-  background-color: #a85f2e;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(168, 95, 46, 0.25);
-}
-
-.pruv-collection-hero__breadcrumb {
-  margin-top: 2rem;
-  padding-top: 1.4rem;
-  display: flex;
+  padding: 1.3rem 2.8rem !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
+  cursor: pointer;
+  min-width: auto !important;
+  min-height: auto !important;
+  line-height: 1.2 !important;
+  border-radius: 9999px !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pruv-collection-hero .button.button--hero::before,
+.pruv-collection-hero .button.button--hero::after,
+.pruv-collection-hero a.button.button--hero::before,
+.pruv-collection-hero a.button.button--hero::after,
+.pruv-collection-hero .button--hero::before,
+.pruv-collection-hero .button--hero::after {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+}
+
+/* Pill Black (Sleek Graphite / Soft Rich Dark) */
+.pruv-collection-hero .button.button--hero-pill-black,
+.pruv-collection-hero a.button.button--hero-pill-black,
+.pruv-collection-hero .button--hero-pill-black,
+.pruv-collection-hero .button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]),
+.pruv-collection-hero a.button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]) {
+  border-radius: 9999px !important;
+  background: #18181b !important;
+  background-color: #18181b !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  opacity: 1 !important;
+}
+
+.pruv-collection-hero .button.button--hero-pill-black:hover,
+.pruv-collection-hero a.button.button--hero-pill-black:hover,
+.pruv-collection-hero .button--hero-pill-black:hover,
+.pruv-collection-hero .button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]):hover,
+.pruv-collection-hero a.button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38) !important;
+  background: #27272a !important;
+  background-color: #27272a !important;
+  border-color: rgba(255, 255, 255, 0.32) !important;
+  color: #ffffff !important;
+}
+
+/* Pill Primary / Accent */
+.pruv-collection-hero .button.button--hero-pill-primary,
+.pruv-collection-hero a.button.button--hero-pill-primary,
+.pruv-collection-hero .button--hero-pill-primary {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #7faeff 0%, #4b8df9 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(75, 141, 249, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+.pruv-collection-hero .button.button--hero-pill-primary:hover,
+.pruv-collection-hero a.button.button--hero-pill-primary:hover,
+.pruv-collection-hero .button--hero-pill-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(75, 141, 249, 0.55) !important;
+  filter: brightness(1.05);
+}
+
+/* Pill White */
+.pruv-collection-hero .button.button--hero-pill-white,
+.pruv-collection-hero a.button.button--hero-pill-white,
+.pruv-collection-hero .button--hero-pill-white {
+  border-radius: 9999px !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #121212 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.pruv-collection-hero .button.button--hero-pill-white:hover,
+.pruv-collection-hero a.button.button--hero-pill-white:hover,
+.pruv-collection-hero .button--hero-pill-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28) !important;
+  background: #f7f7f8 !important;
+  background-color: #f7f7f8 !important;
+  color: #121212 !important;
+}
+
+/* Outline */
+.pruv-collection-hero .button.button--hero-outline,
+.pruv-collection-hero a.button.button--hero-outline,
+.pruv-collection-hero .button--hero-outline {
+  border-radius: 9999px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.8) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.pruv-collection-hero .button.button--hero-outline:hover,
+.pruv-collection-hero a.button.button--hero-outline:hover,
+.pruv-collection-hero .button--hero-outline:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  background-color: rgba(255, 255, 255, 0.18) !important;
+  border-color: #ffffff !important;
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+/* Solid */
+.pruv-collection-hero .button.button--hero-solid-primary,
+.pruv-collection-hero a.button.button--hero-solid-primary,
+.pruv-collection-hero .button--hero-solid-primary {
+  border-radius: 6px !important;
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.pruv-collection-hero .button.button--hero-solid-secondary,
+.pruv-collection-hero a.button.button--hero-solid-secondary,
+.pruv-collection-hero .button--hero-solid-secondary {
+  border-radius: 6px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   Promotional Graphic / Discount Offer Badge
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__promo-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+  user-select: none;
+  animation: pruv-float 4s ease-in-out infinite alternate;
+}
+
+.pruv-collection-hero__promo-badge-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 0.88;
+}
+
+.pruv-collection-hero__promo-prefix {
+  font-size: clamp(1.6rem, 2.4vw, 2.8rem);
+  font-weight: 900;
   text-transform: uppercase;
-  color: rgba(25, 23, 18, 0.6);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.pruv-collection-hero__promo-discount {
+  font-size: clamp(5.6rem, 9.5vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pruv-collection-hero__promo-suffix {
+  font-size: clamp(2rem, 3.2vw, 3.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #ffffff;
+  opacity: 0.95;
+}
+
+.pruv-collection-hero__promo-tag {
+  background: #ffffff;
+  color: #121212;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.6rem;
+  border-radius: 4px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  margin-top: 0.8rem;
+}
+
+/* --------------------------------------------------------------------------
+   Ticker Strip
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__ticker {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  overflow: hidden;
+  background-color: #7ba4f4;
+  color: #ffffff;
+  padding: 1rem 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.pruv-collection-hero__ticker-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: pruv-ticker-scroll var(--ticker-duration, 22s) linear infinite;
+}
+
+.pruv-collection-hero__ticker:hover .pruv-collection-hero__ticker-track {
+  animation-play-state: paused;
+}
+
+.pruv-collection-hero__ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.2rem;
+  padding-right: 2.2rem;
+  white-space: nowrap;
+  color: inherit;
+}
+
+.pruv-collection-hero__ticker-separator {
+  opacity: 0.65;
+  font-size: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   Breadcrumb Navigation
+   -------------------------------------------------------------------------- */
+.pruv-collection-hero__breadcrumb {
+  position: relative;
+  z-index: 3;
+  padding-top: 1.4rem;
+  padding-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
 .pruv-collection-hero__breadcrumb a {
-  color: #191712;
+  color: inherit;
   text-decoration: none;
-  font-weight: 600;
+  transition: opacity 0.2s ease;
 }
 
 .pruv-collection-hero__breadcrumb a:hover {
-  color: #a85f2e;
+  opacity: 1;
   text-decoration: underline;
 }
 
+.pruv-collection-hero__breadcrumb-divider {
+  opacity: 0.5;
+}
+
 .pruv-collection-hero__breadcrumb [aria-current='page'] {
-  color: #a85f2e;
-  font-weight: 600;
+  font-weight: 700;
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Adjustments - Place Content & Buttons at the Bottom
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .pruv-collection-hero__visual {
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+
+  .pruv-collection-hero__container {
+    padding-top: 2.5rem !important;
+    padding-bottom: 3.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    min-height: 100% !important;
+    width: 100% !important;
+    gap: 1.4rem !important;
+  }
+
+  .pruv-collection-hero__content {
+    margin-top: auto !important;
+    width: 100% !important;
+  }
+
+  .pruv-collection-hero__buttons {
+    margin-top: 1.6rem !important;
+    width: 100% !important;
+  }
+
+  .pruv-collection-hero__content--mob-align-left {
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+  .pruv-collection-hero__content--mob-align-left .pruv-collection-hero__buttons {
+    justify-content: flex-start !important;
+  }
+
+  .pruv-collection-hero__content--mob-align-center {
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .pruv-collection-hero__content--mob-align-center .pruv-collection-hero__buttons {
+    justify-content: center !important;
+  }
+
+  .pruv-collection-hero__content--mob-align-right {
+    text-align: right !important;
+    align-items: flex-end !important;
+  }
+  .pruv-collection-hero__content--mob-align-right .pruv-collection-hero__buttons {
+    justify-content: flex-end !important;
+  }
+
+  .pruv-collection-hero__promo-badge {
+    margin-top: 0.5rem;
+    order: -1; /* Display badge above bottom text/CTA on mobile if enabled */
+  }
+
+  .pruv-collection-hero__ticker {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+  }
 }
