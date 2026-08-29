@@ -81,10 +81,42 @@ collection-component {
 
 /* base */
 
+html {
+  box-sizing: border-box;
+  font-size: calc(var(--font-body-scale) * 62.5%);
+  height: 100%;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
+}
+
+#MainContent,
+main {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.shopify-section {
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .page-width {
   max-width: var(--page-width);
   margin: 0 auto;
   padding: 0 1.5rem;
+  box-sizing: border-box;
 }
 
 body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
