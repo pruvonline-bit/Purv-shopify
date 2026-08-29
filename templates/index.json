@@ -53,18 +53,50 @@
       "settings": {
         "image": "shopify://shop_images/ChatGPT_Image_Aug_27_2026_05_17_39_PM.png",
         "height": "large",
+        "mobile_height": "large",
         "overlay_opacity": 35,
+        "overlay_style": "gradient",
+        "color_scheme": "scheme-4",
+        "position_mode": "grid",
+        "canvas_pos_x": 15,
+        "canvas_pos_y": 75,
+        "canvas_max_width": 640,
+        "mobile_canvas_pos_x": 50,
+        "mobile_canvas_pos_y": 85,
+        "mobile_canvas_max_width": 420,
         "content_position": "bottom-left",
+        "mobile_content_position": "bottom",
+        "mobile_content_alignment": "left",
         "offset_x": 0,
         "offset_y": 0,
-        "color_scheme": "scheme-4",
+        "show_content": true,
         "eyebrow": "Beyond Doubt",
         "heading": "Beyond doubt, beyond hard water.",
+        "heading_size": "large",
         "subheading": "<p>Scalp-focused hair rituals engineered for the water, pollution and buildup your city actually throws at your hair.</p>",
+        "coupon_code": "Use code: PAYDAY",
+        "show_button_1": true,
         "button_label_1": "Shop TriShield",
         "button_link_1": "shopify://collections/all",
+        "button_style_1": "pill-black",
+        "button_custom_bg": "",
+        "button_custom_text": "",
+        "show_button_2": false,
         "button_label_2": "View ingredients",
         "button_link_2": "",
+        "button_style_2": "outline",
+        "show_promo_badge": false,
+        "promo_prefix": "FLAT",
+        "promo_discount": "25%",
+        "promo_suffix": "OFF",
+        "promo_tag": "USE CODE | PAYDAY",
+        "promo_badge_position": "right",
+        "show_bottom_bar": true,
+        "bottom_bar_mode": "press_marquee",
+        "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
+        "ticker_speed": 22,
+        "ticker_bg_color": "#7ba4f4",
+        "ticker_text_color": "#ffffff",
         "press_heading": "As seen in"
       }
     },
@@ -74,31 +106,9 @@
         "concern-1": {
           "type": "category_card",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_05_00_15_PM.png",
             "title": "HAIR GROWTH",
-            "custom_bg_color": "#b8d4f1",
-            "custom_text_color": "#ffffff"
-          }
-        },
-        "concern-2": {
-          "type": "category_card",
-          "settings": {
-            "title": "ANTI-DANDRUFF",
-            "custom_bg_color": "#b8d4f1",
-            "custom_text_color": "#ffffff"
-          }
-        },
-        "concern-3": {
-          "type": "category_card",
-          "settings": {
-            "title": "DRY HAIR",
-            "custom_bg_color": "#b8d4f1",
-            "custom_text_color": "#ffffff"
-          }
-        },
-        "concern-4": {
-          "type": "category_card",
-          "settings": {
-            "title": "STYLING",
+            "link": "",
             "custom_bg_color": "#b8d4f1",
             "custom_text_color": "#ffffff"
           }
@@ -106,7 +116,9 @@
         "concern-5": {
           "type": "category_card",
           "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_58_32_PM.png",
             "title": "ANTI-GREY",
+            "link": "",
             "custom_bg_color": "#b8d4f1",
             "custom_text_color": "#ffffff"
           }
@@ -114,7 +126,9 @@
         "concern-6": {
           "type": "category_card",
           "settings": {
-            "title": "BODY",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_55_49_PM.png",
+            "title": "DANDRUFF",
+            "link": "",
             "custom_bg_color": "#b8d4f1",
             "custom_text_color": "#ffffff"
           }
@@ -122,7 +136,9 @@
         "concern-7": {
           "type": "category_card",
           "settings": {
-            "title": "FACE",
+            "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_44_17_PM.png",
+            "title": "REGROWTH",
+            "link": "",
             "custom_bg_color": "#b8d4f1",
             "custom_text_color": "#ffffff"
           }
@@ -130,9 +146,6 @@
       },
       "block_order": [
         "concern-1",
-        "concern-2",
-        "concern-3",
-        "concern-4",
         "concern-5",
         "concern-6",
         "concern-7"
