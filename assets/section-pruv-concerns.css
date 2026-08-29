@@ -42,7 +42,7 @@
 .pruv-concerns__track {
   display: flex;
   align-items: stretch;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1.4rem;
   width: 100%;
   list-style: none;
@@ -70,12 +70,13 @@
   .pruv-concerns__track {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: flex-start !important;
     overflow-x: auto;
+    scroll-padding-left: 2.4rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
     gap: 1.4rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 0.4rem 2.4rem 1.2rem;
   }
 
   .pruv-concerns__track::-webkit-scrollbar {
@@ -88,7 +89,7 @@
   }
 }
 
-/* Mobile: Single horizontal scrollable row */
+/* Mobile: Single horizontal scrollable row starting flush with header */
 @media screen and (max-width: 749px) {
   .pruv-concerns__container {
     padding-left: 0 !important;
@@ -96,20 +97,22 @@
   }
 
   .pruv-concerns__header {
-    padding-left: 1.6rem;
-    padding-right: 1.6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     margin-bottom: 1.6rem;
   }
 
   .pruv-concerns__track {
     display: flex;
     flex-wrap: nowrap;
+    justify-content: flex-start !important;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 2rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 0.4rem 1.6rem 1.2rem;
+    padding: 0.4rem 2rem 1.4rem;
     gap: 1.2rem;
   }
 

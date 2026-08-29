@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ 'pruv-glass-nav.css' | asset_url }}" media="print" onload="this.media='all'">
+{{ 'pruv-glass-nav.css' | asset_url | stylesheet_tag }}
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -18,6 +18,69 @@
 {%- endif -%}
 
 <style>
+  /* ==========================================================================
+     Prüv Desktop Navbar Styling (Matching Reference)
+     ========================================================================== */
+  @media screen and (min-width: 990px) {
+    .header__inline-menu .list-menu--inline {
+      gap: 3.2rem !important;
+    }
+
+    .header__menu-item {
+      font-size: 1.35rem !important;
+      font-weight: 700 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      color: #191712 !important;
+      text-decoration: none !important;
+      transition: color 0.2s ease !important;
+    }
+
+    .header__menu-item span,
+    .header__active-menu-item,
+    .list-menu__item--active {
+      text-decoration: none !important;
+    }
+
+    .header__menu-item:hover,
+    .header__menu-item:hover span,
+    .header__active-menu-item {
+      color: #a85f2e !important;
+      text-decoration: none !important;
+    }
+
+    /* Icon Sequence: [Account] -> [Cart] -> [Search] */
+    .header__icons {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 0.4rem !important;
+    }
+
+    .header__icon--account,
+    shopify-account.header__icon,
+    .header__icons .header__icon--account {
+      order: 1 !important;
+    }
+
+    .header__icon--cart,
+    .header__icons .header__icon--cart {
+      order: 2 !important;
+    }
+
+    .header__icons .header__search {
+      order: 3 !important;
+    }
+
+    /* Balanced Icon Sizes on Desktop */
+    .header__icon .icon,
+    .header__icon svg,
+    .header__icon--cart .icon,
+    .header__icon--cart svg {
+      width: 2.1rem !important;
+      height: 2.1rem !important;
+    }
+  }
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
