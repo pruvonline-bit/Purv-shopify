@@ -8,7 +8,7 @@
 }
 
 .pruv-reviews__header {
-  margin-bottom: 3.6rem;
+  margin-bottom: 1.6rem;
   text-align: left;
 }
 
@@ -19,12 +19,12 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #a85f2e; /* Prüv Signature Terracotta */
-  margin: 0 0 1.2rem;
+  margin: 0 0 0.8rem;
 }
 
 .pruv-reviews__heading {
   font-family: inherit;
-  font-size: clamp(3.2rem, 4.4vw, 4.8rem);
+  font-size: clamp(2.8rem, 3.8vw, 4.2rem);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -46,17 +46,17 @@
   isolation: isolate;
   overflow: hidden;
   --card-w: 36rem;
-  --scale-center: 1.1;
+  --scale-center: 1.08;
   --scale-side: 0.92;
   --scale-hidden: 0.7;
-  --slot-shift: 118%;
-  padding-bottom: 2rem;
+  --slot-shift: 116%;
+  padding-bottom: 0.6rem;
 }
 
 .pruv-reviews__track {
   position: relative;
-  min-height: 44rem;
-  padding-block: 2.5rem;
+  min-height: 33rem;
+  padding-block: 1rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -201,14 +201,14 @@
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  margin-top: 2.2rem;
+  margin-top: 0.8rem;
   position: relative;
   z-index: 4;
 }
 
 .pruv-reviews__dot {
-  width: 0.9rem;
-  height: 0.9rem;
+  width: 0.85rem;
+  height: 0.85rem;
   border-radius: 50%;
   border: none;
   background-color: rgba(168, 95, 46, 0.22);
@@ -219,7 +219,7 @@
 
 .pruv-reviews__dot.is-active {
   background-color: #a85f2e;
-  width: 2.8rem;
+  width: 2.6rem;
   border-radius: 100px;
 }
 
@@ -230,10 +230,12 @@
   .pruv-reviews__carousel {
     --card-w: min(88vw, 35rem);
     --scale-center: 1;
+    padding-bottom: 0.2rem;
   }
 
   .pruv-reviews__track {
-    min-height: 38rem;
+    min-height: 29rem;
+    padding-block: 0.4rem;
   }
 
   .pruv-reviews__card {

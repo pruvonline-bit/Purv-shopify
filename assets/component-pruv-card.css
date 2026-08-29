@@ -258,10 +258,20 @@ product-component.pruv-product-card-component {
   text-transform: uppercase !important;
   padding: 1.2rem 2rem !important;
   border-radius: 9999px !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  outline: none !important;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(25, 23, 18, 0.2);
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+/* Remove Dawn default button pseudo-element box borders */
+.button--pruv-add-to-cart::before,
+.button--pruv-add-to-cart::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .button--pruv-add-to-cart:hover {
