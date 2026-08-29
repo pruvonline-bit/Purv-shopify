@@ -163,7 +163,6 @@
       "settings": {
         "collection": "all",
         "products_to_show": 4,
-        "badge_text": "Bestseller",
         "eyebrow": "Our Bestsellers",
         "heading": "Proven favourites. <strong>Beyond doubt, always.</strong>",
         "description": "<p>Our most repurchased rituals — tested against hard water, pollution and everyday buildup, not just marketing claims.</p>",
@@ -271,7 +270,8 @@
         "container_color_scheme": "scheme-3",
         "color_scheme": "scheme-1",
         "open_first_collapsible_row": true,
-        "image_ratio": "large",
+        "image": "shopify://shop_images/Shampoo_bottle_product_photography_202608291751.jpg",
+        "image_ratio": "small",
         "desktop_layout": "image_first",
         "padding_top": 48,
         "padding_bottom": 48
@@ -280,14 +280,21 @@
     "video_glass": {
       "type": "pruv-video-glass",
       "settings": {
+        "video": "shopify://files/videos/Prův_Trishield_shampoo_product_a…_202608291739.mp4",
+        "height": "medium",
+        "overlay_color": "#000000",
+        "overlay_opacity": 10,
+        "glass_style": "light",
+        "glass_blur_strength": 24,
+        "glass_opacity": 15,
+        "card_position": "center",
+        "eyebrow": "",
         "heading": "Give our science <strong>a spin.</strong>",
+        "text": "",
         "button_label": "KNOW MORE",
         "button_link": "shopify://collections/all",
         "button_style": "glass",
-        "glass_style": "light",
-        "glass_blur_strength": 24,
-        "height": "medium",
-        "overlay_opacity": 10,
+        "color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -392,8 +399,8 @@
     "bestsellers",
     "trust_badges",
     "product_details",
-    "video_glass",
     "philosophy",
+    "video_glass",
     "reviews"
   ]
 }
