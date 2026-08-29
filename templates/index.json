@@ -277,6 +277,19 @@
         "padding_bottom": 48
       }
     },
+    "philosophy": {
+      "type": "pruv-philosophy",
+      "settings": {
+        "eyebrow": "Our Philosophy",
+        "heading": "Hair and scalp science <strong>meets everyday care.</strong>",
+        "text": "<p>We approach hair and scalp care as systems, not symptoms. Our formulations are engineered through dermatological insight to address concerns at their origin, delivering measured results that endure.</p>",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
     "video_glass": {
       "type": "pruv-video-glass",
       "settings": {
@@ -297,19 +310,6 @@
         "color_scheme": "",
         "padding_top": 48,
         "padding_bottom": 48
-      }
-    },
-    "philosophy": {
-      "type": "pruv-philosophy",
-      "settings": {
-        "eyebrow": "Our Philosophy",
-        "heading": "Hair and scalp science <strong>meets everyday care.</strong>",
-        "text": "<p>We approach hair and scalp care as systems, not symptoms. Our formulations are engineered through dermatological insight to address concerns at their origin, delivering measured results that endure.</p>",
-        "button_label": "Know more",
-        "button_link": "",
-        "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
       }
     },
     "reviews": {
