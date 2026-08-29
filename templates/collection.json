@@ -1,16 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "banner": {
       "type": "pruv-collection-hero",
       "settings": {
-        "height": "regular",
+        "image": "shopify://shop_images/Gemini_Generated_Image_sh0zwqsh0zwqsh0z.png",
+        "image_mobile": "shopify://shop_images/Cosmetologist_designing_haircare__2026082w91244.jpg",
+        "layout_type": "full_width",
+        "height": "medium",
+        "mobile_height": "medium",
+        "overlay_opacity": 35,
+        "overlay_style": "gradient",
         "color_scheme": "scheme-5",
         "eyebrow": "Limited Time",
         "heading": "Sale is live! Grab your essentials",
         "subheading": "<p>Save on your favourite hair and scalp rituals, for a limited time only.</p>",
+        "position_mode": "grid",
+        "canvas_pos_x": 50,
+        "canvas_pos_y": 50,
+        "canvas_max_width": 660,
+        "mobile_canvas_pos_x": 50,
+        "mobile_canvas_pos_y": 85,
+        "mobile_canvas_max_width": 420,
+        "content_position": "center",
+        "mobile_content_position": "bottom",
+        "mobile_content_alignment": "center",
+        "show_content": true,
+        "eyebrow": "",
+        "heading": "",
+        "heading_size": "medium",
+        "subheading": "",
         "promo_code": "",
-        "button_label": "Shop now",
-        "button_link": "",
+        "show_button_1": true,
+        "button_label_1": "Shop now",
+        "button_link_1": "",
+        "button_style_1": "pill-black",
+        "button_custom_bg": "",
+        "button_custom_text": "",
+        "show_button_2": false,
+        "button_label_2": "",
+        "button_link_2": "",
+        "button_style_2": "outline",
+        "show_promo_badge": false,
+        "promo_prefix": "FLAT",
+        "promo_discount": "25%",
+        "promo_suffix": "OFF",
+        "promo_tag": "USE CODE | PAYDAY",
+        "promo_badge_position": "right",
+        "show_ticker": false,
+        "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
+        "ticker_speed": 22,
+        "ticker_bg_color": "#7ba4f4",
+        "ticker_text_color": "#ffffff",
         "show_breadcrumb": true
       }
     },
@@ -19,6 +68,7 @@
       "settings": {
         "products_per_page": 16,
         "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
@@ -30,7 +80,6 @@
         "enable_filtering": true,
         "filter_type": "drawer",
         "enable_sorting": true,
-        "columns_mobile": "2",
         "padding_top": 24,
         "padding_bottom": 36
       }
