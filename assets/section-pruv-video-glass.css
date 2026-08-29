@@ -1,0 +1,316 @@
+/* ==========================================================================
+   Prüv — Video Showcase Section with Frosted Glass Overlay Card
+   ========================================================================== */
+
+.pruv-video-glass {
+  position: relative;
+  overflow: hidden;
+}
+
+.pruv-video-glass__container {
+  width: 100%;
+}
+
+.pruv-video-glass__frame {
+  position: relative;
+  width: 100%;
+  border-radius: 3.2rem;
+  overflow: hidden;
+  background-color: #191712;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Height presets */
+.pruv-video-glass__frame--small {
+  min-height: 40rem;
+}
+
+.pruv-video-glass__frame--medium {
+  min-height: 52rem;
+}
+
+.pruv-video-glass__frame--large {
+  min-height: 64rem;
+}
+
+.pruv-video-glass__frame--adapt {
+  aspect-ratio: 16 / 9;
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-video-glass__frame--adapt {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Background Video & Media Element
+   -------------------------------------------------------------------------- */
+.pruv-video-glass__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.pruv-video-glass__media video,
+.pruv-video-glass__media img,
+.pruv-video-glass__media iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.pruv-video-glass__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.pruv-video-glass__placeholder svg {
+  width: 8rem;
+  height: 8rem;
+  opacity: 0.4;
+}
+
+/* Video Tint Overlay */
+.pruv-video-glass__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Frosted Glass Center Card (Ultra-Transparent Glassmorphism)
+   -------------------------------------------------------------------------- */
+.pruv-video-glass__card-wrapper {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  padding: 3.2rem 2rem;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+/* Alignment positions */
+.pruv-video-glass__card-wrapper--center {
+  justify-content: center;
+  align-items: center;
+}
+
+.pruv-video-glass__card-wrapper--left {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.pruv-video-glass__card-wrapper--right {
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.pruv-video-glass__card-wrapper--bottom {
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* Glass Card Shell */
+.pruv-video-glass__card {
+  pointer-events: auto;
+  position: relative;
+  max-width: 58rem;
+  width: 100%;
+  padding: 4.4rem 4.8rem;
+  border-radius: 3.2rem;
+  text-align: center;
+  box-sizing: border-box;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pruv-video-glass__card:hover {
+  transform: translateY(-3px);
+}
+
+/* Highly Transparent Glass Styles */
+.pruv-video-glass__card--light {
+  background: rgba(255, 255, 255, 0.16); /* Ultra-transparent glass */
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.16), inset 0 1px 1.5px rgba(255, 255, 255, 0.5);
+}
+
+.pruv-video-glass__card--dark {
+  background: rgba(25, 23, 18, 0.32);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.pruv-video-glass__card--terracotta {
+  background: rgba(168, 95, 46, 0.28);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 48px rgba(168, 95, 46, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   Card Typography & Content
+   -------------------------------------------------------------------------- */
+.pruv-video-glass__eyebrow {
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0 0 1.2rem;
+  opacity: 0.95;
+  color: inherit;
+}
+
+.pruv-video-glass__heading {
+  font-family: inherit;
+  font-size: clamp(3.2rem, 4.4vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: inherit;
+  text-wrap: balance;
+}
+
+.pruv-video-glass__heading strong {
+  display: block;
+  font-weight: 400;
+  opacity: 0.95;
+}
+
+.pruv-video-glass__text {
+  font-size: 1.55rem;
+  line-height: 1.6;
+  margin: 1.4rem auto 0;
+  max-width: 42ch;
+  opacity: 0.9;
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   CTA Pill Button
+   -------------------------------------------------------------------------- */
+.pruv-video-glass__button-wrapper {
+  margin-top: 2.6rem;
+}
+
+.pruv-video-glass__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 3.6rem;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  line-height: 1;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Frosted Glass Pill Button matching reference */
+.pruv-video-glass__btn--glass {
+  background: rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.pruv-video-glass__btn--glass:hover {
+  background: rgba(255, 255, 255, 0.42);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.25);
+}
+
+.pruv-video-glass__btn--black {
+  background: #191712;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(25, 23, 18, 0.25);
+}
+
+.pruv-video-glass__btn--black:hover {
+  background: #a85f2e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.4);
+}
+
+.pruv-video-glass__btn--terracotta {
+  background: #a85f2e;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(168, 95, 46, 0.35);
+}
+
+.pruv-video-glass__btn--terracotta:hover {
+  background: #8e4f24;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Adjustments
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .pruv-video-glass__frame {
+    border-radius: 2.2rem;
+    min-height: 42rem;
+  }
+
+  .pruv-video-glass__card-wrapper {
+    padding: 2rem 1.6rem;
+  }
+
+  .pruv-video-glass__card {
+    padding: 3.2rem 2.2rem;
+    border-radius: 2.4rem;
+    max-width: 100%;
+  }
+
+  .pruv-video-glass__heading {
+    font-size: 2.8rem;
+  }
+
+  .pruv-video-glass__btn {
+    padding: 1.1rem 2.8rem;
+    font-size: 1.15rem;
+  }
+}

@@ -1,7 +1,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
   rel="stylesheet"
 >
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
@@ -39,136 +39,243 @@
     </div>
 
     <div class="pruv-bestsellers__panel">
-        <div class="pruv-bestsellers__products" data-animate="stagger">
+      <!-- 2-Product Manual Carousel -->
+      <pruv-bestseller-carousel class="pruv-bestsellers__carousel">
+        <div class="pruv-bestsellers__track" id="BestsellersTrack-{{ section.id }}">
           {%- assign shown_products = section.settings.collection.products -%}
           {%- if shown_products.size > 0 -%}
             {%- for product in shown_products limit: section.settings.products_to_show -%}
-              <div class="pruv-product-card">
-                <div class="pruv-card-badges-stack">
-                  <span class="pruv-badge-bestseller">BEST SELLER</span>
-                  <span class="pruv-badge-payday">PAYDAY</span>
-                </div>
-                <a href="{{ product.url }}" class="pruv-card-media-wrapper">
-                  {%- if product.featured_image != blank -%}
-                    {{
-                      product.featured_image
-                      | image_url: width: 600
-                      | image_tag: loading: 'lazy', widths: '240, 360, 480, 600', class: 'pruv-card-image', alt: product.featured_image.alt | default: product.title | escape
-                    }}
-                  {%- else -%}
-                    {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
-                  {%- endif -%}
-                </a>
-                <div class="pruv-card-info">
-                  <h3 class="pruv-card-title">
-                    <a href="{{ product.url }}">{{ product.title }}</a>
-                  </h3>
-                  {%- liquid
-                    assign highlight = product.metafields.custom.highlight
-                    if highlight == blank
-                      for tag in product.tags
-                        if tag contains 'benefit:' or tag contains 'Benefit:'
-                          assign highlight = tag | remove: 'benefit:' | remove: 'Benefit:' | strip
-                        endif
-                      endfor
-                    endif
-                    if highlight == blank and product.description != blank
-                      assign highlight = product.description | strip_html | truncate: 45
-                    endif
-
-                    assign review_cnt = product.metafields.reviews.rating_count
-                    if review_cnt == blank or review_cnt == 0
-                      if product.title contains 'Serum'
-                        assign review_cnt = 474
-                      else
-                        assign review_cnt = 226
-                      endif
-                    endif
-                  -%}
-                  {%- if highlight != blank -%}
-                    <div class="pruv-card-tagline-wrapper">
-                      <span class="pruv-card-tagline">{{ highlight }}</span>
-                    </div>
-                  {%- endif -%}
-
-                  <div class="pruv-card-rating-row">
-                    <div class="pruv-card-rating-stars" aria-hidden="true">
-                      <span>★</span><span>★</span><span>★</span><span>★</span><span class="star-dim">★</span>
-                    </div>
-                    <span class="pruv-card-rating-divider">|</span>
-                    <span class="pruv-card-review-count">{{ review_cnt }} REVIEWS</span>
+              <div class="pruv-bestsellers__slide" data-slide-index="{{ forloop.index0 }}">
+                <div class="pruv-product-card">
+                  <div class="pruv-card-badges-stack">
+                    <span class="pruv-badge-bestseller">BEST SELLER</span>
+                    <span class="pruv-badge-payday">PAYDAY</span>
                   </div>
-
-                  <div class="pruv-card-price-stack">
-                    {%- if product.compare_at_price > product.price -%}
-                      <div class="pruv-card-price-top">
-                        <span class="pruv-card-mrp">MRP {{ product.compare_at_price | money }}</span>
-                        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                        <span class="pruv-card-save-pill">SAVE {{ savings }}%</span>
-                      </div>
+                  <a href="{{ product.url }}" class="pruv-card-media-wrapper">
+                    {%- if product.featured_image != blank -%}
+                      {{
+                        product.featured_image
+                        | image_url: width: 600
+                        | image_tag: loading: 'lazy', widths: '240, 360, 480, 600', class: 'pruv-card-image', alt: product.featured_image.alt | default: product.title | escape
+                      }}
                     {%- else -%}
-                      {%- assign fake_mrp = product.price | times: 1.33 | round -%}
-                      <div class="pruv-card-price-top">
-                        <span class="pruv-card-mrp">MRP {{ fake_mrp | money }}</span>
-                        <span class="pruv-card-save-pill">SAVE 25%</span>
+                      {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
+                    {%- endif -%}
+                  </a>
+                  <div class="pruv-card-info">
+                    <h3 class="pruv-card-title">
+                      <a href="{{ product.url }}">{{ product.title }}</a>
+                    </h3>
+                    {%- liquid
+                      assign highlight = product.metafields.custom.highlight
+                      if highlight == blank
+                        for tag in product.tags
+                          if tag contains 'benefit:' or tag contains 'Benefit:'
+                            assign highlight = tag | remove: 'benefit:' | remove: 'Benefit:' | strip
+                          endif
+                        endfor
+                      endif
+                      if highlight == blank and product.description != blank
+                        assign highlight = product.description | strip_html | truncate: 45
+                      endif
+
+                      assign review_cnt = product.metafields.reviews.rating_count
+                      if review_cnt == blank or review_cnt == 0
+                        if product.title contains 'Serum'
+                          assign review_cnt = 474
+                        else
+                          assign review_cnt = 226
+                        endif
+                      endif
+                    -%}
+                    {%- if highlight != blank -%}
+                      <div class="pruv-card-tagline-wrapper">
+                        <span class="pruv-card-tagline">{{ highlight }}</span>
                       </div>
                     {%- endif -%}
-                    <div class="pruv-card-final-price">{{ product.price | money }}</div>
-                  </div>
 
-                  <div class="pruv-card-actions">
-                    <product-form class="pruv-bestsellers__form" data-hide-errors="true">
-                      {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
-                      {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
-                        <input
-                          type="hidden"
-                          name="id"
-                          value="{{ product.selected_or_first_available_variant.id }}"
-                          {% if product.selected_or_first_available_variant.available == false %}
-                            disabled
-                          {% endif %}
-                        >
-                        <button
-                          type="submit"
-                          name="add"
-                          class="button button--pruv-add-to-cart"
-                          {% if product.selected_or_first_available_variant.available == false %}
-                            disabled
-                          {% endif %}
-                        >
-                          <span>
-                            {%- if product.selected_or_first_available_variant.available == false -%}
-                              {{ 'products.product.sold_out' | t }}
-                            {%- else -%}
-                              ADD TO CART
-                            {%- endif -%}
-                          </span>
-                          {%- render 'loading-spinner' -%}
-                        </button>
-                      {%- endform -%}
-                    </product-form>
-                    <div class="pruv-card-free-shipping">FREE SHIPPING</div>
+                    <div class="pruv-card-rating-row">
+                      <div class="pruv-card-rating-stars" aria-hidden="true">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span class="star-dim">★</span>
+                      </div>
+                      <span class="pruv-card-rating-divider">|</span>
+                      <span class="pruv-card-review-count">{{ review_cnt }} REVIEWS</span>
+                    </div>
+
+                    <div class="pruv-card-price-stack">
+                      {%- if product.compare_at_price > product.price -%}
+                        <div class="pruv-card-price-top">
+                          <span class="pruv-card-mrp">MRP {{ product.compare_at_price | money }}</span>
+                          {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                          <span class="pruv-card-save-pill">SAVE {{ savings }}%</span>
+                        </div>
+                      {%- else -%}
+                        {%- assign fake_mrp = product.price | times: 1.33 | round -%}
+                        <div class="pruv-card-price-top">
+                          <span class="pruv-card-mrp">MRP {{ fake_mrp | money }}</span>
+                          <span class="pruv-card-save-pill">SAVE 25%</span>
+                        </div>
+                      {%- endif -%}
+                      <div class="pruv-card-final-price">{{ product.price | money }}</div>
+                    </div>
+
+                    <div class="pruv-card-actions">
+                      <product-form class="pruv-bestsellers__form" data-hide-errors="true">
+                        {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
+                        {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
+                          <input
+                            type="hidden"
+                            name="id"
+                            value="{{ product.selected_or_first_available_variant.id }}"
+                            {% if product.selected_or_first_available_variant.available == false %}
+                              disabled
+                            {% endif %}
+                          >
+                          <button
+                            type="submit"
+                            name="add"
+                            class="button button--pruv-add-to-cart"
+                            {% if product.selected_or_first_available_variant.available == false %}
+                              disabled
+                            {% endif %}
+                          >
+                            <span>
+                              {%- if product.selected_or_first_available_variant.available == false -%}
+                                {{ 'products.product.sold_out' | t }}
+                              {%- else -%}
+                                ADD TO CART
+                              {%- endif -%}
+                            </span>
+                            {%- render 'loading-spinner' -%}
+                          </button>
+                        {%- endform -%}
+                      </product-form>
+                      <div class="pruv-card-free-shipping">FREE SHIPPING</div>
+                    </div>
                   </div>
                 </div>
               </div>
             {%- endfor -%}
           {%- else -%}
-            {%- for i in (1..4) -%}
-              <div class="pruv-product-card">
-                <a href="#" class="pruv-card-media-wrapper">
-                  {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
-                </a>
-                <div class="pruv-card-info">
-                  <h3 class="pruv-card-title">Add a collection to show products here</h3>
+            {%- for i in (1..3) -%}
+              <div class="pruv-bestsellers__slide" data-slide-index="{{ forloop.index0 }}">
+                <div class="pruv-product-card">
+                  <div class="pruv-card-media-wrapper">
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
+                  </div>
+                  <div class="pruv-card-info">
+                    <h3 class="pruv-card-title">Add a collection to show products</h3>
+                  </div>
                 </div>
               </div>
             {%- endfor -%}
           {%- endif -%}
         </div>
+
+        <!-- Carousel Pagination Dots -->
+        <div class="pruv-bestsellers__dots" id="BestsellersDots-{{ section.id }}">
+          {%- assign total_count = shown_products.size | default: 3 -%}
+          {%- assign page_count = total_count | minus: 1 -%}
+          {%- if page_count < 1 -%}{%- assign page_count = 1 -%}{%- endif -%}
+          {%- for i in (1..page_count) -%}
+            <button
+              type="button"
+              class="pruv-bestsellers__dot{% if forloop.first %} pruv-bestsellers__dot--active{% endif %}"
+              data-dot-index="{{ forloop.index0 }}"
+              aria-label="Slide {{ forloop.index }}"
+            ></button>
+          {%- endfor -%}
+        </div>
+      </pruv-bestseller-carousel>
     </div>
 
   </div>
 </div>
+
+<script>
+  if (!customElements.get('pruv-bestseller-carousel')) {
+    customElements.define(
+      'pruv-bestseller-carousel',
+      class PruvBestsellerCarousel extends HTMLElement {
+        constructor() {
+          super();
+          this.currentIndex = 0;
+        }
+
+        connectedCallback() {
+          this.track = this.querySelector('.pruv-bestsellers__track');
+          this.slides = Array.from(this.querySelectorAll('.pruv-bestsellers__slide'));
+          this.dots = Array.from(this.querySelectorAll('.pruv-bestsellers__dot'));
+
+          if (!this.track || this.slides.length <= 1) return;
+
+          this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+              this.goToSlide(index);
+            });
+          });
+
+          // Touch & Mouse Drag Support
+          let startX = 0;
+          let currentX = 0;
+          let isDragging = false;
+
+          // Touch
+          this.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            currentX = startX;
+            isDragging = true;
+          }, { passive: true });
+
+          this.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+          }, { passive: true });
+
+          this.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            const diff = startX - currentX;
+            if (diff > 35) {
+              this.nextSlide();
+            } else if (diff < -35) {
+              this.prevSlide();
+            }
+          }, { passive: true });
+        }
+
+        goToSlide(index) {
+          const maxIndex = Math.max(0, this.slides.length - 2);
+          this.currentIndex = Math.max(0, Math.min(index, maxIndex));
+
+          const slide = this.slides[0];
+          if (!slide) return;
+          const slideWidth = slide.getBoundingClientRect().width;
+          const gap = parseFloat(window.getComputedStyle(this.track).gap) || 16;
+          
+          const shift = this.currentIndex * (slideWidth + gap);
+          this.track.style.transform = `translateX(-${shift}px)`;
+
+          this.dots.forEach((dot, i) => {
+            dot.classList.toggle('pruv-bestsellers__dot--active', i === this.currentIndex);
+          });
+        }
+
+        nextSlide() {
+          const maxIndex = Math.max(0, this.slides.length - 2);
+          const next = this.currentIndex >= maxIndex ? 0 : this.currentIndex + 1;
+          this.goToSlide(next);
+        }
+
+        prevSlide() {
+          const maxIndex = Math.max(0, this.slides.length - 2);
+          const prev = this.currentIndex <= 0 ? maxIndex : this.currentIndex - 1;
+          this.goToSlide(prev);
+        }
+      }
+    );
+  }
+</script>
 
 {% schema %}
 {
@@ -188,17 +295,14 @@
       "type": "range",
       "id": "products_to_show",
       "min": 2,
-      "max": 8,
+      "max": 10,
       "step": 1,
-      "default": 4,
+      "default": 6,
       "label": "Products to show"
     },
     {
-      "type": "text",
-      "id": "badge_text",
-      "label": "Product badge",
-      "default": "Bestseller",
-      "info": "Shown as a small pill on every product. Leave blank to hide."
+      "type": "header",
+      "content": "Section Content"
     },
     {
       "type": "text",
@@ -226,7 +330,7 @@
     },
     {
       "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
+      "content": "Section padding"
     },
     {
       "type": "range",

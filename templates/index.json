@@ -264,6 +264,21 @@
         "padding_bottom": 48
       }
     },
+    "video_glass": {
+      "type": "pruv-video-glass",
+      "settings": {
+        "heading": "Give our science <strong>a spin.</strong>",
+        "button_label": "KNOW MORE",
+        "button_link": "shopify://collections/all",
+        "button_style": "glass",
+        "glass_style": "light",
+        "glass_blur_strength": 24,
+        "height": "medium",
+        "overlay_opacity": 10,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "philosophy": {
       "type": "pruv-philosophy",
       "settings": {
@@ -364,6 +379,7 @@
     "bestsellers",
     "trust_badges",
     "product_details",
+    "video_glass",
     "philosophy",
     "reviews"
   ]
