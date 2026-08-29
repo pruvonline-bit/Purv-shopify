@@ -33,6 +33,13 @@
       }
     {%- endif -%}
     {%- if section.settings.ticker_text_color != blank -%}
+      #PruvCollectionHero-{{ section.id }} .pruv-collection-hero__ticker,
+      #PruvCollectionHero-{{ section.id }} .pruv-collection-hero__ticker-item {
+        color: {{ section.settings.ticker_text_color }};
+      }
+    {%- endif -%}
+  {%- endif -%}
+
   {%- if section.settings.button_custom_bg != blank -%}
     #PruvCollectionHero-{{ section.id }} .button--hero-primary {
       background: {{ section.settings.button_custom_bg }} !important;
