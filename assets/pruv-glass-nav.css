@@ -38,3 +38,157 @@
     justify-content: center;
   }
 }
+
+/* ==========================================================================
+   Mobile Navbar Layout (Matching Reference: Logo Left, Icons Right)
+   Icon sequence: [Account] -> [Cart] -> [Search] -> [Hamburger Menu]
+   ========================================================================== */
+@media screen and (max-width: 989px) {
+  .header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-top: 1.2rem !important;
+    padding-bottom: 1.2rem !important;
+    padding-left: 1.6rem !important;
+    padding-right: 1.6rem !important;
+    grid-template-columns: unset !important;
+    grid-template-areas: unset !important;
+  }
+
+  /* 1. Logo on the far left */
+  .header__heading,
+  .header__heading-link {
+    order: 1 !important;
+    margin: 0 !important;
+    margin-right: auto !important;
+    text-align: left !important;
+    justify-self: start !important;
+    display: flex !important;
+    align-items: center !important;
+    width: auto !important;
+    padding: 0 !important;
+  }
+
+  .header__heading-logo-wrapper {
+    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .header__heading-logo {
+    max-height: 3.4rem !important;
+    width: auto !important;
+    object-fit: contain;
+  }
+
+  /* 2. Group Action Icons on the right */
+  .header__icons {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 0.2rem !important;
+    padding-right: 0 !important;
+    margin-left: auto !important;
+    width: auto !important;
+  }
+
+  /* Account Icon (1st in icons group) */
+  .header__icon--account,
+  shopify-account.header__icon,
+  .header__icons .header__icon--account {
+    order: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    min-width: 3.8rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Cart Icon (2nd in icons group) */
+  .header__icon--cart,
+  .header__icons .header__icon--cart {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+  }
+
+  /* Search Icon (3rd in icons group) */
+  .header__icons .header__search,
+  .header__icons details-modal.header__search,
+  .header__icons details.modal {
+    order: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    margin: 0 !important;
+  }
+
+  .header__icons .header__search .header__icon {
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide redundant left search modal on mobile */
+  .header > .header__search {
+    display: none !important;
+  }
+
+  /* 3. Hamburger Menu Drawer (4th - Far Right) */
+  header-drawer {
+    order: 3 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 0 0 0.1rem !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+  }
+
+  header-drawer .header__icon--menu {
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .header__icon .icon,
+  .header__icon svg {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
+    display: block !important;
+  }
+
+  .header__icon--cart .icon,
+  .header__icon--cart svg {
+    width: 2.35rem !important;
+    height: 2.35rem !important;
+  }
+
+  .cart-count-bubble {
+    bottom: 2.2rem !important;
+    left: 2.2rem !important;
+    width: 1.8rem !important;
+    height: 1.8rem !important;
+    font-size: 1rem !important;
+    background-color: #a85f2e !important;
+    color: #ffffff !important;
+  }
+}

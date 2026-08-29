@@ -1,0 +1,236 @@
+/* ==========================================================================
+   Prüv — Visual Concern / Category Story Cards Section
+   ========================================================================== */
+
+.pruv-concerns {
+  position: relative;
+  overflow: hidden;
+}
+
+.pruv-concerns__container {
+  width: 100%;
+}
+
+.pruv-concerns__header {
+  margin-bottom: 2.4rem;
+  text-align: left;
+}
+
+.pruv-concerns__eyebrow {
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a85f2e;
+  margin: 0 0 0.8rem;
+}
+
+.pruv-concerns__heading {
+  font-family: inherit;
+  font-size: clamp(2.4rem, 3.2vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #191712;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Cards Track & Layout
+   -------------------------------------------------------------------------- */
+.pruv-concerns__track {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.4rem;
+  width: 100%;
+  list-style: none;
+  padding: 0.4rem 0 1rem;
+  margin: 0;
+}
+
+/* Desktop responsive sizing according to number of cards */
+@media screen and (min-width: 990px) {
+  .pruv-concerns__track {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 1.6rem;
+  }
+
+  .pruv-concern-card {
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .pruv-concerns__track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 1.4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .pruv-concerns__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-concern-card {
+    flex: 0 0 14.5rem;
+    width: 14.5rem;
+  }
+}
+
+/* Mobile: Single horizontal scrollable row */
+@media screen and (max-width: 749px) {
+  .pruv-concerns__container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .pruv-concerns__header {
+    padding-left: 1.6rem;
+    padding-right: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .pruv-concerns__track {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.4rem 1.6rem 1.2rem;
+    gap: 1.2rem;
+  }
+
+  .pruv-concerns__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-concern-card {
+    flex: 0 0 12.8rem;
+    width: 12.8rem;
+    scroll-snap-align: start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Card Tile & Aspect Ratio
+   -------------------------------------------------------------------------- */
+.pruv-concern-card {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  border-radius: 2.2rem;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background-color: #b8d4f1; /* Soft sky blue backdrop matching reference */
+}
+
+.pruv-concern-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.pruv-concern-card__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5; /* Clean portrait squircle ratio */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #b8d4f1;
+}
+
+.pruv-concern-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pruv-concern-card:hover .pruv-concern-card__image {
+  transform: scale(1.05);
+}
+
+/* Placeholder state when no image is uploaded yet */
+.pruv-concern-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #cde3fa 0%, #a8cbf2 100%);
+  color: rgba(25, 23, 18, 0.35);
+}
+
+.pruv-concern-card__placeholder svg {
+  width: 4.8rem;
+  height: 4.8rem;
+  opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   Frosted Glass Pill Badge
+   -------------------------------------------------------------------------- */
+.pruv-concern-card__glass-pill {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 2.2rem);
+  max-width: 14.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 9999px;
+  background: rgba(35, 28, 22, 0.48); /* Frosted dark glaze */
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.pruv-concern-card:hover .pruv-concern-card__glass-pill {
+  background: rgba(168, 95, 46, 0.85); /* Prüv Terracotta on Hover */
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 18px rgba(168, 95, 46, 0.45);
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-concern-card {
+    border-radius: 1.8rem;
+  }
+
+  .pruv-concern-card__glass-pill {
+    bottom: 1rem;
+    width: calc(100% - 1.6rem);
+    padding: 0.55rem 0.8rem;
+    font-size: 1.05rem;
+  }
+}

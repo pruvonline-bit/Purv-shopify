@@ -302,56 +302,28 @@ product-component.pruv-product-card-component {
 }
 
 /* --------------------------------------------------------------------------
-   Full-Width 3rd Product / Odd Last Item Layout
+   Full-Width 3rd Product / Odd Last Item Layout (Mobile ONLY)
    -------------------------------------------------------------------------- */
-#product-grid > .grid__item:last-child:nth-child(2n+1),
-#product-grid > .grid__item:nth-child(3):last-child,
-.pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1),
-.pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child {
-  grid-column: 1 / -1;
-  width: 100%;
-  max-width: 100%;
-}
-
 @media screen and (max-width: 749px) {
-  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-product-card,
-  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) {
+  #product-grid > .grid__item:last-child:nth-child(2n+1),
+  #product-grid > .grid__item:nth-child(3):last-child {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-product-card {
     padding: 1.8rem 1.6rem 2rem;
   }
 
-  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper,
-  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) .pruv-card-media-wrapper {
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper {
     aspect-ratio: 16 / 10;
     max-height: 26rem;
     margin-bottom: 1.8rem;
   }
 
-  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper img,
-  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) .pruv-card-media-wrapper img {
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper img {
     max-height: 23rem;
-  }
-}
-
-@media screen and (min-width: 750px) {
-  #product-grid > .grid__item:nth-child(3):last-child .pruv-product-card,
-  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 3.6rem;
-    align-items: center;
-    padding: 2.8rem 3.4rem;
-  }
-
-  #product-grid > .grid__item:nth-child(3):last-child .pruv-card-media-wrapper,
-  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child .pruv-card-media-wrapper {
-    aspect-ratio: 4 / 3;
-    max-height: 36rem;
-    margin-bottom: 0;
-  }
-
-  #product-grid > .grid__item:nth-child(3):last-child .pruv-card-media-wrapper img,
-  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child .pruv-card-media-wrapper img {
-    max-height: 32rem;
   }
 }
 

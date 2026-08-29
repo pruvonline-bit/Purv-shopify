@@ -9,8 +9,8 @@
 @media screen and (min-width: 750px) {
   .pruv-philosophy__row {
     flex-direction: row;
-    align-items: center;
-    gap: 5.4rem;
+    align-items: flex-start;
+    gap: 6rem;
   }
 }
 

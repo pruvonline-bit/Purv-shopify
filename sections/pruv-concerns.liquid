@@ -1,0 +1,222 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@600;700&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-concerns.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pruv-concerns color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-concerns__container page-width">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="pruv-concerns__header" data-animate="fade-up">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pruv-concerns__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pruv-concerns__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="pruv-concerns__track" data-animate="stagger">
+      {%- for block in section.blocks -%}
+        <a
+          {% if block.settings.link != blank %}
+            href="{{ block.settings.link }}"
+          {% else %}
+            role="link" aria-disabled="true"
+          {% endif %}
+          class="pruv-concern-card"
+          {{ block.shopify_attributes }}
+          {% if block.settings.custom_bg_color != blank and block.settings.custom_bg_color != 'rgba(0,0,0,0)' %}
+            style="background-color: {{ block.settings.custom_bg_color }};"
+          {% endif %}
+        >
+          <div class="pruv-concern-card__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '240, 360, 480, 600',
+                  class: 'pruv-concern-card__image',
+                  alt: block.settings.image.alt | default: block.settings.title | escape
+              }}
+            {%- else -%}
+              <div class="pruv-concern-card__placeholder">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.title != blank -%}
+            <span
+              class="pruv-concern-card__glass-pill"
+              {% if block.settings.custom_glass_bg != blank or block.settings.custom_text_color != blank %}
+                style="
+                  {% if block.settings.custom_glass_bg != blank %}background: {{ block.settings.custom_glass_bg }};{% endif %}
+                  {% if block.settings.custom_text_color != blank %}color: {{ block.settings.custom_text_color }};{% endif %}
+                "
+              {% endif %}
+            >
+              {{ block.settings.title | escape }}
+            </span>
+          {%- endif -%}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prüv visual categories",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "TARGETED CARE"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by <strong>Hair & Scalp Ritual</strong>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_card",
+      "name": "Category / Concern card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pill text label",
+          "default": "HAIR GROWTH"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card link"
+        },
+        {
+          "type": "color",
+          "id": "custom_bg_color",
+          "label": "Custom background color",
+          "default": "#b8d4f1"
+        },
+        {
+          "type": "color",
+          "id": "custom_text_color",
+          "label": "Custom pill text color",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv visual categories",
+      "blocks": [
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "HAIR GROWTH"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "ANTI-DANDRUFF"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "DRY HAIR"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "STYLING"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "ANTI-GREY"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "BODY"
+          }
+        },
+        {
+          "type": "category_card",
+          "settings": {
+            "title": "FACE"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
