@@ -1,68 +1,68 @@
-/* Prüv — reviews: fixed 3-slot rotator (no scroll container, no scroll-snap).
-   Cards sit at a constant intrinsic width and are purely transform-driven between
-   four slot states (center / left / right / hidden), each a set of CSS custom
-   properties. Because translateX(%) resolves against the moving element's own
-   (constant, unscaled) width, none of this needs offsetWidth/offsetLeft/clientWidth
-   — it's correct the instant the DOM exists, before any script runs. */
+/* ==========================================================================
+   Prüv — Customer Reviews Section (Signature Warm Terracotta / Sand Palette)
+   ========================================================================== */
+
+.pruv-reviews {
+  position: relative;
+  overflow: hidden;
+}
 
 .pruv-reviews__header {
-  max-width: 52rem;
-  margin: 0 0 2.4rem;
+  max-width: 64rem;
+  margin: 0 auto 3.6rem;
+  text-align: left;
 }
 
 .pruv-reviews__eyebrow {
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
-  margin: 0 0 1.4rem;
+  color: #a85f2e; /* Prüv Signature Terracotta */
+  margin: 0 0 1.2rem;
 }
 
 .pruv-reviews__heading {
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: clamp(2.8rem, 3.6vw, 4rem);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.01em;
+  font-family: inherit;
+  font-size: clamp(3.2rem, 4.4vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
   color: #191712;
   margin: 0;
-  text-wrap: balance;
 }
 
 .pruv-reviews__heading strong {
-  font-weight: 600;
+  display: block;
+  font-weight: 300;
+  color: rgba(25, 23, 18, 0.85);
 }
 
-/* carousel */
+/* --------------------------------------------------------------------------
+   Carousel & Stage
+   -------------------------------------------------------------------------- */
 .pruv-reviews__carousel {
   display: block;
-  /* Establish this as its own stacking context and clip both axes: cards use
-     `transform`, which creates a local stacking context per card, and if the
-     scaled-up center card ever renders taller than the stage's min-height, clipped
-     overflow keeps it contained here instead of spilling into the sticky header
-     above (which it did — z-index alone doesn't stop visual overflow escaping the
-     section entirely). */
   isolation: isolate;
   overflow: hidden;
-  --card-w: 37rem;
-  --scale-center: 1.5;
-  --scale-side: 0.65;
-  --scale-hidden: 0.5;
-  /* Half of scaled center width + a gap + half of the (unscaled, since that's what
-     translateX(%) resolves against) side card width, expressed as a percentage of
-     the side card's own width. Tune by eye against the live preview if the side
-     cards ever visually clip into the center card or sit too far apart. */
-  --slot-shift: 114%;
+  --card-w: 36rem;
+  --scale-center: 1.1;
+  --scale-side: 0.92;
+  --scale-hidden: 0.7;
+  --slot-shift: 118%;
+  padding-bottom: 2rem;
 }
 
 .pruv-reviews__track {
   position: relative;
-  min-height: 50rem;
-  padding-block: 2rem;
+  min-height: 44rem;
+  padding-block: 2.5rem;
 }
 
+/* --------------------------------------------------------------------------
+   Review Card (Prüv Signature Warm Luxury Card)
+   -------------------------------------------------------------------------- */
 .pruv-reviews__card {
   position: absolute;
   top: 50%;
@@ -73,14 +73,19 @@
   --slot-opacity: 0;
   transform: translate(-50%, -50%) translateX(var(--slot-x)) scale(var(--slot-scale));
   opacity: var(--slot-opacity);
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, visibility 0.6s;
-  border-radius: 1.8rem;
-  padding: 2.6rem 3rem;
+  transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.55s ease, box-shadow 0.4s ease, visibility 0.55s;
+  border-radius: 3.2rem;
+  padding: 3.2rem 3.4rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  border: 0.1rem solid rgba(25, 23, 18, 0.08);
-  background-color: #fdfbf7;
+  gap: 1.4rem;
+  background-color: #ffffff;
+  border: 1.5px solid rgba(168, 95, 46, 0.2);
+  box-shadow:
+    0 14px 40px -4px rgba(168, 95, 46, 0.12),
+    0 4px 16px rgba(25, 23, 18, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-sizing: border-box;
 }
 
 .pruv-reviews__card[data-slot='center'] {
@@ -88,30 +93,28 @@
   --slot-scale: var(--scale-center);
   --slot-opacity: 1;
   z-index: 3;
-  border: 0.1rem solid transparent;
-  background:
-    linear-gradient(rgba(253, 251, 247, 0.82), rgba(253, 251, 247, 0.82)) padding-box,
-    linear-gradient(135deg, rgba(168, 95, 46, 0.65), rgba(198, 138, 85, 0.2) 45%, rgba(168, 95, 46, 0.5)) border-box;
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  backdrop-filter: blur(14px) saturate(160%);
+  background: #ffffff;
+  border: 2px solid rgba(168, 95, 46, 0.45);
   box-shadow:
-    inset 0 0 3.2rem rgba(168, 95, 46, 0.14),
-    inset 0 0.1rem 0.1rem rgba(255, 255, 255, 0.6),
-    0 2.8rem 6rem rgba(25, 23, 18, 0.14);
+    0 22px 55px -4px rgba(168, 95, 46, 0.2),
+    0 6px 20px rgba(25, 23, 18, 0.08),
+    0 0 0 2px rgba(242, 228, 212, 0.6);
 }
 
 .pruv-reviews__card[data-slot='left'] {
   --slot-x: calc(-1 * var(--slot-shift));
   --slot-scale: var(--scale-side);
-  --slot-opacity: 0.45;
+  --slot-opacity: 0.55;
   z-index: 2;
+  border-color: rgba(168, 95, 46, 0.14);
 }
 
 .pruv-reviews__card[data-slot='right'] {
   --slot-x: var(--slot-shift);
   --slot-scale: var(--scale-side);
-  --slot-opacity: 0.45;
+  --slot-opacity: 0.55;
   z-index: 2;
+  border-color: rgba(168, 95, 46, 0.14);
 }
 
 .pruv-reviews__card[data-slot='hidden'] {
@@ -129,6 +132,9 @@
   }
 }
 
+/* --------------------------------------------------------------------------
+   Card Internal Elements
+   -------------------------------------------------------------------------- */
 .pruv-reviews__card-top {
   display: flex;
   align-items: center;
@@ -137,71 +143,76 @@
 }
 
 .pruv-reviews__stars {
-  font-size: 1.4rem;
-  letter-spacing: 0.15em;
-  color: rgba(25, 23, 18, 0.18);
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: rgba(25, 23, 18, 0.15);
   line-height: 1;
+  display: inline-flex;
 }
 
 .pruv-reviews__star--full {
-  color: #f0ad3f;
+  color: #f0ad3f; /* Prüv Warm Gold Star */
 }
 
 .pruv-reviews__tag {
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a85f2e;
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  color: #a85f2e; /* Prüv Signature Terracotta */
+  text-decoration: none;
   white-space: nowrap;
 }
 
 .pruv-reviews__title {
-  margin: 0;
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
+  margin: 0.4rem 0 0;
+  font-family: inherit;
+  font-size: 2.2rem;
+  font-weight: 800;
   color: #191712;
   line-height: 1.2;
+  letter-spacing: -0.015em;
 }
 
 .pruv-reviews__quote {
   margin: 0;
-  font-size: 1.35rem;
-  line-height: 1.55;
-  color: rgba(25, 23, 18, 0.68);
+  font-family: inherit;
+  font-size: 1.45rem;
+  line-height: 1.65;
+  color: rgba(25, 23, 18, 0.72);
   flex-grow: 1;
-  max-height: 9.6rem;
+  max-height: 12rem;
   overflow: hidden;
 }
 
 .pruv-reviews__name {
-  margin: 0;
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 1.3rem;
-  font-weight: 600;
+  margin: 1rem 0 0;
+  font-family: inherit;
+  font-size: 1.55rem;
+  font-weight: 700;
   color: #191712;
 }
 
-/* Pagination dots */
+/* --------------------------------------------------------------------------
+   Pagination Dots
+   -------------------------------------------------------------------------- */
 .pruv-reviews__dots {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  margin-top: 2rem;
+  margin-top: 2.2rem;
   position: relative;
   z-index: 4;
 }
 
 .pruv-reviews__dot {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.9rem;
+  height: 0.9rem;
   border-radius: 50%;
   border: none;
-  background-color: rgba(25, 23, 18, 0.2);
+  background-color: rgba(168, 95, 46, 0.22);
   cursor: pointer;
   padding: 0;
   transition: background-color 0.3s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.3s ease;
@@ -209,32 +220,27 @@
 
 .pruv-reviews__dot.is-active {
   background-color: #a85f2e;
-  width: 2.4rem;
+  width: 2.8rem;
   border-radius: 100px;
 }
 
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .pruv-reviews__card[data-slot='center'] {
-    background-color: #fdfbf7;
-    background-image: none;
-  }
-}
-
-/* Mobile: expanded card width and right-to-left sliding carousel */
+/* --------------------------------------------------------------------------
+   Mobile Responsive Adjustments
+   -------------------------------------------------------------------------- */
 @media screen and (max-width: 749px) {
   .pruv-reviews__carousel {
-    --card-w: min(88vw, 36rem);
+    --card-w: min(88vw, 35rem);
     --scale-center: 1;
   }
 
   .pruv-reviews__track {
-    min-height: 32rem;
+    min-height: 38rem;
   }
 
   .pruv-reviews__card {
-    padding: 2.4rem 2.2rem;
-    border-radius: 1.8rem;
-    transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.55s ease, visibility 0.55s;
+    padding: 2.8rem 2.4rem;
+    border-radius: 2.6rem;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, visibility 0.5s;
   }
 
   .pruv-reviews__card[data-slot='center'] {
@@ -263,12 +269,12 @@
   }
 
   .pruv-reviews__title {
-    font-size: 1.8rem;
+    font-size: 2.0rem;
   }
 
   .pruv-reviews__quote {
     font-size: 1.35rem;
     line-height: 1.6;
-    max-height: 11rem;
+    max-height: 13rem;
   }
 }

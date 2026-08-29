@@ -1,0 +1,401 @@
+/* ==========================================================================
+   Prüv — Modern DTC Product Card (Prüv Signature Warm Luxury Palette)
+   ========================================================================== */
+
+.pruv-product-card-component,
+product-component.pruv-product-card-component {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.pruv-product-card {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  border-radius: 1.8rem;
+  padding: 1.6rem 1.6rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.pruv-product-card:hover {
+  border-color: rgba(168, 95, 46, 0.4);
+  box-shadow: 0 10px 32px -4px rgba(168, 95, 46, 0.14), 0 2px 10px rgba(25, 23, 18, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   Top-Right Badges Stack (BEST SELLER + PAYDAY)
+   -------------------------------------------------------------------------- */
+.pruv-card-badges-stack {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.pruv-badge-bestseller {
+  background-color: #a85f2e; /* Prüv Signature Terracotta */
+  color: #fbf8f2;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(168, 95, 46, 0.35);
+}
+
+.pruv-badge-payday {
+  background-color: rgba(251, 248, 242, 0.94);
+  color: #a85f2e;
+  border: 1px solid rgba(168, 95, 46, 0.35);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.8rem;
+  border-radius: 9999px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Media / Bottle Cutout with Floor Shadow
+   -------------------------------------------------------------------------- */
+.pruv-card-media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+  overflow: hidden;
+}
+
+.pruv-card-media-wrapper img,
+.pruv-card-media-wrapper .pruv-card-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.12));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pruv-product-card:hover .pruv-card-media-wrapper img {
+  transform: scale(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   Product Title & Tagline
+   -------------------------------------------------------------------------- */
+.pruv-card-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pruv-card-title,
+.pruv-card__title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 1.55rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #191712;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3.8rem;
+}
+
+.pruv-card-title a,
+.pruv-card__title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pruv-card-title a:hover,
+.pruv-card__title a:hover {
+  color: #a85f2e;
+}
+
+.pruv-card-tagline-wrapper {
+  margin: 0.8rem 0 0.6rem;
+}
+
+.pruv-card-tagline {
+  display: inline-block;
+  background-color: #faf5ee;
+  border: 1px solid #f1e4d3;
+  color: #4a3e31;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Review Rating Row (Stars | 226 REVIEWS)
+   -------------------------------------------------------------------------- */
+.pruv-card-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.4rem 0 0.8rem;
+}
+
+.pruv-card-rating-stars {
+  display: inline-flex;
+  gap: 0.15rem;
+  color: #f0ad3f; /* Prüv Warm Gold Star */
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.pruv-card-rating-stars .star-dim {
+  color: rgba(25, 23, 18, 0.15);
+}
+
+.pruv-card-rating-divider {
+  color: rgba(25, 23, 18, 0.2);
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.pruv-card-review-count {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(25, 23, 18, 0.65);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Price Stack with MRP and SAVE % Pill
+   -------------------------------------------------------------------------- */
+.pruv-card-price-stack {
+  margin: 0.6rem 0 1.4rem;
+  margin-top: auto;
+}
+
+.pruv-card-price-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.pruv-card-mrp {
+  font-size: 1.35rem;
+  color: rgba(25, 23, 18, 0.55);
+  font-weight: 600;
+  text-decoration: line-through;
+}
+
+.pruv-card-save-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1.5px solid #a85f2e;
+  color: #a85f2e;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.2rem 0.85rem;
+  border-radius: 9999px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.pruv-card-final-price {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #191712;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   Prüv ADD TO CART Pill Button
+   -------------------------------------------------------------------------- */
+.button--pruv-add-to-cart {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100% !important;
+  min-height: 4.6rem;
+  background: #191712 !important; /* Prüv Deep Onyx */
+  background-color: #191712 !important;
+  color: #fbf8f2 !important;
+  font-family: inherit;
+  font-weight: 800 !important;
+  font-size: 1.35rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  padding: 1.2rem 2rem !important;
+  border-radius: 9999px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(25, 23, 18, 0.2);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.button--pruv-add-to-cart:hover {
+  background: #a85f2e !important; /* Shift to Terracotta on Hover */
+  background-color: #a85f2e !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.4);
+  transform: translateY(-1.5px);
+}
+
+.button--pruv-add-to-cart[disabled] {
+  background-color: #e5e5e5 !important;
+  color: #999999 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* --------------------------------------------------------------------------
+   FREE SHIPPING Bottom Strip
+   -------------------------------------------------------------------------- */
+.pruv-card-free-shipping {
+  display: block;
+  background-color: #f5f0e6; /* Prüv Warm Sand/Ivory */
+  color: #191712;
+  border: 1px solid rgba(168, 95, 46, 0.12);
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.65rem 1rem;
+  border-radius: 0.6rem;
+  margin-top: 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Full-Width 3rd Product / Odd Last Item Layout
+   -------------------------------------------------------------------------- */
+#product-grid > .grid__item:last-child:nth-child(2n+1),
+#product-grid > .grid__item:nth-child(3):last-child,
+.pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1),
+.pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 749px) {
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-product-card,
+  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) {
+    padding: 1.8rem 1.6rem 2rem;
+  }
+
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper,
+  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) .pruv-card-media-wrapper {
+    aspect-ratio: 16 / 10;
+    max-height: 26rem;
+    margin-bottom: 1.8rem;
+  }
+
+  #product-grid > .grid__item:last-child:nth-child(2n+1) .pruv-card-media-wrapper img,
+  .pruv-bestsellers__products > .pruv-product-card:last-child:nth-child(2n+1) .pruv-card-media-wrapper img {
+    max-height: 23rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  #product-grid > .grid__item:nth-child(3):last-child .pruv-product-card,
+  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3.6rem;
+    align-items: center;
+    padding: 2.8rem 3.4rem;
+  }
+
+  #product-grid > .grid__item:nth-child(3):last-child .pruv-card-media-wrapper,
+  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child .pruv-card-media-wrapper {
+    aspect-ratio: 4 / 3;
+    max-height: 36rem;
+    margin-bottom: 0;
+  }
+
+  #product-grid > .grid__item:nth-child(3):last-child .pruv-card-media-wrapper img,
+  .pruv-bestsellers__products > .pruv-product-card:nth-child(3):last-child .pruv-card-media-wrapper img {
+    max-height: 32rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Mobile Adjustments for Standard 2-Col Cards
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .pruv-product-card {
+    padding: 1.2rem 1.2rem 1.4rem;
+    border-radius: 1.4rem;
+  }
+
+  .pruv-card-title,
+  .pruv-card__title {
+    font-size: 1.35rem;
+    min-height: 3.4rem;
+  }
+
+  .pruv-card-tagline {
+    font-size: 1.05rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .pruv-card-final-price {
+    font-size: 2.2rem;
+  }
+
+  .pruv-card-mrp {
+    font-size: 1.2rem;
+  }
+
+  .pruv-card-save-pill {
+    font-size: 0.95rem;
+    padding: 0.15rem 0.65rem;
+  }
+
+  .button--pruv-add-to-cart {
+    min-height: 4.2rem;
+    font-size: 1.2rem !important;
+    padding: 1rem 1.4rem !important;
+  }
+
+  .pruv-card-free-shipping {
+    font-size: 1.05rem;
+    padding: 0.5rem 0.8rem;
+  }
+}

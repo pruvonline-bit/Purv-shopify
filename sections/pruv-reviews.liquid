@@ -1,9 +1,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@600&display=swap"
-  rel="stylesheet"
->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 {{ 'section-pruv-reviews.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
@@ -62,10 +59,10 @@
               {%- endif -%}
             </div>
             {%- if block.settings.title != blank -%}
-              <p class="pruv-reviews__title">&ldquo;{{ block.settings.title | escape }}&rdquo;</p>
+              <h3 class="pruv-reviews__title">&ldquo;{{ block.settings.title | escape }}&rdquo;</h3>
             {%- endif -%}
-            <p class="pruv-reviews__quote">{{ block.settings.quote }}</p>
-            <p class="pruv-reviews__name">{{ block.settings.name }}</p>
+            <p class="pruv-reviews__quote">{{ block.settings.quote | escape }}</p>
+            <p class="pruv-reviews__name">{{ block.settings.name | escape }}</p>
           </div>
         {%- endfor -%}
       </div>
@@ -210,13 +207,13 @@
 {
   "name": "Prüv reviews",
   "tag": "section",
-  "class": "section",
+  "class": "section pruv-reviews-section",
   "settings": [
     {
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow",
-      "default": "Customer Reviews"
+      "default": "OUR PHILOSOPHY"
     },
     {
       "type": "inline_richtext",
@@ -242,7 +239,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
-      "default": 72
+      "default": 64
     },
     {
       "type": "range",
@@ -252,7 +249,7 @@
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 72
+      "default": 64
     }
   ],
   "blocks": [
@@ -272,26 +269,26 @@
         {
           "type": "text",
           "id": "title",
-          "label": "Short title",
-          "default": "Wonderful"
+          "label": "Review title / Quote headline",
+          "default": "Top notch"
         },
         {
           "type": "textarea",
           "id": "quote",
           "label": "Review text",
-          "default": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo that's done that."
+          "default": "It is a boon for hair fall issues and regular use reduces hair breakage and promotes hair growth. Foams well and cleans my scalp off dirt and excess oil while leaving my hair deeply moisturized and tangle free."
         },
         {
           "type": "text",
           "id": "name",
           "label": "Customer name",
-          "default": "Ananya S."
+          "default": "Vineeta Bhatnagar"
         },
         {
           "type": "text",
           "id": "product_tag",
           "label": "Product tag",
-          "default": "TRISHIELD_SHAMPOO"
+          "default": "TRISHIELD SHAMPOO"
         }
       ]
     }
@@ -305,10 +302,10 @@
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Wonderful",
-            "quote": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo that's done that.",
-            "name": "Ananya S.",
-            "product_tag": "TRISHIELD_SHAMPOO"
+            "title": "Top notch",
+            "quote": "It is a boon for hair fall issues and regular use reduces hair breakage and promotes hair growth. Foams well and cleans my scalp off dirt and excess oil while leaving my hair deeply moisturized and tangle free.",
+            "name": "Vineeta Bhatnagar",
+            "product_tag": "TRISHIELD SHAMPOO"
           }
         },
         {
@@ -316,19 +313,9 @@
           "settings": {
             "rating": 5,
             "title": "Most effective",
-            "quote": "Switched after years of trying imported brands. The difference with Delhi's water was obvious in two washes.",
+            "quote": "Switched after years of trying imported brands. The difference with hard water was obvious in two washes. Scalp feels exceptionally clean and calm.",
             "name": "Kabir M.",
-            "product_tag": "TRISHIELD_SHAMPOO"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "rating": 4,
-            "title": "Effective",
-            "quote": "Lightweight, doesn't weigh my hair down, and the scent isn't overpowering. Repurchasing already.",
-            "name": "Riya T.",
-            "product_tag": "KERATIN_CERAMIDE_MASK"
+            "product_tag": "TRISHIELD SHAMPOO"
           }
         },
         {
@@ -336,29 +323,19 @@
           "settings": {
             "rating": 5,
             "title": "Game changer",
-            "quote": "Living in Mumbai, my hair used to feel coated by evening. Three washes in and that's gone completely.",
+            "quote": "Living in Mumbai, my hair used to feel coated by evening. Three washes in and that's gone completely. Best ritual investment I've made.",
             "name": "Devika R.",
-            "product_tag": "TRISHIELD_SHAMPOO"
+            "product_tag": "KERATIN CERAMIDE MASK"
           }
         },
         {
           "type": "review",
           "settings": {
             "rating": 5,
-            "title": "Worth it",
-            "quote": "Detangles my hair in seconds flat. Smells incredible without being overpowering, and a little goes a long way.",
-            "name": "Arjun K.",
-            "product_tag": "KERATIN_CERAMIDE_MASK"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "rating": 4,
-            "title": "Impressed",
-            "quote": "My scalp used to get itchy within a day of washing. Hasn't happened once since I switched three weeks ago.",
-            "name": "Meera P.",
-            "product_tag": "TRISHIELD_SHAMPOO"
+            "title": "Wonderful",
+            "quote": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo and scalp ritual that's ever done that.",
+            "name": "Ananya S.",
+            "product_tag": "TRISHIELD SHAMPOO"
           }
         }
       ]

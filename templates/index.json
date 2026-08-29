@@ -273,11 +273,11 @@
         "review-6"
       ],
       "settings": {
-        "eyebrow": "Customer Reviews",
+        "eyebrow": "OUR PHILOSOPHY",
         "heading": "What you say <strong>matters the most.</strong>",
         "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },

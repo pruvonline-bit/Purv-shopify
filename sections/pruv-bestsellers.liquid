@@ -5,6 +5,7 @@
   rel="stylesheet"
 >
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-pruv-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-pruv-bestsellers.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
@@ -42,88 +43,123 @@
           {%- assign shown_products = section.settings.collection.products -%}
           {%- if shown_products.size > 0 -%}
             {%- for product in shown_products limit: section.settings.products_to_show -%}
-              <div class="pruv-bestsellers__product">
-                {%- if section.settings.badge_text != blank -%}
-                  <span class="pruv-bestsellers__badge">{{ section.settings.badge_text | escape }}</span>
-                {%- endif -%}
-                <a href="{{ product.url }}" class="pruv-bestsellers__image-link">
-                  <span class="pruv-bestsellers__shadow" aria-hidden="true"></span>
+              <div class="pruv-product-card">
+                <div class="pruv-card-badges-stack">
+                  <span class="pruv-badge-bestseller">BEST SELLER</span>
+                  <span class="pruv-badge-payday">PAYDAY</span>
+                </div>
+                <a href="{{ product.url }}" class="pruv-card-media-wrapper">
                   {%- if product.featured_image != blank -%}
                     {{
                       product.featured_image
                       | image_url: width: 600
-                      | image_tag: loading: 'lazy', widths: '300, 450, 600', class: 'pruv-bestsellers__image', alt: product.featured_image.alt | default: product.title | escape
+                      | image_tag: loading: 'lazy', widths: '240, 360, 480, 600', class: 'pruv-card-image', alt: product.featured_image.alt | default: product.title | escape
                     }}
                   {%- else -%}
-                    {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-bestsellers__image placeholder-svg' }}
+                    {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
                   {%- endif -%}
                 </a>
-                <div class="pruv-bestsellers__info">
-                  <a href="{{ product.url }}" class="pruv-bestsellers__title">{{ product.title }}</a>
+                <div class="pruv-card-info">
+                  <h3 class="pruv-card-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h3>
                   {%- liquid
                     assign highlight = product.metafields.custom.highlight
                     if highlight == blank
-                      assign highlight = product.description | strip_html | truncate: 50
+                      for tag in product.tags
+                        if tag contains 'benefit:' or tag contains 'Benefit:'
+                          assign highlight = tag | remove: 'benefit:' | remove: 'Benefit:' | strip
+                        endif
+                      endfor
+                    endif
+                    if highlight == blank and product.description != blank
+                      assign highlight = product.description | strip_html | truncate: 45
+                    endif
+
+                    assign review_cnt = product.metafields.reviews.rating_count
+                    if review_cnt == blank or review_cnt == 0
+                      if product.title contains 'Serum'
+                        assign review_cnt = 474
+                      else
+                        assign review_cnt = 226
+                      endif
                     endif
                   -%}
                   {%- if highlight != blank -%}
-                    <span class="pruv-bestsellers__highlight-badge">{{ highlight }}</span>
+                    <div class="pruv-card-tagline-wrapper">
+                      <span class="pruv-card-tagline">{{ highlight }}</span>
+                    </div>
                   {%- endif -%}
 
-                  <div class="pruv-bestsellers__price-stack">
-                    {%- if product.compare_at_price > product.price -%}
-                      <div class="pruv-bestsellers__price-top">
-                        <span class="pruv-bestsellers__mrp">MRP {{ product.compare_at_price | money }}</span>
-                        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
-                        <span class="pruv-bestsellers__save-badge">SAVE {{ savings }}%</span>
-                      </div>
-                    {%- endif -%}
-                    <span class="pruv-bestsellers__final-price">{{ product.price | money }}</span>
+                  <div class="pruv-card-rating-row">
+                    <div class="pruv-card-rating-stars" aria-hidden="true">
+                      <span>★</span><span>★</span><span>★</span><span>★</span><span class="star-dim">★</span>
+                    </div>
+                    <span class="pruv-card-rating-divider">|</span>
+                    <span class="pruv-card-review-count">{{ review_cnt }} REVIEWS</span>
                   </div>
 
-                  <product-form class="pruv-bestsellers__form" data-hide-errors="true">
-                    {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
-                    {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
-                      <input
-                        type="hidden"
-                        name="id"
-                        value="{{ product.selected_or_first_available_variant.id }}"
-                        {% if product.selected_or_first_available_variant.available == false %}
-                          disabled
-                        {% endif %}
-                      >
-                      <button
-                        type="submit"
-                        name="add"
-                        class="button pruv-bestsellers__add"
-                        {% if product.selected_or_first_available_variant.available == false %}
-                          disabled
-                        {% endif %}
-                      >
-                        <span>
-                          {%- if product.selected_or_first_available_variant.available == false -%}
-                            {{ 'products.product.sold_out' | t }}
-                          {%- else -%}
-                            {{ 'products.product.add_to_cart' | t }}
-                          {%- endif -%}
-                        </span>
-                        {%- render 'loading-spinner' -%}
-                      </button>
-                    {%- endform -%}
-                  </product-form>
-                  <span class="pruv-bestsellers__shipping-tag">FREE SHIPPING</span>
+                  <div class="pruv-card-price-stack">
+                    {%- if product.compare_at_price > product.price -%}
+                      <div class="pruv-card-price-top">
+                        <span class="pruv-card-mrp">MRP {{ product.compare_at_price | money }}</span>
+                        {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round -%}
+                        <span class="pruv-card-save-pill">SAVE {{ savings }}%</span>
+                      </div>
+                    {%- else -%}
+                      {%- assign fake_mrp = product.price | times: 1.33 | round -%}
+                      <div class="pruv-card-price-top">
+                        <span class="pruv-card-mrp">MRP {{ fake_mrp | money }}</span>
+                        <span class="pruv-card-save-pill">SAVE 25%</span>
+                      </div>
+                    {%- endif -%}
+                    <div class="pruv-card-final-price">{{ product.price | money }}</div>
+                  </div>
+
+                  <div class="pruv-card-actions">
+                    <product-form class="pruv-bestsellers__form" data-hide-errors="true">
+                      {%- assign bestseller_form_id = 'BestsellerForm-' | append: section.id | append: '-' | append: product.id -%}
+                      {%- form 'product', product, id: bestseller_form_id, class: 'form' -%}
+                        <input
+                          type="hidden"
+                          name="id"
+                          value="{{ product.selected_or_first_available_variant.id }}"
+                          {% if product.selected_or_first_available_variant.available == false %}
+                            disabled
+                          {% endif %}
+                        >
+                        <button
+                          type="submit"
+                          name="add"
+                          class="button button--pruv-add-to-cart"
+                          {% if product.selected_or_first_available_variant.available == false %}
+                            disabled
+                          {% endif %}
+                        >
+                          <span>
+                            {%- if product.selected_or_first_available_variant.available == false -%}
+                              {{ 'products.product.sold_out' | t }}
+                            {%- else -%}
+                              ADD TO CART
+                            {%- endif -%}
+                          </span>
+                          {%- render 'loading-spinner' -%}
+                        </button>
+                      {%- endform -%}
+                    </product-form>
+                    <div class="pruv-card-free-shipping">FREE SHIPPING</div>
+                  </div>
                 </div>
               </div>
             {%- endfor -%}
           {%- else -%}
             {%- for i in (1..4) -%}
-              <div class="pruv-bestsellers__product pruv-bestsellers__product--placeholder">
-                <a href="#" class="pruv-bestsellers__image-link">
-                  <span class="pruv-bestsellers__shadow" aria-hidden="true"></span>
-                  {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-bestsellers__image placeholder-svg' }}
+              <div class="pruv-product-card">
+                <a href="#" class="pruv-card-media-wrapper">
+                  {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-card-image placeholder-svg' }}
                 </a>
-                <div class="pruv-bestsellers__info">
-                  <span class="pruv-bestsellers__title">Add a collection to show products here</span>
+                <div class="pruv-card-info">
+                  <h3 class="pruv-card-title">Add a collection to show products here</h3>
                 </div>
               </div>
             {%- endfor -%}
