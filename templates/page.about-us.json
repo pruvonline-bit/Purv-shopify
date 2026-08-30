@@ -157,44 +157,44 @@
         "milestone-1": {
           "type": "milestone",
           "settings": {
-            "year": "2024",
-            "label": "January",
+            "year": "2019",
+            "label": "FEBRUARY",
             "title": "The beginning",
-            "description": "It started with a simple realisation: hair care built for Indian water and weather barely existed."
+            "description": "It started in a kitchen with a homemade flaxseed hair gel. A simple experiment and a simple realisation: hair care could be more honest, more thoughtful, and grounded in what actually works."
           }
         },
         "milestone-2": {
           "type": "milestone",
           "settings": {
-            "year": "2024",
-            "label": "June",
+            "year": "2022",
+            "label": "MARCH",
             "title": "From one solution to many",
-            "description": "The first ritual grew into a focused range built around specific hair and scalp concerns."
+            "description": "A defining moment when we received funding on Shark Tank India, strengthening our belief in science-led hair care for a wider audience and solidifying our resolve to raise the standard."
           }
         },
         "milestone-3": {
           "type": "milestone",
           "settings": {
-            "year": "2025",
-            "label": "January",
+            "year": "2024",
+            "label": "JANUARY",
             "title": "Scaling with intent",
-            "description": "As trust grew, so did the team and the processes behind every batch."
+            "description": "Formulated specifically for Indian hard water and humid climates, expanding rituals across scalp health and bond repair with rigorous clinical testing."
           }
         },
         "milestone-4": {
           "type": "milestone",
           "settings": {
             "year": "2026",
-            "label": "March",
+            "label": "FUTURE",
             "title": "Advancing further",
-            "description": "Today, the focus stays the same: real science, real results, for real Indian hair."
+            "description": "Continuing our relentless pursuit: real science, uncompromising efficacy, and intentional care tailored for every strand of Indian hair."
           }
         }
       },
       "block_order": ["milestone-1", "milestone-2", "milestone-3", "milestone-4"],
       "settings": {
         "eyebrow": "The Journey So Far",
-        "heading": "Shaped by curiosity, <strong>built for Indian hair.</strong>",
+        "heading": "Shaped by curiosity and <strong>commitment to better hair.</strong>",
         "text": "",
         "color_scheme": "scheme-2",
         "padding_top": 72,

@@ -2412,6 +2412,10 @@ input[type='checkbox'] {
   display: block;
   position: relative;
   background-color: rgb(var(--color-background));
+  /* The color-scheme-N rule in theme.liquid sets overflow-x: hidden on this element,
+     which makes it a clipping container and cuts off the mobile menu-drawer panel
+     (absolutely positioned below it, much taller than the header itself). */
+  overflow: visible !important;
 }
 
 .header-wrapper--border-bottom {

@@ -76,25 +76,27 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!hasScrollTrigger) return;
 
   /* Timeline Items GSAP Scroll Animation */
+  var timelineContainer = document.querySelector('.pruv-timeline');
   var timelineItems = document.querySelectorAll('.pruv-timeline__item');
-  if (timelineItems.length) {
-    timelineItems.forEach(function (item) {
-      var date = item.querySelector('.pruv-timeline__date');
-      var marker = item.querySelector('.pruv-timeline__marker');
+  if (timelineContainer && timelineItems.length) {
+    timelineItems.forEach(function (item, index) {
+      var date = item.querySelector('.pruv-timeline__date-wrapper');
+      var connector = item.querySelector('.pruv-timeline__connector-wrapper');
       var content = item.querySelector('.pruv-timeline__content');
 
-      if (content) gsap.set(content, { opacity: 0, y: 32, x: 16 });
-      if (date) gsap.set(date, { opacity: 0, y: 20 });
-      if (marker) gsap.set(marker, { opacity: 0, scale: 0.4 });
+      if (date) gsap.set(date, { opacity: 0, y: 24 });
+      if (connector) gsap.set(connector, { opacity: 0, scaleX: 0.7, transformOrigin: 'left center' });
+      if (content) gsap.set(content, { opacity: 0, y: 24 });
 
       ScrollTrigger.create({
-        trigger: item,
-        start: 'top 85%',
+        trigger: timelineContainer,
+        start: 'top 82%',
         once: true,
         onEnter: function () {
-          if (date) gsap.to(date, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
-          if (marker) gsap.to(marker, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)', delay: 0.05 });
-          if (content) gsap.to(content, { opacity: 1, y: 0, x: 0, duration: 0.8, ease: 'power3.out', delay: 0.1 });
+          var delay = index * 0.12;
+          if (date) gsap.to(date, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: delay });
+          if (connector) gsap.to(connector, { opacity: 1, scaleX: 1, duration: 0.8, ease: 'power3.out', delay: delay + 0.08 });
+          if (content) gsap.to(content, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', delay: delay + 0.16 });
         },
       });
     });

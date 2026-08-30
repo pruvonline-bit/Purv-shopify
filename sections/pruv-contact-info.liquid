@@ -1,0 +1,305 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@600;700&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-contact-info.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign map_src = section.settings.map_embed_url | strip
+  if map_src contains '<iframe'
+    assign map_src = map_src | split: 'src="' | last | split: '"' | first
+  endif
+  assign map_ok = false
+  if map_src contains 'google.com/maps'
+    assign map_ok = true
+  endif
+-%}
+
+<div class="pruv-contact-info color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-contact-info__row page-width">
+    <div class="pruv-contact-info__col pruv-contact-info__col--content">
+      <div class="pruv-contact-info__header" data-animate="fade-up">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pruv-contact-info__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="pruv-contact-info__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="pruv-contact-info__grid" role="list" data-animate="stagger">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign raw_link = block.settings.link | strip
+              assign safe_link = ''
+              assign lower_link = raw_link | downcase
+              assign p1 = lower_link | slice: 0, 1
+              assign p4 = lower_link | slice: 0, 4
+              assign p7 = lower_link | slice: 0, 7
+              assign p8 = lower_link | slice: 0, 8
+              if p4 == 'tel:' or p7 == 'mailto:' or p7 == 'http://' or p8 == 'https://' or p1 == '/'
+                assign safe_link = raw_link
+              endif
+            -%}
+            <li class="pruv-contact-info__card" {{ block.shopify_attributes }}>
+              {%- if block.settings.label != blank -%}
+                <span class="pruv-contact-info__chip">{{ block.settings.label | escape }}</span>
+              {%- endif -%}
+              <div class="pruv-contact-info__lines">
+                {%- if block.settings.line_1 != blank -%}
+                  <p class="pruv-contact-info__line pruv-contact-info__line--primary">
+                    {%- if safe_link != blank -%}
+                      <a class="pruv-contact-info__link" href="{{ safe_link | escape }}">
+                        {{- block.settings.line_1 | escape -}}
+                      </a>
+                    {%- else -%}
+                      {{- block.settings.line_1 | escape -}}
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+                {%- if block.settings.line_2 != blank -%}
+                  <p class="pruv-contact-info__line">{{ block.settings.line_2 | escape }}</p>
+                {%- endif -%}
+                {%- if block.settings.line_3 != blank -%}
+                  <p class="pruv-contact-info__line">{{ block.settings.line_3 | escape }}</p>
+                {%- endif -%}
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="pruv-contact-info__col pruv-contact-info__col--map" data-animate="from-right">
+      {%- if map_ok -%}
+        <div class="pruv-contact-info__map">
+          <iframe
+            src="{{ map_src | escape }}"
+            title="{{ section.settings.map_title | default: 'Map' | escape }}"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+      {%- elsif request.design_mode -%}
+        <div class="pruv-contact-info__map pruv-contact-info__map--placeholder">
+          <p>
+            Paste a Google Maps <strong>embed</strong> URL in this section&rsquo;s settings.<br>
+            Google Maps &rarr; Share &rarr; <em>Embed a map</em> &rarr; Copy HTML.
+          </p>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.map_directions_url != blank and section.settings.map_directions_label != blank -%}
+        <a
+          class="pruv-contact-info__directions"
+          href="{{ section.settings.map_directions_url | escape }}"
+          target="_blank"
+          rel="noopener"
+        >
+          {{- section.settings.map_directions_label | escape }}
+          <span class="visually-hidden">(opens in a new window)</span>
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prüv contact info",
+  "tag": "section",
+  "class": "section pruv-contact-info-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact <strong>Information</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Questions about a formula, an order, or your routine? Reach the Prüv team directly — no bots, no ticket queues. We read and answer every message ourselves.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Map"
+    },
+    {
+      "type": "text",
+      "id": "map_embed_url",
+      "label": "Google Maps embed URL",
+      "info": "Google Maps → Share → Embed a map → Copy HTML. Paste the whole iframe tag or just the src URL. A normal share link (goo.gl/maps or /maps/place/) will NOT load — it must be an embed URL.",
+      "default": "https://maps.google.com/maps?q=Okhla%20Industrial%20Estate%20Phase%20III%2C%20New%20Delhi&t=&z=14&ie=UTF8&iwloc=&output=embed"
+    },
+    {
+      "type": "text",
+      "id": "map_title",
+      "label": "Map accessible title",
+      "info": "Read out to screen readers.",
+      "default": "Prüv head office location on Google Maps"
+    },
+    {
+      "type": "text",
+      "id": "map_directions_label",
+      "label": "Directions link label",
+      "default": "Get directions"
+    },
+    {
+      "type": "text",
+      "id": "map_directions_url",
+      "label": "Directions link URL",
+      "info": "Optional. Opens in a new tab."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact_card",
+      "name": "Contact card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label chip",
+          "default": "CALL"
+        },
+        {
+          "type": "text",
+          "id": "line_1",
+          "label": "Line 1",
+          "default": "+91 98765 43210"
+        },
+        {
+          "type": "text",
+          "id": "link",
+          "label": "Line 1 link",
+          "info": "Optional. Use tel:+919876543210, mailto:hello@pruv.in, or a full https:// URL. Leave blank for plain text."
+        },
+        {
+          "type": "text",
+          "id": "line_2",
+          "label": "Line 2"
+        },
+        {
+          "type": "text",
+          "id": "line_3",
+          "label": "Line 3"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [
+    {
+      "name": "Prüv contact info",
+      "blocks": [
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "CALL",
+            "line_1": "+91 98765 43210",
+            "link": "tel:+919876543210",
+            "line_2": "Monday – Saturday",
+            "line_3": "10am – 7pm IST"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "EMAIL",
+            "line_1": "hello@pruv.in",
+            "link": "mailto:hello@pruv.in",
+            "line_2": "We reply within 24 hours"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "CHAT",
+            "line_1": "WhatsApp us",
+            "link": "https://wa.me/919876543210",
+            "line_2": "Fastest way to reach the team",
+            "line_3": "Order help, routine advice"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "HEADQUARTERS",
+            "line_1": "Prüv Labs",
+            "line_2": "212 Okhla Industrial Estate, Phase III",
+            "line_3": "New Delhi 110020, India"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "CAREERS",
+            "line_1": "careers@pruv.in",
+            "link": "mailto:careers@pruv.in",
+            "line_2": "Formulation, operations and content roles"
+          }
+        },
+        {
+          "type": "contact_card",
+          "settings": {
+            "label": "COLLABS",
+            "line_1": "partners@pruv.in",
+            "link": "mailto:partners@pruv.in",
+            "line_2": "Creators, clinics and retail partners"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

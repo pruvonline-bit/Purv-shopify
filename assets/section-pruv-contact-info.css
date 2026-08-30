@@ -1,0 +1,298 @@
+/* Prüv — contact info: detail cards + Google Maps embed */
+
+/* --- Layout: split at 990, not 750 --------------------------------- */
+.pruv-contact-info__row {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-contact-info__row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 5.6rem;
+  }
+
+  .pruv-contact-info__col--content {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .pruv-contact-info__col--map {
+    flex: 0 0 38%;
+    max-width: 46rem;
+    min-width: 0;
+  }
+}
+
+/* --- Header -------------------------------------------------------- */
+.pruv-contact-info__heading {
+  margin: 0 0 1.6rem;
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: #191712;
+  text-wrap: balance;
+}
+
+.pruv-contact-info__heading strong {
+  font-weight: 700;
+}
+
+.pruv-contact-info__text {
+  margin: 0 0 3.2rem;
+  max-width: 52ch;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: #6e6759;
+}
+
+/* --- Card grid: 1 -> 2 -> 3 columns -------------------------------- */
+.pruv-contact-info__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-contact-info__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-contact-info__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- Card ---------------------------------------------------------- */
+.pruv-contact-info__card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  border-radius: 1.8rem;
+  padding: 1.6rem 1.6rem 1.8rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.pruv-contact-info__card:hover {
+  border-color: rgba(168, 95, 46, 0.4);
+  box-shadow: 0 10px 32px -4px rgba(168, 95, 46, 0.14), 0 2px 10px rgba(25, 23, 18, 0.04);
+  transform: translateY(-2px);
+}
+
+.pruv-contact-info__chip {
+  align-self: flex-start;
+  display: inline-block;
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  border: 1px solid rgba(168, 95, 46, 0.2);
+  background-color: rgba(168, 95, 46, 0.08);
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8e4f24;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.pruv-contact-info__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.pruv-contact-info__line {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: #6e6759;
+}
+
+.pruv-contact-info__line--primary {
+  margin-bottom: 0.2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #191712;
+}
+
+.pruv-contact-info__link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(168, 95, 46, 0.35);
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.pruv-contact-info__link:hover {
+  color: #a85f2e;
+  border-color: #a85f2e;
+}
+
+.pruv-contact-info__link:focus-visible {
+  outline: 2px solid #a85f2e;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* --- Map ----------------------------------------------------------- */
+.pruv-contact-info__map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 2.2rem;
+  overflow: hidden;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  box-shadow: 0 10px 32px -4px rgba(168, 95, 46, 0.14);
+  background-color: rgba(25, 23, 18, 0.04);
+}
+
+.pruv-contact-info__map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-contact-info__col--map {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .pruv-contact-info__map {
+    aspect-ratio: auto;
+    flex: 1 1 auto;
+    min-height: 48rem;
+  }
+}
+
+/* aspect-ratio fallback (Safari < 15) */
+@supports not (aspect-ratio: 1 / 1) {
+  .pruv-contact-info__map {
+    height: 0;
+    padding-bottom: 75%;
+  }
+
+  @media screen and (min-width: 990px) {
+    .pruv-contact-info__map {
+      height: 48rem;
+      padding-bottom: 0;
+    }
+  }
+}
+
+.pruv-contact-info__map--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.4rem;
+  border-style: dashed;
+  box-shadow: none;
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: #6e6759;
+}
+
+.pruv-contact-info__map--placeholder p {
+  margin: 0;
+}
+
+.pruv-contact-info__directions {
+  align-self: flex-start;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #191712;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(168, 95, 46, 0.35);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.pruv-contact-info__directions:hover {
+  color: #a85f2e;
+  border-color: #a85f2e;
+}
+
+.pruv-contact-info__directions:focus-visible {
+  outline: 2px solid #a85f2e;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-contact-info__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+
+  .pruv-contact-info__card {
+    border-radius: 1.6rem;
+    padding: 1.4rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .pruv-contact-info__chip {
+    padding: 0.3rem 0.8rem;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    border-radius: 999px;
+    line-height: 1.2;
+  }
+
+  .pruv-contact-info__lines {
+    gap: 0.2rem;
+  }
+
+  .pruv-contact-info__line {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .pruv-contact-info__line--primary {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.1rem;
+  }
+
+  .pruv-contact-info__map {
+    border-radius: 1.6rem;
+  }
+
+  .pruv-contact-info__text {
+    margin-bottom: 2.4rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .pruv-contact-info__grid {
+    gap: 0.8rem;
+  }
+
+  .pruv-contact-info__card {
+    padding: 1.2rem 1rem;
+  }
+
+  .pruv-contact-info__line--primary {
+    font-size: 1.25rem;
+  }
+}

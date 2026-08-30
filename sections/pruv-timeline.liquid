@@ -14,45 +14,163 @@
   }
 {%- endstyle -%}
 
-<div class="pruv-timeline color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<div class="pruv-timeline color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" data-section-id="{{ section.id }}">
   <div class="pruv-timeline__header page-width page-width--narrow" data-animate="fade-up">
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="pruv-timeline__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    {%- endif -%}
-    {%- if section.settings.heading != blank -%}
-      <h2 class="pruv-timeline__heading">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-    {%- if section.settings.text != blank -%}
-      <div class="pruv-timeline__text rte">{{ section.settings.text }}</div>
-    {%- endif -%}
+    <div class="pruv-timeline__header-text">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-timeline__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-timeline__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="pruv-timeline__text rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
   </div>
 
   {%- if section.blocks.size > 0 -%}
-    <div class="pruv-timeline__list page-width page-width--narrow" data-animate="stagger">
-      {%- for block in section.blocks -%}
-        <div class="pruv-timeline__item" {{ block.shopify_attributes }}>
-          <div class="pruv-timeline__date">
-            {%- if block.settings.year != blank -%}
-              <span class="pruv-timeline__year">{{ block.settings.year | escape }}</span>
-            {%- endif -%}
-            {%- if block.settings.label != blank -%}
-              <span class="pruv-timeline__label">{{ block.settings.label | escape }}</span>
-            {%- endif -%}
+    <div class="pruv-timeline__container" data-timeline-container>
+      <div class="pruv-timeline__track" data-timeline-track tabindex="0" role="region" aria-label="Timeline milestones">
+        {%- for block in section.blocks -%}
+          <div class="pruv-timeline__item" {{ block.shopify_attributes }} data-timeline-item data-index="{{ forloop.index0 }}">
+            <div class="pruv-timeline__date-wrapper">
+              {%- if block.settings.year != blank -%}
+                <span class="pruv-timeline__year">{{ block.settings.year | escape }}</span>
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}
+                <span class="pruv-timeline__label">{{ block.settings.label | escape }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="pruv-timeline__connector-wrapper" aria-hidden="true">
+              <div class="pruv-timeline__node">
+                <span class="pruv-timeline__node-dot"></span>
+                <span class="pruv-timeline__node-pulse"></span>
+              </div>
+              {%- unless forloop.last -%}
+                <div class="pruv-timeline__rail">
+                  <div class="pruv-timeline__line"></div>
+                  <div class="pruv-timeline__arrow-stream">
+                    <span class="pruv-timeline__animated-arrow arrow-1">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </span>
+                    <span class="pruv-timeline__animated-arrow arrow-2">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+              {%- else -%}
+                <div class="pruv-timeline__rail pruv-timeline__rail--end">
+                  <div class="pruv-timeline__line pruv-timeline__line--fade"></div>
+                </div>
+              {%- endunless -%}
+            </div>
+
+            <div class="pruv-timeline__content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="pruv-timeline__item-title">{{ block.settings.title | escape }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="pruv-timeline__item-description">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
           </div>
-          <div class="pruv-timeline__marker" aria-hidden="true"></div>
-          <div class="pruv-timeline__content">
-            {%- if block.settings.title != blank -%}
-              <h3 class="pruv-timeline__item-title">{{ block.settings.title | escape }}</h3>
-            {%- endif -%}
-            {%- if block.settings.description != blank -%}
-              <p class="pruv-timeline__item-description">{{ block.settings.description }}</p>
-            {%- endif -%}
-          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="pruv-timeline__progress-wrapper" aria-hidden="true">
+        <div class="pruv-timeline__progress-bar">
+          <div class="pruv-timeline__progress-thumb" data-timeline-progress></div>
         </div>
-      {%- endfor -%}
+      </div>
     </div>
   {%- endif -%}
 </div>
+
+<script>
+  (function() {
+    function initTimeline(section) {
+      const track = section.querySelector('[data-timeline-track]');
+      if (!track) return;
+
+      const progressThumb = section.querySelector('[data-timeline-progress]');
+      const items = section.querySelectorAll('[data-timeline-item]');
+
+      function updateControls() {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        const currentScroll = track.scrollLeft;
+
+        if (progressThumb && maxScroll > 0) {
+          const percentage = Math.min(Math.max((currentScroll / maxScroll) * 100, 0), 100);
+          progressThumb.style.width = Math.max(percentage, 15) + '%';
+          progressThumb.style.transform = 'translateX(' + (currentScroll / maxScroll * (100 - parseFloat(progressThumb.style.width))) + '%)';
+        }
+      }
+
+      track.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls);
+      setTimeout(updateControls, 100);
+
+      function scrollByCard(direction) {
+        const itemWidth = items[0] ? items[0].getBoundingClientRect().width + 32 : 360;
+        track.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+      }
+
+      // Mouse drag to scroll
+      let isDown = false;
+      let startX;
+      let scrollLeft;
+
+      track.addEventListener('mousedown', function(e) {
+        isDown = true;
+        track.classList.add('is-dragging');
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', function() {
+        if (!isDown) return;
+        isDown = false;
+        track.classList.remove('is-dragging');
+      });
+
+      track.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.6;
+        track.scrollLeft = scrollLeft - walk;
+      });
+
+      // Keyboard navigation
+      track.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') {
+          scrollByCard(1);
+        } else if (e.key === 'ArrowLeft') {
+          scrollByCard(-1);
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.pruv-timeline').forEach(initTimeline);
+    });
+
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function(e) {
+        if (e.target.classList.contains('pruv-timeline-section') || e.target.querySelector('.pruv-timeline')) {
+          const el = e.target.classList.contains('pruv-timeline') ? e.target : e.target.querySelector('.pruv-timeline');
+          if (el) initTimeline(el);
+        }
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -70,7 +188,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Shaped by curiosity, <strong>built for Indian hair.</strong>"
+      "default": "Shaped by curiosity and <strong>commitment to better hair.</strong>"
     },
     {
       "type": "richtext",
@@ -117,13 +235,13 @@
           "type": "text",
           "id": "year",
           "label": "Year",
-          "default": "2024"
+          "default": "2019"
         },
         {
           "type": "text",
           "id": "label",
           "label": "Month / label",
-          "default": "January"
+          "default": "FEBRUARY"
         },
         {
           "type": "text",
@@ -135,12 +253,12 @@
           "type": "textarea",
           "id": "description",
           "label": "Description",
-          "default": "A short description of this milestone."
+          "default": "It started in a kitchen with a homemade flaxseed hair gel. A simple experiment and a simple realisation: hair care could be more honest, more thoughtful, and grounded in what actually works."
         }
       ]
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Prüv timeline",
@@ -148,37 +266,37 @@
         {
           "type": "milestone",
           "settings": {
-            "year": "2024",
-            "label": "January",
+            "year": "2019",
+            "label": "FEBRUARY",
             "title": "The beginning",
-            "description": "It started with a simple realisation: hair care built for Indian water and weather barely existed."
+            "description": "It started in a kitchen with a homemade flaxseed hair gel. A simple experiment and a simple realisation: hair care could be more honest, more thoughtful, and grounded in what actually works."
+          }
+        },
+        {
+          "type": "milestone",
+          "settings": {
+            "year": "2022",
+            "label": "MARCH",
+            "title": "From one solution to many",
+            "description": "A defining moment when we received funding on Shark Tank India, strengthening our belief in science-led hair care for a wider audience and solidifying our resolve to raise the standard."
           }
         },
         {
           "type": "milestone",
           "settings": {
             "year": "2024",
-            "label": "June",
-            "title": "From one solution to many",
-            "description": "The first ritual grew into a focused range built around specific hair and scalp concerns."
-          }
-        },
-        {
-          "type": "milestone",
-          "settings": {
-            "year": "2025",
-            "label": "January",
+            "label": "JANUARY",
             "title": "Scaling with intent",
-            "description": "As trust grew, so did the team and the processes behind every batch."
+            "description": "Formulated specifically for Indian hard water and humid climates, expanding rituals across scalp health and bond repair with rigorous clinical testing."
           }
         },
         {
           "type": "milestone",
           "settings": {
             "year": "2026",
-            "label": "March",
+            "label": "FUTURE",
             "title": "Advancing further",
-            "description": "Today, the focus stays the same: real science, real results, for real Indian hair."
+            "description": "Continuing our relentless pursuit: real science, uncompromising efficacy, and intentional care tailored for every strand of Indian hair."
           }
         }
       ]
@@ -186,3 +304,4 @@
   ]
 }
 {% endschema %}
+

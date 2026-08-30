@@ -1,0 +1,443 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@600;700&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-faqs.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign cat_idx_csv = ''
+  for block in section.blocks
+    if block.type == 'category'
+      assign cat_idx_csv = cat_idx_csv | append: forloop.index0 | append: ','
+    endif
+  endfor
+  assign cat_idx_csv = cat_idx_csv | remove_last: ','
+  assign cat_indexes = cat_idx_csv | split: ','
+  assign cat_count = cat_indexes.size
+-%}
+
+<div class="pruv-faqs color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-faqs__inner page-width">
+    {%- if section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="pruv-faqs__header" data-animate="fade-up">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pruv-faqs__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="pruv-faqs__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if cat_count > 1 -%}
+      <div class="pruv-faqs__tablist" role="tablist" aria-label="FAQ categories" data-animate="fade-up">
+        {%- assign tab_i = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' -%}
+            <button
+              type="button"
+              class="pruv-faqs__pill{% if tab_i == 0 %} is-active{% endif %}"
+              role="tab"
+              id="tab-{{ section.id }}-{{ block.id }}"
+              aria-controls="panel-{{ section.id }}-{{ block.id }}"
+              aria-selected="{% if tab_i == 0 %}true{% else %}false{% endif %}"
+              tabindex="{% if tab_i == 0 %}0{% else %}-1{% endif %}"
+              data-faq-tab
+              data-block-id="{{ block.id }}"
+              {{ block.shopify_attributes }}
+            >
+              {{- block.settings.label | escape -}}
+            </button>
+            {%- assign tab_i = tab_i | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="pruv-faqs__panels" data-animate="fade-up">
+      {%- if cat_count > 0 -%}
+        {%- for cat_pos in cat_indexes -%}
+          {%- if cat_pos != blank -%}
+            {%- liquid
+              assign cat_pos_num = cat_pos | plus: 0
+              assign start = cat_pos_num
+              if forloop.index0 == 0
+                assign start = -1
+              endif
+              assign stop = section.blocks.size
+              unless forloop.last
+                assign next_pos = cat_indexes[forloop.index]
+                assign stop = next_pos | plus: 0
+              endunless
+              assign cat_block = section.blocks[cat_pos_num]
+              assign q_num = 0
+            -%}
+            <div
+              class="pruv-faqs__panel"
+              id="panel-{{ section.id }}-{{ cat_block.id }}"
+              role="tabpanel"
+              aria-labelledby="tab-{{ section.id }}-{{ cat_block.id }}"
+              data-faq-panel
+              data-block-id="{{ cat_block.id }}"
+              {% unless forloop.first %}
+                hidden
+              {% endunless %}
+            >
+              <h3 class="pruv-faqs__panel-title">{{ cat_block.settings.label | escape }}</h3>
+              <ul class="pruv-faqs__list" role="list">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'question'
+                      and forloop.index0 > start
+                      and forloop.index0 < stop
+                      and block.settings.question != blank
+                  -%}
+                    {%- liquid
+                      assign q_num = q_num | plus: 1
+                      assign is_open = false
+                      if section.settings.open_first and q_num == 1
+                        assign is_open = true
+                      endif
+                    -%}
+                    {%- render 'pruv-faq-item',
+                      block: block,
+                      section_id: section.id,
+                      q_num: q_num,
+                      is_open: is_open
+                    -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- liquid
+          assign q_num = 0
+        -%}
+        <div class="pruv-faqs__panel" data-faq-panel>
+          <ul class="pruv-faqs__list" role="list">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'question' and block.settings.question != blank -%}
+                {%- liquid
+                  assign q_num = q_num | plus: 1
+                  assign is_open = false
+                  if section.settings.open_first and q_num == 1
+                    assign is_open = true
+                  endif
+                -%}
+                {%- render 'pruv-faq-item',
+                  block: block,
+                  section_id: section.id,
+                  q_num: q_num,
+                  is_open: is_open
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<noscript>
+  <style>
+    .pruv-faqs__tablist {
+      display: none;
+    }
+
+    .pruv-faqs__panel[hidden] {
+      display: block !important;
+    }
+
+    .pruv-faqs__panel + .pruv-faqs__panel {
+      margin-top: 3.2rem;
+    }
+
+    .pruv-faqs__panel-title {
+      position: static !important;
+      width: auto !important;
+      height: auto !important;
+      clip: auto !important;
+      overflow: visible !important;
+      margin: 0 0 1.2rem !important;
+      font-family: 'Geist Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a85f2e;
+    }
+
+    .pruv-faqs__answer {
+      grid-template-rows: 1fr !important;
+    }
+
+    .pruv-faqs__answer-inner {
+      visibility: visible !important;
+    }
+
+    .pruv-faqs__icon {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<script>
+  (function () {
+    function initPruvFaqs(section) {
+      if (section.dataset.faqsInit === 'true') return;
+      section.dataset.faqsInit = 'true';
+
+      var tabs = Array.prototype.slice.call(section.querySelectorAll('[data-faq-tab]'));
+      var panels = Array.prototype.slice.call(section.querySelectorAll('[data-faq-panel]'));
+
+      function activate(index, setFocus) {
+        tabs.forEach(function (tab, i) {
+          var selected = i === index;
+          tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tab.setAttribute('tabindex', selected ? '0' : '-1');
+          tab.classList.toggle('is-active', selected);
+        });
+        panels.forEach(function (panel, i) {
+          panel.hidden = i !== index;
+        });
+        if (setFocus && tabs[index]) tabs[index].focus();
+      }
+
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () {
+          activate(i, false);
+        });
+
+        tab.addEventListener('keydown', function (event) {
+          var next = null;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+            next = (i + 1) % tabs.length;
+          } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+            next = (i - 1 + tabs.length) % tabs.length;
+          } else if (event.key === 'Home') {
+            next = 0;
+          } else if (event.key === 'End') {
+            next = tabs.length - 1;
+          }
+          if (next === null) return;
+          event.preventDefault();
+          activate(next, true);
+        });
+      });
+
+      function setOpen(item, open) {
+        var button = item.querySelector('[data-faq-toggle]');
+        item.classList.toggle('is-open', open);
+        if (button) button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      section.querySelectorAll('[data-faq-toggle]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var item = button.closest('[data-faq-item]');
+          if (!item) return;
+          var willOpen = button.getAttribute('aria-expanded') !== 'true';
+          var scope = item.closest('[data-faq-panel]') || section;
+
+          if (willOpen) {
+            scope.querySelectorAll('[data-faq-item].is-open').forEach(function (other) {
+              if (other !== item) setOpen(other, false);
+            });
+          }
+          setOpen(item, willOpen);
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.pruv-faqs').forEach(initPruvFaqs);
+    });
+
+    if (window.Shopify && Shopify.designMode) {
+      document.addEventListener('shopify:section:load', function (e) {
+        var el = e.target.classList.contains('pruv-faqs') ? e.target : e.target.querySelector('.pruv-faqs');
+        if (el) initPruvFaqs(el);
+      });
+
+      // The block list is flat, so a selected question can live in a hidden
+      // panel. Reveal its tab and expand it so the merchant sees what they clicked.
+      document.addEventListener('shopify:block:select', function (e) {
+        var section = e.target.closest('.pruv-faqs');
+        if (!section) return;
+        var blockId = e.target.getAttribute('data-block-id') || (e.detail && e.detail.blockId);
+        if (!blockId) return;
+
+        var tab = section.querySelector('[data-faq-tab][data-block-id="' + blockId + '"]');
+        if (tab) {
+          tab.click();
+          return;
+        }
+
+        var item = section.querySelector('[data-faq-item][data-block-id="' + blockId + '"]');
+        if (!item) return;
+        var panel = item.closest('[data-faq-panel]');
+        if (panel && panel.id) {
+          var owner = section.querySelector('[data-faq-tab][aria-controls="' + panel.id + '"]');
+          if (owner) owner.click();
+        }
+        var toggle = item.querySelector('[data-faq-toggle]');
+        if (toggle && toggle.getAttribute('aria-expanded') !== 'true') toggle.click();
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Prüv FAQs",
+  "tag": "section",
+  "class": "section pruv-faqs-section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQs"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first question in each category",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab label",
+          "info": "Creates a tab. Every Question block below it — until the next Category block — belongs to this tab.",
+          "default": "Orders & Shipping"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How can I track my order?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>The moment your order ships you will get an email and an SMS with a live tracking link.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "presets": [
+    {
+      "name": "Prüv FAQs",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "label": "Orders & Shipping"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>The moment your order ships you will get an email and an SMS with a live tracking link. You can also check status any time under <strong>Account → Orders</strong>. Metros usually receive their parcel in 2–4 working days; the rest of India in 4–7.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Do you ship across India?",
+            "answer": "<p>Yes — every serviceable PIN code in India, through our courier partners. Orders above ₹699 ship free; below that a flat ₹49 applies at checkout.</p>"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "label": "Products & Ingredients"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are Prüv products suitable for hard water?",
+            "answer": "<p>That is exactly what they are built for. Every formula is tested against hard water at Indian TDS levels, so it lathers, rinses clean and performs without leaving the mineral film that flattens hair and dulls colour.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Are your formulas sulphate and paraben free?",
+            "answer": "<p>Yes. No SLS, no SLES, no parabens and no added mineral oil. We use gentler surfactant systems that clean thoroughly without stripping the scalp barrier.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

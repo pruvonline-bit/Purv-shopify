@@ -1,0 +1,43 @@
+{% doc %}
+  Renders a single FAQ accordion row for the Prüv FAQs section.
+
+  @param {object} block - The `question` block to render.
+  @param {string} section_id - The parent section id, used to namespace element ids.
+  @param {number} q_num - The 1-based number shown before the question.
+  @param {boolean} is_open - Whether the row starts expanded.
+
+  @example
+  {% render 'pruv-faq-item', block: block, section_id: section.id, q_num: 1, is_open: true %}
+{% enddoc %}
+
+<li
+  class="pruv-faqs__item{% if is_open %} is-open{% endif %}"
+  data-faq-item
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <h4 class="pruv-faqs__question-wrap">
+    <button
+      type="button"
+      class="pruv-faqs__toggle"
+      id="q-{{ section_id }}-{{ block.id }}"
+      aria-expanded="{% if is_open %}true{% else %}false{% endif %}"
+      aria-controls="a-{{ section_id }}-{{ block.id }}"
+      data-faq-toggle
+    >
+      <span class="pruv-faqs__number" aria-hidden="true">{{ q_num }}.</span>
+      <span class="pruv-faqs__question">{{ block.settings.question | escape }}</span>
+      <span class="pruv-faqs__icon" aria-hidden="true"></span>
+    </button>
+  </h4>
+  <div
+    class="pruv-faqs__answer"
+    id="a-{{ section_id }}-{{ block.id }}"
+    role="region"
+    aria-labelledby="q-{{ section_id }}-{{ block.id }}"
+  >
+    <div class="pruv-faqs__answer-inner">
+      <div class="pruv-faqs__answer-rte rte">{{ block.settings.answer }}</div>
+    </div>
+  </div>
+</li>
