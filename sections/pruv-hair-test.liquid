@@ -1,0 +1,412 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@600;700&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-hair-test.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-hair-test.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="pruv-hair-test color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank -%}
+      <div class="pruv-hair-test__header" data-animate="fade-up">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="pruv-hair-test__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pruv-hair-test__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="pruv-hair-test__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {% render 'pruv-hair-test-quiz', section: section, context: 'page' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Prüv hair test",
+  "tag": "section",
+  "class": "section pruv-hair-test-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "60-second hair test"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find your routine. <strong>Beyond guesswork.</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Four questions about your hair, your water and your routine. We'll match you to the formula built for what your hair actually deals with — and show you exactly why.</p>"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back button label",
+      "default": "Back"
+    },
+    {
+      "type": "header",
+      "content": "Results screen"
+    },
+    {
+      "type": "text",
+      "id": "result_eyebrow",
+      "label": "Result eyebrow",
+      "default": "Your result"
+    },
+    {
+      "type": "text",
+      "id": "result_heading",
+      "label": "Result heading",
+      "default": "Your hair's best match"
+    },
+    {
+      "type": "textarea",
+      "id": "result_text",
+      "label": "Result intro text",
+      "default": "Based on what you told us, here's where to start — and the reasoning behind it."
+    },
+    {
+      "type": "text",
+      "id": "result_supporting_label",
+      "label": "Supporting products label",
+      "default": "Complete your ritual"
+    },
+    {
+      "type": "header",
+      "content": "Doctor recommendation"
+    },
+    {
+      "type": "checkbox",
+      "id": "doctor_enabled",
+      "label": "Show doctor block on results",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor photo",
+      "info": "Square image works best. A placeholder shows until you upload one."
+    },
+    {
+      "type": "text",
+      "id": "doctor_badge",
+      "label": "Badge text",
+      "default": "Doctor recommended"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_quote",
+      "label": "Quote",
+      "default": "Most hair concerns I see in clinic trace back to the scalp environment — water, buildup and barrier damage. Matching the formula to the cause is what makes the difference."
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "label": "Doctor name",
+      "default": "Dr. [Name]"
+    },
+    {
+      "type": "text",
+      "id": "doctor_role",
+      "label": "Position / qualification",
+      "default": "[Position, qualification]"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_disclaimer",
+      "label": "Disclaimer",
+      "info": "Keep a factual disclaimer here. These are cosmetic products and the test is not a medical diagnosis.",
+      "default": "This test suggests cosmetic products based on your answers. It is not a medical diagnosis. For persistent hair loss or scalp conditions, please consult a qualified dermatologist."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-2"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product slot",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The ORDER of these Product blocks defines the weight positions used in every question. Slot 1 is the first number, slot 2 the second, and so on."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Display name",
+          "info": "Leave blank to use the product's own title."
+        },
+        {
+          "type": "text",
+          "id": "axis",
+          "label": "Concern it owns",
+          "default": "Environment & scalp"
+        },
+        {
+          "type": "textarea",
+          "id": "hero_line",
+          "label": "Why this is the match",
+          "info": "Shown only when this product is the top result.",
+          "default": "Built for the water and air your hair actually lives in."
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Step label",
+          "default": "About you"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What's your main hair concern right now?"
+        },
+        {
+          "type": "text",
+          "id": "help",
+          "label": "Helper text"
+        },
+        {
+          "type": "range",
+          "id": "weight",
+          "min": 0,
+          "max": 5,
+          "step": 0.5,
+          "label": "Question weight",
+          "info": "How much this question counts. Use a high weight for the main concern and a low one (0.5) for questions that should only break ties.",
+          "default": 2
+        },
+        {
+          "type": "header",
+          "content": "Option 1"
+        },
+        { "type": "text", "id": "opt1_label", "label": "Label" },
+        { "type": "text", "id": "opt1_sub", "label": "Sub-label" },
+        {
+          "type": "text",
+          "id": "opt1_weights",
+          "label": "Points",
+          "info": "One number per Product slot, comma separated, in block order. Example: 0,3,1",
+          "default": "0,0,0"
+        },
+        {
+          "type": "text",
+          "id": "opt1_reason",
+          "label": "Reason clause",
+          "info": "Completes the sentence shown on the results screen. Leave blank to keep this answer out of the explanation."
+        },
+        {
+          "type": "header",
+          "content": "Option 2"
+        },
+        { "type": "text", "id": "opt2_label", "label": "Label" },
+        { "type": "text", "id": "opt2_sub", "label": "Sub-label" },
+        { "type": "text", "id": "opt2_weights", "label": "Points", "default": "0,0,0" },
+        { "type": "text", "id": "opt2_reason", "label": "Reason clause" },
+        {
+          "type": "header",
+          "content": "Option 3"
+        },
+        { "type": "text", "id": "opt3_label", "label": "Label" },
+        { "type": "text", "id": "opt3_sub", "label": "Sub-label" },
+        { "type": "text", "id": "opt3_weights", "label": "Points", "default": "0,0,0" },
+        { "type": "text", "id": "opt3_reason", "label": "Reason clause" },
+        {
+          "type": "header",
+          "content": "Option 4"
+        },
+        { "type": "text", "id": "opt4_label", "label": "Label" },
+        { "type": "text", "id": "opt4_sub", "label": "Sub-label" },
+        { "type": "text", "id": "opt4_weights", "label": "Points", "default": "0,0,0" },
+        { "type": "text", "id": "opt4_reason", "label": "Reason clause" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Prüv hair test",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "axis": "Environment & scalp",
+            "hero_line": "Built for the water and air your hair actually lives in — hardwater defence, pollution defence and microbiome care in one daily wash."
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "axis": "Density & thinning",
+            "hero_line": "Works at the root across multiple pathways to rebuild structural density where hair has thinned."
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "axis": "Damage & dryness",
+            "hero_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down."
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "eyebrow": "About you",
+            "question": "First — who are we formulating for?",
+            "help": "This only shapes how we talk to you. Your concerns drive the recommendation.",
+            "weight": 0.5,
+            "opt1_label": "Woman",
+            "opt1_weights": "0,1,1",
+            "opt2_label": "Man",
+            "opt2_weights": "1,2,0",
+            "opt3_label": "Prefer not to say",
+            "opt3_weights": "1,1,1"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your main concern",
+            "question": "What bothers you most about your hair right now?",
+            "help": "Pick the one that frustrates you most — this carries the most weight in your result.",
+            "weight": 4,
+            "opt1_label": "Thinning or reduced density",
+            "opt1_sub": "More scalp showing, ponytail feels thinner",
+            "opt1_weights": "0,3,1",
+            "opt1_reason": "thinning needs actives that work at the root, not just on the surface",
+            "opt2_label": "Breakage and split ends",
+            "opt2_sub": "Strands snap, ends feel rough and dry",
+            "opt2_weights": "0,1,3",
+            "opt2_reason": "breakage needs structural repair inside the hair shaft, not just conditioning",
+            "opt3_label": "Oily, itchy or flaky scalp",
+            "opt3_sub": "Scalp feels congested, hair looks dull by day two",
+            "opt3_weights": "3,0,0",
+            "opt3_reason": "a congested scalp has to be rebalanced before anything else can work",
+            "opt4_label": "Buildup and dullness",
+            "opt4_sub": "Hair feels coated, shampoo barely lathers",
+            "opt4_weights": "3,0,1",
+            "opt4_reason": "mineral buildup coats the cuticle and blocks everything applied after it"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your water & scalp",
+            "question": "How do your water and scalp behave?",
+            "help": "Water hardness is the single most underrated factor in Indian hair care.",
+            "weight": 2,
+            "opt1_label": "Hard water",
+            "opt1_sub": "White residue on taps, shampoo won't lather properly",
+            "opt1_weights": "3,0,1",
+            "opt1_reason": "hard water leaves mineral deposits that dull the hair and irritate the scalp",
+            "opt2_label": "Scalp feels dry and tight",
+            "opt2_sub": "Especially right after washing",
+            "opt2_weights": "1,0,2",
+            "opt2_reason": "a stripped scalp barrier usually shows up as dryness along the length too",
+            "opt3_label": "Scalp turns oily fast",
+            "opt3_sub": "Greasy within a day of washing",
+            "opt3_weights": "2,1,0",
+            "opt3_reason": "fast oil turnover needs cleansing that balances the scalp rather than stripping it",
+            "opt4_label": "Soft or filtered water",
+            "opt4_sub": "Scalp feels comfortable most days",
+            "opt4_weights": "0,1,1",
+            "opt4_reason": "with water off the table, the gains come from strength and structure instead"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your routine",
+            "question": "How much stress does your hair take in a normal week?",
+            "help": "Be honest — this decides what your hair needs rebuilt.",
+            "weight": 2,
+            "opt1_label": "Heat, colour or chemical treatment",
+            "opt1_sub": "Straightening, blow-drying, colour or keratin",
+            "opt1_weights": "0,1,3",
+            "opt1_reason": "heat and chemical processing depletes the bonds that hold the hair shaft together",
+            "opt2_label": "Tied up tight, or washed daily",
+            "opt2_sub": "Friction from styling and frequent washing",
+            "opt2_weights": "2,1,2",
+            "opt2_reason": "friction and frequent washing wear the cuticle down a little at a time",
+            "opt3_label": "Out in pollution and sun",
+            "opt3_sub": "Commuting or outdoors most days",
+            "opt3_weights": "3,1,1",
+            "opt3_reason": "particulates and UV oxidise the hair and load the scalp with grime",
+            "opt4_label": "Minimal — mostly left natural",
+            "opt4_sub": "Little heat, no chemical treatment",
+            "opt4_weights": "1,2,0",
+            "opt4_reason": "with low external stress, the biggest gains come from working at the root"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

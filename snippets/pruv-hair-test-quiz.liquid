@@ -1,0 +1,120 @@
+{% doc %}
+  Renders the Prüv Hair Test quiz shell plus its JSON config.
+
+  Question and product data come from the calling section's blocks, so the page
+  section and the home-page popup share one implementation.
+
+  @param {object} section - The calling section (blocks + settings are read from it).
+  @param {string} [context] - 'page' or 'popup'. Only used for a modifier class.
+
+  @example
+  {% render 'pruv-hair-test-quiz', section: section, context: 'page' %}
+{% enddoc %}
+
+{%- liquid
+  assign product_blocks = section.blocks | where: 'type', 'product'
+  assign question_blocks = section.blocks | where: 'type', 'question'
+  assign opt_indexes = '1,2,3,4' | split: ','
+  assign ctx = context | default: 'page'
+-%}
+
+{%- if product_blocks.size > 0 and question_blocks.size > 0 -%}
+  <div
+    class="pruv-quiz pruv-quiz--{{ ctx }}"
+    data-pruv-quiz
+    data-context="{{ ctx }}"
+  >
+    {%- capture quiz_config -%}
+{
+  "products": [
+    {%- for block in product_blocks -%}
+      {%- assign p = block.settings.product -%}
+      {
+        "title": {{ block.settings.title | default: p.title | default: 'Product' | json }},
+        "url": {% if p %}{{ p.url | json }}{% else %}""{% endif %},
+        "price": {% if p %}{{ p.price | money | json }}{% else %}""{% endif %},
+        "image": {% if p and p.featured_image %}{{ p.featured_image | image_url: width: 480 | json }}{% else %}""{% endif %},
+        "axis": {{ block.settings.axis | json }},
+        "heroLine": {{ block.settings.hero_line | json }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "steps": [
+    {%- for block in question_blocks -%}
+      {
+        "eyebrow": {{ block.settings.eyebrow | json }},
+        "question": {{ block.settings.question | json }},
+        "help": {{ block.settings.help | json }},
+        "weight": {{ block.settings.weight | default: 2 }},
+        "options": [
+          {%- assign first_opt = true -%}
+          {%- for i in opt_indexes -%}
+            {%- assign label_key = 'opt' | append: i | append: '_label' -%}
+            {%- assign label = block.settings[label_key] -%}
+            {%- if label != blank -%}
+              {%- unless first_opt -%},{%- endunless -%}
+              {%- assign first_opt = false -%}
+              {%- assign sub_key = 'opt' | append: i | append: '_sub' -%}
+              {%- assign reason_key = 'opt' | append: i | append: '_reason' -%}
+              {%- assign weights_key = 'opt' | append: i | append: '_weights' -%}
+              {%- assign weights_raw = block.settings[weights_key] | default: '0,0,0' | split: ',' -%}
+              {
+                "label": {{ label | json }},
+                "sublabel": {{ block.settings[sub_key] | json }},
+                "reason": {{ block.settings[reason_key] | json }},
+                "weights": [
+                  {%- for w in weights_raw -%}
+                    {{ w | strip | plus: 0 }}{%- unless forloop.last -%},{%- endunless -%}
+                  {%- endfor -%}
+                ]
+              }
+            {%- endif -%}
+          {%- endfor -%}
+        ]
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "result": {
+    "eyebrow": {{ section.settings.result_eyebrow | json }},
+    "heading": {{ section.settings.result_heading | json }},
+    "text": {{ section.settings.result_text | json }},
+    "supportingLabel": {{ section.settings.result_supporting_label | json }}
+  },
+  "doctor": {
+    "enabled": {% if section.settings.doctor_enabled %}true{% else %}false{% endif %},
+    "badge": {{ section.settings.doctor_badge | json }},
+    "quote": {{ section.settings.doctor_quote | json }},
+    "name": {{ section.settings.doctor_name | json }},
+    "role": {{ section.settings.doctor_role | json }},
+    "disclaimer": {{ section.settings.doctor_disclaimer | json }},
+    "image": {% if section.settings.doctor_image %}{{ section.settings.doctor_image | image_url: width: 320 | json }}{% else %}""{% endif %}
+  }
+}
+    {%- endcapture -%}
+    <script type="application/json" data-quiz-config>{{ quiz_config }}</script>
+
+    <div class="pruv-quiz__progress">
+      <span class="pruv-quiz__progress-track">
+        <span class="pruv-quiz__progress-fill" data-quiz-progress></span>
+      </span>
+      <p class="pruv-quiz__progress-label">
+        <span data-quiz-step-num>1</span>/<span data-quiz-step-total>{{ question_blocks.size }}</span>
+      </p>
+    </div>
+
+    <div class="pruv-quiz__viewport" data-quiz-viewport aria-live="polite"></div>
+
+    <div class="pruv-quiz__nav">
+      <button type="button" class="pruv-quiz__back" data-quiz-back hidden>
+        &larr; {{ section.settings.back_label | default: 'Back' | escape }}
+      </button>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="pruv-quiz pruv-quiz--empty">
+    <p class="pruv-quiz__help">
+      Add at least one <strong>Product</strong> block and one <strong>Question</strong> block to this section
+      for the hair test to appear.
+    </p>
+  </div>
+{%- endif -%}

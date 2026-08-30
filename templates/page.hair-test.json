@@ -1,0 +1,154 @@
+{
+  "sections": {
+    "hair_test": {
+      "type": "pruv-hair-test",
+      "blocks": {
+        "product_shampoo": {
+          "type": "product",
+          "settings": {
+            "product": "pruv-1",
+            "axis": "Environment & scalp",
+            "hero_line": "Built for the water and air your hair actually lives in — hardwater defence, pollution defence and microbiome care in one daily wash."
+          }
+        },
+        "product_serum": {
+          "type": "product",
+          "settings": {
+            "product": "product-2",
+            "axis": "Density & thinning",
+            "hero_line": "Works at the root across multiple pathways to rebuild structural density where hair has thinned."
+          }
+        },
+        "product_mask": {
+          "type": "product",
+          "settings": {
+            "product": "product-3",
+            "axis": "Damage & dryness",
+            "hero_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down."
+          }
+        },
+        "q_gender": {
+          "type": "question",
+          "settings": {
+            "eyebrow": "About you",
+            "question": "First — who are we formulating for?",
+            "help": "This only shapes how we talk to you. Your concerns drive the recommendation.",
+            "weight": 0.5,
+            "opt1_label": "Woman",
+            "opt1_weights": "0,1,1",
+            "opt2_label": "Man",
+            "opt2_weights": "1,2,0",
+            "opt3_label": "Prefer not to say",
+            "opt3_weights": "1,1,1"
+          }
+        },
+        "q_concern": {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your main concern",
+            "question": "What bothers you most about your hair right now?",
+            "help": "Pick the one that frustrates you most — this carries the most weight in your result.",
+            "weight": 4,
+            "opt1_label": "Thinning or reduced density",
+            "opt1_sub": "More scalp showing, ponytail feels thinner",
+            "opt1_weights": "0,3,1",
+            "opt1_reason": "thinning needs actives that work at the root, not just on the surface",
+            "opt2_label": "Breakage and split ends",
+            "opt2_sub": "Strands snap, ends feel rough and dry",
+            "opt2_weights": "0,1,3",
+            "opt2_reason": "breakage needs structural repair inside the hair shaft, not just conditioning",
+            "opt3_label": "Oily, itchy or flaky scalp",
+            "opt3_sub": "Scalp feels congested, hair looks dull by day two",
+            "opt3_weights": "3,0,0",
+            "opt3_reason": "a congested scalp has to be rebalanced before anything else can work",
+            "opt4_label": "Buildup and dullness",
+            "opt4_sub": "Hair feels coated, shampoo barely lathers",
+            "opt4_weights": "3,0,1",
+            "opt4_reason": "mineral buildup coats the cuticle and blocks everything applied after it"
+          }
+        },
+        "q_water": {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your water & scalp",
+            "question": "How do your water and scalp behave?",
+            "help": "Water hardness is the single most underrated factor in Indian hair care.",
+            "weight": 2,
+            "opt1_label": "Hard water",
+            "opt1_sub": "White residue on taps, shampoo won't lather properly",
+            "opt1_weights": "3,0,1",
+            "opt1_reason": "hard water leaves mineral deposits that dull the hair and irritate the scalp",
+            "opt2_label": "Scalp feels dry and tight",
+            "opt2_sub": "Especially right after washing",
+            "opt2_weights": "1,0,2",
+            "opt2_reason": "a stripped scalp barrier usually shows up as dryness along the length too",
+            "opt3_label": "Scalp turns oily fast",
+            "opt3_sub": "Greasy within a day of washing",
+            "opt3_weights": "2,1,0",
+            "opt3_reason": "fast oil turnover needs cleansing that balances the scalp rather than stripping it",
+            "opt4_label": "Soft or filtered water",
+            "opt4_sub": "Scalp feels comfortable most days",
+            "opt4_weights": "0,1,1",
+            "opt4_reason": "with water off the table, the gains come from strength and structure instead"
+          }
+        },
+        "q_routine": {
+          "type": "question",
+          "settings": {
+            "eyebrow": "Your routine",
+            "question": "How much stress does your hair take in a normal week?",
+            "help": "Be honest — this decides what your hair needs rebuilt.",
+            "weight": 2,
+            "opt1_label": "Heat, colour or chemical treatment",
+            "opt1_sub": "Straightening, blow-drying, colour or keratin",
+            "opt1_weights": "0,1,3",
+            "opt1_reason": "heat and chemical processing depletes the bonds that hold the hair shaft together",
+            "opt2_label": "Tied up tight, or washed daily",
+            "opt2_sub": "Friction from styling and frequent washing",
+            "opt2_weights": "2,1,2",
+            "opt2_reason": "friction and frequent washing wear the cuticle down a little at a time",
+            "opt3_label": "Out in pollution and sun",
+            "opt3_sub": "Commuting or outdoors most days",
+            "opt3_weights": "3,1,1",
+            "opt3_reason": "particulates and UV oxidise the hair and load the scalp with grime",
+            "opt4_label": "Minimal — mostly left natural",
+            "opt4_sub": "Little heat, no chemical treatment",
+            "opt4_weights": "1,2,0",
+            "opt4_reason": "with low external stress, the biggest gains come from working at the root"
+          }
+        }
+      },
+      "block_order": [
+        "product_shampoo",
+        "product_serum",
+        "product_mask",
+        "q_gender",
+        "q_concern",
+        "q_water",
+        "q_routine"
+      ],
+      "settings": {
+        "eyebrow": "60-second hair test",
+        "heading": "Find your routine. <strong>Beyond guesswork.</strong>",
+        "text": "<p>Four questions about your hair, your water and your routine. We'll match you to the formula built for what your hair actually deals with — and show you exactly why.</p>",
+        "back_label": "Back",
+        "result_eyebrow": "Your result",
+        "result_heading": "Your hair's best match",
+        "result_text": "Based on what you told us, here's where to start — and the reasoning behind it.",
+        "result_supporting_label": "Complete your ritual",
+        "doctor_enabled": true,
+        "doctor_badge": "Doctor recommended",
+        "doctor_quote": "Most hair concerns I see in clinic trace back to the scalp environment — water, buildup and barrier damage. Matching the formula to the cause is what makes the difference.",
+        "doctor_name": "Dr. [Name]",
+        "doctor_role": "[Position, qualification]",
+        "doctor_disclaimer": "This test suggests cosmetic products based on your answers. It is not a medical diagnosis. For persistent hair loss or scalp conditions, please consult a qualified dermatologist.",
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "hair_test"
+  ]
+}

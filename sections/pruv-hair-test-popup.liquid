@@ -1,0 +1,139 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700;800&family=Geist+Mono:wght@600;700&display=swap"
+  rel="stylesheet"
+>
+{{ 'section-pruv-hair-test.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-hair-test.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'pruv-hair-test-popup.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign quiz_page = section.settings.quiz_page
+  assign quiz_url = ''
+  if quiz_page != blank
+    assign quiz_url = quiz_page.url
+  endif
+-%}
+
+{%- if section.settings.enabled and quiz_url != blank -%}
+  <div
+    class="pruv-quiz-popup"
+    data-pruv-quiz-popup
+    data-delay="{{ section.settings.delay | times: 1000 }}"
+    data-source="{{ quiz_url }}"
+  >
+    <dialog
+      class="pruv-quiz-dialog"
+      data-quiz-dialog
+      aria-label="{{ section.settings.heading | default: 'Hair test' | strip_html | escape }}"
+    >
+      <div class="pruv-quiz-dialog__panel">
+        <button
+          type="button"
+          class="pruv-quiz-dialog__close"
+          data-quiz-dialog-close
+          aria-label="{{ 'accessibility.close' | t | default: 'Close' }}"
+        >
+          <svg viewBox="0 0 18 17" fill="none" aria-hidden="true">
+            <path
+              d="M.865 15.978a.5.5 0 0 0 .707.707l7.433-7.431 7.579 7.282a.5.5 0 0 0 .693-.72L9.712 8.546l7.417-7.416a.5.5 0 1 0-.707-.708L8.991 7.853 1.413.573a.5.5 0 1 0-.693.72l7.563 7.268z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+
+        <div class="pruv-quiz-dialog__intro">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pruv-hair-test__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="pruv-hair-test__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="pruv-hair-test__text">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+
+        {% comment %}
+          The quiz is fetched from the hair test page on open, so its questions and
+          scoring live in exactly one place. The link below is the no-JS and
+          fetch-failure fallback.
+        {% endcomment %}
+        <div class="pruv-quiz-dialog__mount" data-quiz-mount>
+          <p class="pruv-quiz-dialog__fallback">
+            <a class="pruv-quiz__card-cta" href="{{ quiz_url }}">
+              {{ section.settings.fallback_label | default: 'Take the hair test' | escape }}
+            </a>
+          </p>
+        </div>
+      </div>
+    </dialog>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Prüv hair test popup",
+  "tag": "section",
+  "class": "section pruv-hair-test-popup-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "page",
+      "id": "quiz_page",
+      "label": "Hair test page",
+      "info": "The page holding the Prüv hair test section. The popup loads the quiz from it, so you only configure the questions once. Required — the popup will not render without it."
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "label": "Delay before opening",
+      "default": 7
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "60-second hair test"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not sure where to <strong>start?</strong>"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Four quick questions. We'll match you to the right formula and show you why."
+    },
+    {
+      "type": "text",
+      "id": "fallback_label",
+      "label": "Fallback link label",
+      "info": "Shown if the quiz cannot be loaded, or with JavaScript disabled.",
+      "default": "Take the hair test"
+    },
+    {
+      "type": "paragraph",
+      "content": "The popup opens once per browser session. Dismissing it or completing the test keeps it closed until the visitor's next session. In the theme editor it opens when you select this section instead of on a timer."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv hair test popup"
+    }
+  ]
+}
+{% endschema %}

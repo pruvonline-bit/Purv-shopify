@@ -391,6 +391,18 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
+    },
+    "hair_test_popup": {
+      "type": "pruv-hair-test-popup",
+      "settings": {
+        "enabled": true,
+        "quiz_page": "hair-test",
+        "delay": 7,
+        "eyebrow": "60-second hair test",
+        "heading": "Not sure where to <strong>start?</strong>",
+        "text": "Four quick questions. We'll match you to the right formula and show you why.",
+        "fallback_label": "Take the hair test"
+      }
     }
   },
   "order": [
@@ -401,6 +413,7 @@
     "product_details",
     "philosophy",
     "video_glass",
-    "reviews"
+    "reviews",
+    "hair_test_popup"
   ]
 }
