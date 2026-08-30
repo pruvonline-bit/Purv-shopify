@@ -112,3 +112,51 @@
   color: #524d43;
   margin: 0;
 }
+
+/* --------------------------------------------------------------------------
+   Mobile: swipeable card row instead of a tall stacked column.
+   CSS only — no markup change. The negative inline margin lets the track bleed
+   out of .page-width's 1.5rem gutter to the viewport edge, while the matching
+   padding keeps the first card optically aligned with the heading above it.
+   The card width leaves the next card peeking, which is what signals "swipe".
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 749px) {
+  .pruv-pdp-ingredients__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 1.2rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* stop a horizontal swipe triggering browser back-navigation */
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.4rem;
+    scroll-padding-left: 1.5rem;
+    scroll-padding-inline-start: 1.5rem;
+  }
+
+  .pruv-pdp-ingredients__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-pdp-ingredients__card {
+    flex: 0 0 78%;
+    max-width: 30rem;
+    scroll-snap-align: start;
+    scroll-margin-left: 1.5rem;
+    scroll-margin-inline-start: 1.5rem;
+  }
+
+  /* A flex row already equalises card heights; make sure a hover transform
+     left over from the desktop grid cannot nudge cards mid-scroll. */
+  .pruv-pdp-ingredients__card:hover {
+    transform: none;
+  }
+}
