@@ -122,12 +122,21 @@
         {%- if section.blocks.size > 0 -%}
           <div class="pruv-footer__link-group">
             {%- for block in section.blocks -%}
+              {%- liquid
+                assign link_url = block.settings.url
+                if link_url == blank
+                  assign lower_label = block.settings.label | downcase
+                  if lower_label contains 'contact'
+                    assign link_url = '/pages/contact'
+                  endif
+                endif
+              -%}
               <div class="pruv-footer__link-item" {{ block.shopify_attributes }}>
                 <a
-                  {% if block.settings.url == blank %}
+                  {% if link_url == blank %}
                     role="link" aria-disabled="true"
                   {% else %}
-                    href="{{ block.settings.url }}"
+                    href="{{ link_url }}"
                   {% endif %}
                   class="pruv-footer__link"
                 >
@@ -144,14 +153,9 @@
           {%- endif -%}
           <ul class="pruv-footer__help-list list-unstyled">
             {%- if section.settings.contact_link_label != blank -%}
+              {%- assign footer_contact_url = section.settings.contact_link_url | default: '/pages/contact' -%}
               <li>
-                <a
-                  {% if section.settings.contact_link_url == blank %}
-                    role="link" aria-disabled="true"
-                  {% else %}
-                    href="{{ section.settings.contact_link_url }}"
-                  {% endif %}
-                >
+                <a href="{{ footer_contact_url }}">
                   {{- section.settings.contact_link_label | escape -}}
                 </a>
               </li>

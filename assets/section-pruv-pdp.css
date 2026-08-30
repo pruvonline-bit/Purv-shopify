@@ -1,0 +1,726 @@
+/* Prüv — product detail page: vertical gallery, pack-size cards, offer cards, accordions, FAQs */
+
+/* ==========================================================================
+   1. Media gallery — vertical thumbnail rail on the left of the main image
+   ========================================================================== */
+.product--thumbnail media-gallery {
+  position: relative;
+  display: block;
+}
+
+@media screen and (min-width: 750px) {
+  /* The info column is far taller than the gallery, which would otherwise leave
+     a dead gap under the image. Dawn already puts .product__column-sticky on
+     media-gallery for the thumbnail layout; this rule is more specific than
+     that class, so it has to restate `sticky` or it cancels it. */
+  .product--thumbnail media-gallery {
+    position: sticky;
+    top: 3rem;
+    align-self: flex-start;
+    max-height: calc(100vh - 6rem);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .product--thumbnail media-gallery > slider-component:not(.thumbnail-slider) {
+    order: 2;
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .product--thumbnail media-gallery > .thumbnail-slider {
+    order: 1;
+    flex: 0 0 8.4rem;
+    width: 8.4rem;
+    margin: 0;
+  }
+
+  .product--thumbnail .thumbnail-slider .thumbnail-list.slider--tablet-up,
+  .product--thumbnail .thumbnail-list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    overflow: visible;
+  }
+
+  .product--thumbnail .thumbnail-list__item.slider__slide,
+  .product--thumbnail .thumbnail-list__item {
+    width: 8.4rem !important;
+    max-width: 8.4rem;
+    flex: 0 0 auto;
+  }
+
+  /* The thumbnail rail scrolls itself rather than the page when there are many */
+  .product--thumbnail .thumbnail-slider .thumbnail-list {
+    max-height: calc(100vh - 6rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  /* Keep the main image inside the sticky box so it can never outgrow the
+     viewport and strand the bottom of the image off-screen. */
+  .product--thumbnail media-gallery > slider-component:not(.thumbnail-slider) .product__media-item,
+  .product--thumbnail media-gallery > slider-component:not(.thumbnail-slider) .product__media {
+    max-height: calc(100vh - 6rem);
+  }
+
+  .product--thumbnail media-gallery > slider-component:not(.thumbnail-slider) .product__media img {
+    max-height: calc(100vh - 6rem);
+    object-fit: contain;
+  }
+
+  .product--thumbnail .thumbnail-slider .thumbnail-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Dawn's horizontal prev/next thumb arrows make no sense vertically */
+  .product--thumbnail .thumbnail-slider > .slider-button {
+    display: none;
+  }
+}
+
+.product--thumbnail .thumbnail {
+  border-radius: 1.2rem;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  /* The product PNGs are background-removed, so a pure white tile makes a
+     white bottle disappear. A faint warm tile gives the silhouette an edge. */
+  background-color: #faf6f0;
+  padding: 0.6rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Product shots are white-on-white, so cover crops them to a blank square */
+.product--thumbnail .thumbnail img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.product--thumbnail .thumbnail[aria-current='true'] {
+  border-color: #a85f2e;
+  box-shadow: 0 0 0 1px #a85f2e;
+}
+
+.product--thumbnail .thumbnail:hover {
+  border-color: rgba(168, 95, 46, 0.5);
+}
+
+.product--thumbnail .product__media {
+  border-radius: 1.8rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.product--thumbnail .product__media-item .product__modal-opener {
+  border-radius: 1.8rem;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   2. Info column
+   ========================================================================== */
+.pruv-pdp-info .product__title,
+.pruv-pdp-info .product__title h1 {
+  font-size: clamp(2.2rem, 2.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #191712;
+}
+
+/* ==========================================================================
+   3. PACK SIZE — Dawn's pill variant picker restyled as reference cards.
+      Auto-hidden by Dawn when the product has a single variant.
+   ========================================================================== */
+.product-form__input--pill {
+  margin: 0 0 2rem;
+  padding: 0;
+  border: 0;
+}
+
+.product-form__input--pill > legend.form__label,
+.product-form__input--dropdown > .form__label,
+.product-form__input--swatch > legend.form__label {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a85f2e;
+}
+
+.product-form__input--pill input[type='radio'] + label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-width: 11.5rem;
+  margin: 0 0.8rem 0.8rem 0;
+  padding: 1.2rem 1.6rem;
+  border-radius: 1.4rem;
+  border: 1.5px solid rgba(25, 23, 18, 0.15);
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #191712;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-form__input--pill input[type='radio'] + label:hover {
+  border-color: #a85f2e;
+  background-color: rgba(168, 95, 46, 0.06);
+}
+
+.product-form__input--pill input[type='radio']:checked + label {
+  border-color: #a85f2e;
+  background-color: rgba(168, 95, 46, 0.1);
+  color: #8e4f24;
+  box-shadow: 0 4px 14px -4px rgba(168, 95, 46, 0.35);
+}
+
+.product-form__input--pill input[type='radio']:focus-visible + label {
+  outline: 2px solid #a85f2e;
+  outline-offset: 2px;
+}
+
+.product-form__input--pill input[type='radio'].disabled + label,
+.product-form__input--pill input[type='radio'] + label.disabled {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+
+/* ==========================================================================
+   4. Quantity + Add to cart on one row
+   ========================================================================== */
+/* Quantity and Add to cart share a row. The buy-buttons wrapper Dawn emits has
+   no class of its own, so it is reached as the sibling right after quantity —
+   which the product template's block order guarantees. */
+@media screen and (min-width: 750px) {
+  .pruv-pdp-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .pruv-pdp-info > * {
+    width: 100%;
+  }
+
+  .pruv-pdp-info > .product-form__quantity {
+    width: auto;
+    flex: 0 0 auto;
+    margin: 0 1.2rem 2rem 0;
+  }
+
+  .pruv-pdp-info > .product-form__quantity + div {
+    width: auto;
+    flex: 1 1 18rem;
+    min-width: 0;
+    margin-bottom: 2rem;
+  }
+
+  .pruv-pdp-info > .product-form__quantity + div .product-form {
+    margin-bottom: 0;
+  }
+}
+
+.pruv-pdp-info .quantity {
+  border-radius: 100px;
+  border: 1.5px solid rgba(25, 23, 18, 0.15);
+  background-color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  min-height: 5rem;
+}
+
+.pruv-pdp-info .quantity:after {
+  box-shadow: none;
+}
+
+.pruv-pdp-info .quantity__input {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #191712;
+}
+
+.pruv-pdp-info .quantity__button {
+  color: #a85f2e;
+}
+
+.pruv-pdp-info .product-form__submit {
+  min-height: 5rem;
+  border-radius: 100px;
+  background-color: #191712;
+  color: #f5f0e6;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.pruv-pdp-info .product-form__submit:not([disabled]):hover {
+  background-color: #a85f2e;
+  transform: translateY(-1px);
+}
+
+.pruv-pdp-info .product-form__submit:after,
+.pruv-pdp-info .product-form__submit:before {
+  box-shadow: none;
+  border: 0;
+}
+
+.pruv-pdp-info .shopify-payment-button__button--unbranded {
+  min-height: 5rem;
+  border-radius: 100px;
+  background-color: transparent !important;
+  border: 1.5px solid rgba(25, 23, 18, 0.35) !important;
+  color: #191712 !important;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pruv-pdp-info .shopify-payment-button__button--unbranded:hover:not([disabled]) {
+  background-color: #191712 !important;
+  color: #f5f0e6 !important;
+}
+
+/* ==========================================================================
+   5. EXTRA SAVINGS offer cards
+   ========================================================================== */
+.pruv-pdp-offers {
+  margin: 0 0 2.4rem;
+}
+
+.pruv-pdp-offers__label {
+  margin: 0 0 1rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a85f2e;
+}
+
+.pruv-pdp-offers__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-pdp-offers__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pruv-pdp-offers__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  background-color: rgba(168, 95, 46, 0.05);
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pruv-pdp-offers__card:hover {
+  border-color: rgba(168, 95, 46, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(168, 95, 46, 0.18);
+}
+
+/* The info column is ~450px, so three cards get ~140px each. Icon above the
+   text rather than beside it keeps the titles on one line at that width. */
+.pruv-pdp-offers__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 1.1rem 0.8rem 0.9rem;
+  flex: 1 1 auto;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-pdp-offers__body {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    gap: 0.9rem;
+    padding: 1.1rem 1.2rem 1rem;
+  }
+}
+
+.pruv-pdp-offers__icon {
+  flex: none;
+  width: 2.1rem;
+  height: 2.1rem;
+  color: #a85f2e;
+}
+
+.pruv-pdp-offers__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pruv-pdp-offers__title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #191712;
+  text-wrap: balance;
+}
+
+.pruv-pdp-offers__sub {
+  margin: 0.2rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: #6e6759;
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-pdp-offers__title { font-size: 1.45rem; }
+  .pruv-pdp-offers__sub { font-size: 1.25rem; }
+}
+
+.pruv-pdp-offers__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.8rem;
+  border-top: 1px solid rgba(168, 95, 46, 0.16);
+  background-color: rgba(168, 95, 46, 0.08);
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #8e4f24;
+  text-align: center;
+}
+
+.pruv-pdp-offers__copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin: -0.4rem -0.4rem -0.4rem 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0.6rem;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pruv-pdp-offers__copy:hover {
+  background-color: rgba(168, 95, 46, 0.16);
+  color: #191712;
+}
+
+.pruv-pdp-offers__copy:focus-visible {
+  outline: 2px solid #a85f2e;
+  outline-offset: 1px;
+}
+
+.pruv-pdp-offers__copy svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  display: block;
+}
+
+.pruv-pdp-offers__copy.is-copied {
+  color: #191712;
+}
+
+/* ==========================================================================
+   6. Accordions — Dawn collapsible_tab restyled with a +/- affordance
+   ========================================================================== */
+.pruv-pdp-info .product__accordion {
+  border: 0;
+  border-top: 1px solid rgba(25, 23, 18, 0.12);
+  margin: 0;
+  padding: 0;
+}
+
+.pruv-pdp-info .product__accordion:last-of-type {
+  border-bottom: 1px solid rgba(25, 23, 18, 0.12);
+}
+
+.pruv-pdp-info .product__accordion + .product__accordion {
+  margin-top: 0;
+}
+
+.pruv-pdp-info .product__accordion summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.6rem 3.4rem 1.6rem 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+
+.pruv-pdp-info .product__accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.pruv-pdp-info .product__accordion summary:hover {
+  color: #a85f2e;
+}
+
+.pruv-pdp-info .product__accordion summary:focus-visible {
+  outline: 2px solid #a85f2e;
+  outline-offset: -2px;
+}
+
+.pruv-pdp-info .product__accordion .summary__title {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.pruv-pdp-info .product__accordion .accordion__title {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: inherit;
+}
+
+/* Dawn's caret out, CSS plus/minus in */
+.pruv-pdp-info .product__accordion summary .icon-caret,
+.pruv-pdp-info .product__accordion summary > svg {
+  display: none;
+}
+
+.pruv-pdp-info .product__accordion summary::after,
+.pruv-pdp-info .product__accordion summary::before {
+  content: '';
+  position: absolute;
+  right: 0.4rem;
+  top: 50%;
+  width: 1.4rem;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.pruv-pdp-info .product__accordion summary::before {
+  transform: rotate(90deg);
+}
+
+.pruv-pdp-info .product__accordion details[open] > summary::before {
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content {
+  padding: 0 0 1.8rem;
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #6e6759;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content > * + * {
+  margin-top: 1rem;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content a {
+  color: #a85f2e;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content ul,
+.pruv-pdp-info .product__accordion .accordion__content ol {
+  padding-left: 1.8rem;
+  margin: 0.6rem 0 0;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Rich-text descriptions often wrap each bullet's text in its own <p>, which
+   drops the text onto the line below the marker. Keep the first one inline. */
+.pruv-pdp-info .product__accordion .accordion__content li > p {
+  margin: 0;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content li > p:first-child {
+  display: inline;
+}
+
+/* An empty paragraph between bullets is a common paste artefact */
+.pruv-pdp-info .product__accordion .accordion__content li > p:empty,
+.pruv-pdp-info .product__accordion .accordion__content > p:empty {
+  display: none;
+}
+
+/* ==========================================================================
+   7. Per-product FAQs
+   ========================================================================== */
+.pruv-pdp-faqs {
+  margin: 2.4rem 0 0;
+}
+
+.pruv-pdp-faqs__heading {
+  margin: 0 0 1.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a85f2e;
+}
+
+.pruv-pdp-faqs__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.pruv-pdp-faqs__item {
+  background-color: #ffffff;
+  border: 1px solid rgba(168, 95, 46, 0.16);
+  border-radius: 1.4rem;
+  overflow: hidden;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pruv-pdp-faqs__item:hover,
+.pruv-pdp-faqs__item[open] {
+  border-color: rgba(168, 95, 46, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(168, 95, 46, 0.16);
+}
+
+.pruv-pdp-faqs__summary {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 3.8rem 1.3rem 1.4rem;
+  cursor: pointer;
+  list-style: none;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #191712;
+  transition: color 0.2s ease;
+}
+
+.pruv-pdp-faqs__summary::-webkit-details-marker {
+  display: none;
+}
+
+.pruv-pdp-faqs__summary:hover {
+  color: #a85f2e;
+}
+
+.pruv-pdp-faqs__summary:focus-visible {
+  outline: 2px solid #a85f2e;
+  outline-offset: -2px;
+}
+
+.pruv-pdp-faqs__summary::after,
+.pruv-pdp-faqs__summary::before {
+  content: '';
+  position: absolute;
+  right: 1.4rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+}
+
+.pruv-pdp-faqs__summary::before {
+  transform: rotate(90deg);
+}
+
+.pruv-pdp-faqs__item[open] .pruv-pdp-faqs__summary::before {
+  transform: rotate(0deg);
+  opacity: 0;
+}
+
+.pruv-pdp-faqs__answer {
+  padding: 0 1.4rem 1.4rem;
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: #6e6759;
+}
+
+.pruv-pdp-faqs__answer > * + * {
+  margin-top: 0.8rem;
+}
+
+.pruv-pdp-faqs__answer a {
+  color: #a85f2e;
+}
+
+/* ==========================================================================
+   8. Mobile
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  .pruv-pdp-info .product-form__quantity {
+    margin-bottom: 1.2rem;
+  }
+
+  .pruv-pdp-offers__body {
+    align-items: center;
+  }
+
+  .pruv-pdp-info .product__accordion summary {
+    padding: 1.4rem 3rem 1.4rem 0;
+  }
+
+  .pruv-pdp-info .product__accordion .accordion__title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-form__input--pill input[type='radio'] + label,
+  .pruv-pdp-offers__card,
+  .pruv-pdp-info .product-form__submit,
+  .pruv-pdp-info .product__accordion summary::after,
+  .pruv-pdp-info .product__accordion summary::before,
+  .pruv-pdp-faqs__summary::after,
+  .pruv-pdp-faqs__summary::before {
+    transition: none;
+  }
+}

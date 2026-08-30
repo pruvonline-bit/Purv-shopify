@@ -131,7 +131,16 @@
       {{ scheme_classes | prepend: 'body' }} {
         color: rgba(var(--color-foreground), 0.75);
         background-color: rgb(var(--color-background));
+      }
+
+      /* Horizontal-overflow containment belongs on the page root only. Applying
+         overflow-x to every .color-scheme-* element made each one a scroll
+         container, which broke `position: sticky` inside them (product gallery)
+         and clipped absolutely-positioned children (mobile menu drawer).
+         html/body/main below still contain any horizontal overflow. */
+      body {
         overflow-x: hidden;
+        overflow-x: clip;
         max-width: 100vw;
         width: 100%;
         position: relative;

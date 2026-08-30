@@ -13,6 +13,9 @@
         "title": {
           "type": "title"
         },
+        "rating": {
+          "type": "rating"
+        },
         "price": {
           "type": "price"
         },
@@ -33,8 +36,95 @@
             "show_gift_card_recipient": true
           }
         },
-        "description": {
-          "type": "description"
+        "offers": {
+          "type": "pruv_offers",
+          "settings": {
+            "heading": "Extra savings",
+            "offer_1_icon": "tag",
+            "offer_1_title": "PAYDAY is live",
+            "offer_1_subtitle": "Get flat 25% off",
+            "offer_1_footer": "Use code: PAYDAY",
+            "offer_1_code": "PAYDAY",
+            "offer_2_icon": "gift",
+            "offer_2_title": "Buy 2 products",
+            "offer_2_subtitle": "Get a free gift",
+            "offer_2_footer": "No code required",
+            "offer_2_code": "",
+            "offer_3_icon": "truck",
+            "offer_3_title": "Free shipping",
+            "offer_3_subtitle": "On orders above ₹699",
+            "offer_3_footer": "No code required",
+            "offer_3_code": ""
+          }
+        },
+        "tab_description": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Description",
+            "icon": "none",
+            "open_by_default": true,
+            "use_product_description": true,
+            "content": ""
+          }
+        },
+        "tab_benefits": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Key benefits",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>"
+          }
+        },
+        "tab_ingredients": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Key ingredients",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p>Edit this block in the theme editor to list the actives for this range, or move it into a product metafield if each product needs its own.</p>"
+          }
+        },
+        "tab_suited": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Suited for",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p>All hair types. Especially suited to hard-water areas, humid climates, and scalps prone to buildup or flaking.</p>"
+          }
+        },
+        "tab_more_info": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "More information",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p>Sulphate free, paraben free, cruelty free and vegan. Manufactured in India. Store away from direct sunlight.</p>"
+          }
+        },
+        "tab_lab_reports": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Lab reports",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p>Dermatologically tested and safety assessed. Add links to your test certificates here.</p>"
+          }
+        },
+        "faqs": {
+          "type": "pruv_faqs",
+          "settings": {
+            "heading": "FAQs",
+            "metafield_namespace": "custom",
+            "metafield_key": "faqs",
+            "open_first": false
+          }
         },
         "share": {
           "type": "share",
@@ -46,23 +136,31 @@
       "block_order": [
         "vendor",
         "title",
+        "rating",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "description",
+        "offers",
+        "tab_description",
+        "tab_benefits",
+        "tab_ingredients",
+        "tab_suited",
+        "tab_more_info",
+        "tab_lab_reports",
+        "faqs",
         "share"
       ],
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
         "media_position": "left",
-        "gallery_layout": "stacked",
-        "media_size": "large",
+        "gallery_layout": "thumbnail",
+        "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
         "image_zoom": "lightbox",
-        "mobile_thumbnails": "hide",
+        "mobile_thumbnails": "show",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,

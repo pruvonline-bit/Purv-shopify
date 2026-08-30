@@ -81,6 +81,14 @@ collection-component {
 
 /* base */
 
+/* `overflow-x: hidden` turns an element into a scroll container, which kills
+   `position: sticky` for everything inside it. `clip` contains the same
+   horizontal overflow WITHOUT creating a scrollport, so sticky keeps working.
+   `hidden` stays first as the fallback for Safari < 16. */
+/* NOTE: `clip` must never be used on <html>. It forbids a scrolling mechanism
+   outright, which stops the page scrolling. The root is also not a sticky
+   blocker (its overflow propagates to the viewport), so `hidden` is correct
+   here and `clip` is only used on the descendants below. */
 html {
   box-sizing: border-box;
   font-size: calc(var(--font-body-scale) * 62.5%);
@@ -93,6 +101,7 @@ html {
 
 body {
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
   position: relative;
@@ -101,6 +110,7 @@ body {
 #MainContent,
 main {
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
   width: 100%;
   position: relative;

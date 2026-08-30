@@ -1,0 +1,62 @@
+{% doc %}
+  Renders per-product FAQs on the product page.
+
+  Reads a list-of-metaobject metafield on the product (default namespace/key
+  `custom.faqs`), where each referenced metaobject has a `question` field and an
+  `answer` field. Renders nothing when the product has no FAQs, so products can
+  opt in one at a time.
+
+  @param {object} block - The `pruv_faqs` block.
+  @param {object} product - The product to read FAQs from.
+
+  @example
+  {% render 'pruv-pdp-faqs', block: block, product: product %}
+{% enddoc %}
+
+{%- liquid
+  assign mf_namespace = block.settings.metafield_namespace | default: 'custom'
+  assign mf_key = block.settings.metafield_key | default: 'faqs'
+  assign faq_entries = product.metafields[mf_namespace][mf_key].value
+-%}
+
+{%- if faq_entries != blank and faq_entries.size > 0 -%}
+  <div class="pruv-pdp-faqs" {{ block.shopify_attributes }}>
+    {%- if block.settings.heading != blank -%}
+      <p class="pruv-pdp-faqs__heading">{{ block.settings.heading | escape }}</p>
+    {%- endif -%}
+    <ul class="pruv-pdp-faqs__list" role="list">
+      {%- for entry in faq_entries -%}
+        {%- liquid
+          assign q = entry.question
+          assign a = entry.answer
+        -%}
+        {%- if q != blank -%}
+          <li>
+            <details
+              class="pruv-pdp-faqs__item"
+              id="PruvPdpFaq-{{ block.id }}-{{ forloop.index }}"
+              {% if block.settings.open_first and forloop.first %}
+                open
+              {% endif %}
+            >
+              <summary class="pruv-pdp-faqs__summary">{{ q }}</summary>
+              <div class="pruv-pdp-faqs__answer rte">{{ a }}</div>
+            </details>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="pruv-pdp-faqs" {{ block.shopify_attributes }}>
+    <p class="pruv-pdp-faqs__heading">{{ block.settings.heading | default: 'FAQs' | escape }}</p>
+    <div
+      class="pruv-pdp-faqs__item"
+      style="padding: 1.4rem; border-style: dashed; font-size: 1.35rem; line-height: 1.6; color: #6e6759;"
+    >
+      No FAQs on this product yet. Add them in Admin under
+      <strong>Products &rarr; {{ product.title | escape }} &rarr; Metafields &rarr; {{ mf_namespace }}.{{ mf_key }}</strong>.
+      Only you can see this message.
+    </div>
+  </div>
+{%- endif -%}

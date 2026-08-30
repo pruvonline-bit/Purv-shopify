@@ -37,7 +37,8 @@
         "contact": {
           "type": "nav_link",
           "settings": {
-            "label": "Contact Us"
+            "label": "Contact Us",
+            "url": "shopify://pages/contact"
           }
         }
       },
@@ -59,7 +60,7 @@
         "help_heading": "Need help?",
         "show_policies": true,
         "contact_link_label": "Contact Us",
-        "contact_link_url": "",
+        "contact_link_url": "shopify://pages/contact",
         "payment_enable": false,
         "tagline": "",
         "legal_entity": "",
