@@ -99,6 +99,24 @@
     // Completing the test counts as engagement; keep it closed for the session.
     root.addEventListener('pruv:quiz:complete', markSeen);
 
+    // The floating button is an explicit request, so it ignores the
+    // once-per-session guard entirely and always opens the test.
+    var launcher = root.querySelector('[data-quiz-launcher]');
+    if (launcher) {
+      launcher.addEventListener('click', function () {
+        loadQuiz();
+        if (!dialog.open) {
+          dialog.showModal();
+          document.documentElement.style.overflow = 'hidden';
+          if (window.PruvQuizInit) window.PruvQuizInit(dialog);
+        }
+      });
+      // Reveal it once the page has settled rather than on first paint.
+      window.setTimeout(function () {
+        launcher.classList.add('is-in');
+      }, 1200);
+    }
+
     if (window.Shopify && window.Shopify.designMode) {
       // In the editor, open on section select instead of on a timer so it never
       // blocks the merchant while they are editing other sections.
@@ -111,6 +129,7 @@
       return;
     }
 
+    if (root.getAttribute('data-timer') !== 'true') return;
     if (seen()) return;
 
     timer = window.setTimeout(open, delay);

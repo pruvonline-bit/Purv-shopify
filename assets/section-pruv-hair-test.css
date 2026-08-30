@@ -805,3 +805,141 @@
     transition: none;
   }
 }
+
+/* ==========================================================================
+   Floating launcher
+   ========================================================================== */
+.pruv-quiz-launcher {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.2rem 2rem 1.2rem 1.5rem;
+  border: 0;
+  border-radius: 100px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #a85f2e 0%, #8e4f24 100%);
+  color: #fbf8f2;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 28px -6px rgba(168, 95, 46, 0.55), 0 2px 8px rgba(25, 23, 18, 0.18);
+  /* Hidden until the JS reveals it, so it never flashes during first paint. */
+  opacity: 0;
+  transform: translateY(24px) scale(0.9);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
+}
+
+.pruv-quiz-launcher.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.pruv-quiz-launcher:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(168, 95, 46, 0.65), 0 3px 10px rgba(25, 23, 18, 0.22);
+}
+
+.pruv-quiz-launcher:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.pruv-quiz-launcher:focus-visible {
+  outline: 2px solid #191712;
+  outline-offset: 3px;
+}
+
+/* Expanding ring that draws the eye without moving the button itself. */
+.pruv-quiz-launcher__pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  border: 2px solid rgba(168, 95, 46, 0.55);
+  pointer-events: none;
+  animation: pruvLauncherPulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pruvLauncherPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+.pruv-quiz-launcher__icon {
+  flex: none;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: pruvLauncherBob 3.2s ease-in-out infinite;
+}
+
+.pruv-quiz-launcher__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes pruvLauncherBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.pruv-quiz-launcher__label {
+  white-space: nowrap;
+}
+
+/* Hide the launcher while the dialog is open — it would sit on the backdrop. */
+.pruv-quiz-popup:has([data-quiz-dialog][open]) .pruv-quiz-launcher {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-quiz-launcher {
+    right: 1.4rem;
+    bottom: 1.4rem;
+    padding: 1rem 1.6rem 1rem 1.2rem;
+    font-size: 1.15rem;
+    gap: 0.7rem;
+  }
+
+  .pruv-quiz-launcher__icon {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-quiz-launcher,
+  .pruv-quiz-launcher__pulse,
+  .pruv-quiz-launcher__icon {
+    animation: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .pruv-quiz-launcher {
+    transform: none;
+  }
+}

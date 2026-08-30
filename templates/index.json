@@ -401,7 +401,9 @@
         "eyebrow": "60-second hair test",
         "heading": "Not sure where to <strong>start?</strong>",
         "text": "Four quick questions. We'll match you to the right formula and show you why.",
-        "fallback_label": "Take the hair test"
+        "fallback_label": "Take the hair test",
+        "show_launcher": true,
+        "launcher_label": "Hair Test"
       }
     }
   },
