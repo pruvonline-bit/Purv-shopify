@@ -811,8 +811,13 @@
    ========================================================================== */
 .pruv-quiz-launcher {
   position: fixed;
-  right: 2rem;
+  left: 0;
+  right: 0;
   bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: -moz-fit-content;
+  width: fit-content;
   z-index: 40;
   display: inline-flex;
   align-items: center;
@@ -880,6 +885,36 @@
   }
 }
 
+/* Periodic shine sweeping across the pill. */
+.pruv-quiz-launcher::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.5) 48%,
+    rgba(255, 255, 255, 0.75) 52%,
+    transparent 62%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0;
+  animation: pruvLauncherFlash 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pruvLauncherFlash {
+  0%,
+  62% {
+    background-position: 160% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
 .pruv-quiz-launcher__icon {
   flex: none;
   width: 2.2rem;
@@ -918,8 +953,7 @@
 
 @media screen and (max-width: 749px) {
   .pruv-quiz-launcher {
-    right: 1.4rem;
-    bottom: 1.4rem;
+    bottom: 1.6rem;
     padding: 1rem 1.6rem 1rem 1.2rem;
     font-size: 1.15rem;
     gap: 0.7rem;
@@ -933,6 +967,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .pruv-quiz-launcher,
+  .pruv-quiz-launcher::after,
   .pruv-quiz-launcher__pulse,
   .pruv-quiz-launcher__icon {
     animation: none;
