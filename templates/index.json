@@ -95,7 +95,7 @@
         "bottom_bar_mode": "press_marquee",
         "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
         "ticker_speed": 22,
-        "ticker_bg_color": "#7ba4f4",
+        "ticker_bg_color": "#B87333",
         "ticker_text_color": "#ffffff",
         "press_heading": ""
       }
@@ -109,7 +109,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_05_00_15_PM.png",
             "title": "HAIR GROWTH",
             "link": "",
-            "custom_bg_color": "#b8d4f1",
+            "custom_bg_color": "#EDE7DD",
             "custom_text_color": "#ffffff"
           }
         },
@@ -119,7 +119,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_58_32_PM.png",
             "title": "ANTI-GREY",
             "link": "",
-            "custom_bg_color": "#b8d4f1",
+            "custom_bg_color": "#EDE7DD",
             "custom_text_color": "#ffffff"
           }
         },
@@ -129,7 +129,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_55_49_PM.png",
             "title": "DANDRUFF",
             "link": "",
-            "custom_bg_color": "#b8d4f1",
+            "custom_bg_color": "#EDE7DD",
             "custom_text_color": "#ffffff"
           }
         },
@@ -139,7 +139,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_44_17_PM.png",
             "title": "REGROWTH",
             "link": "",
-            "custom_bg_color": "#b8d4f1",
+            "custom_bg_color": "#EDE7DD",
             "custom_text_color": "#ffffff"
           }
         }

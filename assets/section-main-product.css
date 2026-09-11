@@ -1502,7 +1502,7 @@ a.product__text {
   line-height: 1.08;
   font-weight: 400;
   letter-spacing: -0.01em;
-  color: #191712;
+  color: #1B1D1F;
   margin-bottom: 0.8rem;
 }
 
@@ -1512,7 +1512,7 @@ a.product__text {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin-bottom: 0.6rem;
 }
 
@@ -1528,7 +1528,7 @@ a.product__text {
   font-family: 'Geist Mono', monospace;
   font-size: 2.6rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   line-height: 1.1;
 }
 
@@ -1536,9 +1536,9 @@ a.product__text {
   font-family: 'Geist Mono', monospace;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.12);
-  border: 0.1rem solid rgba(168, 95, 46, 0.3);
+  color: #B87333;
+  background-color: rgba(184, 115, 51, 0.12);
+  border: 0.1rem solid rgba(184, 115, 51, 0.3);
   border-radius: 100px;
   padding: 0.3rem 0.9rem;
   text-transform: uppercase;
@@ -1553,7 +1553,7 @@ a.product__text {
   padding: 1.2rem 1.6rem;
   border-radius: 1.2rem;
   background-color: rgba(242, 228, 212, 0.5);
-  border: 1.5px dashed #a85f2e;
+  border: 1.5px dashed #B87333;
   margin: 1.4rem 0 2rem;
 }
 
@@ -1563,7 +1563,7 @@ a.product__text {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background-color: #a85f2e;
+  background-color: #B87333;
   color: #ffffff;
   padding: 0.3rem 0.7rem;
   border-radius: 100px;
@@ -1576,7 +1576,7 @@ a.product__text {
 }
 
 .pruv-pdp-promo__text strong {
-  color: #191712;
+  color: #1B1D1F;
   font-weight: 700;
 }
 
@@ -1584,7 +1584,7 @@ a.product__text {
 .product__media-wrapper .media {
   border-radius: 2rem;
   overflow: hidden;
-  border: 1px solid rgba(25, 23, 18, 0.08);
+  border: 1px solid rgba(138, 129, 117, 0.08);
 }
 
 /* Buy buttons capsule redesign */
@@ -1598,18 +1598,18 @@ a.product__text {
   text-transform: uppercase !important;
   padding: 1.4rem 2.4rem !important;
   min-height: 4.8rem !important;
-  background-color: #191712 !important;
-  color: #f5f0e6 !important;
+  background-color: #1B1D1F !important;
+  color: #F5F2EC !important;
   border: none !important;
-  box-shadow: 0 4px 16px rgba(25, 23, 18, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(27, 29, 31, 0.15) !important;
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .product-form__submit:hover,
 .shopify-payment-button__button--unbranded:hover {
-  background-color: #a85f2e !important;
+  background-color: #B87333 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.3) !important;
+  box-shadow: 0 6px 20px rgba(184, 115, 51, 0.3) !important;
 }
 
 /* Trust Badges Strip */
@@ -1621,7 +1621,7 @@ a.product__text {
   gap: 1.2rem;
   margin-top: 2rem;
   padding-top: 1.8rem;
-  border-top: 1px solid rgba(25, 23, 18, 0.08);
+  border-top: 1px solid rgba(138, 129, 117, 0.08);
 }
 
 .pruv-pdp-trust__item {
@@ -1633,13 +1633,13 @@ a.product__text {
   font-weight: 600;
   letter-spacing: 0.02em;
   text-transform: uppercase;
-  color: #524d43;
+  color: #8A8175;
 }
 
 .pruv-pdp-trust__icon {
   width: 1.6rem;
   height: 1.6rem;
-  color: #a85f2e;
+  color: #B87333;
   flex: none;
 }
 
@@ -1648,7 +1648,7 @@ a.product__text {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 2.2rem;
   font-weight: 600;
-  color: #191712;
+  color: #1B1D1F;
   line-height: 1.2;
   margin: 0 0 0.8rem;
 }
@@ -1667,7 +1667,7 @@ a.product__text {
 }
 
 .pruv-pdp-rating-divider {
-  color: rgba(25, 23, 18, 0.25);
+  color: rgba(138, 129, 117, 0.25);
   font-size: 1.4rem;
 }
 
@@ -1676,7 +1676,7 @@ a.product__text {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: rgba(25, 23, 18, 0.6);
+  color: rgba(138, 129, 117, 0.6);
   text-transform: uppercase;
 }
 
@@ -1698,11 +1698,11 @@ a.product__text {
   font-family: 'Geist Mono', monospace;
   font-size: 1.4rem;
   font-weight: 600;
-  color: rgba(25, 23, 18, 0.65);
+  color: rgba(138, 129, 117, 0.65);
 }
 
 .pruv-pdp-mrp s {
-  color: rgba(25, 23, 18, 0.5);
+  color: rgba(138, 129, 117, 0.5);
   text-decoration: line-through;
 }
 
@@ -1712,9 +1712,9 @@ a.product__text {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #a85f2e;
-  border: 1px solid #a85f2e;
-  background-color: rgba(168, 95, 46, 0.08);
+  color: #B87333;
+  border: 1px solid #B87333;
+  background-color: rgba(184, 115, 51, 0.08);
   padding: 0.3rem 1.4rem;
   border-radius: 100px;
 }
@@ -1723,7 +1723,7 @@ a.product__text {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 3.6rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   line-height: 1;
   letter-spacing: -0.02em;
   margin-top: 0.2rem;
@@ -1732,7 +1732,7 @@ a.product__text {
 .pruv-pdp-tax-label {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.2rem;
-  color: rgba(25, 23, 18, 0.5);
+  color: rgba(138, 129, 117, 0.5);
   margin-top: 0.2rem;
 }
 
@@ -1746,9 +1746,9 @@ a.product__text {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  background-color: rgba(168, 95, 46, 0.15);
-  border: 1px solid rgba(168, 95, 46, 0.3);
-  color: #a85f2e;
+  background-color: rgba(184, 115, 51, 0.15);
+  border: 1px solid rgba(184, 115, 51, 0.3);
+  color: #B87333;
   padding: 0.4rem 1.2rem;
   border-radius: 100px;
 }
@@ -1774,7 +1774,7 @@ a.product__text {
     background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid rgba(25, 23, 18, 0.08);
+    border-top: 1px solid rgba(138, 129, 117, 0.08);
     padding: 1.2rem 1.6rem;
     display: flex;
     align-items: center;
@@ -1797,8 +1797,8 @@ a.product__text {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(168, 95, 46, 0.12);
-  border: 1px solid rgba(168, 95, 46, 0.3);
+  background-color: rgba(184, 115, 51, 0.12);
+  border: 1px solid rgba(184, 115, 51, 0.3);
   border-radius: 100px;
   padding: 0.4rem 0.8rem;
   min-width: 11rem;
@@ -1809,7 +1809,7 @@ a.product__text {
   width: 3.2rem;
   height: 3.2rem;
   border-radius: 50%;
-  background-color: #a85f2e;
+  background-color: #B87333;
   color: #ffffff;
   border: none;
   display: flex;
@@ -1821,14 +1821,14 @@ a.product__text {
 }
 
 .pruv-pdp-sticky-bar__qty-btn:hover {
-  background-color: #191712;
+  background-color: #1B1D1F;
 }
 
 .pruv-pdp-sticky-bar__qty-val {
   font-family: 'Geist Mono', monospace;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   padding: 0 0.6rem;
 }
 
@@ -1836,18 +1836,18 @@ a.product__text {
   flex: 1;
   height: 4.8rem;
   border-radius: 100px !important;
-  background-color: #191712 !important;
-  color: #f5f0e6 !important;
+  background-color: #1B1D1F !important;
+  color: #F5F2EC !important;
   font-family: 'Geist Mono', monospace !important;
   font-size: 1.3rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   border: none !important;
-  box-shadow: 0 4px 16px rgba(25, 23, 18, 0.2) !important;
+  box-shadow: 0 4px 16px rgba(27, 29, 31, 0.2) !important;
   transition: background-color 0.2s ease, transform 0.2s ease !important;
 }
 
 .pruv-pdp-sticky-bar__add:hover {
-  background-color: #a85f2e !important;
+  background-color: #B87333 !important;
 }

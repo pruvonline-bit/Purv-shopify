@@ -16,7 +16,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 0.8rem;
 }
 
@@ -26,7 +26,7 @@
   font-size: clamp(2.8rem, 4vw, 4rem);
   line-height: 1.1;
   font-weight: 400;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0;
   text-wrap: balance;
 }
@@ -52,7 +52,7 @@
 
 .pruv-pdp-benefits__card {
   background-color: rgba(242, 228, 212, 0.4);
-  border: 1px solid rgba(168, 95, 46, 0.18);
+  border: 1px solid rgba(184, 115, 51, 0.18);
   border-radius: 1.8rem;
   padding: 2.4rem 2rem;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -60,15 +60,15 @@
 
 .pruv-pdp-benefits__card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px -4px rgba(168, 95, 46, 0.12);
-  border-color: #a85f2e;
+  box-shadow: 0 8px 24px -4px rgba(184, 115, 51, 0.12);
+  border-color: #B87333;
 }
 
 .pruv-pdp-benefits__stat {
   font-family: 'Geist Mono', monospace;
   font-size: 2.4rem;
   font-weight: 700;
-  color: #a85f2e;
+  color: #B87333;
   letter-spacing: -0.02em;
   margin-bottom: 1rem;
 }
@@ -77,7 +77,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 0.8rem;
   line-height: 1.25;
 }
@@ -86,7 +86,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.3rem;
   line-height: 1.5;
-  color: #524d43;
+  color: #8A8175;
   margin: 0;
 }
 

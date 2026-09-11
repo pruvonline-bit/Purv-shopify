@@ -1332,6 +1332,20 @@ button.shopify-payment-button__button--unbranded {
   --border-opacity: var(--buttons-border-opacity);
 }
 
+/* Prüv — primary buttons (Deep Graphite by default) hover toward Oxidized
+   Copper, matching the hover convention already used elsewhere in the
+   theme (product cards, hair-test launcher). Secondary/tertiary buttons
+   are unaffected since their background is the transparent/page color. */
+.button:not([disabled]):not(.button--secondary):not(.button--tertiary):hover {
+  background-color: rgba(var(--pruv-copper), var(--alpha-button-background));
+}
+
+/* scheme-5 buttons are already Oxidized Copper — hover to the darker
+   copper shade instead of repeating the same color. */
+.color-scheme-5 .button:not([disabled]):not(.button--secondary):not(.button--tertiary):hover {
+  background-color: rgba(var(--pruv-copper-dark), var(--alpha-button-background));
+}
+
 .button:focus-visible,
 .button:focus,
 .button.focused,

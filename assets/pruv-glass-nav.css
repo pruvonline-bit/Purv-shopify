@@ -13,7 +13,7 @@
 
 .shopify-section-header-sticky .header-wrapper {
   background-color: rgba(var(--color-background), 0.78);
-  box-shadow: 0 8px 24px rgba(25, 23, 18, 0.06);
+  box-shadow: 0 8px 24px rgba(27, 29, 31, 0.06);
 }
 
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -54,7 +54,7 @@
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
-    color: #191712 !important;
+    color: #1B1D1F !important;
     padding: 0.8rem 0.4rem !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
@@ -69,7 +69,7 @@
   .header__menu-item:hover,
   .header__menu-item:hover span,
   .header__active-menu-item {
-    color: #a85f2e !important;
+    color: #B87333 !important;
     text-decoration: none !important;
   }
 
@@ -91,7 +91,7 @@
     justify-content: center !important;
     width: 4rem !important;
     height: 4rem !important;
-    color: #191712 !important;
+    color: #1B1D1F !important;
     transition: color 0.2s ease !important;
   }
 
@@ -105,7 +105,7 @@
     width: 4rem !important;
     height: 4rem !important;
     position: relative !important;
-    color: #191712 !important;
+    color: #1B1D1F !important;
     transition: color 0.2s ease !important;
   }
 
@@ -124,14 +124,14 @@
   .header__icons .header__search .header__icon {
     width: 4rem !important;
     height: 4rem !important;
-    color: #191712 !important;
+    color: #1B1D1F !important;
     transition: color 0.2s ease !important;
   }
 
   .header__icon:hover,
   .header__icon:hover svg,
   .header__icon:hover .icon {
-    color: #a85f2e !important;
+    color: #B87333 !important;
   }
 
   /* Desktop Icon Sizes - Balanced & Proportional */
@@ -154,7 +154,7 @@
     width: 1.8rem !important;
     height: 1.8rem !important;
     font-size: 1rem !important;
-    background-color: #a85f2e !important;
+    background-color: #B87333 !important;
     color: #ffffff !important;
   }
 }
@@ -308,7 +308,7 @@
     width: 1.8rem !important;
     height: 1.8rem !important;
     font-size: 1rem !important;
-    background-color: #a85f2e !important;
+    background-color: #B87333 !important;
     color: #ffffff !important;
   }
 }

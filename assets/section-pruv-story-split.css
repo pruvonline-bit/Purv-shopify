@@ -37,7 +37,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 1.4rem;
 }
 
@@ -46,7 +46,7 @@
   line-height: 1.15;
   font-weight: 400;
   letter-spacing: -0.01em;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 1.6rem;
   text-wrap: balance;
 }
@@ -58,7 +58,7 @@
 .pruv-story-split__text {
   font-size: 1.5rem;
   line-height: 1.65;
-  color: #6e6759;
+  color: #8A8175;
   margin: 0 0 2rem;
 }
 
@@ -69,7 +69,7 @@
 .pruv-story-split__button {
   display: inline-flex;
   align-items: center;
-  border: 0.1rem solid rgba(25, 23, 18, 0.35);
+  border: 0.1rem solid rgba(138, 129, 117, 0.35);
   border-radius: 100px;
   padding: 1rem 3.2rem;
   font-family: 'Geist Mono', monospace;
@@ -77,14 +77,14 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #191712;
+  color: #1B1D1F;
   text-decoration: none;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .pruv-story-split__button:hover {
-  background-color: #191712;
-  color: #f5f0e6;
+  background-color: #1B1D1F;
+  color: #F5F2EC;
 }
 
 /* Text-only variant: centered narrow column, no image */

@@ -33,7 +33,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 1rem;
 }
 
@@ -45,7 +45,7 @@
   letter-spacing: -0.01em;
   margin: 0 0 1.2rem;
   text-wrap: balance;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 .pruv-bestsellers__heading strong {
@@ -56,7 +56,7 @@
 .pruv-bestsellers__description {
   font-size: 1.45rem;
   line-height: 1.55;
-  color: rgba(25, 23, 18, 0.7);
+  color: rgba(138, 129, 117, 0.7);
   max-width: 34ch;
   margin: 0;
 }
@@ -70,7 +70,7 @@
   padding: 1.8rem 1.4rem 2rem;
   background-color: #f5ebe0; /* Solid warm sand background */
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(168, 95, 46, 0.08);
+  box-shadow: 0 8px 30px rgba(184, 115, 51, 0.08);
 }
 
 @media screen and (min-width: 750px) {
@@ -147,11 +147,11 @@
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.45);
   background-image: 
-    linear-gradient(rgba(168, 95, 46, 0.22) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 95, 46, 0.22) 1px, transparent 1px);
+    linear-gradient(rgba(184, 115, 51, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 115, 51, 0.22) 1px, transparent 1px);
   background-size: 24px 24px;
-  border: 1px solid rgba(168, 95, 46, 0.2);
-  box-shadow: inset 0 2px 8px rgba(168, 95, 46, 0.04);
+  border: 1px solid rgba(184, 115, 51, 0.2);
+  box-shadow: inset 0 2px 8px rgba(184, 115, 51, 0.04);
 }
 
 .pruv-bestsellers__slide .pruv-card-media-wrapper img,
@@ -182,7 +182,7 @@
   font-size: 1.45rem;
   font-weight: 700;
   line-height: 1.2;
-  color: #191712;
+  color: #1B1D1F;
   min-height: 3.2rem;
   margin-bottom: 0.4rem;
 }
@@ -229,7 +229,7 @@
 .pruv-bestsellers__slide .pruv-card-final-price {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #191712;
+  color: #1B1D1F;
   margin-bottom: 0.8rem;
 }
 
@@ -241,8 +241,8 @@
 
 .pruv-bestsellers__slide .pruv-card-free-shipping {
   background-color: rgba(251, 248, 242, 0.7);
-  border: 1px solid rgba(168, 95, 46, 0.15);
-  color: #191712;
+  border: 1px solid rgba(184, 115, 51, 0.15);
+  color: #1B1D1F;
   padding: 0.45rem 0.8rem;
   font-size: 0.95rem;
   margin-top: 0.6rem;
@@ -263,7 +263,7 @@
   width: 0.7rem;
   height: 0.7rem;
   border-radius: 9999px;
-  background-color: rgba(25, 23, 18, 0.25);
+  background-color: rgba(27, 29, 31, 0.25);
   border: none;
   padding: 0;
   cursor: pointer;
@@ -271,11 +271,11 @@
 }
 
 .pruv-bestsellers__dot:hover {
-  background-color: rgba(168, 95, 46, 0.6);
+  background-color: rgba(184, 115, 51, 0.6);
 }
 
 .pruv-bestsellers__dot--active {
   width: 2.2rem;
-  background-color: #191712;
+  background-color: #1B1D1F;
   border-radius: 100px;
 }

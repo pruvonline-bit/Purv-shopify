@@ -26,7 +26,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin-right: 0.4rem;
 }
 
@@ -39,28 +39,28 @@
   white-space: nowrap;
   padding: 0.8rem 1.8rem;
   border-radius: 100px;
-  border: 1px solid rgba(25, 23, 18, 0.15);
+  border: 1px solid rgba(138, 129, 117, 0.15);
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.3rem;
   font-weight: 500;
   text-decoration: none;
-  color: #191712;
+  color: #1B1D1F;
   background-color: rgba(255, 255, 255, 0.6);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pruv-pills__pill:hover {
-  border-color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.08);
-  color: #a85f2e;
+  border-color: #B87333;
+  background-color: rgba(184, 115, 51, 0.08);
+  color: #B87333;
   transform: translateY(-1px);
 }
 
 .pruv-pills__pill--active {
-  background-color: #191712;
-  color: #f5f0e6;
-  border-color: #191712;
-  box-shadow: 0 4px 12px rgba(25, 23, 18, 0.15);
+  background-color: #1B1D1F;
+  color: #F5F2EC;
+  border-color: #1B1D1F;
+  box-shadow: 0 4px 12px rgba(27, 29, 31, 0.15);
 }
 
 /* Toolbar: product count + filter/sort trigger */
@@ -72,14 +72,14 @@
 
 .mobile-facets__open-wrapper {
   border-radius: 100px;
-  border: 1px solid rgba(25, 23, 18, 0.2);
+  border: 1px solid rgba(138, 129, 117, 0.2);
   padding: 0.8rem 1.8rem;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .mobile-facets__open-wrapper:hover {
-  border-color: #191712;
-  background-color: rgba(25, 23, 18, 0.04);
+  border-color: #1B1D1F;
+  background-color: rgba(27, 29, 31, 0.04);
 }
 
 .facets-container-drawer .mobile-facets__open-wrapper {
@@ -88,7 +88,7 @@
 
 /* Filter drawer contents */
 .mobile-facets__inner {
-  --pruv-accent: #a85f2e;
+  --pruv-accent: #B87333;
 }
 
 .facets__summary {
@@ -100,7 +100,7 @@
 }
 
 price-range input[type='range'] {
-  accent-color: var(--pruv-accent, #a85f2e);
+  accent-color: var(--pruv-accent, #B87333);
 }
 
 .mobile-facets__footer .button--primary {
@@ -118,8 +118,8 @@ price-range input[type='range'] {
 
 .pruv-card-tagline {
   display: inline-block;
-  background-color: rgba(25, 23, 18, 0.05);
-  color: #524d43;
+  background-color: rgba(27, 29, 31, 0.05);
+  color: #8A8175;
   border-radius: 0.6rem;
   padding: 0.3rem 0.8rem;
   font-family: 'Geist', system-ui, sans-serif;
@@ -135,9 +135,9 @@ price-range input[type='range'] {
   margin-left: 0.6rem;
   padding: 0.2rem 0.7rem;
   border-radius: 100px;
-  background-color: rgba(168, 95, 46, 0.1);
-  border: 0.1rem solid rgba(168, 95, 46, 0.3);
-  color: #a85f2e;
+  background-color: rgba(184, 115, 51, 0.1);
+  border: 0.1rem solid rgba(184, 115, 51, 0.3);
+  color: #B87333;
   font-family: 'Geist Mono', monospace;
   font-size: 1rem;
   font-weight: 700;
@@ -155,7 +155,7 @@ price-range input[type='range'] {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(25, 23, 18, 0.55);
+  color: rgba(138, 129, 117, 0.55);
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 0.4rem;
   padding: 0.5rem 0;
@@ -172,16 +172,16 @@ price-range input[type='range'] {
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   padding: 1.1rem 2rem !important;
-  background-color: #191712 !important;
-  color: #f5f0e6 !important;
+  background-color: #1B1D1F !important;
+  color: #F5F2EC !important;
   border: none !important;
-  box-shadow: 0 4px 12px rgba(25, 23, 18, 0.12) !important;
+  box-shadow: 0 4px 12px rgba(27, 29, 31, 0.12) !important;
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
 }
 
 .quick-add__submit:hover,
 .quick-add .button:hover {
-  background-color: #a85f2e !important;
+  background-color: #B87333 !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 18px rgba(168, 95, 46, 0.28) !important;
+  box-shadow: 0 6px 18px rgba(184, 115, 51, 0.28) !important;
 }

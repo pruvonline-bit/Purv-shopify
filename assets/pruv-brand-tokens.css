@@ -1,0 +1,11 @@
+/* Prüv — brand color tokens (Deep Graphite / Bone White / Oxidized Copper / Warm Grey).
+   Kept separate from base.css's own custom properties so it survives
+   "Update from Shopify" syncs to stock Dawn files untouched. RGB triplets,
+   matching Dawn's rgb(var(--x)) / rgba(var(--x), alpha) convention. */
+:root {
+  --pruv-graphite: 27, 29, 31;       /* #1B1D1F Deep Graphite */
+  --pruv-bone: 245, 242, 236;        /* #F5F2EC Bone White */
+  --pruv-copper: 184, 115, 51;       /* #B87333 Oxidized Copper */
+  --pruv-copper-dark: 156, 98, 43;   /* #9C622B — ~15% darker, hover/active */
+  --pruv-warm-grey: 138, 129, 117;   /* #8A8175 Warm Grey */
+}

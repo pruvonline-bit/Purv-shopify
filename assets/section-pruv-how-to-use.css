@@ -17,7 +17,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 0.8rem;
 }
 
@@ -27,7 +27,7 @@
   font-size: clamp(3rem, 4.5vw, 4.2rem);
   line-height: 1.05;
   font-weight: 400;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 1.2rem;
   text-wrap: balance;
 }
@@ -35,7 +35,7 @@
 .pruv-pdp-how-to-use__subtitle {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.5rem;
-  color: #524d43;
+  color: #8A8175;
   margin: 0;
 }
 
@@ -54,7 +54,7 @@
 
 .pruv-pdp-how-to-use__card {
   background-color: #ffffff;
-  border: 1px solid rgba(168, 95, 46, 0.2);
+  border: 1px solid rgba(184, 115, 51, 0.2);
   border-radius: 2rem;
   padding: 3.2rem 2.4rem;
   position: relative;
@@ -63,7 +63,7 @@
 
 .pruv-pdp-how-to-use__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px -4px rgba(168, 95, 46, 0.14);
+  box-shadow: 0 12px 28px -4px rgba(184, 115, 51, 0.14);
 }
 
 .pruv-pdp-how-to-use__step-num {
@@ -72,8 +72,8 @@
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.12);
+  color: #B87333;
+  background-color: rgba(184, 115, 51, 0.12);
   padding: 0.4rem 1.2rem;
   border-radius: 100px;
   margin-bottom: 1.6rem;
@@ -83,7 +83,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 1rem;
 }
 
@@ -91,7 +91,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.4rem;
   line-height: 1.55;
-  color: #524d43;
+  color: #8A8175;
   margin: 0;
 }
 

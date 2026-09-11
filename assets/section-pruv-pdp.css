@@ -87,7 +87,7 @@
 
 .product--thumbnail .thumbnail {
   border-radius: 1.2rem;
-  border: 1px solid rgba(168, 95, 46, 0.16);
+  border: 1px solid rgba(184, 115, 51, 0.16);
   /* The product PNGs are background-removed, so a pure white tile makes a
      white bottle disappear. A faint warm tile gives the silhouette an edge. */
   background-color: #faf6f0;
@@ -103,12 +103,12 @@
 }
 
 .product--thumbnail .thumbnail[aria-current='true'] {
-  border-color: #a85f2e;
-  box-shadow: 0 0 0 1px #a85f2e;
+  border-color: #B87333;
+  box-shadow: 0 0 0 1px #B87333;
 }
 
 .product--thumbnail .thumbnail:hover {
-  border-color: rgba(168, 95, 46, 0.5);
+  border-color: rgba(184, 115, 51, 0.5);
 }
 
 .product--thumbnail .product__media {
@@ -131,7 +131,7 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 /* ==========================================================================
@@ -154,7 +154,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .product-form__input--pill input[type='radio'] + label {
@@ -168,31 +168,31 @@
   margin: 0 0.8rem 0.8rem 0;
   padding: 1.2rem 1.6rem;
   border-radius: 1.4rem;
-  border: 1.5px solid rgba(25, 23, 18, 0.15);
+  border: 1.5px solid rgba(138, 129, 117, 0.15);
   background-color: rgba(255, 255, 255, 0.6);
   font-family: 'Geist Mono', monospace;
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #191712;
+  color: #1B1D1F;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .product-form__input--pill input[type='radio'] + label:hover {
-  border-color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.06);
+  border-color: #B87333;
+  background-color: rgba(184, 115, 51, 0.06);
 }
 
 .product-form__input--pill input[type='radio']:checked + label {
-  border-color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.1);
-  color: #8e4f24;
-  box-shadow: 0 4px 14px -4px rgba(168, 95, 46, 0.35);
+  border-color: #B87333;
+  background-color: rgba(184, 115, 51, 0.1);
+  color: #9C622B;
+  box-shadow: 0 4px 14px -4px rgba(184, 115, 51, 0.35);
 }
 
 .product-form__input--pill input[type='radio']:focus-visible + label {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: 2px;
 }
 
@@ -239,7 +239,7 @@
 
 .pruv-pdp-info .quantity {
   border-radius: 100px;
-  border: 1.5px solid rgba(25, 23, 18, 0.15);
+  border: 1.5px solid rgba(138, 129, 117, 0.15);
   background-color: rgba(255, 255, 255, 0.6);
   overflow: hidden;
   min-height: 5rem;
@@ -253,18 +253,18 @@
   font-family: 'Geist Mono', monospace;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 .pruv-pdp-info .quantity__button {
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-info .product-form__submit {
   min-height: 5rem;
   border-radius: 100px;
-  background-color: #191712;
-  color: #f5f0e6;
+  background-color: #1B1D1F;
+  color: #F5F2EC;
   font-family: 'Geist Mono', monospace;
   font-size: 1.3rem;
   font-weight: 700;
@@ -275,7 +275,7 @@
 }
 
 .pruv-pdp-info .product-form__submit:not([disabled]):hover {
-  background-color: #a85f2e;
+  background-color: #B87333;
   transform: translateY(-1px);
 }
 
@@ -289,8 +289,8 @@
   min-height: 5rem;
   border-radius: 100px;
   background-color: transparent !important;
-  border: 1.5px solid rgba(25, 23, 18, 0.35) !important;
-  color: #191712 !important;
+  border: 1.5px solid rgba(138, 129, 117, 0.35) !important;
+  color: #1B1D1F !important;
   font-family: 'Geist Mono', monospace;
   font-size: 1.3rem;
   font-weight: 700;
@@ -299,8 +299,8 @@
 }
 
 .pruv-pdp-info .shopify-payment-button__button--unbranded:hover:not([disabled]) {
-  background-color: #191712 !important;
-  color: #f5f0e6 !important;
+  background-color: #1B1D1F !important;
+  color: #F5F2EC !important;
 }
 
 /* ==========================================================================
@@ -317,7 +317,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-offers__grid {
@@ -336,15 +336,15 @@
   display: flex;
   flex-direction: column;
   border-radius: 1.4rem;
-  border: 1px solid rgba(168, 95, 46, 0.16);
-  background-color: rgba(168, 95, 46, 0.05);
+  border: 1px solid rgba(184, 115, 51, 0.16);
+  background-color: rgba(184, 115, 51, 0.05);
   overflow: hidden;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .pruv-pdp-offers__card:hover {
-  border-color: rgba(168, 95, 46, 0.4);
-  box-shadow: 0 8px 24px -6px rgba(168, 95, 46, 0.18);
+  border-color: rgba(184, 115, 51, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(184, 115, 51, 0.18);
 }
 
 /* The info column is ~450px, so three cards get ~140px each. Icon above the
@@ -373,7 +373,7 @@
   flex: none;
   width: 2.1rem;
   height: 2.1rem;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-offers__icon svg {
@@ -387,7 +387,7 @@
   font-size: 1.3rem;
   font-weight: 700;
   line-height: 1.25;
-  color: #191712;
+  color: #1B1D1F;
   text-wrap: balance;
 }
 
@@ -395,7 +395,7 @@
   margin: 0.2rem 0 0;
   font-size: 1.15rem;
   line-height: 1.35;
-  color: #6e6759;
+  color: #8A8175;
   text-wrap: balance;
 }
 
@@ -410,13 +410,13 @@
   justify-content: center;
   gap: 0.6rem;
   padding: 0.7rem 0.8rem;
-  border-top: 1px solid rgba(168, 95, 46, 0.16);
-  background-color: rgba(168, 95, 46, 0.08);
+  border-top: 1px solid rgba(184, 115, 51, 0.16);
+  background-color: rgba(184, 115, 51, 0.08);
   font-family: 'Geist Mono', monospace;
   font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #8e4f24;
+  color: #9C622B;
   text-align: center;
 }
 
@@ -438,12 +438,12 @@
 }
 
 .pruv-pdp-offers__copy:hover {
-  background-color: rgba(168, 95, 46, 0.16);
-  color: #191712;
+  background-color: rgba(184, 115, 51, 0.16);
+  color: #1B1D1F;
 }
 
 .pruv-pdp-offers__copy:focus-visible {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: 1px;
 }
 
@@ -454,7 +454,7 @@
 }
 
 .pruv-pdp-offers__copy.is-copied {
-  color: #191712;
+  color: #1B1D1F;
 }
 
 /* ==========================================================================
@@ -462,13 +462,13 @@
    ========================================================================== */
 .pruv-pdp-info .product__accordion {
   border: 0;
-  border-top: 1px solid rgba(25, 23, 18, 0.12);
+  border-top: 1px solid rgba(138, 129, 117, 0.12);
   margin: 0;
   padding: 0;
 }
 
 .pruv-pdp-info .product__accordion:last-of-type {
-  border-bottom: 1px solid rgba(25, 23, 18, 0.12);
+  border-bottom: 1px solid rgba(138, 129, 117, 0.12);
 }
 
 .pruv-pdp-info .product__accordion + .product__accordion {
@@ -492,11 +492,11 @@
 }
 
 .pruv-pdp-info .product__accordion summary:hover {
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-info .product__accordion summary:focus-visible {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: -2px;
 }
 
@@ -549,7 +549,7 @@
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 .pruv-pdp-info .product__accordion .accordion__content > * + * {
@@ -557,7 +557,7 @@
 }
 
 .pruv-pdp-info .product__accordion .accordion__content a {
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-info .product__accordion .accordion__content ul,
@@ -600,7 +600,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-faqs__list {
@@ -614,7 +614,7 @@
 
 .pruv-pdp-faqs__item {
   background-color: #ffffff;
-  border: 1px solid rgba(168, 95, 46, 0.16);
+  border: 1px solid rgba(184, 115, 51, 0.16);
   border-radius: 1.4rem;
   overflow: hidden;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
@@ -622,8 +622,8 @@
 
 .pruv-pdp-faqs__item:hover,
 .pruv-pdp-faqs__item[open] {
-  border-color: rgba(168, 95, 46, 0.4);
-  box-shadow: 0 8px 24px -6px rgba(168, 95, 46, 0.16);
+  border-color: rgba(184, 115, 51, 0.4);
+  box-shadow: 0 8px 24px -6px rgba(184, 115, 51, 0.16);
 }
 
 .pruv-pdp-faqs__summary {
@@ -637,7 +637,7 @@
   font-size: 1.45rem;
   font-weight: 600;
   line-height: 1.4;
-  color: #191712;
+  color: #1B1D1F;
   transition: color 0.2s ease;
 }
 
@@ -646,11 +646,11 @@
 }
 
 .pruv-pdp-faqs__summary:hover {
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-pdp-faqs__summary:focus-visible {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: -2px;
 }
 
@@ -681,7 +681,7 @@
   padding: 0 1.4rem 1.4rem;
   font-size: 1.35rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 .pruv-pdp-faqs__answer > * + * {
@@ -689,7 +689,7 @@
 }
 
 .pruv-pdp-faqs__answer a {
-  color: #a85f2e;
+  color: #B87333;
 }
 
 /* ==========================================================================

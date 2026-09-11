@@ -16,7 +16,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 0.8rem;
 }
 
@@ -26,7 +26,7 @@
   font-size: clamp(3rem, 4.5vw, 4.2rem);
   line-height: 1.05;
   font-weight: 400;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 1.2rem;
   text-wrap: balance;
 }
@@ -34,7 +34,7 @@
 .pruv-pdp-ingredients__subtitle {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.5rem;
-  color: #524d43;
+  color: #8A8175;
   margin: 0;
 }
 
@@ -59,18 +59,18 @@
 
 .pruv-pdp-ingredients__card {
   background-color: #ffffff;
-  border: 1px solid rgba(25, 23, 18, 0.08);
+  border: 1px solid rgba(138, 129, 117, 0.08);
   border-radius: 2rem;
   padding: 2.8rem 2.2rem;
   position: relative;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 16px -2px rgba(25, 23, 18, 0.03);
+  box-shadow: 0 4px 16px -2px rgba(27, 29, 31, 0.03);
 }
 
 .pruv-pdp-ingredients__card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px -6px rgba(25, 23, 18, 0.08);
-  border-color: rgba(168, 95, 46, 0.3);
+  box-shadow: 0 12px 32px -6px rgba(27, 29, 31, 0.08);
+  border-color: rgba(184, 115, 51, 0.3);
 }
 
 .pruv-pdp-ingredients__badge {
@@ -80,8 +80,8 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.1);
+  color: #B87333;
+  background-color: rgba(184, 115, 51, 0.1);
   padding: 0.3rem 0.8rem;
   border-radius: 100px;
   margin-bottom: 1.4rem;
@@ -91,7 +91,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0 0 0.4rem;
 }
 
@@ -101,7 +101,7 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
   margin: 0 0 1.2rem;
 }
 
@@ -109,7 +109,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.35rem;
   line-height: 1.55;
-  color: #524d43;
+  color: #8A8175;
   margin: 0;
 }
 

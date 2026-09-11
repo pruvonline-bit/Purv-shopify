@@ -58,9 +58,9 @@ variant-selects {
 
 /* Custom styles for Pill display type */
 .product-form__input--pill input[type='radio'] + label {
-  border: 1px solid rgba(25, 23, 18, 0.2);
+  border: 1px solid rgba(138, 129, 117, 0.2);
   background-color: rgba(255, 255, 255, 0.7);
-  color: #191712;
+  color: #1B1D1F;
   border-radius: 100px;
   display: inline-block;
   margin: 0.7rem 0.6rem 0.4rem 0;
@@ -88,16 +88,16 @@ variant-selects {
 }
 
 .product-form__input--pill input[type='radio'] + label:hover {
-  border-color: #a85f2e;
-  background-color: rgba(168, 95, 46, 0.08);
-  color: #a85f2e;
+  border-color: #B87333;
+  background-color: rgba(184, 115, 51, 0.08);
+  color: #B87333;
 }
 
 .product-form__input--pill input[type='radio']:checked + label {
-  background-color: #191712;
-  color: #f5f0e6;
-  border-color: #191712;
-  box-shadow: 0 4px 12px rgba(25, 23, 18, 0.15);
+  background-color: #1B1D1F;
+  color: #F5F2EC;
+  border-color: #1B1D1F;
+  box-shadow: 0 4px 12px rgba(27, 29, 31, 0.15);
 }
 
 @media screen and (forced-colors: active) {

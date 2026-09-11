@@ -29,7 +29,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-timeline__heading {
@@ -38,7 +38,7 @@
   line-height: 1.15;
   font-weight: 400;
   letter-spacing: -0.02em;
-  color: #191712;
+  color: #1B1D1F;
   text-wrap: balance;
 }
 
@@ -49,7 +49,7 @@
 .pruv-timeline__text {
   font-size: 1.5rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
   margin: 0;
 }
 
@@ -118,7 +118,7 @@
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.03em;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 .pruv-timeline__label {
@@ -127,7 +127,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 /* Horizontal Connector Line & Animated Arrows */
@@ -155,9 +155,9 @@
   width: 1.1rem;
   height: 1.1rem;
   border-radius: 50%;
-  background-color: #a85f2e;
+  background-color: #B87333;
   border: 2px solid #ffffff;
-  box-shadow: 0 0 0 2px #a85f2e;
+  box-shadow: 0 0 0 2px #B87333;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -166,15 +166,15 @@
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 50%;
-  background-color: rgba(168, 95, 46, 0.2);
+  background-color: rgba(184, 115, 51, 0.2);
   animation: nodePulse 2.4s infinite cubic-bezier(0.4, 0, 0.6, 1);
   pointer-events: none;
 }
 
 .pruv-timeline__item:hover .pruv-timeline__node-dot {
   transform: scale(1.25);
-  background-color: #191712;
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #191712;
+  background-color: #1B1D1F;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #1B1D1F;
 }
 
 .pruv-timeline__rail {
@@ -196,12 +196,12 @@
   left: 0;
   right: 0;
   height: 2px;
-  background-color: rgba(168, 95, 46, 0.35);
+  background-color: rgba(184, 115, 51, 0.35);
   border-radius: 2px;
 }
 
 .pruv-timeline__line--fade {
-  background: linear-gradient(90deg, rgba(168, 95, 46, 0.35) 0%, rgba(168, 95, 46, 0.08) 80%, transparent 100%);
+  background: linear-gradient(90deg, rgba(184, 115, 51, 0.35) 0%, rgba(184, 115, 51, 0.08) 80%, transparent 100%);
 }
 
 /* Animating Flowing Arrows */
@@ -213,7 +213,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
-  color: #a85f2e;
+  color: #B87333;
   pointer-events: none;
 }
 
@@ -276,7 +276,7 @@
   margin: 0;
   font-size: 1.7rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
@@ -285,7 +285,7 @@
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.55;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 /* Progress Bar Indicator */
@@ -299,7 +299,7 @@
 .pruv-timeline__progress-bar {
   width: 12rem;
   height: 0.3rem;
-  background-color: rgba(168, 95, 46, 0.15);
+  background-color: rgba(184, 115, 51, 0.15);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
@@ -308,7 +308,7 @@
 .pruv-timeline__progress-thumb {
   height: 100%;
   width: 25%;
-  background-color: #a85f2e;
+  background-color: #B87333;
   border-radius: 999px;
   transition: transform 0.15s ease-out, width 0.15s ease-out;
 }

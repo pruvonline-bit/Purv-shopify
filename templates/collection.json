@@ -58,7 +58,7 @@
         "show_ticker": false,
         "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
         "ticker_speed": 22,
-        "ticker_bg_color": "#7ba4f4",
+        "ticker_bg_color": "#B87333",
         "ticker_text_color": "#ffffff",
         "show_breadcrumb": true
       }

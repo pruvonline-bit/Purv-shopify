@@ -16,7 +16,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #a85f2e;
+  color: #B87333;
 }
 
 .pruv-process__heading {
@@ -25,7 +25,7 @@
   line-height: 1.12;
   font-weight: 400;
   letter-spacing: -0.01em;
-  color: #191712;
+  color: #1B1D1F;
   text-wrap: balance;
 }
 
@@ -37,7 +37,7 @@
   max-width: 48ch;
   font-size: 1.5rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
   margin: 0;
 }
 
@@ -65,7 +65,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: #a85f2e;
+  color: #B87333;
   padding-top: 0.2rem;
 }
 
@@ -73,12 +73,12 @@
   margin: 0 0 0.6rem;
   font-size: 1.9rem;
   font-weight: 600;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 .pruv-process__step-description {
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
 }

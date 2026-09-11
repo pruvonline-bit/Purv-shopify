@@ -16,7 +16,7 @@
   width: 100%;
   border-radius: 3.2rem;
   overflow: hidden;
-  background-color: #191712;
+  background-color: #1B1D1F;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -75,7 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  background: linear-gradient(135deg, #2A2C2E 0%, #1B1D1F 100%);
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -159,7 +159,7 @@
 }
 
 .pruv-video-glass__card--dark {
-  background: rgba(25, 23, 18, 0.32);
+  background: rgba(27, 29, 31, 0.32);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
   backdrop-filter: blur(18px) saturate(180%);
   border: 1.5px solid rgba(255, 255, 255, 0.22);
@@ -169,13 +169,13 @@
 }
 
 .pruv-video-glass__card--terracotta {
-  background: rgba(168, 95, 46, 0.28);
+  background: rgba(184, 115, 51, 0.28);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
   backdrop-filter: blur(18px) saturate(180%);
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   color: #ffffff;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 20px 48px rgba(168, 95, 46, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 20px 48px rgba(184, 115, 51, 0.2), inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -261,29 +261,29 @@
 }
 
 .pruv-video-glass__btn--black {
-  background: #191712;
+  background: #1B1D1F;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 14px rgba(25, 23, 18, 0.25);
+  box-shadow: 0 4px 14px rgba(27, 29, 31, 0.25);
 }
 
 .pruv-video-glass__btn--black:hover {
-  background: #a85f2e;
+  background: #B87333;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.4);
+  box-shadow: 0 6px 20px rgba(184, 115, 51, 0.4);
 }
 
 .pruv-video-glass__btn--terracotta {
-  background: #a85f2e;
+  background: #B87333;
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 14px rgba(168, 95, 46, 0.35);
+  box-shadow: 0 4px 14px rgba(184, 115, 51, 0.35);
 }
 
 .pruv-video-glass__btn--terracotta:hover {
-  background: #8e4f24;
+  background: #9C622B;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(168, 95, 46, 0.5);
+  box-shadow: 0 6px 20px rgba(184, 115, 51, 0.5);
 }
 
 /* --------------------------------------------------------------------------

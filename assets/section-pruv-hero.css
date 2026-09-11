@@ -337,8 +337,8 @@ a.button.button--hero-pill-black,
 .button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]),
 a.button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]) {
   border-radius: 9999px !important;
-  background: #18181b !important;
-  background-color: #18181b !important;
+  background: #1B1D1F !important;
+  background-color: #1B1D1F !important;
   color: #ffffff !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.28) !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
@@ -352,8 +352,8 @@ a.button.button--hero-pill-black:hover,
 a.button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--hero-solid-"]):not([class*="button--hero-outline"]):hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.38) !important;
-  background: #27272a !important;
-  background-color: #27272a !important;
+  background: #2A2C2E !important;
+  background-color: #2A2C2E !important;
   border-color: rgba(255, 255, 255, 0.32) !important;
   color: #ffffff !important;
 }
@@ -363,9 +363,9 @@ a.button.button--hero:not([class*="button--hero-pill-"]):not([class*="button--he
 a.button.button--hero-pill-primary,
 .button--hero-pill-primary {
   border-radius: 9999px !important;
-  background: linear-gradient(135deg, #7faeff 0%, #4b8df9 100%) !important;
+  background: #B87333 !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 20px rgba(75, 141, 249, 0.4) !important;
+  box-shadow: 0 6px 20px rgba(184, 115, 51, 0.4) !important;
   border: 1px solid rgba(255, 255, 255, 0.35) !important;
 }
 
@@ -373,8 +373,8 @@ a.button.button--hero-pill-primary,
 a.button.button--hero-pill-primary:hover,
 .button--hero-pill-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(75, 141, 249, 0.55) !important;
-  filter: brightness(1.05);
+  background: #9C622B !important;
+  box-shadow: 0 10px 28px rgba(184, 115, 51, 0.55) !important;
 }
 
 /* Pill White */
@@ -518,7 +518,7 @@ a.button.button--hero-solid-secondary,
   z-index: 3;
   width: 100%;
   overflow: hidden;
-  background-color: #7ba4f4;
+  background-color: #B87333;
   color: #ffffff;
   padding: 1.1rem 0;
   font-size: 1.25rem;

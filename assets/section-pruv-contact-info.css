@@ -33,7 +33,7 @@
   font-weight: 400;
   line-height: 1.12;
   letter-spacing: -0.01em;
-  color: #191712;
+  color: #1B1D1F;
   text-wrap: balance;
 }
 
@@ -46,7 +46,7 @@
   max-width: 52ch;
   font-size: 1.6rem;
   line-height: 1.6;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 /* --- Card grid: 1 -> 2 -> 3 columns -------------------------------- */
@@ -78,15 +78,15 @@
   flex-direction: column;
   gap: 1.2rem;
   background-color: #ffffff;
-  border: 1px solid rgba(168, 95, 46, 0.16);
+  border: 1px solid rgba(184, 115, 51, 0.16);
   border-radius: 1.8rem;
   padding: 1.6rem 1.6rem 1.8rem;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .pruv-contact-info__card:hover {
-  border-color: rgba(168, 95, 46, 0.4);
-  box-shadow: 0 10px 32px -4px rgba(168, 95, 46, 0.14), 0 2px 10px rgba(25, 23, 18, 0.04);
+  border-color: rgba(184, 115, 51, 0.4);
+  box-shadow: 0 10px 32px -4px rgba(184, 115, 51, 0.14), 0 2px 10px rgba(27, 29, 31, 0.04);
   transform: translateY(-2px);
 }
 
@@ -95,14 +95,14 @@
   display: inline-block;
   padding: 0.4rem 1.2rem;
   border-radius: 100px;
-  border: 1px solid rgba(168, 95, 46, 0.2);
-  background-color: rgba(168, 95, 46, 0.08);
+  border: 1px solid rgba(184, 115, 51, 0.2);
+  background-color: rgba(184, 115, 51, 0.08);
   font-family: 'Geist Mono', monospace;
   font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8e4f24;
+  color: #9C622B;
   line-height: 1.4;
   white-space: nowrap;
 }
@@ -117,31 +117,31 @@
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.55;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 .pruv-contact-info__line--primary {
   margin-bottom: 0.2rem;
   font-size: 1.6rem;
   font-weight: 600;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 .pruv-contact-info__link {
   color: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(168, 95, 46, 0.35);
+  border-bottom: 1px solid rgba(184, 115, 51, 0.35);
   overflow-wrap: anywhere;
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .pruv-contact-info__link:hover {
-  color: #a85f2e;
-  border-color: #a85f2e;
+  color: #B87333;
+  border-color: #B87333;
 }
 
 .pruv-contact-info__link:focus-visible {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: 2px;
   border-radius: 2px;
 }
@@ -153,9 +153,9 @@
   aspect-ratio: 4 / 3;
   border-radius: 2.2rem;
   overflow: hidden;
-  border: 1px solid rgba(168, 95, 46, 0.16);
-  box-shadow: 0 10px 32px -4px rgba(168, 95, 46, 0.14);
-  background-color: rgba(25, 23, 18, 0.04);
+  border: 1px solid rgba(184, 115, 51, 0.16);
+  box-shadow: 0 10px 32px -4px rgba(184, 115, 51, 0.14);
+  background-color: rgba(27, 29, 31, 0.04);
 }
 
 .pruv-contact-info__map iframe {
@@ -206,7 +206,7 @@
   box-shadow: none;
   font-size: 1.4rem;
   line-height: 1.55;
-  color: #6e6759;
+  color: #8A8175;
 }
 
 .pruv-contact-info__map--placeholder p {
@@ -220,19 +220,19 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #191712;
+  color: #1B1D1F;
   text-decoration: none;
-  border-bottom: 1px solid rgba(168, 95, 46, 0.35);
+  border-bottom: 1px solid rgba(184, 115, 51, 0.35);
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .pruv-contact-info__directions:hover {
-  color: #a85f2e;
-  border-color: #a85f2e;
+  color: #B87333;
+  border-color: #B87333;
 }
 
 .pruv-contact-info__directions:focus-visible {
-  outline: 2px solid #a85f2e;
+  outline: 2px solid #B87333;
   outline-offset: 2px;
 }
 

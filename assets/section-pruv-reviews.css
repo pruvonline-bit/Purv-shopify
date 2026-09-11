@@ -18,7 +18,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #a85f2e; /* Prüv Signature Terracotta */
+  color: #B87333; /* Prüv Signature Terracotta */
   margin: 0 0 0.8rem;
 }
 
@@ -28,14 +28,14 @@
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.02em;
-  color: #191712;
+  color: #1B1D1F;
   margin: 0;
 }
 
 .pruv-reviews__heading strong {
   display: block;
   font-weight: 300;
-  color: rgba(25, 23, 18, 0.85);
+  color: rgba(138, 129, 117, 0.85);
 }
 
 /* --------------------------------------------------------------------------
@@ -79,10 +79,10 @@
   flex-direction: column;
   gap: 1.4rem;
   background-color: #ffffff;
-  border: 1.5px solid rgba(168, 95, 46, 0.2);
+  border: 1.5px solid rgba(184, 115, 51, 0.2);
   box-shadow:
-    0 14px 40px -4px rgba(168, 95, 46, 0.12),
-    0 4px 16px rgba(25, 23, 18, 0.05),
+    0 14px 40px -4px rgba(184, 115, 51, 0.12),
+    0 4px 16px rgba(27, 29, 31, 0.05),
     0 0 0 1px rgba(255, 255, 255, 0.8);
   box-sizing: border-box;
 }
@@ -93,10 +93,10 @@
   --slot-opacity: 1;
   z-index: 3;
   background: #ffffff;
-  border: 2px solid rgba(168, 95, 46, 0.45);
+  border: 2px solid rgba(184, 115, 51, 0.45);
   box-shadow:
-    0 22px 55px -4px rgba(168, 95, 46, 0.2),
-    0 6px 20px rgba(25, 23, 18, 0.08),
+    0 22px 55px -4px rgba(184, 115, 51, 0.2),
+    0 6px 20px rgba(27, 29, 31, 0.08),
     0 0 0 2px rgba(242, 228, 212, 0.6);
 }
 
@@ -105,7 +105,7 @@
   --slot-scale: var(--scale-side);
   --slot-opacity: 0.55;
   z-index: 2;
-  border-color: rgba(168, 95, 46, 0.14);
+  border-color: rgba(184, 115, 51, 0.14);
 }
 
 .pruv-reviews__card[data-slot='right'] {
@@ -113,7 +113,7 @@
   --slot-scale: var(--scale-side);
   --slot-opacity: 0.55;
   z-index: 2;
-  border-color: rgba(168, 95, 46, 0.14);
+  border-color: rgba(184, 115, 51, 0.14);
 }
 
 .pruv-reviews__card[data-slot='hidden'] {
@@ -144,7 +144,7 @@
 .pruv-reviews__stars {
   font-size: 1.5rem;
   letter-spacing: 0.12em;
-  color: rgba(25, 23, 18, 0.15);
+  color: rgba(138, 129, 117, 0.15);
   line-height: 1;
   display: inline-flex;
 }
@@ -159,7 +159,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a85f2e; /* Prüv Signature Terracotta */
+  color: #B87333; /* Prüv Signature Terracotta */
   text-decoration: none;
   white-space: nowrap;
 }
@@ -169,7 +169,7 @@
   font-family: inherit;
   font-size: 2.2rem;
   font-weight: 800;
-  color: #191712;
+  color: #1B1D1F;
   line-height: 1.2;
   letter-spacing: -0.015em;
 }
@@ -179,7 +179,7 @@
   font-family: inherit;
   font-size: 1.45rem;
   line-height: 1.65;
-  color: rgba(25, 23, 18, 0.72);
+  color: rgba(138, 129, 117, 0.72);
   flex-grow: 1;
   max-height: 12rem;
   overflow: hidden;
@@ -190,7 +190,7 @@
   font-family: inherit;
   font-size: 1.55rem;
   font-weight: 700;
-  color: #191712;
+  color: #1B1D1F;
 }
 
 /* --------------------------------------------------------------------------
@@ -211,14 +211,14 @@
   height: 0.85rem;
   border-radius: 50%;
   border: none;
-  background-color: rgba(168, 95, 46, 0.22);
+  background-color: rgba(184, 115, 51, 0.22);
   cursor: pointer;
   padding: 0;
   transition: background-color 0.3s ease, width 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.3s ease;
 }
 
 .pruv-reviews__dot.is-active {
-  background-color: #a85f2e;
+  background-color: #B87333;
   width: 2.6rem;
   border-radius: 100px;
 }
