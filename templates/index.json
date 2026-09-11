@@ -100,6 +100,67 @@
         "press_heading": ""
       }
     },
+    "ritual_explainer": {
+      "type": "pruv-ritual-explainer",
+      "blocks": {
+        "step-reset": {
+          "type": "step",
+          "settings": {
+            "step_number": "1",
+            "time_badge": "10s Read · 2x/week",
+            "title": "RESET",
+            "tagline": "Phase 01 · Scalp Detox & Demineralisation",
+            "product_role": "TriShield Clarifying Shampoo",
+            "description": "Dissolves stubborn calcium, magnesium and mineral crusts deposited by city hard water. Decongests follicular pores without stripping natural barrier lipids.",
+            "key_actives": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators",
+            "button_label": "Explore Reset",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "step-support": {
+          "type": "step",
+          "settings": {
+            "step_number": "2",
+            "time_badge": "10s Read · Daily",
+            "title": "SUPPORT",
+            "tagline": "Phase 02 · Microbiome & Follicle Nutrition",
+            "product_role": "Follicle Tonic & Daily Conditioner",
+            "description": "Rebalances scalp pH, nourishes the microbial ecosystem, and floods the root zone with essential micronutrients to boost microcirculation.",
+            "key_actives": "Probiotic Ferments · Niacinamide · Rosemary Peptides",
+            "button_label": "Explore Support",
+            "button_link": "shopify://collections/all"
+          }
+        },
+        "step-repair": {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "time_badge": "10s Read · Weekly",
+            "title": "REPAIR",
+            "tagline": "Phase 03 · Bond Integrity & Cuticle Shield",
+            "product_role": "Keratin & Ceramide Deep Recovery Mask",
+            "description": "Reconstructs damaged keratin chains, seals lifted hair cuticles against humidity, and leaves a breathable shield against urban micro-pollutants.",
+            "key_actives": "Hydrolyzed Keratin · Ceramide NP · Argan Lipid Matrix",
+            "button_label": "Explore Repair",
+            "button_link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "step-reset",
+        "step-support",
+        "step-repair"
+      ],
+      "settings": {
+        "eyebrow": "The Prüv System · 10-Second Explainer",
+        "heading": "Educate in 10 Seconds: <em>Reset. Support. Repair.</em>",
+        "subheading": "<p>A targeted 3-phase scalp and hair ritual engineered specifically to counteract hard water mineral buildup, restore microbiome equilibrium, and seal the cuticular barrier.</p>",
+        "show_connectors": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
     "concerns": {
       "type": "pruv-concerns",
       "blocks": {
@@ -409,6 +470,7 @@
   },
   "order": [
     "hero",
+    "ritual_explainer",
     "concerns",
     "bestsellers",
     "trust_badges",

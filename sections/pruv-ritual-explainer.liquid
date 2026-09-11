@@ -1,0 +1,306 @@
+{{ 'section-pruv-ritual-explainer.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="pruv-ritual color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="pruv-ritual__container">
+    
+    {%- comment -%} Section Header {%- endcomment -%}
+    <div class="pruv-ritual__header" data-animate="fade-up">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="pruv-ritual__eyebrow-wrapper">
+          <span class="pruv-ritual__eyebrow-dot"></span>
+          <p class="pruv-ritual__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-ritual__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <div class="pruv-ritual__subheading">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Desktop Step Connectors {%- endcomment -%}
+    {%- if section.settings.show_connectors and section.blocks.size > 1 -%}
+      <div class="pruv-ritual__connectors" aria-hidden="true">
+        <div class="pruv-ritual__connector-line"></div>
+        {%- for block in section.blocks -%}
+          {%- assign step_display_num = block.settings.step_number | default: forloop.index -%}
+          <div class="pruv-ritual__connector-dot">
+            <span class="pruv-ritual__connector-node"></span>
+            <span>STEP 0{{ step_display_num }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Step Cards Grid {%- endcomment -%}
+    <div class="pruv-ritual__grid-wrapper">
+      <div class="pruv-ritual__grid" data-animate="stagger">
+        {%- for block in section.blocks -%}
+          {%- assign step_display_num = block.settings.step_number | default: forloop.index -%}
+          <div class="pruv-ritual__card" {{ block.shopify_attributes }}>
+            
+            <div class="pruv-ritual__card-top">
+              <span class="pruv-ritual__step-badge">STEP 0{{ step_display_num }}</span>
+              {%- if block.settings.time_badge != blank -%}
+                <span class="pruv-ritual__step-duration">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  {{ block.settings.time_badge }}
+                </span>
+              {%- endif -%}
+            </div>
+
+            <div class="pruv-ritual__card-body">
+              <div class="pruv-ritual__step-title-wrap">
+                <h3 class="pruv-ritual__step-title">{{ block.settings.title }}</h3>
+                {%- if block.settings.tagline != blank -%}
+                  <p class="pruv-ritual__step-tagline">{{ block.settings.tagline }}</p>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.product_role != blank -%}
+                <div class="pruv-ritual__role-box">
+                  <span class="pruv-ritual__role-label">Product Role</span>
+                  <span class="pruv-ritual__role-product">{{ block.settings.product_role }}</span>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="pruv-ritual__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.key_actives != blank -%}
+                <div class="pruv-ritual__actives">
+                  <span class="pruv-ritual__actives-label">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    Key Actives
+                  </span>
+                  <div class="pruv-ritual__actives-text">{{ block.settings.key_actives }}</div>
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if block.settings.button_label != blank -%}
+              <a href="{{ block.settings.button_link | default: '#' }}" class="pruv-ritual__action">
+                <span>{{ block.settings.button_label }}</span>
+                <span class="pruv-ritual__action-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </a>
+            {%- endif -%}
+
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Mobile Swipe Indicator {%- endcomment -%}
+      <div class="pruv-ritual__mobile-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+        <span>Swipe to explore ritual steps</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv Ritual Explainer",
+  "tag": "section",
+  "class": "section pruv-ritual-explainer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Prüv System · 10-Second Explainer"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Educate in 10 Seconds: <em>Reset. Support. Repair.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>A targeted 3-phase scalp and hair ritual engineered specifically to counteract hard water mineral buildup, restore microbiome equilibrium, and seal the cuticular barrier.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_connectors",
+      "label": "Show step connectors on desktop",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Ritual Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step number (e.g. 1, 2, 3)",
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "time_badge",
+          "label": "Time / Frequency badge",
+          "default": "10s Read · 2x/week"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "RESET"
+        },
+        {
+          "type": "text",
+          "id": "tagline",
+          "label": "Step Subtitle / Phase",
+          "default": "Phase 01 · Scalp Detox & Demineralisation"
+        },
+        {
+          "type": "text",
+          "id": "product_role",
+          "label": "Product Role",
+          "default": "TriShield Clarifying Shampoo"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "10-Second Takeaway / Role Description",
+          "default": "Dissolves stubborn calcium, magnesium and mineral salts left by municipal hard water. Clears congested follicular pores without drying out scalp lipids."
+        },
+        {
+          "type": "text",
+          "id": "key_actives",
+          "label": "Key Actives",
+          "default": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Explore Reset"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv Ritual Explainer",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "1",
+            "time_badge": "10s Read · 2x/week",
+            "title": "RESET",
+            "tagline": "Phase 01 · Scalp Detox & Demineralisation",
+            "product_role": "TriShield Clarifying Shampoo",
+            "description": "Dissolves stubborn calcium, magnesium and mineral crusts deposited by city hard water. Decongests follicular pores without stripping natural barrier lipids.",
+            "key_actives": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators",
+            "button_label": "Explore Reset",
+            "button_link": "/collections/all"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "2",
+            "time_badge": "10s Read · Daily",
+            "title": "SUPPORT",
+            "tagline": "Phase 02 · Microbiome & Follicle Nutrition",
+            "product_role": "Follicle Tonic & Daily Conditioner",
+            "description": "Rebalances scalp pH, nourishes the microbial ecosystem, and floods the root zone with essential micronutrients to boost microcirculation.",
+            "key_actives": "Probiotic Ferments · Niacinamide · Rosemary Peptides",
+            "button_label": "Explore Support",
+            "button_link": "/collections/all"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "time_badge": "10s Read · Weekly",
+            "title": "REPAIR",
+            "tagline": "Phase 03 · Bond Integrity & Cuticle Shield",
+            "product_role": "Keratin & Ceramide Deep Recovery Mask",
+            "description": "Reconstructs damaged keratin chains, seals lifted hair cuticles against humidity, and leaves a breathable shield against urban micro-pollutants.",
+            "key_actives": "Hydrolyzed Keratin · Ceramide NP · Argan Lipid Matrix",
+            "button_label": "Explore Repair",
+            "button_link": "/collections/all"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

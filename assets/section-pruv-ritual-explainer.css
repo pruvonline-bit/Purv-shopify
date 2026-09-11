@@ -1,0 +1,443 @@
+/* ==========================================================================
+   Prüv — 10-Second Ritual Explainer Section (Reset / Support / Repair)
+   ========================================================================== */
+
+.pruv-ritual {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--gradient-background, #FAF7F2);
+}
+
+.pruv-ritual__container {
+  width: 100%;
+  max-width: var(--page-width, 120rem);
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-ritual__container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+/* Header */
+.pruv-ritual__header {
+  text-align: center;
+  max-width: 72rem;
+  margin: 0 auto 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-ritual__header {
+    margin-bottom: 5.6rem;
+  }
+}
+
+.pruv-ritual__eyebrow-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: rgba(184, 115, 51, 0.08);
+  border: 1px solid rgba(184, 115, 51, 0.22);
+  border-radius: 10rem;
+  padding: 0.5rem 1.4rem;
+}
+
+.pruv-ritual__eyebrow-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: #B87333;
+  display: inline-block;
+}
+
+.pruv-ritual__eyebrow {
+  margin: 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B87333;
+}
+
+.pruv-ritual__heading {
+  margin: 0;
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  font-size: clamp(2.8rem, 4vw, 4.4rem);
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #1B1D1F;
+  text-wrap: balance;
+}
+
+.pruv-ritual__heading em,
+.pruv-ritual__heading i {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #B87333;
+}
+
+.pruv-ritual__heading strong {
+  font-weight: 700;
+}
+
+.pruv-ritual__subheading {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.6;
+  color: #736C62;
+  max-width: 54ch;
+}
+
+/* Grid & Step Flow */
+.pruv-ritual__grid-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.pruv-ritual__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+@media screen and (min-width: 900px) {
+  .pruv-ritual__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.8rem;
+  }
+}
+
+/* Step Card */
+.pruv-ritual__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(184, 115, 51, 0.18);
+  border-radius: 2.4rem;
+  padding: 3.2rem 2.8rem;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s ease;
+  box-shadow: 0 4px 16px -2px rgba(27, 29, 31, 0.03);
+}
+
+.pruv-ritual__card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(184, 115, 51, 0.45);
+  box-shadow: 0 16px 36px -8px rgba(184, 115, 51, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* Card Top Bar (Step badge + Step Number) */
+.pruv-ritual__card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.pruv-ritual__step-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B87333;
+  background-color: rgba(184, 115, 51, 0.1);
+  padding: 0.5rem 1.2rem;
+  border-radius: 10rem;
+}
+
+.pruv-ritual__step-duration {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #9C9489;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pruv-ritual__step-duration svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  stroke: #9C9489;
+}
+
+/* Card Body */
+.pruv-ritual__card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pruv-ritual__step-title-wrap {
+  margin-bottom: 1.4rem;
+}
+
+.pruv-ritual__step-title {
+  margin: 0;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1B1D1F;
+  line-height: 1.15;
+}
+
+.pruv-ritual__step-tagline {
+  margin: 0.4rem 0 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #B87333;
+}
+
+/* Product Role Pill */
+.pruv-ritual__role-box {
+  background-color: #F8F6F2;
+  border-left: 3px solid #B87333;
+  border-radius: 0 1rem 1rem 0;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.pruv-ritual__role-label {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8A8175;
+  margin-bottom: 0.3rem;
+}
+
+.pruv-ritual__role-product {
+  display: block;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: #1B1D1F;
+}
+
+/* Description / 10-Second Takeaway */
+.pruv-ritual__description {
+  margin: 0 0 2rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.6;
+  color: #615B52;
+}
+
+/* Actives / Science Specs */
+.pruv-ritual__actives {
+  margin-top: auto;
+  padding-top: 1.6rem;
+  border-top: 1px dashed rgba(184, 115, 51, 0.2);
+  margin-bottom: 2.4rem;
+}
+
+.pruv-ritual__actives-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9C9489;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pruv-ritual__actives-text {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #2F3235;
+  line-height: 1.45;
+}
+
+/* Card Action / Link */
+.pruv-ritual__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  background-color: #1B1D1F;
+  color: #FFFFFF;
+  border-radius: 10rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.pruv-ritual__action:hover {
+  background-color: #B87333;
+}
+
+.pruv-ritual__action-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.pruv-ritual__action:hover .pruv-ritual__action-arrow {
+  transform: translateX(3px);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.pruv-ritual__action-arrow svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  stroke: #FFFFFF;
+}
+
+/* Horizontal Step Connectors (Desktop only) */
+@media screen and (min-width: 900px) {
+  .pruv-ritual__connectors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(100% - 10rem);
+    margin: 0 auto 2.4rem;
+    padding: 0 4rem;
+    position: relative;
+  }
+
+  .pruv-ritual__connector-line {
+    position: absolute;
+    top: 50%;
+    left: 8rem;
+    right: 8rem;
+    height: 2px;
+    background: linear-gradient(90deg, #B87333 0%, rgba(184, 115, 51, 0.3) 100%);
+    z-index: 1;
+    transform: translateY(-50%);
+  }
+
+  .pruv-ritual__connector-dot {
+    position: relative;
+    z-index: 2;
+    background-color: #FAF7F2;
+    padding: 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #B87333;
+  }
+
+  .pruv-ritual__connector-node {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: #B87333;
+    border: 2px solid #FAF7F2;
+    box-shadow: 0 0 0 2px #B87333;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .pruv-ritual__connectors {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Mobile Swipeable Snapping Track (Under 750px)
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  .pruv-ritual__grid {
+    display: flex;
+    grid-template-columns: none;
+    gap: 1.6rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 1.2rem;
+    scroll-padding-left: 1.5rem;
+    scroll-padding-inline-start: 1.5rem;
+  }
+
+  .pruv-ritual__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-ritual__card {
+    flex: 0 0 86%;
+    max-width: 32rem;
+    scroll-snap-align: start;
+    scroll-margin-left: 1.5rem;
+    scroll-margin-inline-start: 1.5rem;
+    padding: 2.8rem 2.2rem;
+  }
+
+  .pruv-ritual__card:hover {
+    transform: none;
+  }
+
+  .pruv-ritual__step-title {
+    font-size: 2.3rem;
+  }
+
+  /* Mobile swipe hint */
+  .pruv-ritual__mobile-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.6rem;
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.15rem;
+    color: #9C9489;
+  }
+
+  .pruv-ritual__mobile-hint svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    stroke: #9C9489;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-ritual__mobile-hint {
+    display: none;
+  }
+}
