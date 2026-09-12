@@ -1,0 +1,111 @@
+<div class="pruv-cursor-dot" id="PruvCursorDot" aria-hidden="true"></div>
+<div class="pruv-cursor-ring" id="PruvCursorRing" aria-hidden="true"></div>
+
+<style>
+  @media screen and (min-width: 750px) {
+    html.pruv-cursor-active,
+    html.pruv-cursor-active * {
+      cursor: none !important;
+    }
+  }
+
+  .pruv-cursor-dot,
+  .pruv-cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2147483647;
+    border-radius: 50%;
+    opacity: 1 !important;
+    visibility: visible !important;
+    will-change: transform;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .pruv-cursor-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #B87333;
+    box-shadow: 0 0 0 1.5px #FFFFFF, 0 2px 6px rgba(0, 0, 0, 0.45);
+  }
+
+  .pruv-cursor-ring {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #B87333;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6), 0 0 16px rgba(184, 115, 51, 0.45);
+  }
+
+  .pruv-cursor-ring.is-hovering {
+    width: 54px;
+    height: 54px;
+    background-color: rgba(184, 115, 51, 0.18);
+    border-color: #B87333;
+    border-width: 2.5px;
+    box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0 22px rgba(184, 115, 51, 0.6);
+  }
+
+  @media screen and (max-width: 749px) {
+    .pruv-cursor-dot,
+    .pruv-cursor-ring {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    if (window.innerWidth < 750) return;
+
+    var dot = document.getElementById('PruvCursorDot');
+    var ring = document.getElementById('PruvCursorRing');
+    if (!dot || !ring) return;
+
+    var mouseX = window.innerWidth / 2;
+    var mouseY = window.innerHeight / 2;
+    var ringX = mouseX;
+    var ringY = mouseY;
+    var isHovering = false;
+
+    function place(el, x, y) {
+      el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)';
+    }
+
+    place(dot, mouseX, mouseY);
+    place(ring, ringX, ringY);
+    document.documentElement.classList.add('pruv-cursor-active');
+
+    function render() {
+      ringX += (mouseX - ringX) * 0.2;
+      ringY += (mouseY - ringY) * 0.2;
+      place(ring, ringX, ringY);
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+
+    function onMove(e) {
+      if (e.pointerType === 'touch') return;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      place(dot, mouseX, mouseY);
+
+      var target = e.target;
+      var isInteractive = target && (
+        target.matches('a, button, input, select, textarea, [role="button"], label, summary, .cursor-pointer') ||
+        target.closest('a, button, input, select, textarea, [role="button"], label, summary, .cursor-pointer')
+      );
+
+      if (isInteractive && !isHovering) {
+        isHovering = true;
+        ring.classList.add('is-hovering');
+      } else if (!isInteractive && isHovering) {
+        isHovering = false;
+        ring.classList.remove('is-hovering');
+      }
+    }
+
+    window.addEventListener('pointermove', onMove, { capture: true, passive: true });
+    window.addEventListener('mousemove', onMove, { capture: true, passive: true });
+  })();
+</script>

@@ -1,12 +1,10 @@
-/* Prüv — custom cursor: a small solid dot with a trailing ring, both in
-   Oxidized Copper. Desktop-with-mouse only; touch devices keep native
-   behavior untouched (no cursor concept there anyway). */
+/* Prüv — custom luxury cursor: solid copper dot with trailing halo ring.
+   Enhanced with high-contrast outlines to stay crisp on both dark and light surfaces,
+   and interactive hover scaling. */
 
-@media (hover: hover) and (pointer: fine), (any-hover: hover) and (any-pointer: fine) {
-  html.pruv-cursor-enabled,
-  html.pruv-cursor-enabled * {
-    cursor: none !important;
-  }
+html.pruv-cursor-enabled,
+html.pruv-cursor-enabled * {
+  cursor: none !important;
 }
 
 .pruv-cursor-dot,
@@ -18,23 +16,36 @@
   z-index: 2147483647;
   border-radius: 50%;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   will-change: transform;
 }
 
 .pruv-cursor-dot {
-  width: 0.7rem;
-  height: 0.7rem;
-  background-color: rgb(var(--pruv-copper));
+  width: 8px;
+  height: 8px;
+  background-color: #B87333;
+  background-color: rgb(var(--pruv-copper, 184, 115, 51));
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85), 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .pruv-cursor-ring {
-  width: 3.6rem;
-  height: 3.6rem;
-  border: 1.5px solid rgb(var(--pruv-copper));
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid #B87333;
+  border: 1.5px solid rgb(var(--pruv-copper, 184, 115, 51));
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 12px rgba(184, 115, 51, 0.3);
+}
+
+.pruv-cursor-ring.is-hovering {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(184, 115, 51, 0.12);
+  border-color: #B87333;
+  border-width: 2px;
 }
 
 .pruv-cursor-dot.is-hidden,
 .pruv-cursor-ring.is-hidden {
-  opacity: 0;
+  opacity: 0 !important;
+  visibility: hidden;
 }
