@@ -2,12 +2,12 @@
 
    Two things here are deliberate:
 
-   1. `display` is set INLINE with !important. These elements were being
-      hidden by a stylesheet outside document.styleSheets (browser/extension
-      cosmetic filtering of small empty fixed-position divs) - no author rule
-      declaring `display` matched them, yet computed display was `none`. An
-      inline !important declaration is the only thing that reliably outranks
-      author-origin CSS, so the visibility toggle lives here, not in the CSS.
+   1. Visibility is toggled with the `is-active` class, not an inline style.
+      These are empty divs, and Dawn's base.css carries `a:empty, ul:empty,
+      div:empty, section:empty, ... { display: none }` - a 0-1-1 selector that
+      beats a lone `.pruv-cursor-dot` at 0-1-0, which is why the cursor was
+      invisible. `.pruv-cursor-dot.is-active` in pruv-custom-cursor.css is
+      0-2-0 and outranks it, so no inline write and no !important are needed.
 
    2. Activation is driven by real mouse/pen input, not a viewport-width
       breakpoint. A width guard meant a narrow desktop window or a zoomed-in
@@ -60,8 +60,8 @@
     mouseY = ringY = y;
     place(dot, x, y);
     place(ring, x, y);
-    dot.style.setProperty('display', 'block', 'important');
-    ring.style.setProperty('display', 'block', 'important');
+    dot.classList.add('is-active');
+    ring.classList.add('is-active');
     document.documentElement.classList.add('pruv-cursor-active');
     frame = requestAnimationFrame(render);
   }
@@ -70,8 +70,8 @@
     if (!active) return;
     active = false;
     document.documentElement.classList.remove('pruv-cursor-active');
-    dot.style.setProperty('display', 'none', 'important');
-    ring.style.setProperty('display', 'none', 'important');
+    dot.classList.remove('is-active');
+    ring.classList.remove('is-active');
     if (frame) {
       cancelAnimationFrame(frame);
       frame = null;

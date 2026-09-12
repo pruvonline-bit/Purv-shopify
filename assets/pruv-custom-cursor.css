@@ -1,16 +1,17 @@
 /* Prüv — custom cursor: copper dot + trailing halo ring.
 
-   IMPORTANT: `display` is deliberately NOT toggled from this file.
-   pruv-custom-cursor.js sets it inline with !important once it sees real
-   mouse input. These elements were being hidden by a stylesheet outside
-   document.styleSheets (browser/extension cosmetic filtering, which targets
-   small empty fixed-position divs) - verified live: no author rule declaring
-   `display` matched the element, yet computed display was `none`, and an
-   inline !important declaration was the only thing that restored it.
-   Moving `display` back in here will silently break the cursor again. */
+   These two elements are empty divs, and Dawn's base.css carries
+   `a:empty, ul:empty, div:empty, section:empty, ... { display: none }` - a
+   0-1-1 selector that beats a lone `.pruv-cursor-dot` at 0-1-0 and collapses
+   them to nothing. That is why the cursor was invisible. Visibility is
+   therefore switched by the `.is-active` class pair below, whose selectors are
+   0-2-0 and win. Keep both classes in those selectors, and keep the explicit
+   `display` on each. */
 
 .pruv-cursor-dot,
 .pruv-cursor-ring {
+  /* Same value Dawn's `div:empty` rule would impose anyway, stated here so the
+     hidden state is a decision of this file rather than a side effect. */
   display: none;
   position: fixed;
   top: 0;
@@ -35,6 +36,15 @@
   height: 40px;
   border: 2px solid #b87333;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6), 0 0 16px rgba(184, 115, 51, 0.45);
+}
+
+/* Both classes are load-bearing: 0-2-0 outranks base.css's `div:empty`, which
+   is what pruv-custom-cursor.js toggles to show the cursor once it sees real
+   mouse input. A plain inline `display` would win too, but a class keeps the
+   styling in the stylesheet. */
+.pruv-cursor-dot.is-active,
+.pruv-cursor-ring.is-active {
+  display: block;
 }
 
 .pruv-cursor-ring.is-hovering {
