@@ -15,9 +15,9 @@
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 2147483647;
   border-radius: 50%;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.2s ease;
   will-change: transform;
 }
@@ -34,9 +34,9 @@
   border: 1.5px solid rgb(var(--pruv-copper));
 }
 
-.pruv-cursor-dot.is-active,
-.pruv-cursor-ring.is-active {
-  opacity: 1;
+.pruv-cursor-dot.is-hidden,
+.pruv-cursor-ring.is-hidden {
+  opacity: 0;
 }
 
 @media (hover: none), (pointer: coarse) {
