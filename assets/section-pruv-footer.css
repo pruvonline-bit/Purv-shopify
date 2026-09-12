@@ -10,7 +10,7 @@
   position: relative;
   border-top: 0.1rem solid rgba(138, 129, 117, 0.15);
   border-bottom: 0.1rem solid rgba(138, 129, 117, 0.15);
-  background-color: rgba(27, 29, 31, 0.04);
+  background-color: rgba(var(--color-foreground), 0.04);
 }
 
 .pruv-footer__row {
@@ -57,7 +57,7 @@
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.1;
-  color: #1B1D1F;
+  color: rgb(var(--color-foreground));
 }
 
 /* pill the newsletter field + inset the round submit button, on top of Dawn's
@@ -86,7 +86,7 @@
 }
 
 .pruv-footer .newsletter-form__button:focus-visible {
-  outline: 0.2rem solid #1B1D1F;
+  outline: 0.2rem solid rgb(var(--color-foreground));
   outline-offset: 0.2rem;
 }
 
@@ -161,7 +161,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #1B1D1F;
+  color: rgb(var(--color-foreground));
   text-decoration: none;
 }
 
@@ -181,7 +181,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #1B1D1F;
+  color: rgb(var(--color-foreground));
 }
 
 .pruv-footer__help-list {
@@ -226,7 +226,7 @@
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
-  color: #1B1D1F;
+  color: rgb(var(--color-foreground));
 }
 
 .pruv-footer__tagline {

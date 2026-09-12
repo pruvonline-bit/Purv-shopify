@@ -54,7 +54,7 @@
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     padding: 0.8rem 0.4rem !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
@@ -91,7 +91,7 @@
     justify-content: center !important;
     width: 4rem !important;
     height: 4rem !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
@@ -105,7 +105,7 @@
     width: 4rem !important;
     height: 4rem !important;
     position: relative !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
@@ -124,7 +124,7 @@
   .header__icons .header__search .header__icon {
     width: 4rem !important;
     height: 4rem !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
