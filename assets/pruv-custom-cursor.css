@@ -1,0 +1,47 @@
+/* Prüv — custom cursor: a small solid dot with a trailing ring, both in
+   Oxidized Copper. Desktop-with-mouse only; touch devices keep native
+   behavior untouched (no cursor concept there anyway). */
+
+@media (hover: hover) and (pointer: fine) {
+  html.pruv-cursor-enabled,
+  html.pruv-cursor-enabled * {
+    cursor: none !important;
+  }
+}
+
+.pruv-cursor-dot,
+.pruv-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+
+.pruv-cursor-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: rgb(var(--pruv-copper));
+}
+
+.pruv-cursor-ring {
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1.5px solid rgb(var(--pruv-copper));
+}
+
+.pruv-cursor-dot.is-active,
+.pruv-cursor-ring.is-active {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .pruv-cursor-dot,
+  .pruv-cursor-ring {
+    display: none;
+  }
+}
