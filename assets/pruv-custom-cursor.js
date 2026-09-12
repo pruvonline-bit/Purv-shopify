@@ -9,7 +9,10 @@
    pointer crosses into an <iframe> (video embeds, Shop Pay, etc.) and would
    otherwise leave the cursor stuck invisible. */
 (function () {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  var hasFinePointer =
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches ||
+    window.matchMedia('(any-hover: hover) and (any-pointer: fine)').matches;
+  if (!hasFinePointer) return;
 
   var dot = document.createElement('div');
   dot.className = 'pruv-cursor-dot';
@@ -35,6 +38,10 @@
   window.addEventListener('mousemove', function (event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
+    if (dot.classList.contains('is-hidden')) {
+      dot.classList.remove('is-hidden');
+      ring.classList.remove('is-hidden');
+    }
     place(dot, mouseX, mouseY);
   });
 

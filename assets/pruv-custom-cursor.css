@@ -2,7 +2,7 @@
    Oxidized Copper. Desktop-with-mouse only; touch devices keep native
    behavior untouched (no cursor concept there anyway). */
 
-@media (hover: hover) and (pointer: fine) {
+@media (hover: hover) and (pointer: fine), (any-hover: hover) and (any-pointer: fine) {
   html.pruv-cursor-enabled,
   html.pruv-cursor-enabled * {
     cursor: none !important;
