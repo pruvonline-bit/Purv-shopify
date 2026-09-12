@@ -38,10 +38,3 @@
 .pruv-cursor-ring.is-hidden {
   opacity: 0;
 }
-
-@media (hover: none), (pointer: coarse) {
-  .pruv-cursor-dot,
-  .pruv-cursor-ring {
-    display: none;
-  }
-}
