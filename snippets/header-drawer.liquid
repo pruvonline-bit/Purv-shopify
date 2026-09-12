@@ -12,12 +12,21 @@
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
-      class="header__icon header__icon--menu header__icon--summary link focus-inset"
+      class="header__icon header__icon--menu header__icon--summary link focus-inset pruv-drawer-toggle"
       aria-label="{{ 'sections.header.menu' | t }}"
     >
-      <span>
-        {{- 'icon-hamburger.svg' | inline_asset_content -}}
-        {{- 'icon-close.svg' | inline_asset_content -}}
+      {%- comment -%}
+        Two labels stacked in one grid cell; the open/close pair slides
+        vertically past each other on toggle (see component-pruv-drawer.css).
+        aria-hidden because the summary's own aria-label already names it.
+      {%- endcomment -%}
+      <span class="pruv-drawer-toggle__labels" aria-hidden="true">
+        <span class="pruv-drawer-toggle__label pruv-drawer-toggle__label--open">
+          {{- 'sections.header.menu' | t -}}
+        </span>
+        <span class="pruv-drawer-toggle__label pruv-drawer-toggle__label--close">
+          {{- 'accessibility.close' | t -}}
+        </span>
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
@@ -31,9 +40,16 @@
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
-                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
+                        class="menu-drawer__menu-item list-menu__item link link--text focus-inset pruv-drawer__link{% if link.child_active %} menu-drawer__menu-item--active{% endif %}"
                       >
-                        {{ link.title | escape }}
+                        <span class="pruv-drawer__link-reveal">
+                          <span class="pruv-drawer__link-roll">
+                            <span class="pruv-drawer__link-text">{{ link.title | escape }}</span>
+                            <span class="pruv-drawer__link-text pruv-drawer__link-text--dup" aria-hidden="true">
+                              {{- link.title | escape -}}
+                            </span>
+                          </span>
+                        </span>
                         <span class="svg-wrapper">
                           {{- 'icon-arrow.svg' | inline_asset_content -}}
                         </span>
@@ -127,12 +143,24 @@
                     <a
                       id="HeaderDrawer-{{ link.handle }}"
                       href="{{ link.url }}"
-                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+                      class="menu-drawer__menu-item list-menu__item link link--text focus-inset pruv-drawer__link{% if link.current %} menu-drawer__menu-item--active{% endif %}"
                       {% if link.current %}
                         aria-current="page"
                       {% endif %}
                     >
-                      {{ link.title | escape }}
+                      {%- comment -%}
+                        __reveal is what GSAP swings up on open (the <a> masks it).
+                        __roll holds the label twice so hover slides the copper
+                        duplicate up into its place.
+                      {%- endcomment -%}
+                      <span class="pruv-drawer__link-reveal">
+                        <span class="pruv-drawer__link-roll">
+                          <span class="pruv-drawer__link-text">{{ link.title | escape }}</span>
+                          <span class="pruv-drawer__link-text pruv-drawer__link-text--dup" aria-hidden="true">
+                            {{- link.title | escape -}}
+                          </span>
+                        </span>
+                      </span>
                     </a>
                   {%- endif -%}
                 </li>
