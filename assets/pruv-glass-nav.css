@@ -1,9 +1,7 @@
-/* Prüv — glassmorphism header, layered over the offer strip */
+/* Prüv — header, layered over the offer strip */
 
 .shopify-section-group-header-group .header-wrapper {
-  background-color: rgba(var(--color-background), 0.66);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
-  backdrop-filter: blur(18px) saturate(160%);
+  background-color: transparent;
   transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
@@ -14,12 +12,6 @@
 .shopify-section-header-sticky .header-wrapper {
   background-color: rgba(var(--color-background), 0.78);
   box-shadow: 0 8px 24px rgba(27, 29, 31, 0.06);
-}
-
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .shopify-section-group-header-group .header-wrapper {
-    background-color: rgb(var(--color-background));
-  }
 }
 
 /* ==========================================================================
@@ -54,7 +46,7 @@
     font-weight: 700 !important;
     letter-spacing: 0.08em !important;
     text-transform: uppercase !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     padding: 0.8rem 0.4rem !important;
     text-decoration: none !important;
     transition: color 0.2s ease !important;
@@ -91,7 +83,7 @@
     justify-content: center !important;
     width: 4rem !important;
     height: 4rem !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
@@ -105,7 +97,7 @@
     width: 4rem !important;
     height: 4rem !important;
     position: relative !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
@@ -124,7 +116,7 @@
   .header__icons .header__search .header__icon {
     width: 4rem !important;
     height: 4rem !important;
-    color: #1B1D1F !important;
+    color: rgb(var(--color-foreground)) !important;
     transition: color 0.2s ease !important;
   }
 
