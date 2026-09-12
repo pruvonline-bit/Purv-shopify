@@ -579,14 +579,26 @@
     margin-bottom: 3.2rem;
   }
 
+  /* Tighter index/node columns than desktop, so the gutter the panel has to
+     clear stays small on a narrow screen. The rail's x is measured from the
+     node in JS, so it follows these widths automatically. */
   .pruv-ritual__step-head {
-    grid-template-columns: 2.8rem 1.8rem 1fr;
-    gap: 0 0.9rem;
+    grid-template-columns: 2.2rem 1.2rem 1fr;
+    gap: 0 0.6rem;
     padding: 1.4rem 0;
   }
 
+  .pruv-ritual__rail-marker {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-left: -0.9rem;
+    margin-top: -0.9rem;
+  }
+
+  /* Indented to sit past the rail and line up under the title. Without this
+     the full-height rail draws straight through the copy and the diagram. */
   .pruv-ritual__step-inner {
-    padding-inline-start: 0;
+    padding-inline-start: 5.2rem;
     padding-bottom: 2.4rem;
   }
 
