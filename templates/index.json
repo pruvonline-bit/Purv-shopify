@@ -95,7 +95,7 @@
         "bottom_bar_mode": "press_marquee",
         "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
         "ticker_speed": 22,
-        "ticker_bg_color": "#B87333",
+        "ticker_bg_color": "#b87333",
         "ticker_text_color": "#ffffff",
         "press_heading": ""
       }
@@ -107,12 +107,15 @@
           "type": "step",
           "settings": {
             "step_number": "1",
-            "time_badge": "10s Read · 2x/week",
             "title": "RESET",
             "tagline": "Phase 01 · Scalp Detox & Demineralisation",
-            "product_role": "TriShield Clarifying Shampoo",
             "description": "Dissolves stubborn calcium, magnesium and mineral crusts deposited by city hard water. Decongests follicular pores without stripping natural barrier lipids.",
+            "product_role": "TriShield Clarifying Shampoo",
             "key_actives": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators",
+            "video": "shopify://files/videos/Shampoo_cleaning_hair_animation_20260912151914.mp4",
+            "media_file": "",
+            "viz": "auto",
+            "time_badge": "10s Read · 2x/week",
             "button_label": "Explore Reset",
             "button_link": "shopify://collections/all"
           }
@@ -121,12 +124,15 @@
           "type": "step",
           "settings": {
             "step_number": "2",
-            "time_badge": "10s Read · Daily",
             "title": "SUPPORT",
             "tagline": "Phase 02 · Microbiome & Follicle Nutrition",
-            "product_role": "Follicle Tonic & Daily Conditioner",
             "description": "Rebalances scalp pH, nourishes the microbial ecosystem, and floods the root zone with essential micronutrients to boost microcirculation.",
+            "product_role": "Follicle Tonic & Daily Conditioner",
             "key_actives": "Probiotic Ferments · Niacinamide · Rosemary Peptides",
+            "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
+            "media_file": "",
+            "viz": "auto",
+            "time_badge": "10s Read · Daily",
             "button_label": "Explore Support",
             "button_link": "shopify://collections/all"
           }
@@ -135,12 +141,15 @@
           "type": "step",
           "settings": {
             "step_number": "3",
-            "time_badge": "10s Read · Weekly",
             "title": "REPAIR",
             "tagline": "Phase 03 · Bond Integrity & Cuticle Shield",
-            "product_role": "Keratin & Ceramide Deep Recovery Mask",
             "description": "Reconstructs damaged keratin chains, seals lifted hair cuticles against humidity, and leaves a breathable shield against urban micro-pollutants.",
+            "product_role": "Keratin & Ceramide Deep Recovery Mask",
             "key_actives": "Hydrolyzed Keratin · Ceramide NP · Argan Lipid Matrix",
+            "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
+            "media_file": "",
+            "viz": "auto",
+            "time_badge": "10s Read · Weekly",
             "button_label": "Explore Repair",
             "button_link": "shopify://collections/all"
           }
@@ -170,7 +179,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_05_00_15_PM.png",
             "title": "HAIR GROWTH",
             "link": "",
-            "custom_bg_color": "#EDE7DD",
+            "custom_bg_color": "#ede7dd",
             "custom_text_color": "#ffffff"
           }
         },
@@ -180,7 +189,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_58_32_PM.png",
             "title": "ANTI-GREY",
             "link": "",
-            "custom_bg_color": "#EDE7DD",
+            "custom_bg_color": "#ede7dd",
             "custom_text_color": "#ffffff"
           }
         },
@@ -190,7 +199,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_55_49_PM.png",
             "title": "DANDRUFF",
             "link": "",
-            "custom_bg_color": "#EDE7DD",
+            "custom_bg_color": "#ede7dd",
             "custom_text_color": "#ffffff"
           }
         },
@@ -200,7 +209,7 @@
             "image": "shopify://shop_images/ChatGPT_Image_Aug_29_2026_04_44_17_PM.png",
             "title": "REGROWTH",
             "link": "",
-            "custom_bg_color": "#EDE7DD",
+            "custom_bg_color": "#ede7dd",
             "custom_text_color": "#ffffff"
           }
         }
@@ -457,14 +466,14 @@
       "type": "pruv-hair-test-popup",
       "settings": {
         "enabled": true,
+        "show_launcher": true,
+        "launcher_label": "Hair Test",
         "quiz_page": "hair-test",
         "delay": 7,
         "eyebrow": "60-second hair test",
         "heading": "Not sure where to <strong>start?</strong>",
         "text": "Four quick questions. We'll match you to the right formula and show you why.",
-        "fallback_label": "Take the hair test",
-        "show_launcher": true,
-        "launcher_label": "Hair Test"
+        "fallback_label": "Take the hair test"
       }
     }
   },
