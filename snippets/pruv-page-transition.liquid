@@ -16,9 +16,29 @@
   deferred file cannot do that - it runs after parsing, so you would see the new
   page flash into view and only then get covered.
 {%- endcomment -%}
+{%- comment -%}
+  Two variants, picked by media query in the stylesheet rather than by script,
+  so the choice is made before first paint on the arriving half too:
+
+  - Narrow screens get the curved sweep - one panel clipped to an ellipse.
+  - Wide screens get staggered columns rising from the bottom, which has far
+    more to look at across a wide viewport than a single flat edge does.
+
+  Both are rendered; only one is ever displayed. Static markup, so the unused
+  one costs nothing but a few bytes.
+{%- endcomment -%}
 <div class="pruv-pt" data-pruv-page-transition data-state="idle" aria-hidden="true">
-  <div class="pruv-pt__layer pruv-pt__layer--edge"></div>
-  <div class="pruv-pt__layer pruv-pt__layer--panel"></div>
+  <div class="pruv-pt__curve">
+    <div class="pruv-pt__layer pruv-pt__layer--edge"></div>
+    <div class="pruv-pt__layer pruv-pt__layer--panel"></div>
+  </div>
+  <div class="pruv-pt__columns">
+    <div class="pruv-pt__column"></div>
+    <div class="pruv-pt__column"></div>
+    <div class="pruv-pt__column"></div>
+    <div class="pruv-pt__column"></div>
+    <div class="pruv-pt__column"></div>
+  </div>
 </div>
 <script>
   (function () {

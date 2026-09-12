@@ -14,18 +14,35 @@
    handed straight back to the browser untouched. */
 (function () {
   var FLAG = 'pruv:pt';
-  var LEAVE_MS = 850; /* keep in step with --pruv-pt-leave */
-  var ENTER_MS = 950; /* keep in step with --pruv-pt-enter */
   var STALL_MS = 4000;
 
   var overlay = document.querySelector('[data-pruv-page-transition]');
   if (!overlay) return;
 
+  /* Timings come from the stylesheet. The two variants take different lengths
+     of time - the columns include their stagger - and which one is live is a
+     media query's decision, so reading it back is the only way the navigation
+     stays in step with whatever is actually on screen. Read per use rather
+     than cached: a resize across the breakpoint changes the answer. */
+  function duration(name, fallback) {
+    var raw = getComputedStyle(overlay).getPropertyValue(name).trim();
+    var value = parseFloat(raw);
+    if (!raw || !isFinite(value)) return fallback;
+    return raw.indexOf('ms') > -1 ? value : value * 1000;
+  }
+
   var canClip =
     window.CSS && CSS.supports && CSS.supports('clip-path', 'ellipse(50% 50% at 50% 50%)');
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!canClip || reduced) {
+  /* Only the curve needs clip-path; the columns are plain transforms. Without
+     clip-path the curve's panel would cover with no animation at all - a
+     graphite flash - so stand down, but only if the curve is the variant this
+     viewport is actually using. */
+  var columns = overlay.querySelector('.pruv-pt__columns');
+  var curveActive = !columns || getComputedStyle(columns).display === 'none';
+
+  if (reduced || (!canClip && curveActive)) {
     // The inline script may already have set `arriving`; stand it down.
     overlay.dataset.state = 'off';
     return;
@@ -60,7 +77,7 @@
       overlay.classList.remove('is-instant');
       void overlay.offsetWidth;
       overlay.dataset.state = 'revealing';
-      window.setTimeout(idle, ENTER_MS + 100);
+      window.setTimeout(idle, duration('--pruv-pt-enter-total', 950) + 100);
     });
   }
 
@@ -84,7 +101,7 @@
     window.setTimeout(function () {
       navigated = true;
       window.location.href = href;
-    }, LEAVE_MS);
+    }, duration('--pruv-pt-leave-total', 850));
 
     /* A navigation that never lands - a 204, a link the server turned into a
        download, the visitor hitting Escape. Retreat rather than sit on top of

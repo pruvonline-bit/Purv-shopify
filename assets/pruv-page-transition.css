@@ -28,6 +28,18 @@
   --pruv-pt-leave: 0.85s;
   --pruv-pt-enter: 0.95s;
   --pruv-pt-ease: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Column variant. easeOutQuad is GSAP's power1.out, which is the default the
+     reference implementation leans on. */
+  --pruv-pt-col: 0.55s;
+  --pruv-pt-col-stagger: 0.11s;
+  --pruv-pt-col-ease: cubic-bezier(0.5, 1, 0.89, 1);
+
+  /* How long the whole gesture takes, stagger included. The script reads these
+     to time the navigation, so the two never drift apart - do not inline the
+     numbers into the JS. */
+  --pruv-pt-leave-total: 0.85s;
+  --pruv-pt-enter-total: 0.95s;
 }
 
 .pruv-pt {
@@ -36,6 +48,28 @@
   z-index: 9999;
   pointer-events: none;
   visibility: hidden;
+}
+
+/* Variant switch. The curve is the narrow-screen default; columns take over at
+   the same 750px the rest of the theme calls desktop. */
+.pruv-pt__columns {
+  display: none;
+}
+
+@media screen and (min-width: 750px) {
+  :root {
+    /* 0.55s + 4 staggers. */
+    --pruv-pt-leave-total: 0.99s;
+    --pruv-pt-enter-total: 0.99s;
+  }
+
+  .pruv-pt__curve {
+    display: none;
+  }
+
+  .pruv-pt__columns {
+    display: block;
+  }
 }
 
 /* Both classes in the selector are load-bearing. These layers are empty divs,
@@ -146,11 +180,109 @@
   transition-duration: 0.5s;
 }
 
+/* ==========================================================================
+   Columns - the wide-screen variant
+   ==========================================================================
+
+   Five full-height columns that rise from below the fold to cover, then keep
+   rising and exit through the top of the viewport on the next page. Same idea
+   as the curve - motion that carries on in one direction across two documents
+   rather than a curtain that opens back up - but staggered left to right, so a
+   wide viewport gets a travelling staircase instead of one flat edge.
+
+   Each column carries a copper hairline on its leading edge, which is what
+   makes the stagger legible: you read five copper lines climbing in sequence.
+   At full cover they all line up along the top of the screen. */
+
+/* `display` and the class pair are both load-bearing here for the same reason
+   as the curve layers above - these are empty divs, and Dawn's base.css hides
+   those at 0-1-1. */
+.pruv-pt .pruv-pt__column {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* A shade over a fifth: sub-pixel column widths otherwise leave hairline
+     gaps of live page showing between them at full cover. */
+  width: 20.2%;
+  background-color: rgb(var(--pruv-graphite));
+  /* Hairline plus a short bloom under it, so the rising edge reads as lit
+     rather than as a drawn border. Stays an accent - a few pixels of copper on
+     a graphite column, never a copper block.
+
+     The bloom is a gradient rather than a second inset shadow: an inset shadow
+     bleeds from the left and right edges as well as the top, and with the
+     columns overlapping slightly that doubled up into uneven vertical lines
+     across the covered screen. A gradient only paints where it is told to. */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(var(--pruv-copper), 0.3),
+    rgba(var(--pruv-copper), 0) 90px
+  );
+  box-shadow: inset 0 3px 0 0 rgba(var(--pruv-copper), 0.9);
+  /* Later siblings paint over earlier ones, so a left edge shows and a right
+     edge would be buried under the overlap. Keeps a whisper of the column
+     structure once the screen is fully covered. */
+  border-left: 1px solid rgba(var(--pruv-copper), 0.14);
+  transform: translateY(100%);
+  transition: transform var(--pruv-pt-col) var(--pruv-pt-col-ease);
+}
+
+.pruv-pt.is-instant .pruv-pt__column {
+  transition: none !important;
+}
+
+/* Position and stagger. The delay only has an effect while a transition is
+   actually running, so it lives on the base rule rather than being repeated
+   in every state. */
+.pruv-pt .pruv-pt__column:nth-child(1) {
+  left: 0;
+  transition-delay: 0s;
+}
+
+.pruv-pt .pruv-pt__column:nth-child(2) {
+  left: 20%;
+  transition-delay: var(--pruv-pt-col-stagger);
+}
+
+.pruv-pt .pruv-pt__column:nth-child(3) {
+  left: 40%;
+  transition-delay: calc(var(--pruv-pt-col-stagger) * 2);
+}
+
+.pruv-pt .pruv-pt__column:nth-child(4) {
+  left: 60%;
+  transition-delay: calc(var(--pruv-pt-col-stagger) * 3);
+}
+
+.pruv-pt .pruv-pt__column:nth-child(5) {
+  left: 80%;
+  transition-delay: calc(var(--pruv-pt-col-stagger) * 4);
+}
+
+/* Waiting below the fold. */
+.pruv-pt[data-state='idle'] .pruv-pt__column,
+.pruv-pt[data-state='cancelled'] .pruv-pt__column {
+  transform: translateY(100%);
+}
+
+/* Covering. */
+.pruv-pt[data-state='leaving'] .pruv-pt__column,
+.pruv-pt[data-state='arriving'] .pruv-pt__column {
+  transform: translateY(0%);
+}
+
+/* Carrying on out through the top. */
+.pruv-pt[data-state='revealing'] .pruv-pt__column {
+  transform: translateY(-100%);
+}
+
 /* No clip-path support, or the visitor asked for less motion: the panel has to
    stay out of the way even though the snippet's inline script may already have
    marked it as arriving. */
 .pruv-pt[data-state='off'],
-.pruv-pt[data-state='off'] .pruv-pt__layer {
+.pruv-pt[data-state='off'] .pruv-pt__layer,
+.pruv-pt[data-state='off'] .pruv-pt__column {
   visibility: hidden;
   clip-path: none;
   transition: none;
