@@ -1,0 +1,106 @@
+{% doc %}
+  Renders the animated diagram for one ritual phase.
+
+  Geometry only - all motion lives in section-pruv-ritual-explainer.css and
+  runs only while the step is active (.pruv-ritual__step.is-active), so each
+  diagram replays when its step opens. Strokes inherit currentColor, so the
+  copper accent is set once in CSS.
+
+  @param {string} viz - one of "reset", "support", "repair". Anything else
+    renders nothing.
+
+  @example
+  {% render 'pruv-ritual-viz', viz: 'reset' %}
+{% enddoc %}
+
+{%- case viz -%}
+  {%- when 'reset' -%}
+    {%- comment -%} Mineral crust dissolving off a strand, then rinsing away. {%- endcomment -%}
+    <svg
+      class="pruv-viz pruv-viz--reset"
+      viewBox="0 0 300 132"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        class="pruv-viz__strand"
+        d="M34 14C70 46 104 28 134 64c30 36 70 20 132 54"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+      <path
+        class="pruv-viz__rinse"
+        d="M34 14C70 46 104 28 134 64c30 36 70 20 132 54"
+        stroke="currentColor"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+      <g class="pruv-viz__crystals" stroke="currentColor" stroke-width="1.6">
+        <rect class="pruv-viz__crystal" x="58" y="26" width="11" height="11" rx="1.5" transform="rotate(38 63.5 31.5)" />
+        <rect class="pruv-viz__crystal" x="104" y="30" width="9" height="9" rx="1.5" transform="rotate(-22 108.5 34.5)" />
+        <rect class="pruv-viz__crystal" x="140" y="62" width="12" height="12" rx="1.5" transform="rotate(18 146 68)" />
+        <rect class="pruv-viz__crystal" x="188" y="74" width="9" height="9" rx="1.5" transform="rotate(-34 192.5 78.5)" />
+        <rect class="pruv-viz__crystal" x="224" y="92" width="10" height="10" rx="1.5" transform="rotate(26 229 97)" />
+      </g>
+    </svg>
+
+  {%- when 'support' -%}
+    {%- comment -%} Nutrients drawn into a follicle, microbiome pulsing outward. {%- endcomment -%}
+    <svg
+      class="pruv-viz pruv-viz--support"
+      viewBox="0 0 300 132"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g class="pruv-viz__rings" stroke="currentColor" stroke-width="1.4">
+        <circle class="pruv-viz__ring" cx="150" cy="70" r="26" />
+        <circle class="pruv-viz__ring" cx="150" cy="70" r="26" />
+        <circle class="pruv-viz__ring" cx="150" cy="70" r="26" />
+      </g>
+      <path
+        class="pruv-viz__follicle"
+        d="M150 118c-16 0-22-18-21-38 1-24 21-36 21-36s20 12 21 36c1 20-5 38-21 38Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <line class="pruv-viz__root" x1="150" y1="44" x2="150" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <g class="pruv-viz__nutrients" fill="currentColor">
+        <circle class="pruv-viz__nutrient" cx="58" cy="38" r="3.5" />
+        <circle class="pruv-viz__nutrient" cx="70" cy="98" r="3" />
+        <circle class="pruv-viz__nutrient" cx="242" cy="44" r="3.5" />
+        <circle class="pruv-viz__nutrient" cx="232" cy="102" r="3" />
+        <circle class="pruv-viz__nutrient" cx="104" cy="18" r="2.5" />
+        <circle class="pruv-viz__nutrient" cx="198" cy="16" r="2.5" />
+      </g>
+    </svg>
+
+  {%- when 'repair' -%}
+    {%- comment -%} Lifted cuticle scales settling flat, then a sealing sweep. {%- endcomment -%}
+    <svg
+      class="pruv-viz pruv-viz--repair"
+      viewBox="0 0 300 132"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <line class="pruv-viz__shaft" x1="26" y1="98" x2="274" y2="98" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <g class="pruv-viz__scales" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+        <path class="pruv-viz__scale" d="M32 98h54l-16-30H48Z" />
+        <path class="pruv-viz__scale" d="M80 98h54l-16-30h-38Z" />
+        <path class="pruv-viz__scale" d="M128 98h54l-16-30h-38Z" />
+        <path class="pruv-viz__scale" d="M176 98h54l-16-30h-38Z" />
+        <path class="pruv-viz__scale" d="M224 98h44l-14-30h-38Z" />
+      </g>
+      <path
+        class="pruv-viz__seal"
+        d="M26 62h248"
+        stroke="currentColor"
+        stroke-width="3"
+        stroke-linecap="round"
+      />
+    </svg>
+{%- endcase -%}
