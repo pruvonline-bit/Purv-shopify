@@ -324,6 +324,24 @@
   color: rgb(var(--pruv-copper));
 }
 
+/* Merchant-uploaded video/image/GIF: the frame just holds it, no copper wash
+   tinting someone's artwork. */
+.pruv-ritual__step-viz--media {
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(var(--color-foreground), 0.04);
+}
+
+.pruv-ritual__step-viz--media img,
+.pruv-ritual__step-viz--media video,
+.pruv-ritual__step-viz--media .video-wrapper,
+.pruv-ritual__step-viz--media deferred-media {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: inherit;
+}
+
 /* Motion only runs for the open step, so each diagram replays on open. */
 
 /* Reset — crystals break off and drift away, then a rinse runs the strand. */

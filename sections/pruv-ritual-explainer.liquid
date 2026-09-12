@@ -126,7 +126,32 @@
                     {%- endif -%}
                   </div>
 
-                  {%- if viz != 'none' -%}
+                  {%- comment -%}
+                    Custom media wins over the built-in diagram: video first
+                    (best motion per byte), then an image/GIF, else the SVG.
+                  {%- endcomment -%}
+                  {%- if block.settings.video != blank -%}
+                    <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media" aria-hidden="true">
+                      {{
+                        block.settings.video
+                        | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true
+                      }}
+                    </div>
+                  {%- elsif block.settings.image != blank -%}
+                    <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media">
+                      {%- comment -%}
+                        Requested at the file's own width: downscaling an
+                        animated GIF through the CDN can flatten it to one frame.
+                      {%- endcomment -%}
+                      <img
+                        src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
+                        alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.height }}"
+                        loading="lazy"
+                      >
+                    </div>
+                  {%- elsif viz != 'none' -%}
                     <div class="pruv-ritual__step-viz" aria-hidden="true">
                       {%- render 'pruv-ritual-viz', viz: viz -%}
                     </div>
@@ -244,10 +269,28 @@
           "default": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators"
         },
         {
+          "type": "header",
+          "content": "Step visual"
+        },
+        {
+          "type": "paragraph",
+          "content": "Upload your own to replace the built-in diagram. A video wins over an image; with neither, the diagram below is used. For animation, MP4 is lighter and smoother than GIF."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (MP4 / WebM, loops muted)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image or animated GIF"
+        },
+        {
           "type": "select",
           "id": "viz",
-          "label": "Animated diagram",
-          "info": "Auto picks by position: 1st Reset, 2nd Support, 3rd Repair.",
+          "label": "Built-in animated diagram",
+          "info": "Used only when no video or image is set. Auto picks by position: 1st Reset, 2nd Support, 3rd Repair.",
           "options": [
             { "value": "auto", "label": "Auto" },
             { "value": "reset", "label": "Reset — mineral crust dissolving" },
