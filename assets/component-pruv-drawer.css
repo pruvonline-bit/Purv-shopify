@@ -12,57 +12,6 @@
    unscoped - it only exists inside header-drawer, which is itself hidden
    on desktop. */
 
-/* --------------------------------------------------------------------------
-   MENU / CLOSE toggle pill
-   -------------------------------------------------------------------------- */
-.pruv-drawer-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 1.5rem;
-  border: 0.1rem solid rgba(var(--pruv-copper), 0.55);
-  border-radius: 0.4rem;
-  font-family: 'Geist Mono', monospace;
-  font-size: 1.15rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  line-height: 1;
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-/* Both labels occupy one grid cell so they can slide past each other. */
-.pruv-drawer-toggle__labels {
-  display: grid;
-  overflow: hidden;
-}
-
-.pruv-drawer-toggle__label {
-  grid-area: 1 / 1;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
-}
-
-.pruv-drawer-toggle__label--close {
-  transform: translateY(130%);
-  opacity: 0;
-}
-
-details[open] > .pruv-drawer-toggle .pruv-drawer-toggle__label--open {
-  transform: translateY(-130%);
-  opacity: 0;
-}
-
-details[open] > .pruv-drawer-toggle .pruv-drawer-toggle__label--close {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-details[open] > .pruv-drawer-toggle {
-  background-color: rgb(var(--pruv-copper));
-  border-color: rgb(var(--pruv-copper));
-  color: rgb(var(--pruv-bone));
-}
-
 @media screen and (max-width: 989px) {
   /* Layering. The header's .shopify-section is `position: sticky; z-index: 3`,
      which makes it a stacking context - so any z-index on the panel only
@@ -77,12 +26,33 @@ details[open] > .pruv-drawer-toggle {
   }
 
   /* Inside the header section: the panel is a *sibling* of its own trigger,
-     so without this it paints over the CLOSE pill and the menu can't be
+     so without this it paints over the close icon and the menu can't be
      dismissed. A plain descendant selector, so closability never depends
      on :has() support. */
-  html.pruv-drawer-gsap details[open] > .pruv-drawer-toggle {
+  html.pruv-drawer-gsap details[open] > .header__icon--menu {
     position: relative;
     z-index: 2;
+  }
+
+  /* Re-assert Dawn's hamburger/close swap. pruv-glass-nav.css forces
+     `.header__icon svg { display: block !important }` for icon sizing, which
+     outranks Dawn's plain `display: none` and leaves the hamburger and the X
+     stacked on top of each other while the drawer is open. Not scoped to
+     pruv-drawer-gsap on purpose - the clash exists whenever the drawer opens,
+     GSAP or not. */
+  details[open] > .header__icon--menu .icon-hamburger,
+  details:not([open]) > .header__icon--menu .icon-close {
+    display: none !important;
+  }
+
+  /* Dawn dims the page with a translucent scrim on the toggle itself
+     (.header__icon--menu[aria-expanded='true']::before, absolutely positioned
+     at top:100%/left:0/width:100%). Positioning the toggle above re-anchors
+     that pseudo-element to the icon, which paints a translucent band from the
+     icon's left edge all the way down the page. Our full-screen overlay is
+     the scrim now, so it has to go. */
+  html.pruv-drawer-gsap .header__icon--menu[aria-expanded='true']::before {
+    display: none;
   }
 
   /* Cosmetic: keep the logo and cart/search icons readable on top of the

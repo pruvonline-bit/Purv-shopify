@@ -12,21 +12,12 @@
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
-      class="header__icon header__icon--menu header__icon--summary link focus-inset pruv-drawer-toggle"
+      class="header__icon header__icon--menu header__icon--summary link focus-inset"
       aria-label="{{ 'sections.header.menu' | t }}"
     >
-      {%- comment -%}
-        Two labels stacked in one grid cell; the open/close pair slides
-        vertically past each other on toggle (see component-pruv-drawer.css).
-        aria-hidden because the summary's own aria-label already names it.
-      {%- endcomment -%}
-      <span class="pruv-drawer-toggle__labels" aria-hidden="true">
-        <span class="pruv-drawer-toggle__label pruv-drawer-toggle__label--open">
-          {{- 'sections.header.menu' | t -}}
-        </span>
-        <span class="pruv-drawer-toggle__label pruv-drawer-toggle__label--close">
-          {{- 'accessibility.close' | t -}}
-        </span>
+      <span>
+        {{- 'icon-hamburger.svg' | inline_asset_content -}}
+        {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
     <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">

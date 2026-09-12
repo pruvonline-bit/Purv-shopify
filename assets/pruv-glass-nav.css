@@ -260,26 +260,23 @@
     display: none !important;
   }
 
-  /* 3. Menu drawer trigger (4th - Far Right). Sizes to the MENU/CLOSE pill
-     rather than a fixed square, and must not shrink under the icon row. */
+  /* 3. Hamburger Menu Drawer (4th - Far Right) */
   header-drawer {
     order: 3 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: 0 0 0 0.6rem !important;
-    width: auto !important;
-    height: auto !important;
-    flex: 0 0 auto !important;
+    margin: 0 0 0 0.1rem !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
   }
 
-  /* The trigger is a MENU/CLOSE pill now, not a square icon button, so it
-     sizes to its label instead of a fixed 3.8rem box. */
   header-drawer .header__icon--menu {
-    width: auto !important;
-    height: auto !important;
-    margin: 0 0 0 0.6rem !important;
-    display: inline-flex !important;
+    width: 3.8rem !important;
+    height: 3.8rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
