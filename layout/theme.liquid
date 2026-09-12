@@ -69,6 +69,7 @@
     <script src="{{ 'pruv-custom-cursor.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pruv-menu-drawer-animation.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pruv-ritual-explainer.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pruv-page-transition.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
 
@@ -305,6 +306,11 @@
     {% endstyle %}
 
     {{ 'pruv-brand-tokens.css' | asset_url | stylesheet_tag }}
+    {%- comment -%}
+      Not deferred and not loaded with media="print": the transition panel has to
+      be styled on the first paint of every page, or the arriving half flashes.
+    {%- endcomment -%}
+    {{ 'pruv-page-transition.css' | asset_url | stylesheet_tag }}
     {{ 'pruv-custom-cursor.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {%- comment -%}
@@ -358,6 +364,12 @@
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
+
+    {%- comment -%}
+      As early in the body as possible, and outside every section wrapper - see
+      the snippet for why both of those matter.
+    {%- endcomment -%}
+    {% render 'pruv-page-transition' %}
 
     {%- if settings.cart_type == 'drawer' -%}
       {%- render 'cart-drawer' -%}

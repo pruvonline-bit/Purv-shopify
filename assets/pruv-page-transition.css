@@ -1,0 +1,163 @@
+/* Prüv — page transition: a curved panel sweep between page loads.
+
+   The shape is lifted from palmo.co.in's basket drawer: a full-bleed panel
+   clipped to an ellipse whose centre sits just *outside* the viewport edge, so
+   the only part of the ellipse you ever see is one flank of it - a convex arc.
+   Growing the radii sweeps that arc across the screen, and because an ellipse
+   flattens as it grows the leading edge starts sharply bowed and straightens
+   out as it lands. That curvature is the whole effect.
+
+   Leaving a page grows the ellipse from the right edge until the panel covers.
+   Arriving shrinks an identical ellipse anchored off the *left* edge, so the
+   panel appears to carry on in the same direction and exit stage left rather
+   than retreating back the way it came - one continuous sweep across two
+   documents.
+
+   Two stacked layers: a copper one that is always a few percent larger than
+   the graphite one, so a thin burnished crescent runs ahead of the panel along
+   the arc. It is never a copper block - at full cover the graphite layer hides
+   it completely.
+
+   Deliberately CSS transitions rather than GSAP. The arriving half has to be
+   painted before any deferred script has even parsed, and a transition that
+   only exists once a CDN responds would mean a graphite screen on a slow
+   connection. cubic-bezier(0.65, 0, 0.35, 1) is easeInOutCubic, which is the
+   same curve GSAP calls power3.inOut - the ease palmo uses on the original. */
+
+:root {
+  --pruv-pt-leave: 0.85s;
+  --pruv-pt-enter: 0.95s;
+  --pruv-pt-ease: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.pruv-pt {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+/* Both classes in the selector are load-bearing. These layers are empty divs,
+   and Dawn's base.css carries `a:empty, ul:empty, div:empty, section:empty, ...
+   { display: none }` - a 0-1-1 selector that beats a lone `.pruv-pt__layer` and
+   collapses them to nothing. The class pair here is 0-2-0, which wins. Do not
+   simplify it, and do not drop the explicit `display`. */
+.pruv-pt .pruv-pt__layer {
+  display: block;
+  position: absolute;
+  inset: 0;
+  /* Idle: a zero-width ellipse tucked against the right edge. */
+  clip-path: ellipse(0% 65% at 105% 50%);
+  /* Declared here, on every state, rather than switched on by the state that
+     needs it. A transition that only appears in the after-change style relies
+     on one specific reading of the spec; always having it and suppressing it
+     explicitly (below) does not. */
+  transition: clip-path var(--pruv-pt-leave) var(--pruv-pt-ease);
+}
+
+/* Applied around the two changes that must land instantly - taking up the
+   covering pose on arrival, and resetting the anchor back to the right edge
+   afterwards. Both move the ellipse's centre, which must never be seen to
+   animate. JS forces a reflow before taking the class off again. */
+.pruv-pt.is-instant .pruv-pt__layer {
+  transition: none !important;
+}
+
+.pruv-pt__layer--edge {
+  background-color: rgba(var(--pruv-copper), 0.92);
+}
+
+.pruv-pt__layer--panel {
+  background-color: rgb(var(--pruv-graphite));
+}
+
+/* Idle --------------------------------------------------------------------- */
+.pruv-pt[data-state='idle'] {
+  visibility: hidden;
+}
+
+.pruv-pt[data-state='idle'] .pruv-pt__layer {
+  clip-path: ellipse(0% 65% at 105% 50%);
+}
+
+/* Leaving ------------------------------------------------------------------
+   pointer-events go live so a second click during the sweep is swallowed
+   rather than queueing up another navigation. */
+.pruv-pt[data-state='leaving'] {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.pruv-pt[data-state='leaving'] .pruv-pt__layer--edge {
+  clip-path: ellipse(153% 123% at 105% 50%);
+}
+
+.pruv-pt[data-state='leaving'] .pruv-pt__layer--panel {
+  clip-path: ellipse(150% 120% at 105% 50%);
+}
+
+/* Arriving -----------------------------------------------------------------
+   Set inline by the snippet's own script while the document is still parsing,
+   so this is the very first thing painted. Already covering, and anchored off
+   the opposite edge ready to continue leftwards. */
+.pruv-pt[data-state='arriving'] {
+  visibility: visible;
+}
+
+.pruv-pt[data-state='arriving'] .pruv-pt__layer--edge {
+  clip-path: ellipse(153% 123% at -5% 50%);
+}
+
+.pruv-pt[data-state='arriving'] .pruv-pt__layer--panel {
+  clip-path: ellipse(150% 120% at -5% 50%);
+}
+
+/* Revealing ----------------------------------------------------------------
+   The panel carries on off the left edge. The copper layer is the one that
+   leads, so here it has to shrink *behind* the graphite - it keeps its size
+   advantage, which now trails, putting the crescent on the arc as it leaves. */
+.pruv-pt[data-state='revealing'] {
+  visibility: visible;
+}
+
+.pruv-pt[data-state='revealing'] .pruv-pt__layer {
+  transition-duration: var(--pruv-pt-enter);
+}
+
+.pruv-pt[data-state='revealing'] .pruv-pt__layer--edge {
+  clip-path: ellipse(0% 68% at -5% 50%);
+}
+
+.pruv-pt[data-state='revealing'] .pruv-pt__layer--panel {
+  clip-path: ellipse(0% 65% at -5% 50%);
+}
+
+/* Cancelled ----------------------------------------------------------------
+   A navigation that never happened (a 204, a link the server turned into a
+   download, the user cancelling). Retreat the way we came rather than leave
+   the panel parked over a live page. */
+.pruv-pt[data-state='cancelled'] {
+  visibility: visible;
+}
+
+.pruv-pt[data-state='cancelled'] .pruv-pt__layer {
+  clip-path: ellipse(0% 65% at 105% 50%);
+  transition-duration: 0.5s;
+}
+
+/* No clip-path support, or the visitor asked for less motion: the panel has to
+   stay out of the way even though the snippet's inline script may already have
+   marked it as arriving. */
+.pruv-pt[data-state='off'],
+.pruv-pt[data-state='off'] .pruv-pt__layer {
+  visibility: hidden;
+  clip-path: none;
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-pt {
+    display: none;
+  }
+}
