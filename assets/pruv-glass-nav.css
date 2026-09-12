@@ -1,7 +1,7 @@
 /* Prüv — header, layered over the offer strip */
 
 .shopify-section-group-header-group .header-wrapper {
-  background-color: rgba(var(--color-background), 0.66);
+  background-color: transparent;
   transition: background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
