@@ -127,22 +127,54 @@
                   </div>
 
                   {%- comment -%}
-                    Custom media wins over the built-in diagram: video first
-                    (best motion per byte), then an image/GIF, else the SVG.
+                    Custom media wins over the built-in diagram, in order:
+                    uploaded video, then a raw file (animated WebP/SVG/GIF
+                    served untransformed), then an image, else the SVG.
                   {%- endcomment -%}
+                  {%- liquid
+                    assign media_src = ''
+                    if block.settings.media_file != blank
+                      if block.settings.media_file contains '//'
+                        assign media_src = block.settings.media_file
+                      else
+                        assign media_src = block.settings.media_file | file_url
+                      endif
+                    endif
+                  -%}
+
                   {%- if block.settings.video != blank -%}
                     <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media" aria-hidden="true">
-                      {{
-                        block.settings.video
-                        | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true
-                      }}
+                      {%- comment -%}
+                        Hand-rolled rather than video_tag: inline autoplay on
+                        iOS needs both `muted` and `playsinline`, and
+                        video_tag does not take a playsinline argument.
+                      {%- endcomment -%}
+                      <video
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        preload="metadata"
+                        {% if block.settings.video.preview_image %}
+                          poster="{{ block.settings.video.preview_image | image_url: width: 900 }}"
+                        {% endif %}
+                      >
+                        {%- for source in block.settings.video.sources -%}
+                          <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                        {%- endfor -%}
+                      </video>
+                    </div>
+                  {%- elsif media_src != blank -%}
+                    <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media">
+                      {%- comment -%}
+                        file_url serves the original bytes, so animation in a
+                        WebP/SVG/GIF survives - the image CDN can re-encode an
+                        animated file down to a single frame.
+                      {%- endcomment -%}
+                      <img src="{{ media_src }}" alt="{{ block.settings.title | escape }}" loading="lazy">
                     </div>
                   {%- elsif block.settings.image != blank -%}
                     <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media">
-                      {%- comment -%}
-                        Requested at the file's own width: downscaling an
-                        animated GIF through the CDN can flatten it to one frame.
-                      {%- endcomment -%}
                       <img
                         src="{{ block.settings.image | image_url: width: block.settings.image.width }}"
                         alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
@@ -274,17 +306,24 @@
         },
         {
           "type": "paragraph",
-          "content": "Upload your own to replace the built-in diagram. A video wins over an image; with neither, the diagram below is used. For animation, MP4 is lighter and smoother than GIF."
+          "content": "Upload your own to replace the built-in diagram. Order used: video, then file name, then image. MP4 belongs in the video slot. Animated WebP, SVG or GIF belongs in the file name slot, because the image slot can flatten animation to one frame."
         },
         {
           "type": "video",
           "id": "video",
-          "label": "Video (MP4 / WebM, loops muted)"
+          "label": "Video — MP4 / WebM",
+          "info": "Plays inline, muted, on loop."
+        },
+        {
+          "type": "text",
+          "id": "media_file",
+          "label": "Animated file name",
+          "info": "For animated WebP, SVG or GIF. Upload it under Content → Files, then enter the file name here, e.g. reset-loop.webp. A full URL also works."
         },
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Image or animated GIF"
+          "label": "Still image"
         },
         {
           "type": "select",
