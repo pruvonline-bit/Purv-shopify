@@ -1,51 +1,53 @@
-/* Prüv — custom luxury cursor: solid copper dot with trailing halo ring.
-   Enhanced with high-contrast outlines to stay crisp on both dark and light surfaces,
-   and interactive hover scaling. */
+/* Prüv — custom cursor: copper dot + trailing halo ring.
 
-html.pruv-cursor-enabled,
-html.pruv-cursor-enabled * {
-  cursor: none !important;
-}
+   IMPORTANT: `display` is deliberately NOT toggled from this file.
+   pruv-custom-cursor.js sets it inline with !important once it sees real
+   mouse input. These elements were being hidden by a stylesheet outside
+   document.styleSheets (browser/extension cosmetic filtering, which targets
+   small empty fixed-position divs) - verified live: no author rule declaring
+   `display` matched the element, yet computed display was `none`, and an
+   inline !important declaration was the only thing that restored it.
+   Moving `display` back in here will silently break the cursor again. */
 
 .pruv-cursor-dot,
 .pruv-cursor-ring {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 2147483647;
+  z-index: 10000;
   border-radius: 50%;
-  opacity: 1;
-  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   will-change: transform;
+  transition: width 0.18s ease, height 0.18s ease, background-color 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .pruv-cursor-dot {
-  width: 8px;
-  height: 8px;
-  background-color: #B87333;
-  background-color: rgb(var(--pruv-copper, 184, 115, 51));
-  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.85), 0 2px 5px rgba(0, 0, 0, 0.3);
+  width: 10px;
+  height: 10px;
+  background-color: #b87333;
+  box-shadow: 0 0 0 1.5px #ffffff, 0 2px 6px rgba(0, 0, 0, 0.45);
 }
 
 .pruv-cursor-ring {
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid #B87333;
-  border: 1.5px solid rgb(var(--pruv-copper, 184, 115, 51));
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4), 0 0 12px rgba(184, 115, 51, 0.3);
+  width: 40px;
+  height: 40px;
+  border: 2px solid #b87333;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6), 0 0 16px rgba(184, 115, 51, 0.45);
 }
 
 .pruv-cursor-ring.is-hovering {
-  width: 48px;
-  height: 48px;
-  background-color: rgba(184, 115, 51, 0.12);
-  border-color: #B87333;
-  border-width: 2px;
+  width: 54px;
+  height: 54px;
+  background-color: rgba(184, 115, 51, 0.18);
+  border-width: 2.5px;
+  box-shadow: 0 0 0 1.5px rgba(255, 255, 255, 0.8), 0 0 22px rgba(184, 115, 51, 0.6);
 }
 
-.pruv-cursor-dot.is-hidden,
-.pruv-cursor-ring.is-hidden {
-  opacity: 0 !important;
-  visibility: hidden;
+/* The native pointer is only surrendered once JS has the custom one running,
+   so a failure here leaves the normal cursor rather than no cursor at all. */
+html.pruv-cursor-active,
+html.pruv-cursor-active * {
+  cursor: none !important;
 }
