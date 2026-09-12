@@ -304,3 +304,15 @@
     color: #ffffff !important;
   }
 }
+
+/* ==========================================================================
+   Mobile menu drawer — GSAP-driven open/close
+   `pruv-drawer-gsap` is set on <html> by assets/pruv-menu-drawer-animation.js
+   only while it is actually driving the panel, so Dawn's CSS slide stays as
+   the fallback when GSAP is unavailable or motion is reduced. Dawn's
+   transform transition has to be off here, or it fights GSAP's per-frame
+   inline transforms. Submenus (.menu-drawer__submenu) keep Dawn's slide.
+   ========================================================================== */
+html.pruv-drawer-gsap .menu-drawer {
+  transition: none !important;
+}
