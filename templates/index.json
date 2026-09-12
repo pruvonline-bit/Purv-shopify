@@ -152,9 +152,9 @@
         "step-repair"
       ],
       "settings": {
-        "eyebrow": "The Prüv System · 10-Second Explainer",
-        "heading": "Educate in 10 Seconds: <em>Reset. Support. Repair.</em>",
-        "subheading": "<p>A targeted 3-phase scalp and hair ritual engineered specifically to counteract hard water mineral buildup, restore microbiome equilibrium, and seal the cuticular barrier.</p>",
+        "eyebrow": "",
+        "heading": "Learn in Seconds: <em>Reset. Support. Repair.</em>",
+        "subheading": "",
         "show_connectors": true,
         "color_scheme": "scheme-4",
         "padding_top": 64,
