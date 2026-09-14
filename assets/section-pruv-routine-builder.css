@@ -1033,86 +1033,261 @@
 }
 
 /* ==========================================================================
-   Mobile summary bar
-   ========================================================================== */
+   Mobile routine sheet
+   ==========================================================================
 
-.pruv-routine__bar {
+   Below 990px the card sits under the tiles, so a pick would change nothing
+   the visitor can see. The sheet slides up on the first pick with a one-row
+   peek - thumbnails, title, total, add to cart - and expands into the full
+   routine. The peek is kept to a single row on purpose: mobile tiles are
+   ~200px tall, and anything taller would cover the second row of tiles just
+   as someone reaches for it. */
+
+.pruv-routine__sheet {
   position: fixed;
-  left: 1.2rem;
-  right: 1.2rem;
-  bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 45;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.2rem;
-  padding: 0.7rem 0.7rem 0.7rem 2rem;
-  border-radius: 100px;
-  background-color: rgb(var(--pruv-graphite));
-  box-shadow: 0 18px 40px -16px rgba(var(--pruv-graphite), 0.55);
-  color: rgb(var(--pruv-bone));
   visibility: hidden;
-  transform: translateY(calc(100% + 2.4rem));
-  transition: transform 0.4s var(--pr-ease-out), visibility 0s linear 0.4s;
+  pointer-events: none;
+  transition: visibility 0s linear 0.4s;
 }
 
-.pruv-routine__bar.is-visible {
+.pruv-routine__sheet.is-visible {
   visibility: visible;
-  transform: none;
-  transition: transform 0.4s var(--pr-ease-out), visibility 0s;
+  transition: visibility 0s;
 }
 
 @media screen and (min-width: 990px) {
-  .pruv-routine__bar {
+  .pruv-routine__sheet {
     display: none;
   }
 }
 
-.pruv-routine__bar-summary {
-  min-width: 0;
+.pruv-routine__sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(var(--pruv-graphite), 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.pruv-routine__sheet[data-expanded='true'] .pruv-routine__sheet-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.pruv-routine__sheet-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 7.2rem);
+  max-height: calc(100dvh - 7.2rem);
+  padding: 0 1.6rem calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  border-radius: 2.4rem 2.4rem 0 0;
+  background-color: rgb(var(--pr-white));
+  box-shadow: 0 -18px 40px -22px rgba(var(--pruv-graphite), 0.4), 0 -1px 0 rgba(var(--pruv-warm-grey), 0.16);
+  color: rgb(var(--pruv-graphite));
+  pointer-events: auto;
+  transform: translateY(calc(100% + 2rem));
+  transition: transform 0.4s var(--pr-ease-out);
+}
+
+.pruv-routine__sheet.is-visible .pruv-routine__sheet-panel {
+  transform: none;
+}
+
+.pruv-routine__sheet-handle {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% + 3.2rem);
+  height: 2.4rem;
+  margin: 0 -1.6rem;
+  padding: 0;
+  border: 0;
+  border-radius: 2.4rem 2.4rem 0 0;
+  background: none;
+  cursor: grab;
+}
+
+/* The handle and peek are the drag zones, so the browser must not claim a
+   vertical swipe there as a page scroll. The expanded body keeps normal
+   touch scrolling. */
+.pruv-routine__sheet-handle,
+.pruv-routine__sheet-peek {
+  touch-action: none;
+}
+
+.pruv-routine__sheet-handle:focus-visible {
+  outline: 2px solid rgb(var(--pruv-copper));
+  outline-offset: -4px;
+}
+
+.pruv-routine__sheet-grip {
+  width: 3.6rem;
+  height: 0.4rem;
+  border-radius: 100px;
+  background-color: rgba(var(--pruv-warm-grey), 0.4);
+}
+
+.pruv-routine__sheet-peek {
+  display: grid;
+  flex: none;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.pruv-routine__sheet-thumbs {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pruv-routine__sheet-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 3.8rem;
+  height: 3.8rem;
   overflow: hidden;
-  font-family: var(--pr-mono);
-  font-size: 1.2rem;
+  border: 2px solid rgb(var(--pr-white));
+  border-radius: 1.1rem;
+  background-color: rgb(var(--pr-thumb));
+}
+
+/* Stacked: every visible thumb after the first tucks under its neighbour. */
+.pruv-routine__sheet-thumb:not([hidden]) ~ .pruv-routine__sheet-thumb {
+  margin-left: -1.2rem;
+}
+
+.pruv-routine__sheet-thumb img {
+  width: 100%;
+  height: 100%;
+  padding: 0.3rem;
+  object-fit: contain;
+}
+
+.pruv-routine__sheet-summary {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.pruv-routine__sheet-title {
+  overflow: hidden;
+  font-family: var(--pr-sans);
+  font-size: 1.45rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  line-height: 1.25;
   text-overflow: ellipsis;
-  text-transform: uppercase;
   white-space: nowrap;
 }
 
-.pruv-routine__bar-button {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  gap: 0.6rem;
-  min-height: 4.4rem;
-  padding: 0 1.8rem;
-  border: 0;
-  border-radius: 100px;
-  background-color: rgb(var(--pruv-copper));
+.pruv-routine__sheet-total {
   font-family: var(--pr-mono);
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgb(var(--pr-white));
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-variant-numeric: tabular-nums;
+  color: rgb(var(--pruv-warm-grey));
 }
 
-.pruv-routine__bar-button:hover {
-  background-color: rgb(var(--pruv-copper-dark));
+.pruv-routine .pruv-routine__sheet-submit {
+  width: auto;
+  min-height: 4.4rem;
+  margin-top: 0;
+  padding: 0 1.8rem;
+  font-size: 1.15rem;
+  white-space: nowrap;
 }
 
-.pruv-routine__bar-button:focus-visible {
-  outline: 2px solid rgb(var(--pruv-bone));
-  outline-offset: 2px;
+.pruv-routine__sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 1.2rem -1.6rem 0;
+  padding: 0 1.6rem 0.4rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-top: 1px solid rgba(var(--pruv-warm-grey), 0.18);
+  -webkit-overflow-scrolling: touch;
+}
+
+.pruv-routine__sheet-body .pruv-routine__reasons {
+  margin-top: 1.4rem;
+}
+
+.pruv-routine__sheet-rows {
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pruv-routine__sheet-row {
+  display: grid;
+  grid-template-columns: 4.4rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(var(--pruv-warm-grey), 0.12);
+}
+
+/* The rows borrow the card's thumb/aside classes, which carry grid-area names
+   from the card's grid. This grid has no such areas, and an unknown area name
+   makes the browser invent implicit tracks - the thumbnail ends up in the
+   price column. Plain source-order placement instead. */
+.pruv-routine__sheet-row > * {
+  grid-area: auto;
+}
+
+.pruv-routine__sheet-row[data-tier='optional'] {
+  margin: 0 -0.8rem;
+  padding: 1rem 0.8rem;
+  border-top-color: transparent;
+  border-radius: 1.2rem;
+  background-color: rgba(var(--pruv-copper), 0.05);
+}
+
+.pruv-routine__sheet-row .pruv-routine__thumb {
+  width: 4.4rem;
+  border-radius: 1.1rem;
+}
+
+.pruv-routine__sheet-row .pruv-routine__thumb img {
+  padding: 0.3rem;
+}
+
+.pruv-routine__sheet-row-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pruv-routine__sheet-row .pruv-routine__title {
+  display: block;
+  font-size: 1.45rem;
+}
+
+.pruv-routine__sheet-row .pruv-routine__aside {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+}
+
+.pruv-routine__sheet-row[data-state='sold_out'] .pruv-routine__thumb img {
+  opacity: 0.6;
+  filter: grayscale(1);
 }
 
 /* The hair test launcher shares the bottom of the screen; step it aside while
-   the bar is up. !important because the launcher's own reveal sets opacity
+   the sheet is up. !important because the launcher's own reveal sets opacity
    through a class toggle with equal specificity. */
-html.pruv-routine-bar-open .pruv-quiz-launcher {
+html.pruv-routine-sheet-open .pruv-quiz-launcher {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -1390,8 +1565,7 @@ html.pruv-routine-bar-open .pruv-quiz-launcher {
 @media (prefers-reduced-motion: reduce) {
   .pruv-routine *,
   .pruv-routine *::before,
-  .pruv-routine *::after,
-  .pruv-routine__bar {
+  .pruv-routine *::after {
     animation: none !important;
     transition: none !important;
   }

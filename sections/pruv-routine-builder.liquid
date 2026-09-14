@@ -260,6 +260,7 @@
 
         <form
           class="pruv-routine__foot"
+          id="PruvRoutineForm-{{ section.id }}"
           method="post"
           action="{{ routes.cart_add_url }}"
           data-pruv-routine-form
@@ -296,6 +297,7 @@
             type="submit"
             class="pruv-routine__submit"
             data-pruv-routine-submit
+            data-pruv-routine-primary
             {% if server_count == 0 %}
               aria-disabled="true"
             {% endif %}
@@ -330,18 +332,162 @@
 
     <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-pruv-routine-status></p>
 
-    {%- if section.settings.show_mobile_bar -%}
+    {%- if section.settings.show_mobile_sheet -%}
       {%- comment -%}
-        Mobile only (hidden at 990px and up). Rendered inert; the script lifts that
-        once a concern is picked and the card's button is out of view. Kept out of
-        the animated card so no transformed ancestor can trap its position: fixed.
+        Live routine sheet, below 990px only.
+
+        On a phone the card sits below the tiles, so picking a concern would
+        otherwise change nothing the visitor can see. This sheet slides up on the
+        first pick and mirrors the card live: a one-row peek (thumbnails, title,
+        total, add to cart) that expands into the full routine.
+
+        It never keeps its own state. Its rows, reasons and toggles are driven by
+        the same resolve pass as the card, and its button submits the card's own
+        form through the `form` attribute, so the two can never disagree about
+        what gets added.
+
+        Rendered inert and hidden; the script shows it while a concern is picked,
+        the section is on screen and the card's own button is not. Kept outside
+        the animated card so no transformed ancestor can trap position: fixed.
       {%- endcomment -%}
-      <div class="pruv-routine__bar" data-pruv-routine-bar aria-hidden="true" inert>
-        <span class="pruv-routine__bar-summary" data-pruv-routine-bar-summary></span>
-        <button type="button" class="pruv-routine__bar-button" data-pruv-routine-bar-button>
-          {{- section.settings.bar_button_label | escape }}
-          <span aria-hidden="true">↓</span>
-        </button>
+      <div class="pruv-routine__sheet" data-pruv-routine-sheet data-expanded="false" aria-hidden="true" inert>
+        <span class="pruv-routine__sheet-backdrop" data-pruv-routine-sheet-backdrop aria-hidden="true"></span>
+
+        <div class="pruv-routine__sheet-panel" role="region" aria-label="{{ section.settings.result_eyebrow | escape }}">
+          <button
+            type="button"
+            class="pruv-routine__sheet-handle"
+            data-pruv-routine-sheet-toggle
+            aria-expanded="false"
+            aria-controls="PruvRoutineSheetBody-{{ section.id }}"
+          >
+            <span class="pruv-routine__sheet-grip" aria-hidden="true"></span>
+            <span class="visually-hidden" data-pruv-routine-sheet-toggle-label>
+              {{- section.settings.sheet_expand_label | escape -}}
+            </span>
+          </button>
+
+          <div class="pruv-routine__sheet-peek">
+            <span class="pruv-routine__sheet-thumbs" data-pruv-routine-sheet-expand aria-hidden="true">
+              {%- for block in slots -%}
+                {%- assign p = block.settings.product -%}
+                <span class="pruv-routine__sheet-thumb" data-pruv-routine-sheet-thumb data-slot="{{ forloop.index0 }}">
+                  {%- if p.featured_media -%}
+                    {{
+                      p.featured_media
+                      | image_url: width: 96
+                      | image_tag: loading: 'lazy', widths: '72, 96', sizes: '36px', alt: ''
+                    }}
+                  {%- endif -%}
+                </span>
+              {%- endfor -%}
+            </span>
+
+            <span class="pruv-routine__sheet-summary" data-pruv-routine-sheet-expand>
+              <span class="pruv-routine__sheet-title" data-pruv-routine-sheet-title>{{ server_heading | escape }}</span>
+              <span class="pruv-routine__sheet-total" data-pruv-routine-sheet-total>{{ server_total | money }}</span>
+            </span>
+
+            <button
+              type="submit"
+              form="PruvRoutineForm-{{ section.id }}"
+              class="pruv-routine__submit pruv-routine__sheet-submit"
+              data-pruv-routine-submit
+              data-label-mode="short"
+            >
+              <span data-pruv-routine-submit-label>{{ section.settings.sheet_add_label | escape }}</span>
+              <svg class="pruv-routine__submit-tick" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+                <path d="m3.5 8.5 3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="pruv-routine__spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+
+          <p class="pruv-routine__error pruv-routine__sheet-error" data-pruv-routine-error role="alert" hidden></p>
+
+          <div
+            class="pruv-routine__sheet-body"
+            id="PruvRoutineSheetBody-{{ section.id }}"
+            data-pruv-routine-sheet-body
+            hidden
+          >
+            <ul class="pruv-routine__reasons">
+              {%- for block in concerns -%}
+                {%- if block.settings.reason != blank -%}
+                  <li class="pruv-routine__reason" data-pruv-routine-reason="{{ forloop.index0 }}" hidden>
+                    <span class="pruv-routine__reason-tick" aria-hidden="true"></span>
+                    <span><strong>{{ block.settings.label | escape }}</strong> — {{ block.settings.reason | escape }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+            <ol class="pruv-routine__sheet-rows">
+              {%- for block in slots -%}
+                {%- liquid
+                  assign p = block.settings.product
+                  assign v = p.selected_or_first_available_variant
+                  assign state = states[forloop.index0]
+                  assign title = block.settings.title | default: p.title | default: block.settings.phase
+                -%}
+                <li
+                  class="pruv-routine__sheet-row"
+                  data-pruv-routine-sheet-row
+                  data-slot="{{ forloop.index0 }}"
+                  data-tier="core"
+                  data-state="{{ state }}"
+                >
+                  <span class="pruv-routine__thumb" aria-hidden="true">
+                    {%- if p.featured_media -%}
+                      {{
+                        p.featured_media
+                        | image_url: width: 120
+                        | image_tag: loading: 'lazy', widths: '88, 120', sizes: '44px', alt: ''
+                      }}
+                    {%- endif -%}
+                  </span>
+                  <span class="pruv-routine__sheet-row-body">
+                    <span class="pruv-routine__phase">
+                      <span>{{ block.settings.phase | escape }} · {{ block.settings.cadence | escape }}</span>
+                      <span class="pruv-routine__badge" data-pruv-routine-badge hidden>
+                        {{- section.settings.result_optional_label | escape -}}
+                      </span>
+                    </span>
+                    <span class="pruv-routine__title">
+                      {%- if p != blank -%}
+                        <a href="{{ p.url }}">{{ title | escape }}</a>
+                      {%- else -%}
+                        {{ title | escape }}
+                      {%- endif -%}
+                    </span>
+                  </span>
+                  <span class="pruv-routine__aside">
+                    {%- case state -%}
+                      {%- when 'ok' -%}
+                        <span class="pruv-routine__price">{{ v.price | money }}</span>
+                      {%- when 'sold_out' -%}
+                        <span class="pruv-routine__soldout">{{ section.settings.sold_out_label | escape }}</span>
+                    {%- endcase -%}
+                    {%- if state == 'ok' -%}
+                      <button
+                        type="button"
+                        class="pruv-routine__toggle"
+                        data-pruv-routine-optional-toggle
+                        aria-pressed="false"
+                        hidden
+                      >
+                        <span class="pruv-routine__toggle-plus" aria-hidden="true">+</span>
+                        <span class="pruv-routine__toggle-tick" aria-hidden="true"></span>
+                        <span data-pruv-routine-toggle-label>{{ section.settings.optional_add_label | escape }}</span>
+                        <span class="visually-hidden">{{ title | escape }}</span>
+                      </button>
+                    {%- endif -%}
+                  </span>
+                </li>
+              {%- endfor -%}
+            </ol>
+          </div>
+        </div>
       </div>
     {%- endif -%}
 
@@ -369,7 +515,10 @@
           "capNotice": {{ section.settings.cap_notice | json }},
           "total": {{ section.settings.total_label | json }},
           "error": {{ section.settings.error_label | json }},
-          "addedNotice": {{ section.settings.added_notice | json }}
+          "addedNotice": {{ section.settings.added_notice | json }},
+          "sheetAdd": {{ section.settings.sheet_add_label | json }},
+          "sheetExpand": {{ section.settings.sheet_expand_label | json }},
+          "sheetCollapse": {{ section.settings.sheet_collapse_label | json }}
         }
       }
     </script>
@@ -613,17 +762,35 @@
       "default": "Couldn't add to cart. Try again."
     },
     {
+      "type": "header",
+      "content": "Mobile routine sheet"
+    },
+    {
       "type": "checkbox",
-      "id": "show_mobile_bar",
-      "label": "Show summary bar on mobile",
-      "info": "A bar at the bottom of the screen that jumps back to the routine once the card is scrolled out of view.",
+      "id": "show_mobile_sheet",
+      "label": "Show the routine sheet on mobile",
+      "info": "Below desktop width, a sheet slides up from the bottom as soon as a concern is picked, so the routine and its add to cart button are visible without scrolling. It steps aside once the routine card itself is on screen.",
       "default": true
     },
     {
       "type": "text",
-      "id": "bar_button_label",
-      "label": "Summary bar button",
-      "default": "View"
+      "id": "sheet_add_label",
+      "label": "Sheet add to cart button",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "sheet_expand_label",
+      "label": "Expand label",
+      "info": "Not shown. Read out by screen readers on the sheet's handle.",
+      "default": "Show full routine"
+    },
+    {
+      "type": "text",
+      "id": "sheet_collapse_label",
+      "label": "Collapse label",
+      "info": "Not shown. Read out by screen readers on the sheet's handle.",
+      "default": "Hide full routine"
     },
     {
       "type": "header",

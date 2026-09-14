@@ -132,7 +132,13 @@
     if (root.getAttribute('data-timer') !== 'true') return;
     if (seen()) return;
 
-    timer = window.setTimeout(open, delay);
+    // Re-check when the timer fires, not just when it's scheduled: something
+    // else on the page may have counted as engagement in the meantime - the
+    // routine builder marks the session seen once a concern is picked, so
+    // nobody halfway through building a routine gets a quiz dropped on them.
+    timer = window.setTimeout(function () {
+      if (!seen()) open();
+    }, delay);
     window.addEventListener('pagehide', function () {
       window.clearTimeout(timer);
     });

@@ -25,6 +25,15 @@
 (function () {
   var DESKTOP = '(min-width: 990px)';
   var STORE = 'pruv:routine:';
+  // Shared with assets/pruv-hair-test-popup.js, which re-checks it before its
+  // timed open. Picking a concern here is engagement enough.
+  var POPUP_SEEN = 'pruv:hairtest:popup:seen';
+
+  function quietHairTestPopup() {
+    try {
+      sessionStorage.setItem(POPUP_SEEN, '1');
+    } catch (e) {}
+  }
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function toArray(list) {
@@ -123,9 +132,12 @@
     var steps = toArray(section.querySelectorAll('[data-pruv-routine-step]'));
     var reasons = toArray(section.querySelectorAll('[data-pruv-routine-reason]'));
     var form = section.querySelector('[data-pruv-routine-form]');
-    var submit = section.querySelector('[data-pruv-routine-submit]');
-    var submitLabel = section.querySelector('[data-pruv-routine-submit-label]');
-    var errorEl = section.querySelector('[data-pruv-routine-error]');
+    // The card's button, plus the mobile sheet's, which submits the same form
+    // through its `form` attribute. The card's is primary: it's the one the
+    // sheet watches to decide when to step aside.
+    var submits = toArray(section.querySelectorAll('[data-pruv-routine-submit]'));
+    var submit = section.querySelector('[data-pruv-routine-primary]') || submits[0];
+    var errorEls = toArray(section.querySelectorAll('[data-pruv-routine-error]'));
     var heading = section.querySelector('[data-pruv-routine-heading]');
     var prompt = section.querySelector('[data-pruv-routine-prompt]');
     var countEl = section.querySelector('[data-pruv-routine-count]');
@@ -133,13 +145,17 @@
     var counter = section.querySelector('[data-pruv-routine-counter]');
     var clearBtn = section.querySelector('[data-pruv-routine-clear]');
     var statusEl = section.querySelector('[data-pruv-routine-status]');
-    var card = section.querySelector('[data-pruv-routine-card]');
     var wrap = section.querySelector('[data-pruv-routine-steps-wrap]');
     var rail = section.querySelector('[data-pruv-routine-rail]');
     var railFill = section.querySelector('[data-pruv-routine-rail-fill]');
-    var bar = section.querySelector('[data-pruv-routine-bar]');
-    var barSummary = section.querySelector('[data-pruv-routine-bar-summary]');
-    var barButton = section.querySelector('[data-pruv-routine-bar-button]');
+    var sheet = section.querySelector('[data-pruv-routine-sheet]');
+    var sheetToggle = section.querySelector('[data-pruv-routine-sheet-toggle]');
+    var sheetToggleLabel = section.querySelector('[data-pruv-routine-sheet-toggle-label]');
+    var sheetBody = section.querySelector('[data-pruv-routine-sheet-body]');
+    var sheetTitle = section.querySelector('[data-pruv-routine-sheet-title]');
+    var sheetTotal = section.querySelector('[data-pruv-routine-sheet-total]');
+    var sheetThumbs = toArray(section.querySelectorAll('[data-pruv-routine-sheet-thumb]'));
+    var sheetRows = toArray(section.querySelectorAll('[data-pruv-routine-sheet-row]'));
 
     var slotCount = steps.length;
     var vectors = checks.map(function (input) {
@@ -312,24 +328,33 @@
         if (tier !== 'optional') delete optedIn[slot];
         lastTier[slot] = tier;
 
-        step.setAttribute('data-tier', tier);
-
-        var badge = step.querySelector('[data-pruv-routine-badge]');
-        if (badge) badge.hidden = tier !== 'optional';
-
-        var toggle = step.querySelector('[data-pruv-routine-optional-toggle]');
         var opted = tier === 'optional' && !!optedIn[slot];
-        if (toggle) {
-          toggle.hidden = tier !== 'optional';
-          toggle.setAttribute('aria-pressed', opted ? 'true' : 'false');
-          var toggleLabel = toggle.querySelector('[data-pruv-routine-toggle-label]');
-          if (toggleLabel) toggleLabel.textContent = opted ? labels.optionalAdded : labels.optionalAdd;
-        }
+        var sheetRow = sheetRows[i];
+
+        // The card row and its mirror in the mobile sheet get identical state.
+        [step, sheetRow].forEach(function (row) {
+          if (!row) return;
+          row.setAttribute('data-tier', tier);
+
+          var badge = row.querySelector('[data-pruv-routine-badge]');
+          if (badge) badge.hidden = tier !== 'optional';
+
+          var toggle = row.querySelector('[data-pruv-routine-optional-toggle]');
+          if (toggle) {
+            toggle.hidden = tier !== 'optional';
+            toggle.setAttribute('aria-pressed', opted ? 'true' : 'false');
+            var toggleLabel = toggle.querySelector('[data-pruv-routine-toggle-label]');
+            if (toggleLabel) toggleLabel.textContent = opted ? labels.optionalAdded : labels.optionalAdd;
+          }
+        });
 
         var node = step.querySelector('[data-pruv-routine-node]');
         if (node) node.toggleAttribute('data-opted', opted);
 
         var inRoutine = tier === 'core' || opted;
+
+        if (sheetRow) sheetRow.hidden = tier === 'off';
+        if (sheetThumbs[i]) sheetThumbs[i].hidden = !inRoutine;
         linesFor(slot).forEach(function (input) {
           input.disabled = !(inRoutine && buyable);
         });
@@ -378,14 +403,23 @@
       roll(totalEl, totalText);
 
       if (!busy) {
-        if (included === 0) {
-          submit.setAttribute('aria-disabled', 'true');
-          submitLabel.textContent = labels.unavailableAll;
-        } else {
-          submit.removeAttribute('aria-disabled');
-          submitLabel.textContent =
-            included === 1 ? labels.addAllSingle : fill(labels.addAll, { count: included });
-        }
+        submits.forEach(function (button) {
+          var label = button.querySelector('[data-pruv-routine-submit-label]');
+          var short = button.getAttribute('data-label-mode') === 'short';
+          if (included === 0) {
+            button.setAttribute('aria-disabled', 'true');
+            label.textContent = labels.unavailableAll;
+          } else {
+            button.removeAttribute('aria-disabled');
+            // The sheet's button has a row to share with the thumbnails and
+            // title, so it keeps a fixed short label; the title carries the count.
+            label.textContent = short
+              ? labels.sheetAdd
+              : included === 1
+                ? labels.addAllSingle
+                : fill(labels.addAll, { count: included });
+          }
+        });
       }
 
       var atCap = picked.length >= cap;
@@ -395,17 +429,21 @@
         : fill(labels.counter, { selected: picked.length, max: cap });
       if (clearBtn) clearBtn.hidden = none;
 
-      if (barSummary) {
-        barSummary.textContent =
-          (included === 1 ? labels.countSingle : fill(labels.count, { count: included })) + ' · ' + totalText;
-      }
+      if (sheetTitle) roll(sheetTitle, headingText);
+      if (sheetTotal) roll(sheetTotal, totalText);
 
       if (!first && !options.silent) {
         announce(headingText + (titles.length ? ': ' + titles.join(', ') + '.' : '.') + ' ' + labels.total + ' ' + totalText + '.');
       }
 
-      if (errorEl) errorEl.hidden = true;
-      syncBar();
+      // Leave an error standing through the re-render that follows a failed add;
+      // any real change to the routine clears it.
+      if (!options.silent) {
+        errorEls.forEach(function (el) {
+          el.hidden = true;
+        });
+      }
+      syncSheet();
       // Rows that tween re-sync on every frame; this covers the ones that don't
       // move, e.g. an opt-in that only changes where the fill ends.
       syncRail();
@@ -422,6 +460,7 @@
           announce(fill(labels.capNotice, { max: cap }), true);
           return;
         }
+        if (input.checked) quietHairTestPopup();
         update();
       });
     });
@@ -437,11 +476,11 @@
       });
     }
 
-    steps.forEach(function (step) {
-      var toggle = step.querySelector('[data-pruv-routine-optional-toggle]');
-      if (!toggle) return;
+    // Opt-in toggles live in both the card and the mobile sheet; either one
+    // flips the same slot, and the resolve pass mirrors it to the other.
+    toArray(section.querySelectorAll('[data-pruv-routine-optional-toggle]')).forEach(function (toggle) {
       toggle.addEventListener('click', function () {
-        var slot = step.getAttribute('data-slot');
+        var slot = toggle.closest('[data-slot]').getAttribute('data-slot');
         if (lastTier[slot] !== 'optional') return;
         if (optedIn[slot]) {
           delete optedIn[slot];
@@ -522,43 +561,145 @@
       indices.forEach(function (i) {
         checks[i].checked = true;
       });
+      // Arriving on a shared routine link is engagement too.
+      quietHairTestPopup();
     }
 
-    /* ---- mobile summary bar ---------------------------------------------- */
+    /* ---- mobile routine sheet -------------------------------------------- */
 
     var mq = window.matchMedia(DESKTOP);
     var sectionInView = false;
     var ctaInView = false;
+    var expanded = false;
 
-    function syncBar() {
-      if (!bar) return;
-      var show = !mq.matches && selected().length > 0 && sectionInView && !ctaInView;
-      bar.classList.toggle('is-visible', show);
-      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
-      bar.toggleAttribute('inert', !show);
-      document.documentElement.classList.toggle('pruv-routine-bar-open', show);
+    function syncSheet() {
+      if (!sheet) return;
+      // Expanded, it stays up regardless of scroll position until closed; the
+      // backdrop is what the visitor is interacting with at that point.
+      var show =
+        !mq.matches && selected().length > 0 && (expanded || (sectionInView && !ctaInView));
+      if (!show && expanded) setExpanded(false, { restoreFocus: false });
+      sheet.classList.toggle('is-visible', show);
+      sheet.setAttribute('aria-hidden', show ? 'false' : 'true');
+      sheet.toggleAttribute('inert', !show);
+      document.documentElement.classList.toggle('pruv-routine-sheet-open', show);
     }
 
-    if (bar && 'IntersectionObserver' in window) {
-      new IntersectionObserver(function (entries) {
-        sectionInView = entries[0].isIntersecting;
-        syncBar();
-      }).observe(section);
+    function setExpanded(open, opts) {
+      if (!sheet || expanded === open) return;
+      opts = opts || {};
+      expanded = open;
+      sheet.setAttribute('data-expanded', open ? 'true' : 'false');
+      sheetToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      if (sheetToggleLabel) sheetToggleLabel.textContent = open ? labels.sheetCollapse : labels.sheetExpand;
+      // Same page-scroll lock Dawn's own drawers use.
+      document.body.classList.toggle('overflow-hidden', open);
 
-      new IntersectionObserver(function (entries) {
-        ctaInView = entries[0].isIntersecting;
-        syncBar();
-      }).observe(submit);
-
-      if (mq.addEventListener) {
-        mq.addEventListener('change', syncBar);
-      } else if (mq.addListener) {
-        mq.addListener(syncBar);
+      if (open) {
+        sheetBody.hidden = false;
+        if (animate) {
+          gsap.killTweensOf(sheetBody);
+          gsap.fromTo(sheetBody, { height: 0, opacity: 0 }, {
+            height: 'auto',
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power3.out',
+            clearProps: 'height,opacity',
+          });
+        }
+      } else if (animate) {
+        gsap.killTweensOf(sheetBody);
+        gsap.to(sheetBody, {
+          height: 0,
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power3.inOut',
+          onComplete: function () {
+            sheetBody.hidden = true;
+            gsap.set(sheetBody, { clearProps: 'height,opacity' });
+          },
+        });
+      } else {
+        sheetBody.hidden = true;
       }
 
-      barButton.addEventListener('click', function () {
-        card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
-        heading.focus({ preventScroll: true });
+      if (!open && opts.restoreFocus !== false && sheet.contains(document.activeElement)) {
+        sheetToggle.focus({ preventScroll: true });
+      }
+    }
+
+    if (sheet) {
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          sectionInView = entries[0].isIntersecting;
+          syncSheet();
+        }).observe(section);
+
+        new IntersectionObserver(function (entries) {
+          ctaInView = entries[0].isIntersecting;
+          syncSheet();
+        }).observe(submit);
+      }
+
+      if (mq.addEventListener) {
+        mq.addEventListener('change', syncSheet);
+      } else if (mq.addListener) {
+        mq.addListener(syncSheet);
+      }
+
+      // A drag on the handle or peek that ends in a click shouldn't also
+      // toggle; this swallows the click the browser fires after a swipe.
+      var dragged = false;
+
+      sheetToggle.addEventListener('click', function () {
+        if (dragged) {
+          dragged = false;
+          return;
+        }
+        setExpanded(!expanded);
+      });
+
+      toArray(section.querySelectorAll('[data-pruv-routine-sheet-expand]')).forEach(function (zone) {
+        zone.addEventListener('click', function () {
+          if (dragged) {
+            dragged = false;
+            return;
+          }
+          setExpanded(!expanded);
+        });
+      });
+
+      section.querySelector('[data-pruv-routine-sheet-backdrop]').addEventListener('click', function () {
+        setExpanded(false);
+      });
+
+      sheet.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && expanded) {
+          event.preventDefault();
+          setExpanded(false);
+        }
+      });
+
+      // Swipe up to expand, down to collapse. Starts only on the handle and the
+      // peek (both touch-action: none), never on the scrolling body or a button.
+      var startY = null;
+      var panel = section.querySelector('.pruv-routine__sheet-panel');
+      panel.addEventListener('pointerdown', function (event) {
+        if (!event.target.closest('.pruv-routine__sheet-handle, .pruv-routine__sheet-peek')) return;
+        if (event.target.closest('[data-pruv-routine-submit]')) return;
+        startY = event.clientY;
+        dragged = false;
+      });
+      window.addEventListener('pointermove', function (event) {
+        if (startY === null) return;
+        var dy = event.clientY - startY;
+        if (Math.abs(dy) < 28) return;
+        dragged = true;
+        setExpanded(dy < 0);
+        startY = null;
+      });
+      window.addEventListener('pointerup', function () {
+        startY = null;
       });
     }
 
@@ -566,18 +707,32 @@
 
     function setBusy(on) {
       busy = on;
-      if (on) {
-        submit.setAttribute('aria-busy', 'true');
-        submitLabel.textContent = labels.adding;
-      } else {
-        submit.removeAttribute('aria-busy');
-      }
+      submits.forEach(function (button) {
+        if (on) {
+          button.setAttribute('aria-busy', 'true');
+          button.querySelector('[data-pruv-routine-submit-label]').textContent = labels.adding;
+        } else {
+          button.removeAttribute('aria-busy');
+        }
+      });
     }
 
-    function showError(message) {
-      if (!errorEl) return;
-      errorEl.textContent = message || labels.error;
-      errorEl.hidden = false;
+    function setAdded(on) {
+      submits.forEach(function (button) {
+        button.toggleAttribute('data-added', on);
+        if (on) button.querySelector('[data-pruv-routine-submit-label]').textContent = labels.added;
+      });
+    }
+
+    /* Only the error beside the button that was pressed is shown - both are
+       role="alert", so showing both would announce the message twice. */
+    function showError(message, submitter) {
+      var inSheet = !!(submitter && submitter.closest('[data-pruv-routine-sheet]'));
+      errorEls.forEach(function (el) {
+        var elInSheet = !!el.closest('[data-pruv-routine-sheet]');
+        el.hidden = elInSheet !== inSheet;
+        if (!el.hidden) el.textContent = message || labels.error;
+      });
     }
 
     /* cart-notification.js's own renderContents() cannot be used here: it reads
@@ -586,7 +741,7 @@
        cart-notification-product section renders every cart line, though, so
        one response still contains everything we added - pick those out.
        Returns false whenever it can't be sure, and the caller goes to /cart. */
-    function renderCartUI(cartUI, response) {
+    function renderCartUI(cartUI, response, returnFocusTo) {
       if (!cartUI || !response.sections) return false;
 
       if (cartUI.tagName === 'CART-DRAWER') {
@@ -621,7 +776,7 @@
       });
 
       if (cartUI.header && cartUI.header.reveal) cartUI.header.reveal();
-      cartUI.setActiveElement(submit);
+      cartUI.setActiveElement(returnFocusTo);
       cartUI.open();
       return true;
     }
@@ -632,6 +787,9 @@
 
       event.preventDefault();
       if (busy) return;
+
+      // The card's button or the sheet's; both post this form.
+      var submitter = event.submitter && submits.indexOf(event.submitter) > -1 ? event.submitter : submit;
 
       if (submit.getAttribute('aria-disabled') === 'true') {
         announce(labels.unavailableAll, true);
@@ -662,7 +820,9 @@
       var request = window.fetchConfig('javascript');
       request.body = JSON.stringify(body);
 
-      if (errorEl) errorEl.hidden = true;
+      errorEls.forEach(function (el) {
+        el.hidden = true;
+      });
       setBusy(true);
 
       fetch(window.routes.cart_add_url, request)
@@ -678,17 +838,16 @@
             });
             setBusy(false);
             update({ silent: true, skipPersist: true });
-            showError(response.description || labels.error);
+            showError(response.description || labels.error, submitter);
             return;
           }
 
           setBusy(false);
           update({ silent: true, skipPersist: true });
-          submit.setAttribute('data-added', '');
-          submitLabel.textContent = labels.added;
+          setAdded(true);
           announce(fill(labels.addedNotice, { count: lines.length }), true);
           window.setTimeout(function () {
-            submit.removeAttribute('data-added');
+            setAdded(false);
             update({ silent: true, skipPersist: true });
           }, 1200);
 
@@ -697,9 +856,13 @@
             cartData: response,
           });
 
+          // An expanded sheet covers most of the screen; get it out of the way
+          // of the cart notification, and don't steal focus while doing it.
+          if (expanded) setExpanded(false, { restoreFocus: false });
+
           var rendered = false;
           try {
-            rendered = renderCartUI(cartUI, response);
+            rendered = renderCartUI(cartUI, response, submitter);
           } catch (e) {
             rendered = false;
           }
@@ -709,7 +872,7 @@
         .catch(function () {
           setBusy(false);
           update({ silent: true, skipPersist: true });
-          showError(labels.error);
+          showError(labels.error, submitter);
         });
     });
 
