@@ -1119,6 +1119,216 @@ html.pruv-routine-bar-open .pruv-quiz-launcher {
 }
 
 /* ==========================================================================
+   Desktop density
+   ==========================================================================
+
+   On a wide screen the section has to sit inside one viewport, so this block
+   tightens everything at 990px and up and leaves tablet and mobile alone.
+
+   Tiles become a single column of slim horizontal rows - glyph, text, check -
+   instead of a 2x2 grid of tall cards. In a 5/12 column a 2x2 of horizontal
+   tiles would leave ~100px for the label, so one column is what makes the
+   compact form readable. The index number is dropped here; the check mark
+   carries the state.
+
+   The card keeps its structure but every step row loses its spare line and the
+   total sits beside the button rather than above it. */
+
+@media screen and (min-width: 990px) {
+  .pruv-routine__layout {
+    gap: 4.8rem;
+  }
+
+  .pruv-routine__heading {
+    font-size: clamp(2.8rem, 2.8vw, 3.6rem);
+  }
+
+  .pruv-routine__concerns {
+    margin-top: 2.4rem;
+  }
+
+  .pruv-routine__tiles {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .pruv-routine__tile {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr) 2.2rem;
+    grid-template-areas:
+      'glyph label mark'
+      'glyph sub mark';
+    align-items: center;
+    column-gap: 1.4rem;
+    row-gap: 0.2rem;
+    min-height: 0;
+    padding: 1.2rem 1.6rem 1.2rem 1.2rem;
+    border-radius: 1.6rem;
+  }
+
+  /* Its children become grid items directly: the mark takes its own column
+     and the index number, which only labels position, is dropped. */
+  .pruv-routine__tile-top {
+    display: contents;
+  }
+
+  .pruv-routine__tile-index {
+    display: none;
+  }
+
+  .pruv-routine__tile-mark {
+    grid-area: mark;
+  }
+
+  .pruv-routine__tile-glyph {
+    grid-area: glyph;
+    width: 4rem;
+    height: 4rem;
+    margin: 0;
+  }
+
+  .pruv-routine__tile-glyph svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .pruv-routine__tile-label {
+    grid-area: label;
+    align-self: end;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+
+  .pruv-routine__tile-sub {
+    grid-area: sub;
+    align-self: start;
+    margin-top: 0;
+    -webkit-line-clamp: 1;
+  }
+
+  .pruv-routine__meta-row {
+    margin-top: 1.2rem;
+  }
+
+  /* --- card --- */
+
+  .pruv-routine__card {
+    padding: 2.4rem 2.8rem;
+  }
+
+  .pruv-routine__card-heading {
+    margin-top: 0.6rem;
+    font-size: clamp(2.2rem, 2vw, 2.6rem);
+  }
+
+  .pruv-routine__prompt,
+  .pruv-routine__reasons {
+    margin-top: 1rem;
+  }
+
+  .pruv-routine__reasons {
+    gap: 0.4rem;
+  }
+
+  .pruv-routine__reason,
+  .pruv-routine__prompt {
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+
+  .pruv-routine__steps-wrap {
+    margin-top: 1.4rem;
+    padding-top: 0.4rem;
+  }
+
+  .pruv-routine__step-inner {
+    grid-template-columns: 2.4rem 5.2rem minmax(0, 1fr) auto;
+    column-gap: 1.4rem;
+    padding: 1rem 0;
+  }
+
+  .pruv-routine__step[data-tier='optional']::before {
+    inset: 0.2rem -1rem;
+  }
+
+  .pruv-routine__thumb {
+    width: 5.2rem;
+    border-radius: 1.2rem;
+  }
+
+  .pruv-routine__thumb img {
+    padding: 0.4rem;
+  }
+
+  .pruv-routine__title {
+    margin-top: 0.2rem;
+    font-size: 1.5rem;
+  }
+
+  .pruv-routine__meta {
+    margin-top: 0.1rem;
+  }
+
+  .pruv-routine__why {
+    margin-top: 0.2rem;
+    -webkit-line-clamp: 1;
+  }
+
+  .pruv-routine__aside {
+    gap: 0.4rem;
+  }
+
+  .pruv-routine__price {
+    font-size: 1.4rem;
+  }
+
+  .pruv-routine__toggle {
+    min-height: 2.8rem;
+  }
+
+  /* Total beside the button instead of above it. The hidden cart inputs
+     generate no boxes, so they never become grid items. */
+  .pruv-routine__foot {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      'total submit'
+      'error error'
+      'cross cross';
+    align-items: center;
+    column-gap: 2.4rem;
+    margin-top: 0.8rem;
+    padding-top: 1.6rem;
+  }
+
+  .pruv-routine__total-row {
+    grid-area: total;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .pruv-routine__total {
+    font-size: 1.9rem;
+  }
+
+  .pruv-routine__submit {
+    grid-area: submit;
+    min-height: 5rem;
+    margin-top: 0;
+  }
+
+  .pruv-routine__error {
+    grid-area: error;
+  }
+
+  .pruv-routine__cross {
+    grid-area: cross;
+    margin-top: 1.4rem;
+  }
+}
+
+/* ==========================================================================
    Motion
    ========================================================================== */
 
