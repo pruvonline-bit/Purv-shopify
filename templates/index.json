@@ -170,6 +170,99 @@
         "padding_bottom": 64
       }
     },
+    "routine_builder": {
+      "type": "pruv-routine-builder",
+      "blocks": {
+        "slot_reset": {
+          "type": "product",
+          "settings": {
+            "product": "pruv-1",
+            "title": "TriShield Shampoo",
+            "phase": "Reset",
+            "cadence": "2x a week",
+            "why_line": "Dissolves the mineral crust hard water leaves behind and decongests the scalp, so everything after it can work.",
+            "always_include": false
+          }
+        },
+        "slot_support": {
+          "type": "product",
+          "settings": {
+            "product": "product-2",
+            "title": "VECTOR-5 Density Serum",
+            "phase": "Support",
+            "cadence": "Daily",
+            "why_line": "Works at the root across multiple pathways to rebuild density where hair has thinned.",
+            "always_include": true
+          }
+        },
+        "slot_repair": {
+          "type": "product",
+          "settings": {
+            "product": "product-3",
+            "title": "Keratin Ceramide Mask",
+            "phase": "Repair",
+            "cadence": "Weekly",
+            "why_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down.",
+            "always_include": false
+          }
+        },
+        "concern_thinning": {
+          "type": "concern",
+          "settings": {
+            "label": "Thinning or less density",
+            "sub_label": "More scalp showing, ponytail feels thinner",
+            "glyph": "thinning",
+            "weights": "0,3,1",
+            "reason": "thinning needs actives that work at the root, not just on the surface"
+          }
+        },
+        "concern_coated": {
+          "type": "concern",
+          "settings": {
+            "label": "Rough or coated hair",
+            "sub_label": "Hair feels coated, shampoo barely lathers",
+            "glyph": "coated",
+            "weights": "3,0,1",
+            "reason": "mineral buildup coats the cuticle and blocks everything applied after it"
+          }
+        },
+        "concern_breakage": {
+          "type": "concern",
+          "settings": {
+            "label": "Breakage or weak strands",
+            "sub_label": "Strands snap, ends feel rough and dry",
+            "glyph": "breakage",
+            "weights": "0,1,3",
+            "reason": "breakage needs structural repair inside the hair shaft, not just conditioning"
+          }
+        },
+        "concern_scalp": {
+          "type": "concern",
+          "settings": {
+            "label": "Oily, itchy or flaky scalp",
+            "sub_label": "Scalp feels congested, hair looks dull by day two",
+            "glyph": "scalp",
+            "weights": "3,0,0",
+            "reason": "a congested scalp has to be rebalanced before anything else can work"
+          }
+        }
+      },
+      "block_order": [
+        "slot_reset",
+        "slot_support",
+        "slot_repair",
+        "concern_thinning",
+        "concern_coated",
+        "concern_breakage",
+        "concern_scalp"
+      ],
+      "settings": {
+        "cross_link_url": "shopify://pages/hair-test",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
     "bestsellers": {
       "type": "pruv-bestsellers",
       "settings": {
@@ -422,6 +515,7 @@
   "order": [
     "hero",
     "ritual_explainer",
+    "routine_builder",
     "bestsellers",
     "trust_badges",
     "product_details",

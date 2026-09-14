@@ -1,0 +1,137 @@
+{% doc %}
+  One row of the Routine Builder's routine card.
+
+  Every product slot is always rendered, whatever the visitor has picked:
+  assets/pruv-routine-builder.js only ever hides, shows and re-tiers these rows,
+  never creates or moves them, so focus and reading order survive every tap.
+  Server-side each row renders as core, which is the complete ritual shown to
+  visitors without JavaScript.
+
+  @param {object} block - the "product" block for this slot
+  @param {number} index0 - the slot's position, which is its weight vector index
+  @param {string} state - "ok", "sold_out", "link_only" or "missing"
+  @param {object} section - the parent section, for labels
+
+  @example
+  {% render 'pruv-routine-step', block: block, index0: 0, state: 'ok', section: section %}
+{% enddoc %}
+
+{%- liquid
+  assign product = block.settings.product
+  assign variant = product.selected_or_first_available_variant
+  assign title = block.settings.title | default: product.title | default: block.settings.phase
+  assign step_number = index0 | plus: 1
+  if step_number < 10
+    assign step_number = step_number | prepend: '0'
+  endif
+
+  assign price = 0
+  if state == 'ok'
+    assign price = variant.price
+  endif
+
+  assign buyable = false
+  if state == 'ok'
+    assign buyable = true
+  endif
+-%}
+
+<li
+  class="pruv-routine__step"
+  data-pruv-routine-step
+  data-slot="{{ index0 }}"
+  data-tier="core"
+  data-state="{{ state }}"
+  data-price="{{ price }}"
+  data-available="{{ buyable }}"
+  data-always="{{ block.settings.always_include }}"
+  data-title="{{ title | escape }}"
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="pruv-routine__step-inner">
+    <span class="pruv-routine__node" data-pruv-routine-node aria-hidden="true"></span>
+
+    <span class="pruv-routine__thumb" aria-hidden="true">
+      {%- if product.featured_media -%}
+        {{
+          product.featured_media
+          | image_url: width: 216
+          | image_tag: loading: 'lazy', widths: '112, 144, 216', sizes: '(min-width: 750px) 72px, 56px', alt: ''
+        }}
+      {%- else -%}
+        {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-routine__placeholder' }}
+      {%- endif -%}
+    </span>
+
+    <div class="pruv-routine__body">
+      <p class="pruv-routine__phase">
+        <span>{{ step_number }} · {{ block.settings.phase | escape }}</span>
+        <span class="pruv-routine__badge" data-pruv-routine-badge hidden>
+          {{- section.settings.result_optional_label | escape -}}
+        </span>
+      </p>
+
+      <h4 class="pruv-routine__title">
+        {%- if product != blank -%}
+          <a href="{{ product.url }}">{{ title | escape }}</a>
+        {%- else -%}
+          {{ title | escape }}
+        {%- endif -%}
+      </h4>
+
+      {%- if block.settings.cadence != blank -%}
+        <p class="pruv-routine__meta">{{ block.settings.cadence | escape }}</p>
+      {%- endif -%}
+
+      {%- if block.settings.why_line != blank -%}
+        <p class="pruv-routine__why">{{ block.settings.why_line | escape }}</p>
+      {%- endif -%}
+
+      {%- if request.design_mode and state == 'missing' -%}
+        <p class="pruv-routine__editor-note">
+          Product slot {{ index0 | plus: 1 }} has no product selected, so this step can't be added to the cart.
+        </p>
+      {%- endif -%}
+    </div>
+
+    <div class="pruv-routine__aside">
+      {%- case state -%}
+        {%- when 'ok' -%}
+          <span class="pruv-routine__price">
+            {{- variant.price | money -}}
+            {%- if variant.compare_at_price > variant.price -%}
+              <s class="pruv-routine__compare">{{ variant.compare_at_price | money }}</s>
+            {%- endif -%}
+          </span>
+        {%- when 'sold_out' -%}
+          <span class="pruv-routine__soldout">{{ section.settings.sold_out_label | escape }}</span>
+      {%- endcase -%}
+
+      {%- if product != blank -%}
+        <a
+          class="pruv-routine__view"
+          href="{{ product.url }}"
+          aria-label="{{ section.settings.view_product_label | escape }} {{ title | escape }}"
+        >
+          {{- section.settings.view_product_label | escape -}}
+        </a>
+      {%- endif -%}
+
+      {%- if buyable -%}
+        <button
+          type="button"
+          class="pruv-routine__toggle"
+          data-pruv-routine-optional-toggle
+          aria-pressed="false"
+          hidden
+        >
+          <span class="pruv-routine__toggle-plus" aria-hidden="true">+</span>
+          <span class="pruv-routine__toggle-tick" aria-hidden="true"></span>
+          <span data-pruv-routine-toggle-label>{{ section.settings.optional_add_label | escape }}</span>
+          <span class="visually-hidden">{{ title | escape }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</li>

@@ -1,0 +1,855 @@
+{{ 'section-pruv-routine-builder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-routine-builder.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  Routine Builder: pick up to N concerns, get a purchasable routine.
+
+  How a routine is resolved (assets/pruv-routine-builder.js does it live):
+  each concern tile carries a weight vector with one number per Product slot,
+  in block order. The selected tiles' vectors are summed, and each slot is then
+  core (in the routine and the cart), optional (offered as "worth adding") or
+  hidden. The vectors are copied from the Prüv hair test's main-concern
+  question so the two entry points can never disagree.
+
+  Rendered Liquid-first. Every tile and every product row exists in the markup
+  and the server paints the complete ritual with a working native multi-line
+  cart form, so with JavaScript off this is still a readable, purchasable
+  section. The script only hides, shows and re-tiers what is already here, and
+  hangs its motion off `.pruv-routine--live`.
+{%- endcomment -%}
+
+{%- liquid
+  assign slots = section.blocks | where: 'type', 'product'
+  assign concerns = section.blocks | where: 'type', 'concern'
+
+  assign server_total = 0
+  assign server_count = 0
+  assign states = ''
+
+  for block in slots
+    assign p = block.settings.product
+    assign v = p.selected_or_first_available_variant
+    assign state = 'ok'
+    if p == blank or v == blank
+      assign state = 'missing'
+    elsif p.requires_selling_plan
+      assign state = 'link_only'
+    elsif p.has_only_default_variant == false
+      assign state = 'link_only'
+    elsif v.available == false
+      assign state = 'sold_out'
+    endif
+
+    if state == 'ok'
+      assign server_total = server_total | plus: v.price
+      assign server_count = server_count | plus: 1
+    endif
+
+    assign states = states | append: state
+    unless forloop.last
+      assign states = states | append: ','
+    endunless
+  endfor
+
+  assign states = states | split: ','
+
+  assign cap = section.settings.selection_cap
+  if cap > concerns.size
+    assign cap = concerns.size
+  endif
+
+  if server_count == 1
+    assign server_button = section.settings.add_all_label_single
+  else
+    assign server_button = section.settings.add_all_label | replace: '{count}', server_count
+  endif
+
+  if server_count == 1
+    assign server_count_label = section.settings.count_label_single
+  else
+    assign server_count_label = section.settings.count_label | replace: '{count}', server_count
+  endif
+
+  comment
+    Every {placeholder} substitution happens here, inside the liquid tag.
+    Liquid's tokenizer ends an output tag at its first closing brace, so
+    replace: '{steps}' written inside double braces cuts the tag short and the
+    whole section fails to upload.
+  endcomment
+  assign server_heading = section.settings.result_heading_empty | replace: '{steps}', server_count
+  assign server_counter = section.settings.counter_label | replace: '{selected}', 0 | replace: '{max}', cap
+-%}
+
+{%- if slots.size > 0 and concerns.size > 0 -%}
+  <section
+    class="pruv-routine color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+    data-pruv-routine
+    data-section-id="{{ section.id }}"
+  >
+    <span class="pruv-routine__glow" aria-hidden="true"></span>
+
+    <div class="pruv-routine__layout page-width">
+      <div class="pruv-routine__picker">
+        <div class="pruv-routine__header" data-animate="fade-up">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pruv-routine__eyebrow">
+              <span class="pruv-routine__eyebrow-dot" aria-hidden="true"></span>
+              {{ section.settings.eyebrow | escape }}
+            </p>
+          {%- endif -%}
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="pruv-routine__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.text != blank -%}
+            <div class="pruv-routine__text">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+
+        <fieldset
+          class="pruv-routine__concerns"
+          data-pruv-routine-concerns
+          aria-describedby="PruvRoutineCounter-{{ section.id }}"
+        >
+          <legend class="visually-hidden">{{ section.settings.concerns_legend | escape }}</legend>
+
+          <div class="pruv-routine__tiles" data-animate="stagger">
+            {%- for block in concerns -%}
+              {%- liquid
+                assign i = forloop.index0
+                assign tile_number = forloop.index
+                if tile_number < 10
+                  assign tile_number = tile_number | prepend: '0'
+                endif
+
+                assign raw = block.settings.weights | default: '' | split: ','
+                assign weights = ''
+                for slot in slots
+                  assign n = raw[forloop.index0] | strip | plus: 0
+                  assign weights = weights | append: n
+                  unless forloop.last
+                    assign weights = weights | append: ','
+                  endunless
+                endfor
+              -%}
+
+              <div class="pruv-routine__tile-wrap" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+                <input
+                  type="checkbox"
+                  class="pruv-routine__check visually-hidden"
+                  id="PruvRoutineConcern-{{ section.id }}-{{ i }}"
+                  data-pruv-routine-concern
+                  data-index="{{ i }}"
+                  data-weights="{{ weights }}"
+                  data-label="{{ block.settings.label | escape }}"
+                >
+                <label class="pruv-routine__tile" for="PruvRoutineConcern-{{ section.id }}-{{ i }}">
+                  <span class="pruv-routine__tile-top" aria-hidden="true">
+                    <span class="pruv-routine__tile-index">{{ tile_number }}</span>
+                    <span class="pruv-routine__tile-mark"></span>
+                  </span>
+
+                  {%- if block.settings.image != blank or block.settings.glyph != 'none' -%}
+                    <span class="pruv-routine__tile-glyph" aria-hidden="true">
+                      {%- if block.settings.image != blank -%}
+                        {{
+                          block.settings.image
+                          | image_url: width: 176
+                          | image_tag: loading: 'lazy', widths: '88, 176', sizes: '44px', alt: ''
+                        }}
+                      {%- else -%}
+                        {%- render 'pruv-routine-glyph', glyph: block.settings.glyph -%}
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+
+                  <span class="pruv-routine__tile-label">{{ block.settings.label | escape }}</span>
+                  {%- if block.settings.sub_label != blank -%}
+                    <span class="pruv-routine__tile-sub">{{ block.settings.sub_label | escape }}</span>
+                  {%- endif -%}
+                </label>
+
+                {%- if request.design_mode and raw.size != slots.size -%}
+                  <p class="pruv-routine__editor-note">
+                    "{{ block.settings.label | escape }}" has {{ raw.size }} weights but there are {{ slots.size }}
+                    Product slots. Missing numbers count as 0 and extra ones are ignored.
+                  </p>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          <div class="pruv-routine__meta-row">
+            <p class="pruv-routine__counter" id="PruvRoutineCounter-{{ section.id }}" data-pruv-routine-counter>
+              {{- server_counter | escape -}}
+            </p>
+            <button type="button" class="pruv-routine__clear" data-pruv-routine-clear hidden>
+              {{- section.settings.clear_label | escape -}}
+            </button>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="pruv-routine__card" data-animate="fade-up" data-pruv-routine-card>
+        <div class="pruv-routine__card-top">
+          <p class="pruv-routine__card-eyebrow">{{ section.settings.result_eyebrow | escape }}</p>
+          <p class="pruv-routine__count">
+            <span data-pruv-routine-count>{{ server_count_label | escape }}</span>
+          </p>
+        </div>
+
+        <h3
+          class="pruv-routine__card-heading"
+          id="PruvRoutineHeading-{{ section.id }}"
+          tabindex="-1"
+          data-pruv-routine-heading
+        >
+          {{- server_heading | escape -}}
+        </h3>
+
+        <p class="pruv-routine__prompt" data-pruv-routine-prompt>
+          <svg class="pruv-routine__prompt-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+            <path d="M13 8H3m4-4L3 8l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ section.settings.result_prompt | escape }}</span>
+        </p>
+
+        <ul class="pruv-routine__reasons" data-pruv-routine-reasons>
+          {%- for block in concerns -%}
+            {%- if block.settings.reason != blank -%}
+              <li class="pruv-routine__reason" data-pruv-routine-reason="{{ forloop.index0 }}" hidden>
+                <span class="pruv-routine__reason-tick" aria-hidden="true"></span>
+                <span><strong>{{ block.settings.label | escape }}</strong> — {{ block.settings.reason | escape }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+
+        <div class="pruv-routine__steps-wrap" data-pruv-routine-steps-wrap>
+          <span class="pruv-routine__rail" data-pruv-routine-rail aria-hidden="true">
+            <span class="pruv-routine__rail-track"></span>
+            <span class="pruv-routine__rail-fill" data-pruv-routine-rail-fill></span>
+          </span>
+
+          <ol class="pruv-routine__steps" data-pruv-routine-steps>
+            {%- for block in slots -%}
+              {%- render 'pruv-routine-step',
+                block: block,
+                index0: forloop.index0,
+                state: states[forloop.index0],
+                section: section
+              -%}
+            {%- endfor -%}
+          </ol>
+        </div>
+
+        <form
+          class="pruv-routine__foot"
+          method="post"
+          action="{{ routes.cart_add_url }}"
+          data-pruv-routine-form
+        >
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+          {%- for block in slots -%}
+            {%- if states[forloop.index0] == 'ok' -%}
+              {%- assign v = block.settings.product.selected_or_first_available_variant -%}
+              <input
+                type="hidden"
+                name="items[{{ forloop.index0 }}][id]"
+                value="{{ v.id }}"
+                data-pruv-routine-line
+                data-slot="{{ forloop.index0 }}"
+              >
+              <input
+                type="hidden"
+                name="items[{{ forloop.index0 }}][quantity]"
+                value="1"
+                data-pruv-routine-qty
+                data-slot="{{ forloop.index0 }}"
+              >
+            {%- endif -%}
+          {%- endfor -%}
+          <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+
+          <div class="pruv-routine__total-row">
+            <span class="pruv-routine__total-label">{{ section.settings.total_label | escape }}</span>
+            <span class="pruv-routine__total" data-pruv-routine-total>{{ server_total | money }}</span>
+          </div>
+
+          <button
+            type="submit"
+            class="pruv-routine__submit"
+            data-pruv-routine-submit
+            {% if server_count == 0 %}
+              aria-disabled="true"
+            {% endif %}
+          >
+            <span data-pruv-routine-submit-label>
+              {%- if server_count == 0 -%}
+                {{ section.settings.unavailable_all_label | escape }}
+              {%- else -%}
+                {{ server_button | escape }}
+              {%- endif -%}
+            </span>
+            <svg class="pruv-routine__submit-arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="M3 8h10m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="pruv-routine__submit-tick" viewBox="0 0 16 16" fill="none" aria-hidden="true" focusable="false">
+              <path d="m3.5 8.5 3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="pruv-routine__spinner" aria-hidden="true"></span>
+          </button>
+
+          <p class="pruv-routine__error" data-pruv-routine-error role="alert" hidden></p>
+
+          {%- if section.settings.cross_link_url != blank and section.settings.cross_link_label != blank -%}
+            <a class="pruv-routine__cross" href="{{ section.settings.cross_link_url }}">
+              {{- section.settings.cross_link_label | escape }}
+              <span aria-hidden="true">→</span>
+            </a>
+          {%- endif -%}
+        </form>
+      </div>
+    </div>
+
+    <p class="visually-hidden" role="status" aria-live="polite" aria-atomic="true" data-pruv-routine-status></p>
+
+    {%- if section.settings.show_mobile_bar -%}
+      {%- comment -%}
+        Mobile only (hidden at 990px and up). Rendered inert; the script lifts that
+        once a concern is picked and the card's button is out of view. Kept out of
+        the animated card so no transformed ancestor can trap its position: fixed.
+      {%- endcomment -%}
+      <div class="pruv-routine__bar" data-pruv-routine-bar aria-hidden="true" inert>
+        <span class="pruv-routine__bar-summary" data-pruv-routine-bar-summary></span>
+        <button type="button" class="pruv-routine__bar-button" data-pruv-routine-bar-button>
+          {{- section.settings.bar_button_label | escape }}
+          <span aria-hidden="true">↓</span>
+        </button>
+      </div>
+    {%- endif -%}
+
+    <script type="application/json" data-pruv-routine-config>
+      {
+        "threshold": {{ section.settings.core_threshold | json }},
+        "cap": {{ cap | json }},
+        "showOptional": {{ section.settings.show_optional | json }},
+        "moneyFormat": {{ shop.money_format | json }},
+        "labels": {
+          "heading": {{ section.settings.result_heading | json }},
+          "headingSingle": {{ section.settings.result_heading_single | json }},
+          "headingEmpty": {{ section.settings.result_heading_empty | json }},
+          "count": {{ section.settings.count_label | json }},
+          "countSingle": {{ section.settings.count_label_single | json }},
+          "addAll": {{ section.settings.add_all_label | json }},
+          "addAllSingle": {{ section.settings.add_all_label_single | json }},
+          "adding": {{ section.settings.adding_label | json }},
+          "added": {{ section.settings.added_label | json }},
+          "unavailableAll": {{ section.settings.unavailable_all_label | json }},
+          "optionalAdd": {{ section.settings.optional_add_label | json }},
+          "optionalAdded": {{ section.settings.optional_added_label | json }},
+          "counter": {{ section.settings.counter_label | json }},
+          "counterCap": {{ section.settings.counter_cap_label | json }},
+          "capNotice": {{ section.settings.cap_notice | json }},
+          "total": {{ section.settings.total_label | json }},
+          "error": {{ section.settings.error_label | json }},
+          "addedNotice": {{ section.settings.added_notice | json }}
+        }
+      }
+    </script>
+  </section>
+{%- elsif request.design_mode -%}
+  <div class="page-width pruv-routine__editor-empty">
+    <p>
+      Add at least one <strong>Product slot</strong> and one <strong>Concern tile</strong> block to build a
+      routine.
+    </p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Prüv routine builder",
+  "tag": "div",
+  "class": "section pruv-routine-section",
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Visitors pick concerns and get a routine they can add to the cart in one go. Designed for the Bone White colour schemes - the tiles and routine card are light surfaces."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Build your routine"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's your hair <strong>dealing with?</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Pick up to three. We'll build the Reset, Support and Repair steps around what you actually need — and leave out what you don't.</p>"
+    },
+    {
+      "type": "text",
+      "id": "concerns_legend",
+      "label": "Concerns group name",
+      "info": "Not shown. Read out by screen readers before the tiles.",
+      "default": "Your hair concerns"
+    },
+    {
+      "type": "text",
+      "id": "counter_label",
+      "label": "Selection counter",
+      "info": "{selected} and {max} are replaced with numbers.",
+      "default": "{selected} of {max} selected"
+    },
+    {
+      "type": "text",
+      "id": "counter_cap_label",
+      "label": "Selection counter at the limit",
+      "default": "{max} of {max} · deselect one to swap"
+    },
+    {
+      "type": "text",
+      "id": "cap_notice",
+      "label": "Limit reached message",
+      "info": "Announced to screen readers when someone tries to pick one more than the limit.",
+      "default": "You can pick up to {max}. Deselect one to swap."
+    },
+    {
+      "type": "text",
+      "id": "clear_label",
+      "label": "Clear button",
+      "default": "Clear"
+    },
+    {
+      "type": "header",
+      "content": "Routine card"
+    },
+    {
+      "type": "text",
+      "id": "result_eyebrow",
+      "label": "Card eyebrow",
+      "default": "Your routine"
+    },
+    {
+      "type": "text",
+      "id": "result_heading",
+      "label": "Heading",
+      "info": "{steps} is replaced with the number of steps.",
+      "default": "Your {steps}-step ritual"
+    },
+    {
+      "type": "text",
+      "id": "result_heading_single",
+      "label": "Heading for a single step",
+      "info": "Used when the result is one step, where \"1-step ritual\" reads oddly.",
+      "default": "Start with one step"
+    },
+    {
+      "type": "text",
+      "id": "result_heading_empty",
+      "label": "Heading before anything is picked",
+      "info": "Also what visitors without JavaScript see.",
+      "default": "Your complete {steps}-step ritual"
+    },
+    {
+      "type": "text",
+      "id": "result_prompt",
+      "label": "Prompt before anything is picked",
+      "default": "Pick your concerns to tailor it. Until then, here's the complete ritual."
+    },
+    {
+      "type": "text",
+      "id": "count_label",
+      "label": "Step count",
+      "info": "{count} is replaced with the number of steps.",
+      "default": "{count} steps"
+    },
+    {
+      "type": "text",
+      "id": "count_label_single",
+      "label": "Step count for one step",
+      "default": "1 step"
+    },
+    {
+      "type": "text",
+      "id": "result_optional_label",
+      "label": "Optional step badge",
+      "info": "On a step that scored above zero but below the threshold. It is shown, but only added to the cart if the visitor opts in.",
+      "default": "Worth adding"
+    },
+    {
+      "type": "text",
+      "id": "optional_add_label",
+      "label": "Opt in button",
+      "default": "Add"
+    },
+    {
+      "type": "text",
+      "id": "optional_added_label",
+      "label": "Opted in button",
+      "default": "Added"
+    },
+    {
+      "type": "text",
+      "id": "view_product_label",
+      "label": "Product link",
+      "default": "View"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Sold out label",
+      "default": "Sold out"
+    },
+    {
+      "type": "header",
+      "content": "Matching"
+    },
+    {
+      "type": "paragraph",
+      "content": "The order of the Product slot blocks sets the weight positions. Keep it identical to the Product slots in the Prüv hair test section so both entry points agree."
+    },
+    {
+      "type": "range",
+      "id": "core_threshold",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Points needed to include a step",
+      "info": "A step needs at least this many points to be included and added to the cart. Above zero but below this, it is offered as optional. At 1 there are no optional steps.",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "selection_cap",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Most concerns selectable",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_optional",
+      "label": "Offer optional steps",
+      "info": "When off, a step below the threshold is hidden instead of offered.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Cart"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "Total label",
+      "default": "Routine total"
+    },
+    {
+      "type": "text",
+      "id": "add_all_label",
+      "label": "Add to cart button",
+      "info": "{count} is replaced with the number of steps being added.",
+      "default": "Add {count} steps to cart"
+    },
+    {
+      "type": "text",
+      "id": "add_all_label_single",
+      "label": "Add to cart button for one step",
+      "default": "Add 1 step to cart"
+    },
+    {
+      "type": "text",
+      "id": "adding_label",
+      "label": "Adding",
+      "default": "Adding…"
+    },
+    {
+      "type": "text",
+      "id": "added_label",
+      "label": "Added",
+      "default": "Added"
+    },
+    {
+      "type": "text",
+      "id": "added_notice",
+      "label": "Added message",
+      "info": "Read out by screen readers. {count} is replaced with the number of items.",
+      "default": "{count} items added to your cart."
+    },
+    {
+      "type": "text",
+      "id": "unavailable_all_label",
+      "label": "Nothing available",
+      "default": "Currently unavailable"
+    },
+    {
+      "type": "text",
+      "id": "error_label",
+      "label": "Error message",
+      "default": "Couldn't add to cart. Try again."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_mobile_bar",
+      "label": "Show summary bar on mobile",
+      "info": "A bar at the bottom of the screen that jumps back to the routine once the card is scrolled out of view.",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "bar_button_label",
+      "label": "Summary bar button",
+      "default": "View"
+    },
+    {
+      "type": "header",
+      "content": "Link to the full hair test"
+    },
+    {
+      "type": "text",
+      "id": "cross_link_label",
+      "label": "Link label",
+      "default": "Not sure? Take the full hair test"
+    },
+    {
+      "type": "url",
+      "id": "cross_link_url",
+      "label": "Link",
+      "info": "Point this at the hair test page. The link is hidden while this is empty."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product slot",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "The ORDER of these blocks defines the weight positions used by every concern tile - slot 1 is the first number, slot 2 the second. Reordering them silently changes what every tile means, so keep it identical to the Product slots in the Prüv hair test."
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Short name",
+          "info": "Leave blank to use the product's own title."
+        },
+        {
+          "type": "text",
+          "id": "phase",
+          "label": "Phase",
+          "default": "Reset"
+        },
+        {
+          "type": "text",
+          "id": "cadence",
+          "label": "How often",
+          "default": "2x a week"
+        },
+        {
+          "type": "textarea",
+          "id": "why_line",
+          "label": "What it does",
+          "info": "Shown on the routine card whenever this step is included."
+        },
+        {
+          "type": "checkbox",
+          "id": "always_include",
+          "label": "Always include this step",
+          "info": "Ignores the score and keeps this step in every routine. Use it for a daily product.",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "concern",
+      "name": "Concern tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Thinning or less density"
+        },
+        {
+          "type": "text",
+          "id": "sub_label",
+          "label": "Sub-label",
+          "default": "More scalp showing, ponytail feels thinner"
+        },
+        {
+          "type": "select",
+          "id": "glyph",
+          "label": "Icon",
+          "options": [
+            { "value": "thinning", "label": "Thinning strands" },
+            { "value": "coated", "label": "Coated strand" },
+            { "value": "breakage", "label": "Broken strand" },
+            { "value": "scalp", "label": "Flaky scalp" },
+            { "value": "none", "label": "None" }
+          ],
+          "default": "thinning"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Optional. Replaces the icon."
+        },
+        {
+          "type": "text",
+          "id": "weights",
+          "label": "Points per product slot",
+          "info": "One number per Product slot, comma separated, in block order. Copy these from the matching option in the Prüv hair test so the two entry points can never disagree. Example: 0,3,1",
+          "default": "0,3,1"
+        },
+        {
+          "type": "text",
+          "id": "reason",
+          "label": "Why this matters",
+          "info": "Completes the sentence on the routine card. Leave blank to keep this tile out of the explanation.",
+          "default": "thinning needs actives that work at the root, not just on the surface"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv routine builder",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "product": "pruv-1",
+            "title": "TriShield Shampoo",
+            "phase": "Reset",
+            "cadence": "2x a week",
+            "why_line": "Dissolves the mineral crust hard water leaves behind and decongests the scalp, so everything after it can work."
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product": "product-2",
+            "title": "VECTOR-5 Density Serum",
+            "phase": "Support",
+            "cadence": "Daily",
+            "why_line": "Works at the root across multiple pathways to rebuild density where hair has thinned.",
+            "always_include": true
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "product": "product-3",
+            "title": "Keratin Ceramide Mask",
+            "phase": "Repair",
+            "cadence": "Weekly",
+            "why_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down."
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Thinning or less density",
+            "sub_label": "More scalp showing, ponytail feels thinner",
+            "glyph": "thinning",
+            "weights": "0,3,1",
+            "reason": "thinning needs actives that work at the root, not just on the surface"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Rough or coated hair",
+            "sub_label": "Hair feels coated, shampoo barely lathers",
+            "glyph": "coated",
+            "weights": "3,0,1",
+            "reason": "mineral buildup coats the cuticle and blocks everything applied after it"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Breakage or weak strands",
+            "sub_label": "Strands snap, ends feel rough and dry",
+            "glyph": "breakage",
+            "weights": "0,1,3",
+            "reason": "breakage needs structural repair inside the hair shaft, not just conditioning"
+          }
+        },
+        {
+          "type": "concern",
+          "settings": {
+            "label": "Oily, itchy or flaky scalp",
+            "sub_label": "Scalp feels congested, hair looks dull by day two",
+            "glyph": "scalp",
+            "weights": "3,0,0",
+            "reason": "a congested scalp has to be rebalanced before anything else can work"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

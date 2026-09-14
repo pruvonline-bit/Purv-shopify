@@ -1,0 +1,58 @@
+{% doc %}
+  Line icon for one Routine Builder concern tile.
+
+  Geometry only, in the same line-art idiom as pruv-ritual-viz. Strokes inherit
+  currentColor, so the tile's resting warm grey and its checked copper are both
+  set once in section-pruv-routine-builder.css.
+
+  @param {string} glyph - one of "thinning", "coated", "breakage", "scalp".
+    Anything else renders nothing.
+
+  @example
+  {% render 'pruv-routine-glyph', glyph: 'thinning' %}
+{% enddoc %}
+
+{%- case glyph -%}
+  {%- when 'thinning' -%}
+    {%- comment -%} Three strands, the middle one breaking up - density thinning out. {%- endcomment -%}
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M11 5c-3.2 8 3.2 16 0 30"/>
+        <path d="M20 5c-3.2 8 3.2 16 0 30" stroke-dasharray="2.6 4.2" opacity="0.5"/>
+        <path d="M29 5c-3.2 8 3.2 16 0 30"/>
+      </g>
+    </svg>
+  {%- when 'coated' -%}
+    {%- comment -%} A strand sealed inside a film, with residue beading off it. {%- endcomment -%}
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 4c-4 9 5 13 1 19s3 9 1 13"/>
+        <rect x="10.5" y="11" width="15" height="19" rx="7.5" opacity="0.45"/>
+        <path d="M31.5 9.5s-3 3.3-3 5.3a3 3 0 0 0 6 0c0-2-3-5.3-3-5.3Z"/>
+        <circle cx="31" cy="25" r="1.4"/>
+      </g>
+    </svg>
+  {%- when 'breakage' -%}
+    {%- comment -%} A strand snapped through, with splinters off the break. {%- endcomment -%}
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 4c-4 5 3 9-1 13l-2.5 2"/>
+        <path d="M22.5 21.5 20 24c-3 4 4 8 0 12"/>
+        <path d="M12.5 17.5 9 16"/>
+        <path d="M28 24.5l3.5 1.5"/>
+        <path d="M13 23l-3 1.5"/>
+      </g>
+    </svg>
+  {%- when 'scalp' -%}
+    {%- comment -%} The curve of a scalp with flakes lifting off it. {%- endcomment -%}
+    <svg viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      <g stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+        <path d="M5 32c9-9 21-9 30 0"/>
+        <path d="M10 20.5l2 1.2"/>
+        <path d="M16.5 13.5l1.2 2"/>
+        <path d="M23.5 16l1.8-1.4"/>
+        <path d="M29.5 21.5l-1.6 1.6"/>
+        <path d="M20 7.5v2.2"/>
+      </g>
+    </svg>
+{%- endcase -%}
