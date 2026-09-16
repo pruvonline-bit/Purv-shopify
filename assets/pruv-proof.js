@@ -7,6 +7,11 @@
    a real ARIA slider, so arrow keys work and screen readers get a value rather
    than a mystery button.
 
+   Below 750px the cases are a horizontal strip, so touch drags start on the
+   handle only and the photo is left to the scroller (scrollerOwnsSwipe). A
+   pointer with no scroll gesture to compete with - mouse, pen - keeps the whole
+   frame at every width.
+
    The follow is smoothed through GSAP's quickTo (about 0.18s of power3.out)
    rather than pinned to the cursor: close enough to feel direct, eased enough
    to feel expensive. Without GSAP it snaps straight to the pointer instead.
@@ -17,6 +22,7 @@
    crop, scale or filter one photo differently from the other. */
 (function () {
   var DESKTOP = '(min-width: 990px)';
+  var STRIP = '(max-width: 749px)';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function toArray(list) {
@@ -83,8 +89,20 @@
 
     var dragging = false;
 
+    /* On a phone the cases are a horizontal strip, and a finger on a photo is
+       far more likely to mean "next case" than "move the line". So for touch,
+       inside the strip, only the handle starts a drag and every other swipe is
+       left to the scroller - the CSS makes the same split. Mouse and pen keep
+       the whole frame, where there is no scroll gesture to compete with. */
+    function scrollerOwnsSwipe(event) {
+      if (event.pointerType !== 'touch') return false;
+      if (!window.matchMedia(STRIP).matches) return false;
+      return !(event.target && event.target.closest && event.target.closest('[data-pruv-compare-handle]'));
+    }
+
     frame.addEventListener('pointerdown', function (event) {
       if (event.button !== undefined && event.button !== 0) return;
+      if (scrollerOwnsSwipe(event)) return;
       dragging = true;
       markTouched();
       figure.classList.add('is-dragging');

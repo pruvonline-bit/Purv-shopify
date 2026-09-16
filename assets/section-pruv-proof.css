@@ -125,11 +125,14 @@
   --pr-case-shadow: 0 24px 48px -30px rgba(0, 0, 0, 0.7);
 }
 
-/* Phones: stacked at full width, and back to the roomy chrome, because the
-   cards are not small here. Deliberately not a swipeable strip - the frame owns
-   horizontal gestures so the divider can be dragged, so a sideways swipe on a
-   photo would move the line instead of the strip. A carousel you cannot swipe
-   from the middle of a card is worse than a column you just scroll. */
+/* Phones: a peeking strip, one case at a time, with the roomy chrome back
+   because a card at 82% of a phone is not small.
+
+   The gesture split is what makes the strip work. Here the photo belongs to
+   the scroller and the divider is dragged by its handle, so a sideways swipe
+   anywhere on a photo moves to the next case instead of moving the line.
+   assets/pruv-proof.js enforces the same rule for touch, and the handle takes
+   touch-action: none so the scroller cannot steal a drag that starts on it. */
 @media screen and (max-width: 749px) {
   .pruv-proof__cases--grid {
     --pr-case-radius: 2.4rem;
@@ -137,7 +140,33 @@
     --pr-case-inset: 1.6rem;
     --pr-case-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.75);
 
-    gap: 3.2rem;
+    display: flex;
+    gap: 1.4rem;
+    padding-bottom: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .pruv-proof__cases--grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-proof__cases--grid > .pruv-proof__case {
+    /* Short of full width so the next case peeks in and the strip reads as
+       scrollable without dots having to say so - same 82% as the bestsellers
+       carousel, so the two strips on the page behave alike. */
+    flex: 0 0 82%;
+    min-width: 82%;
+    scroll-snap-align: start;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-frame {
+    cursor: default;
+    touch-action: auto;
   }
 }
 
@@ -240,7 +269,9 @@
   backdrop-filter: blur(6px);
   color: rgb(var(--pruv-bone));
   cursor: ew-resize;
-  touch-action: pan-y;
+  /* A slider thumb owns its gesture: without this the phone strip would scroll
+     away under a finger that landed on the handle to drag it. */
+  touch-action: none;
 }
 
 .pruv-proof__case-handle:focus-visible {
