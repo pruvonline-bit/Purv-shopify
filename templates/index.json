@@ -278,6 +278,77 @@
         "padding_bottom": 48
       }
     },
+    "proof": {
+      "type": "pruv-proof",
+      "blocks": {
+        "case_1": {
+          "type": "compare",
+          "settings": {
+            "ratio": "4 / 5",
+            "start_position": 50,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 12",
+            "concern": "Hard-water buildup",
+            "note": "Hair stopped feeling coated by the second wash, and the ends held together for longer between trims.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "case_2": {
+          "type": "compare",
+          "settings": {
+            "ratio": "4 / 5",
+            "start_position": 45,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 16",
+            "concern": "Thinning at the part",
+            "note": "The part looked narrower in the same mirror, once the shedding in the shower slowed down.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "case_3": {
+          "type": "compare",
+          "settings": {
+            "ratio": "4 / 5",
+            "start_position": 55,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 10",
+            "concern": "Breakage and short strands",
+            "note": "Fewer broken strands standing up along the part, and the ends stopped catching on the brush.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "day_1": { "type": "diary", "settings": { "day_label": "Day 1", "note": "Scalp felt clean rather than stripped." } },
+        "day_30": { "type": "diary", "settings": { "day_label": "Day 30", "note": "Less buildup by the second day after washing." } },
+        "day_60": { "type": "diary", "settings": { "day_label": "Day 60", "note": "Ends holding together between trims.", "milestone": true } },
+        "day_90": { "type": "diary", "settings": { "day_label": "Day 90", "note": "Wash day lasts longer. Roots feel lighter.", "milestone": true } },
+        "texture_1": { "type": "texture", "settings": { "zoom_label": "20x macro", "caption": "Cuticle laid flat after four weeks of the full ritual." } },
+        "review_1": { "type": "review", "settings": { "rating": 5, "quote": "My scalp still feels clean two days later, which has never happened with our water.", "name": "Ananya S.", "detail": "Bengaluru · 8 weeks in", "verified": true } },
+        "review_2": { "type": "review", "settings": { "rating": 5, "quote": "Switched after years of imported brands. The difference with Delhi water showed in two washes.", "name": "Kabir M.", "detail": "Delhi · 12 weeks in", "verified": true } }
+      },
+      "block_order": [
+        "case_1",
+        "case_2",
+        "case_3",
+        "day_1",
+        "day_30",
+        "day_60",
+        "day_90",
+        "texture_1",
+        "review_1",
+        "review_2"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
     "hair_test_popup": {
       "type": "pruv-hair-test-popup",
       "settings": {
@@ -298,6 +369,7 @@
     "ritual_explainer",
     "routine_builder",
     "bestsellers",
+    "proof",
     "hair_test_popup"
   ]
 }

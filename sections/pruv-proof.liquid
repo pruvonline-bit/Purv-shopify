@@ -1,0 +1,554 @@
+{{ 'section-pruv-proof.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-proof.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- comment -%}
+  Proof: real results, shown responsibly.
+
+  Four kinds of evidence, each an optional block type, in the order a sceptical
+  visitor reads them: the before/after cases, then the day-by-day diary, then
+  close-up texture shots and customer words.
+
+  The before/after cases are the centrepiece - both photos in one card with a
+  divider dragged in real time (snippets/pruv-proof-compare.liquid). Three
+  smaller cards side by side rather than one large one: three people are
+  evidence, one is the photo that happened to work. Motion lives
+  in assets/pruv-proof.js, which sets its own starting states, so with JavaScript
+  off the cases render at their configured split and every other block is simply
+  visible.
+
+  The disclaimer is a plain setting rather than anything clever: it should be
+  read, edited, and stand behind the claims on the page.
+{%- endcomment -%}
+
+{%- liquid
+  assign cases = section.blocks | where: 'type', 'compare'
+  assign diary = section.blocks | where: 'type', 'diary'
+  assign textures = section.blocks | where: 'type', 'texture'
+  assign reviews = section.blocks | where: 'type', 'review'
+-%}
+
+{%- if section.blocks.size > 0 -%}
+  <section
+    class="pruv-proof color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+    data-pruv-proof
+  >
+    <span class="pruv-proof__glow" aria-hidden="true"></span>
+
+    <div class="pruv-proof__container page-width">
+      {%- if section.settings.eyebrow != blank
+        or section.settings.heading != blank
+        or section.settings.text != blank
+      -%}
+        <div class="pruv-proof__header" data-pruv-proof-header>
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pruv-proof__eyebrow">
+              <span class="pruv-proof__eyebrow-dot" aria-hidden="true"></span>
+              {{ section.settings.eyebrow | escape }}
+            </p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="pruv-proof__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="pruv-proof__text">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if cases.size > 0 -%}
+        <div
+          class="pruv-proof__cases{% if cases.size > 1 %} pruv-proof__cases--grid{% endif %}"
+          data-pruv-proof-cases
+          data-count="{{ cases.size }}"
+        >
+          {%- for block in cases -%}
+            {%- render 'pruv-proof-compare', block: block, section: section -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.drag_hint != blank -%}
+          <p class="pruv-proof__hint" data-pruv-proof-hint>
+            <span class="pruv-proof__hint-icon" aria-hidden="true"></span>
+            {{ section.settings.drag_hint | escape }}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if diary.size > 0 -%}
+        <div class="pruv-proof__block">
+          {%- if section.settings.diary_heading != blank -%}
+            <h3 class="pruv-proof__subheading" data-pruv-proof-reveal>
+              {{- section.settings.diary_heading | escape -}}
+            </h3>
+          {%- endif -%}
+
+          <ol class="pruv-proof__diary" data-pruv-proof-diary>
+            {%- for block in diary -%}
+              <li
+                class="pruv-proof__day{% if block.settings.milestone %} pruv-proof__day--milestone{% endif %}"
+                data-pruv-proof-day
+                {{ block.shopify_attributes }}
+              >
+                <span class="pruv-proof__day-media">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 640
+                      | image_tag:
+                        loading: 'lazy',
+                        widths: '240, 400, 640',
+                        sizes: '(min-width: 990px) 20vw, 60vw',
+                        alt: block.settings.day_label
+                    }}
+                  {%- else -%}
+                    {{ 'lifestyle-1' | placeholder_svg_tag: 'pruv-proof__placeholder' }}
+                  {%- endif -%}
+                  <span class="pruv-proof__day-label">{{ block.settings.day_label | escape }}</span>
+                </span>
+                {%- if block.settings.note != blank -%}
+                  <span class="pruv-proof__day-note">{{ block.settings.note | escape }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ol>
+        </div>
+      {%- endif -%}
+
+      {%- if textures.size > 0 or reviews.size > 0 -%}
+        <div class="pruv-proof__block">
+          {%- if section.settings.wall_heading != blank -%}
+            <h3 class="pruv-proof__subheading" data-pruv-proof-reveal>
+              {{- section.settings.wall_heading | escape -}}
+            </h3>
+          {%- endif -%}
+
+          <div class="pruv-proof__wall" data-pruv-proof-wall>
+            {%- for block in textures -%}
+              <figure class="pruv-proof__texture" data-pruv-proof-tile {{ block.shopify_attributes }}>
+                {%- if block.settings.image != blank -%}
+                  {{
+                    block.settings.image
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '320, 520, 800',
+                      sizes: '(min-width: 990px) 30vw, 88vw',
+                      alt: block.settings.caption
+                  }}
+                {%- else -%}
+                  {{ 'lifestyle-2' | placeholder_svg_tag: 'pruv-proof__placeholder' }}
+                {%- endif -%}
+                {%- if block.settings.caption != blank -%}
+                  <figcaption>
+                    {%- if block.settings.zoom_label != blank -%}
+                      <span class="pruv-proof__texture-zoom">{{ block.settings.zoom_label | escape }}</span>
+                    {%- endif -%}
+                    {{ block.settings.caption | escape }}
+                  </figcaption>
+                {%- endif -%}
+              </figure>
+            {%- endfor -%}
+
+            {%- for block in reviews -%}
+              <blockquote class="pruv-proof__review" data-pruv-proof-tile {{ block.shopify_attributes }}>
+                {%- if block.settings.rating > 0 -%}
+                  <span class="pruv-proof__stars" aria-label="{{ block.settings.rating }} out of 5">
+                    {%- for i in (1..5) -%}
+                      <span aria-hidden="true"{% if i > block.settings.rating %} class="is-dim"{% endif %}>&#9733;</span>
+                    {%- endfor -%}
+                  </span>
+                {%- endif -%}
+
+                {%- if block.settings.quote != blank -%}
+                  <p class="pruv-proof__quote">{{ block.settings.quote | escape }}</p>
+                {%- endif -%}
+
+                <footer class="pruv-proof__review-foot">
+                  {%- if block.settings.image != blank -%}
+                    <span class="pruv-proof__review-avatar">
+                      {{
+                        block.settings.image
+                        | image_url: width: 96
+                        | image_tag: loading: 'lazy', widths: '48, 96', sizes: '48px', alt: ''
+                      }}
+                    </span>
+                  {%- endif -%}
+                  <span class="pruv-proof__review-who">
+                    {%- if block.settings.name != blank -%}
+                      <span class="pruv-proof__review-name">{{ block.settings.name | escape }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.detail != blank -%}
+                      <span class="pruv-proof__review-detail">{{ block.settings.detail | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                  {%- if block.settings.verified -%}
+                    <span class="pruv-proof__verified">{{ section.settings.verified_label | escape }}</span>
+                  {%- endif -%}
+                </footer>
+              </blockquote>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.disclaimer != blank -%}
+        <p class="pruv-proof__disclaimer">{{ section.settings.disclaimer }}</p>
+      {%- endif -%}
+    </div>
+  </section>
+{%- elsif request.design_mode -%}
+  <div class="page-width pruv-proof__editor-empty">
+    <p>
+      Add a <strong>Before / after</strong>, <strong>Diary day</strong>, <strong>Texture</strong> or
+      <strong>Customer words</strong> block to build this section.
+    </p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Prüv proof and results",
+  "tag": "div",
+  "class": "section pruv-proof-section",
+  "max_blocks": 24,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Real results, shown responsibly. Before and after photos must be the same person, same framing and same lighting, and cropping is the only edit allowed. Every case carries its timeframe and a permission line, and the theme editor flags a case that is missing them."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Real results"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Drag the line. <strong>Judge for yourself.</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Same person, same light, same frame — only the weeks in between are different.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Before and after"
+    },
+    {
+      "type": "text",
+      "id": "drag_hint",
+      "label": "Drag hint",
+      "info": "Shown under the cases. Hidden once someone has dragged one.",
+      "default": "Drag to compare"
+    },
+    {
+      "type": "text",
+      "id": "slider_label",
+      "label": "Slider name",
+      "info": "Not shown. Read out by screen readers on the drag handle.",
+      "default": "Reveal the before photo"
+    },
+    {
+      "type": "header",
+      "content": "Other proof"
+    },
+    {
+      "type": "text",
+      "id": "diary_heading",
+      "label": "Diary heading",
+      "default": "The 90-day diary"
+    },
+    {
+      "type": "text",
+      "id": "wall_heading",
+      "label": "Texture and reviews heading",
+      "default": "Up close, and in their words"
+    },
+    {
+      "type": "text",
+      "id": "verified_label",
+      "label": "Verified badge",
+      "default": "Verified buyer"
+    },
+    {
+      "type": "header",
+      "content": "Disclaimer"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Disclaimer",
+      "info": "Keep this accurate. It is the line that makes the rest of the section a fair claim rather than an advertisement.",
+      "default": "<p>Real customers, shared with permission. Photos are unretouched and cropped only. Individual results vary with hair type, water and routine. These are cosmetic products and are not intended to diagnose, treat or cure any condition.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-4"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "compare",
+      "name": "Before / after",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Both photos are drawn into the same fixed-ratio frame and cropped to fill it, so neither can be stretched and the pair cannot be re-framed to flatter the result. Shoot both at the same distance, angle and light."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_before",
+          "label": "Before photo"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_after",
+          "label": "After photo"
+        },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Frame shape",
+          "options": [
+            { "value": "4 / 5", "label": "Portrait" },
+            { "value": "1 / 1", "label": "Square" },
+            { "value": "3 / 2", "label": "Landscape" }
+          ],
+          "default": "4 / 5"
+        },
+        {
+          "type": "range",
+          "id": "start_position",
+          "min": 10,
+          "max": 90,
+          "step": 5,
+          "unit": "%",
+          "label": "Starting split",
+          "info": "Where the divider rests before anyone touches it. Keep it near the middle - starting it at an extreme shows off one photo and reads as a sales trick.",
+          "default": 50
+        },
+        {
+          "type": "text",
+          "id": "label_before",
+          "label": "Before label",
+          "default": "Before"
+        },
+        {
+          "type": "text",
+          "id": "label_after",
+          "label": "After label",
+          "default": "After"
+        },
+        {
+          "type": "text",
+          "id": "timeframe",
+          "label": "Timeframe",
+          "info": "Required for a fair claim. How long between the two photos.",
+          "default": "Week 0 to week 12"
+        },
+        {
+          "type": "text",
+          "id": "concern",
+          "label": "Concern",
+          "default": "Hard-water buildup"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "What changed",
+          "info": "In the customer's own words where possible. Describe what they saw, not what the product does.",
+          "default": "Hair stopped feeling coated by the second wash, and the ends held together for longer between trims."
+        },
+        {
+          "type": "text",
+          "id": "conditions",
+          "label": "Conditions",
+          "info": "Required for a fair claim.",
+          "default": "Same light and framing. Unretouched."
+        },
+        {
+          "type": "text",
+          "id": "credit",
+          "label": "Permission line",
+          "info": "Required for a fair claim. Never publish a customer photo without written permission.",
+          "default": "Shared with permission"
+        }
+      ]
+    },
+    {
+      "type": "diary",
+      "name": "Diary day",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "day_label",
+          "label": "Day",
+          "default": "Day 1"
+        },
+        {
+          "type": "textarea",
+          "id": "note",
+          "label": "Note",
+          "default": "Scalp felt clean rather than stripped."
+        },
+        {
+          "type": "checkbox",
+          "id": "milestone",
+          "label": "Mark as a milestone",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "texture",
+      "name": "Texture",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Close-up photo"
+        },
+        {
+          "type": "text",
+          "id": "zoom_label",
+          "label": "Magnification",
+          "info": "State it if the photo is magnified. An unlabelled macro shot overstates what the eye can see.",
+          "default": "20x macro"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Caption",
+          "default": "Cuticle laid flat after four weeks."
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Customer words",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "info": "Set to 0 to hide the stars.",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "info": "Quote it as written. Trim for length if you must, never to change the meaning.",
+          "default": "My scalp still feels clean two days later, which has never happened with our water."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Ananya S."
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "Bengaluru · 8 weeks in"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified buyer",
+          "info": "Only tick this when the order is real and on record.",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv proof and results",
+      "blocks": [
+        { "type": "compare" },
+        {
+          "type": "compare",
+          "settings": {
+            "concern": "Thinning at the part",
+            "timeframe": "Week 0 to week 16",
+            "note": "The part looked narrower in the same mirror once the shedding in the shower slowed down."
+          }
+        },
+        {
+          "type": "compare",
+          "settings": {
+            "concern": "Breakage and short strands",
+            "timeframe": "Week 0 to week 10",
+            "note": "Fewer broken strands standing up along the part, and the ends stopped catching on the brush."
+          }
+        },
+        { "type": "diary", "settings": { "day_label": "Day 1", "note": "Scalp felt clean rather than stripped." } },
+        { "type": "diary", "settings": { "day_label": "Day 30", "note": "Less buildup by the second day after washing." } },
+        { "type": "diary", "settings": { "day_label": "Day 60", "note": "Ends holding together between trims.", "milestone": true } },
+        { "type": "diary", "settings": { "day_label": "Day 90", "note": "Wash day lasts longer. Roots feel lighter.", "milestone": true } },
+        { "type": "texture" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

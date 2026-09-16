@@ -1,0 +1,726 @@
+/* Prüv — Proof and results.
+
+   Graphite stage: photographs carry this section, and they read far better
+   against dark than against bone. Copper is kept to the divider, the accents
+   and the hairlines, per the brand rule against large copper areas.
+
+   The before/after frame is the one piece of geometry that matters. Both photos
+   sit in the same fixed-ratio box at object-fit: cover, so neither can be
+   stretched and the pair is always in register; the reveal is a single
+   clip-path driven from --pruv-compare-pos.
+
+   Motion lives in assets/pruv-proof.js and every starting state is set from
+   there, so without JavaScript the cases render at their configured split and
+   the rest of the section is simply visible. */
+
+.pruv-proof {
+  --pr-white: 255, 255, 255;
+  --pr-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --pr-mono: 'Geist Mono', ui-monospace, monospace;
+  --pr-sans: 'Geist', system-ui, sans-serif;
+  --pruv-compare-pos: 50%;
+
+  position: relative;
+  isolation: isolate;
+}
+
+.pruv-proof__glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(52rem 38rem at 78% 18%, rgba(var(--pruv-copper), 0.16), transparent 68%);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.pruv-proof__header {
+  max-width: 54ch;
+  margin-bottom: 4rem;
+}
+
+.pruv-proof__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 1.6rem;
+  font-family: var(--pr-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__eyebrow-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__heading {
+  margin: 0;
+  font-family: var(--pr-sans);
+  font-size: clamp(2.8rem, 3.6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: rgb(var(--color-foreground));
+}
+
+.pruv-proof__heading strong {
+  display: block;
+  font-weight: 800;
+}
+
+.pruv-proof__text {
+  margin-top: 1.6rem;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.62);
+}
+
+.pruv-proof__text p {
+  margin: 0;
+}
+
+.pruv-proof__subheading {
+  margin: 0 0 2.4rem;
+  font-family: var(--pr-sans);
+  font-size: clamp(1.9rem, 2.2vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: rgb(var(--color-foreground));
+}
+
+.pruv-proof__block {
+  margin-top: 6.4rem;
+}
+
+/* ==========================================================================
+   Before / after
+   ========================================================================== */
+
+/* Three smaller cards, not one hero. Three independent cases read as evidence;
+   a single large one reads as the one photo that worked. The chrome scales with
+   the card through these variables, so a one-case layout still gets the big
+   treatment and nothing has to be restyled per breakpoint. */
+.pruv-proof__cases {
+  --pr-case-radius: 2.4rem;
+  --pr-case-handle: 4.8rem;
+  --pr-case-inset: 1.6rem;
+  --pr-case-shadow: 0 40px 80px -48px rgba(0, 0, 0, 0.75);
+
+  display: grid;
+  gap: 3.2rem;
+}
+
+.pruv-proof__cases--grid {
+  --pr-case-radius: 1.8rem;
+  --pr-case-handle: 3.6rem;
+  --pr-case-inset: 1.1rem;
+  --pr-case-shadow: 0 24px 48px -30px rgba(0, 0, 0, 0.7);
+}
+
+/* Phones: stacked at full width, and back to the roomy chrome, because the
+   cards are not small here. Deliberately not a swipeable strip - the frame owns
+   horizontal gestures so the divider can be dragged, so a sideways swipe on a
+   photo would move the line instead of the strip. A carousel you cannot swipe
+   from the middle of a card is worse than a column you just scroll. */
+@media screen and (max-width: 749px) {
+  .pruv-proof__cases--grid {
+    --pr-case-radius: 2.4rem;
+    --pr-case-handle: 4.8rem;
+    --pr-case-inset: 1.6rem;
+    --pr-case-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.75);
+
+    gap: 3.2rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-proof__cases--grid {
+    gap: 1.6rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  /* Two or four cases would leave an orphan in a three-up grid. */
+  .pruv-proof__cases--grid[data-count='2'],
+  .pruv-proof__cases--grid[data-count='4'] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-proof__cases[data-count='1'] {
+    max-width: 68rem;
+    margin-inline: auto;
+  }
+
+  .pruv-proof__cases--grid {
+    gap: 2.4rem;
+  }
+
+  .pruv-proof__cases--grid[data-count='4'] {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.pruv-proof__case {
+  margin: 0;
+}
+
+.pruv-proof__case-frame {
+  position: relative;
+  aspect-ratio: var(--pruv-compare-ratio, 4 / 5);
+  overflow: hidden;
+  border: 1px solid rgba(var(--pruv-copper), 0.22);
+  border-radius: var(--pr-case-radius, 2.4rem);
+  background-color: rgba(var(--pruv-graphite), 0.6);
+  box-shadow: var(--pr-case-shadow, 0 40px 80px -48px rgba(0, 0, 0, 0.75));
+  cursor: ew-resize;
+  /* Vertical swipes still scroll the page; horizontal ones are ours. */
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.pruv-proof__case-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.pruv-proof__case-layer img,
+.pruv-proof__case-layer svg {
+  width: 100%;
+  height: 100%;
+  /* cover, always: the frame decides the crop, so one photo can never be
+     scaled or stretched differently from the other. */
+  object-fit: cover;
+  /* A hair of overscan so the parallax tween cannot expose an edge. */
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.pruv-proof__case-layer--before {
+  clip-path: inset(0 calc(100% - var(--pruv-compare-pos)) 0 0);
+}
+
+.pruv-proof__case-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pruv-compare-pos);
+  width: 2px;
+  margin-left: -1px;
+  background-color: rgb(var(--pruv-copper));
+  box-shadow: 0 0 18px rgba(var(--pruv-copper), 0.55);
+  pointer-events: none;
+}
+
+.pruv-proof__case-handle {
+  position: absolute;
+  top: 50%;
+  left: var(--pruv-compare-pos);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pr-case-handle, 4.8rem);
+  height: var(--pr-case-handle, 4.8rem);
+  margin: calc(var(--pr-case-handle, 4.8rem) / -2) 0 0 calc(var(--pr-case-handle, 4.8rem) / -2);
+  padding: 0;
+  border: 1.5px solid rgba(var(--pruv-copper), 0.9);
+  border-radius: 50%;
+  background-color: rgba(var(--pruv-graphite), 0.72);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: rgb(var(--pruv-bone));
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+
+.pruv-proof__case-handle:focus-visible {
+  outline: 2px solid rgb(var(--pruv-bone));
+  outline-offset: 3px;
+}
+
+/* Two chevrons, drawn with borders so there is no icon to load. */
+.pruv-proof__case-grip {
+  position: relative;
+  display: block;
+  width: 2rem;
+  height: 1rem;
+}
+
+.pruv-proof__case-grip::before,
+.pruv-proof__case-grip::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: solid currentColor;
+  border-width: 1.6px 1.6px 0 0;
+}
+
+.pruv-proof__case-grip::before {
+  left: 0.1rem;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.pruv-proof__case-grip::after {
+  right: 0.1rem;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.pruv-proof__case-tag {
+  position: absolute;
+  top: var(--pr-case-inset, 1.6rem);
+  z-index: 1;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid rgba(var(--pr-white), 0.22);
+  border-radius: 100px;
+  background-color: rgba(var(--pruv-graphite), 0.62);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--pr-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-bone));
+  pointer-events: none;
+}
+
+.pruv-proof__case-tag--before {
+  left: var(--pr-case-inset, 1.6rem);
+}
+
+.pruv-proof__case-tag--after {
+  right: var(--pr-case-inset, 1.6rem);
+}
+
+/* --- caption -------------------------------------------------------------- */
+
+.pruv-proof__case-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+
+.pruv-proof__case-facts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.2rem;
+  font-family: var(--pr-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pruv-proof__case-timeframe {
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(var(--pruv-copper), 0.42);
+  border-radius: 100px;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__case-concern {
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.pruv-proof__case-note {
+  font-size: 1.45rem;
+  line-height: 1.55;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.pruv-proof__case-credit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.42);
+}
+
+/* --- the compact card ------------------------------------------------------
+   Same card, tuned for a third of the width: the labels and the note step down
+   with the frame, and the note is clamped so the row keeps a shared baseline
+   however long one customer's words run. Only from 750px up, where the cards
+   actually share a row. */
+
+@media screen and (min-width: 750px) {
+  .pruv-proof__cases--grid .pruv-proof__case-tag {
+    padding: 0.4rem 0.9rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-grip {
+    width: 1.6rem;
+    height: 0.8rem;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-meta {
+    gap: 0.7rem;
+    margin-top: 1.4rem;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-facts {
+    gap: 0.6rem 0.9rem;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-timeframe {
+    padding: 0.3rem 0.8rem;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-note {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 1.3rem;
+    line-height: 1.5;
+  }
+
+  .pruv-proof__cases--grid .pruv-proof__case-credit {
+    gap: 0.3rem 1.2rem;
+    font-size: 1.1rem;
+}
+}
+
+/* The hint is only true once the drag is live. */
+.pruv-proof__hint {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 2.4rem 0 0;
+  font-family: var(--pr-mono);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.pruv-proof--live .pruv-proof__hint {
+  display: flex;
+}
+
+.pruv-proof__hint-icon {
+  position: relative;
+  width: 2.4rem;
+  height: 1px;
+  background-color: rgba(var(--pruv-copper), 0.6);
+}
+
+.pruv-proof__hint-icon::before,
+.pruv-proof__hint-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: solid rgb(var(--pruv-copper));
+  border-width: 1.4px 1.4px 0 0;
+}
+
+.pruv-proof__hint-icon::before {
+  left: 0;
+  transform: translateY(-50%) rotate(-135deg);
+}
+
+.pruv-proof__hint-icon::after {
+  right: 0;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* ==========================================================================
+   90-day diary
+   ========================================================================== */
+
+.pruv-proof__diary {
+  display: flex;
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0 0 1rem;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+
+.pruv-proof__diary::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-proof__diary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    overflow: visible;
+  }
+}
+
+.pruv-proof__day {
+  flex: 0 0 62%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-proof__day {
+    flex-basis: 34%;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .pruv-proof__day {
+    flex: initial;
+  }
+}
+
+.pruv-proof__day-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid rgba(var(--pr-white), 0.1);
+  border-radius: 1.6rem;
+  background-color: rgba(var(--pruv-graphite), 0.6);
+}
+
+.pruv-proof__day-media img,
+.pruv-proof__day-media svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pruv-proof__day-label {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  background-color: rgba(var(--pruv-graphite), 0.78);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  font-family: var(--pr-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-bone));
+}
+
+.pruv-proof__day--milestone .pruv-proof__day-media {
+  border-color: rgba(var(--pruv-copper), 0.5);
+}
+
+.pruv-proof__day--milestone .pruv-proof__day-label {
+  background-color: rgb(var(--pruv-copper));
+  color: rgb(var(--pr-white));
+}
+
+.pruv-proof__day-note {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.62);
+}
+
+/* ==========================================================================
+   Texture and reviews
+   ========================================================================== */
+
+.pruv-proof__wall {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-proof__wall {
+    grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+  }
+}
+
+.pruv-proof__texture {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(var(--pr-white), 0.1);
+  border-radius: 2rem;
+  background-color: rgba(var(--pruv-graphite), 0.55);
+}
+
+.pruv-proof__texture img,
+.pruv-proof__texture svg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.pruv-proof__texture figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.6rem 1.8rem 1.8rem;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.pruv-proof__texture-zoom {
+  font-family: var(--pr-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__review {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: 0;
+  padding: 2.2rem;
+  border: 1px solid rgba(var(--pr-white), 0.1);
+  border-radius: 2rem;
+  background-color: rgba(var(--pr-white), 0.04);
+}
+
+.pruv-proof__stars {
+  display: flex;
+  gap: 0.2rem;
+  font-size: 1.3rem;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__stars .is-dim {
+  color: rgba(var(--color-foreground), 0.25);
+}
+
+.pruv-proof__quote {
+  margin: 0;
+  font-family: var(--pr-sans);
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+}
+
+.pruv-proof__review-foot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.pruv-proof__review-avatar {
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: rgba(var(--pr-white), 0.08);
+}
+
+.pruv-proof__review-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pruv-proof__review-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pruv-proof__review-name {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.pruv-proof__review-detail {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.pruv-proof__verified {
+  margin-left: auto;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid rgba(var(--pruv-copper), 0.4);
+  border-radius: 100px;
+  font-family: var(--pr-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-copper));
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Disclaimer
+   ========================================================================== */
+
+.pruv-proof__disclaimer {
+  max-width: 76ch;
+  margin: 4.8rem 0 0;
+  padding-top: 2.4rem;
+  border-top: 1px solid rgba(var(--color-foreground), 0.14);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: rgba(var(--color-foreground), 0.45);
+}
+
+.pruv-proof__disclaimer p {
+  margin: 0;
+}
+
+.pruv-proof__placeholder {
+  width: 100%;
+  height: 100%;
+  fill: rgba(var(--color-foreground), 0.18);
+}
+
+.pruv-proof__editor-note {
+  padding: 0.8rem 1rem;
+  border-radius: 0.8rem;
+  background-color: rgba(var(--pruv-copper), 0.14);
+  font-size: 1.2rem;
+  line-height: 1.45;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-proof__editor-empty {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-proof *,
+  .pruv-proof *::before,
+  .pruv-proof *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

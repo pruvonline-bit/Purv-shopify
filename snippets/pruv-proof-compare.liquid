@@ -1,0 +1,145 @@
+{% doc %}
+  One before/after case: both photos in a single card, revealed by a divider
+  the visitor drags in real time.
+
+  Honest by construction. Both photos are drawn into the same fixed-ratio box
+  with object-fit: cover, so neither can be stretched, and the pair can never be
+  re-cropped to flatter the result. The timeframe and consent line are part of
+  the card rather than optional decoration, and the editor warns when they are
+  missing - see the schema notes in sections/pruv-proof.liquid.
+
+  @param {object} block - a "compare" block
+  @param {object} section - the parent section, for shared labels
+
+  @example
+  {% render 'pruv-proof-compare', block: block, section: section %}
+{% enddoc %}
+
+{%- liquid
+  assign before = block.settings.image_before
+  assign after = block.settings.image_after
+  assign start = block.settings.start_position
+  assign label_before = block.settings.label_before | default: 'Before'
+  assign label_after = block.settings.label_after | default: 'After'
+
+  assign before_alt = label_before
+  if block.settings.concern != blank
+    assign before_alt = label_before | append: ' — ' | append: block.settings.concern
+  endif
+  assign after_alt = label_after
+  if block.settings.timeframe != blank
+    assign after_alt = label_after | append: ' — ' | append: block.settings.timeframe
+  endif
+-%}
+
+<figure
+  class="pruv-proof__case"
+  data-pruv-compare
+  data-start="{{ start }}"
+  style="--pruv-compare-pos: {{ start }}%; --pruv-compare-ratio: {{ block.settings.ratio }};"
+  {{ block.shopify_attributes }}
+>
+  <div class="pruv-proof__case-frame" data-pruv-compare-frame>
+    {%- comment -%}
+      The after photo is the base layer and the before photo is clipped over it,
+      so the reveal is one clip-path on a single element - no layout, no reflow,
+      and it tracks the pointer at whatever rate the display refreshes.
+    {%- endcomment -%}
+    <div class="pruv-proof__case-layer">
+      {%- if after != blank -%}
+        {{
+          after
+          | image_url: width: 1100
+          | image_tag:
+            loading: 'lazy',
+            widths: '360, 540, 760, 1100',
+            sizes: '(min-width: 990px) 30vw, (min-width: 750px) 30vw, 82vw',
+            alt: after_alt
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'pruv-proof__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <div class="pruv-proof__case-layer pruv-proof__case-layer--before" data-pruv-compare-before>
+      {%- if before != blank -%}
+        {{
+          before
+          | image_url: width: 1100
+          | image_tag:
+            loading: 'lazy',
+            widths: '360, 540, 760, 1100',
+            sizes: '(min-width: 990px) 30vw, (min-width: 750px) 30vw, 82vw',
+            alt: before_alt
+        }}
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'pruv-proof__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <span class="pruv-proof__case-divider" data-pruv-compare-divider aria-hidden="true"></span>
+
+    <span class="pruv-proof__case-tag pruv-proof__case-tag--before" data-pruv-compare-tag="before">
+      {{- label_before | escape -}}
+    </span>
+    <span class="pruv-proof__case-tag pruv-proof__case-tag--after" data-pruv-compare-tag="after">
+      {{- label_after | escape -}}
+    </span>
+
+    {%- comment -%}
+      A real slider, so dragging, tapping the photo and the arrow keys all move
+      the same control and screen readers announce a value rather than a button.
+    {%- endcomment -%}
+    <button
+      type="button"
+      class="pruv-proof__case-handle"
+      data-pruv-compare-handle
+      role="slider"
+      tabindex="0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="{{ start }}"
+      aria-label="{{ section.settings.slider_label | escape }}"
+    >
+      <span class="pruv-proof__case-grip" aria-hidden="true"></span>
+    </button>
+  </div>
+
+  <figcaption class="pruv-proof__case-meta">
+    <span class="pruv-proof__case-facts">
+      {%- if block.settings.timeframe != blank -%}
+        <span class="pruv-proof__case-timeframe">{{ block.settings.timeframe | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.concern != blank -%}
+        <span class="pruv-proof__case-concern">{{ block.settings.concern | escape }}</span>
+      {%- endif -%}
+    </span>
+
+    {%- if block.settings.note != blank -%}
+      <span class="pruv-proof__case-note">{{ block.settings.note | escape }}</span>
+    {%- endif -%}
+
+    <span class="pruv-proof__case-credit">
+      {%- if block.settings.conditions != blank -%}
+        <span>{{ block.settings.conditions | escape }}</span>
+      {%- endif -%}
+      {%- if block.settings.credit != blank -%}
+        <span>{{ block.settings.credit | escape }}</span>
+      {%- endif -%}
+    </span>
+
+    {%- if request.design_mode -%}
+      {%- assign missing = '' -%}
+      {%- if block.settings.timeframe == blank -%}{%- assign missing = missing | append: 'a timeframe, ' -%}{%- endif -%}
+      {%- if block.settings.credit == blank -%}{%- assign missing = missing | append: 'a permission line, ' -%}{%- endif -%}
+      {%- if block.settings.conditions == blank -%}{%- assign missing = missing | append: 'the shooting conditions, ' -%}{%- endif -%}
+      {%- if missing != blank -%}
+        <span class="pruv-proof__editor-note">
+          {%- comment -%} Ruby's split drops the trailing empty field, so the joined list has no dangling comma. {%- endcomment -%}
+          This case is missing {{ missing | split: ', ' | join: ', ' }} — a before/after needs that to be a
+          fair claim. Add it before publishing.
+        </span>
+      {%- endif -%}
+    {%- endif -%}
+  </figcaption>
+</figure>
