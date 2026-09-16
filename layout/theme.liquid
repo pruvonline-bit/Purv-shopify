@@ -70,6 +70,7 @@
     <script src="{{ 'pruv-menu-drawer-animation.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pruv-ritual-explainer.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pruv-page-transition.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pruv-button-fill.js' | asset_url }}" defer="defer"></script>
 
     {{ content_for_header }}
 
@@ -311,6 +312,7 @@
       be styled on the first paint of every page, or the arriving half flashes.
     {%- endcomment -%}
     {{ 'pruv-page-transition.css' | asset_url | stylesheet_tag }}
+    {{ 'pruv-button-fill.css' | asset_url | stylesheet_tag }}
     {{ 'pruv-custom-cursor.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {%- comment -%}

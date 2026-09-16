@@ -10,21 +10,16 @@
 }
 
 .pruv-bestsellers__layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2.4rem;
+  display: block;
 }
 
-@media screen and (min-width: 990px) {
-  .pruv-bestsellers__layout {
-    grid-template-columns: minmax(240px, 300px) 1fr;
-    gap: 4rem;
-    align-items: center;
-  }
-}
-
+/* Optional now - the section renders without it. When present it is a header
+   above the panel rather than a column beside it, so an empty one can never
+   leave the products sharing the row with dead space. */
 .pruv-bestsellers__intro {
-  padding-top: 0;
+  max-width: 60ch;
+  margin: 0 auto 3.2rem;
+  text-align: center;
 }
 
 .pruv-bestsellers__eyebrow {
@@ -93,9 +88,19 @@
   display: flex;
   align-items: stretch;
   gap: 2rem;
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  will-change: transform;
   width: 100%;
+  /* Native scroll-snap carousel: touch drag, momentum and keyboard scrolling
+     all come free, and it still works with JavaScript off. */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pruv-bestsellers__track::-webkit-scrollbar {
+  display: none;
 }
 
 @media screen and (max-width: 749px) {
@@ -111,13 +116,17 @@
   min-width: calc(50% - 1rem);
   box-sizing: border-box;
   display: flex;
+  scroll-snap-align: start;
 }
 
 @media screen and (max-width: 749px) {
   .pruv-bestsellers__slide {
-    flex: 0 0 calc(50% - 0.6rem);
-    width: calc(50% - 0.6rem);
-    min-width: calc(50% - 0.6rem);
+    /* Short of full width so the next card peeks in and the strip reads as
+       scrollable without the dots having to say so. A 375px screen split two
+       ways left each card ~165px, too narrow for the price and the CTA. */
+    flex: 0 0 82%;
+    width: 82%;
+    min-width: 82%;
   }
 }
 
@@ -278,4 +287,87 @@
   width: 2.2rem;
   background-color: #1B1D1F;
   border-radius: 100px;
+}
+
+/* ==========================================================================
+   Desktop grid
+   ==========================================================================
+
+   From 990px there is room for the whole range at once, so the carousel gives
+   way to a grid: no scrolling, no dots, every product visible. auto-fit keeps
+   it sensible whatever "products to show" is set to. */
+
+@media screen and (min-width: 990px) {
+  .pruv-bestsellers__track {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+    gap: 2.4rem;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .pruv-bestsellers__slide {
+    flex: initial;
+    width: auto;
+    min-width: 0;
+  }
+
+  .pruv-bestsellers__dots {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Product loading
+   ==========================================================================
+
+   The hidden starting state is set by GSAP, not here, so without JavaScript
+   every card is simply visible. This is only the shimmer that sits under an
+   image while it downloads. */
+
+.pruv-bestsellers__slide .pruv-card-media-wrapper.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 80%
+  );
+  background-size: 220% 100%;
+  animation: pruvBestsellerShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes pruvBestsellerShimmer {
+  from {
+    background-position: 160% 0;
+  }
+
+  to {
+    background-position: -60% 0;
+  }
+}
+
+/* ==========================================================================
+   Add to cart - hover fill
+   ==========================================================================
+
+   The button's own rules swap the background to copper the instant you hover,
+   which would hide the growing disc behind an already-copper button. Once
+   pruv-button-fill.js has run, the background stays graphite and the disc does
+   the colouring; the label still lifts to white on the same timing. Without
+   JavaScript the class is never added and the plain CSS hover stands.
+
+   `html.pruv-fill-ready` is needed to out-specify the !important hover in
+   component-pruv-card.css. */
+
+html.pruv-fill-ready .pruv-bestsellers__slide .button--pruv-add-to-cart:hover,
+html.pruv-fill-ready .pruv-bestsellers__slide .button--pruv-add-to-cart:focus-visible {
+  background: rgb(var(--pruv-graphite)) !important;
+  background-color: rgb(var(--pruv-graphite)) !important;
+}
+
+.pruv-bestsellers__slide .button--pruv-add-to-cart .pruv-fill {
+  background-color: rgb(var(--pruv-copper));
 }

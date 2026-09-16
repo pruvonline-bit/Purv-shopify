@@ -1,0 +1,38 @@
+/* Prüv — GSAP hover fill for buttons. See assets/pruv-button-fill.js.
+
+   The disc is injected as the button's first child and sits behind the label,
+   so every button that opts in needs a stacking context and positioned
+   children. Colours stay in the button's own stylesheet; only the geometry
+   is here. */
+
+[data-pruv-fill] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Everything except the disc sits above it. */
+[data-pruv-fill] > *:not(.pruv-fill) {
+  position: relative;
+  z-index: 1;
+}
+
+.pruv-fill {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: rgb(var(--pruv-copper));
+  transform: scale(0);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-fill {
+    transition: none !important;
+  }
+}
