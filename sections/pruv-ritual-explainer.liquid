@@ -170,8 +170,17 @@
                         file_url serves the original bytes, so animation in a
                         WebP/SVG/GIF survives - the image CDN can re-encode an
                         animated file down to a single frame.
+
+                        No width/height: media_file is a free-text filename, not
+                        an image_picker, so there is no image object to read
+                        intrinsic dimensions off. Guessing a pair would reserve
+                        the wrong box and make CLS worse rather than better -
+                        CSS sizes this to `width: 100%; height: auto` regardless.
+                        The image_picker branch below does pass real dimensions.
                       {%- endcomment -%}
+                      {% # theme-check-disable ImgWidthAndHeight %}
                       <img src="{{ media_src }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+                      {% # theme-check-enable ImgWidthAndHeight %}
                     </div>
                   {%- elsif block.settings.image != blank -%}
                     <div class="pruv-ritual__step-viz pruv-ritual__step-viz--media">
