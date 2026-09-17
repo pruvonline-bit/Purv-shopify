@@ -199,6 +199,7 @@
 .pruv-search .pruv-search__field {
   position: relative;
   display: grid;
+  width: 100%;
   grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 1.2rem;
@@ -213,7 +214,13 @@
 .pruv-search .pruv-search__field::before,
 .pruv-search .pruv-search__field::after {
   content: '';
+  /* A grid container's pseudo-elements are grid items. Without an area of
+     their own they take an implicit track, and absolute positioning then
+     resolves inside that track - which drew this hairline as a full-width
+     line above the input instead of a rule beneath it. */
+  grid-area: 1 / 1 / -1 / -1;
   position: absolute;
+  top: auto;
   right: 0;
   bottom: 0;
   left: 0;
@@ -357,7 +364,13 @@
   stroke-linejoin: round;
 }
 
-.pruv-search .pruv-search__input:focus-visible,
+/* The input's focus indicator is the copper rule under the field, drawn the
+   moment it takes focus - a ring around the text as well reads as an error
+   box. Everything else here keeps a ring, since nothing else has one. */
+.pruv-search .pruv-search__input:focus-visible {
+  outline: 0;
+}
+
 .pruv-search .pruv-search__close:focus-visible,
 .pruv-search .pruv-search__reset:focus-visible,
 .pruv-search .pruv-search__submit:focus-visible,
@@ -443,7 +456,11 @@
   box-shadow: none;
   overflow-y: auto;
   overscroll-behavior: contain;
+  /* Chrome ignores ::-webkit-scrollbar once scrollbar-width is set, so the
+     colour has to come from the standard property or the bar renders in the
+     browser's own grey. The webkit rules below stay for older WebKit. */
   scrollbar-width: thin;
+  scrollbar-color: rgba(var(--pruv-copper), 0.55) transparent;
 }
 
 /* predictive-search.js sets an inline max-height measured from the bottom of
@@ -464,7 +481,7 @@
 
 .pruv-search .pruv-search__results::-webkit-scrollbar-thumb {
   border-radius: 100px;
-  background-color: rgba(var(--pruv-warm-grey), 0.4);
+  background-color: rgba(var(--pruv-copper), 0.55);
 }
 
 .pruv-search .predictive-search__results-groups-wrapper {

@@ -135,6 +135,23 @@
       scrim.addEventListener('click', closeWithMotion, true);
     }
 
+    /* Anything outside the panel closes it, not only the scrim. The scrim
+       covers the viewport, so normally it catches every outside click - but it
+       only catches what paints below it, and a section with a higher z-index
+       than the header would take those clicks instead. This is measured
+       against the panel, so it holds whatever is on top. */
+    document.addEventListener(
+      'click',
+      function (event) {
+        if (!details.hasAttribute('open')) return;
+        var target = event.target;
+        // Inside the panel is not outside it, and the summary is the toggle.
+        if (panel.contains(target) || summary.contains(target)) return;
+        closeWithMotion(event);
+      },
+      true
+    );
+
     details.addEventListener(
       'keyup',
       function (event) {
