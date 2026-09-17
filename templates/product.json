@@ -3,13 +3,6 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title"
         },
@@ -34,27 +27,6 @@
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
-          }
-        },
-        "offers": {
-          "type": "pruv_offers",
-          "settings": {
-            "heading": "Extra savings",
-            "offer_1_icon": "tag",
-            "offer_1_title": "PAYDAY is live",
-            "offer_1_subtitle": "Get flat 25% off",
-            "offer_1_footer": "Use code: PAYDAY",
-            "offer_1_code": "PAYDAY",
-            "offer_2_icon": "gift",
-            "offer_2_title": "Buy 2 products",
-            "offer_2_subtitle": "Get a free gift",
-            "offer_2_footer": "No code required",
-            "offer_2_code": "",
-            "offer_3_icon": "truck",
-            "offer_3_title": "Free shipping",
-            "offer_3_subtitle": "On orders above ₹699",
-            "offer_3_footer": "No code required",
-            "offer_3_code": ""
           }
         },
         "tab_description": {
@@ -134,14 +106,12 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
         "rating",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
-        "offers",
         "tab_description",
         "tab_benefits",
         "tab_ingredients",
