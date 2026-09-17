@@ -1,4 +1,11 @@
 {{ 'pruv-glass-nav.css' | asset_url | stylesheet_tag }}
+{%- comment -%}
+  The search palette: not deferred behind media="print" like Dawn's own search
+  CSS below, because it restyles a panel that can be opened on the first frame
+  by Cmd+K, and a half-styled palette is worse than a slow one.
+{%- endcomment -%}
+{{ 'pruv-search.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-search.js' | asset_url }}" defer="defer"></script>
 <link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
@@ -240,7 +247,8 @@
       endif
 
       if render_search_left
-        render 'header-search', input_id: 'Search-In-Modal-1'
+        # one line: inside a liquid tag every line is its own tag, so a wrapped render breaks
+        render 'header-search', input_id: 'Search-In-Modal-1', placeholder: section.settings.search_placeholder, quick_label: section.settings.search_quick_label, quick_terms: section.settings.search_quick_terms
       endif
     -%}
 
@@ -344,7 +352,12 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {%- render 'header-search',
+        input_id: 'Search-In-Modal',
+        placeholder: section.settings.search_placeholder,
+        quick_label: section.settings.search_quick_label,
+        quick_terms: section.settings.search_quick_terms
+      -%}
 
       {%- if shop.customer_accounts_enabled -%}
         <shopify-account
@@ -681,6 +694,33 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "Search"
+    },
+    {
+      "type": "paragraph",
+      "content": "The search icon opens a panel over the page. Cmd+K, Ctrl+K and / open it from anywhere."
+    },
+    {
+      "type": "text",
+      "id": "search_placeholder",
+      "label": "Field placeholder",
+      "default": "Search rituals, concerns, ingredients"
+    },
+    {
+      "type": "text",
+      "id": "search_quick_label",
+      "label": "Suggestions label",
+      "default": "Popular"
+    },
+    {
+      "type": "text",
+      "id": "search_quick_terms",
+      "label": "Suggested searches",
+      "info": "Comma separated. Each one searches in place, so keep them to terms the catalogue actually answers. Leave empty to hide the row.",
+      "default": "Hard water, Thinning, Breakage, Shampoo, Serum, Mask"
     },
     {
       "type": "header",

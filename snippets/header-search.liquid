@@ -1,14 +1,35 @@
 {% comment %}
-  Renders a header search modal. Should be used with 'header.liquid'
+  Renders the header search: a Prüv command palette over a scrim, used by
+  'header.liquid'. Styling is assets/pruv-search.css, motion and the keyboard
+  shortcut are assets/pruv-search.js.
+
+  Dawn's own machinery is kept on purpose, so predictive search, focus trapping,
+  arrow-key selection and the no-JavaScript fallback all still work:
+
+  - <details-modal> binds to the first `button[type="button"]` it finds as the
+    close control, so that button comes first in the markup and is placed by CSS.
+    Anything else clickable in here is a link or a submit/reset button.
+  - trapFocus() takes the first `[tabindex="-1"]`, which must be the panel.
+  - <predictive-search> owns the input, [data-predictive-search] and the status
+    region, and closes its results on focusout - so the suggestion chips live
+    inside it, or tapping one would close what it just opened.
 
   Accepts:
   - input_id: {String} Id for the search input element (required)
+  - placeholder: {String} Field placeholder
+  - quick_label: {String} Label beside the suggestion chips
+  - quick_terms: {String} Comma-separated suggested terms
 
   Usage:
-  {% render 'header-search', input_id: 'My-Id'%}
+  {% render 'header-search', input_id: 'My-Id' %}
 {% endcomment %}
 
-<details-modal class="header__search">
+{%- liquid
+  assign field_placeholder = placeholder | default: 'Search rituals, concerns, ingredients'
+  assign terms = quick_terms | default: '' | split: ','
+-%}
+
+<details-modal class="header__search pruv-search">
   <details>
     <summary
       class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle"
@@ -25,30 +46,54 @@
       </span>
     </summary>
     <div
-      class="search-modal modal__content gradient"
+      class="search-modal modal__content pruv-search__modal"
       role="dialog"
       aria-modal="true"
       aria-label="{{ 'general.search.search' | t }}"
+      data-pruv-search
     >
-      <div class="modal-overlay"></div>
-      <div
-        class="search-modal__content{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} search-modal__content-top{% else %} search-modal__content-bottom{% endif %}"
-        tabindex="-1"
-      >
+      <div class="modal-overlay pruv-search__scrim" data-pruv-search-scrim></div>
+      <div class="search-modal__content pruv-search__panel" tabindex="-1" data-pruv-search-panel>
+        <div class="pruv-search__head" data-pruv-search-head>
+          <p class="pruv-search__eyebrow">
+            <span class="pruv-search__dot" aria-hidden="true"></span>
+            {{ 'general.search.search' | t }}
+          </p>
+
+          {%- comment -%} First button[type="button"] in the component: the closer. {%- endcomment -%}
+          <button
+            type="button"
+            class="search-modal__close-button modal__close-button pruv-search__close"
+            aria-label="{{ 'accessibility.close' | t }}"
+          >
+            <span class="pruv-search__close-key" aria-hidden="true">ESC</span>
+            <span class="svg-wrapper">
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </span>
+          </button>
+        </div>
+
         {%- if settings.predictive_search_enabled -%}
-          <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+          <predictive-search class="pruv-search__form" data-loading-text="{{ 'accessibility.loading' | t }}">
         {%- else -%}
-          <search-form class="search-modal__form">
+          <search-form class="pruv-search__form">
         {%- endif -%}
-        <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-          <div class="field">
+        <form action="{{ routes.search_url }}" method="get" role="search" class="search pruv-search__form-inner">
+          <div class="field pruv-search__field" data-pruv-search-field>
+            <span class="pruv-search__field-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                <circle cx="10.5" cy="10.5" r="6.75" />
+                <path d="M15.5 15.5 21 21" />
+              </svg>
+            </span>
+
             <input
-              class="search__input field__input"
+              class="search__input pruv-search__input"
               id="{{ input_id }}"
               type="search"
               name="q"
               value="{{ search.terms | escape }}"
-              placeholder="{{ 'general.search.search' | t }}"
+              placeholder="{{ field_placeholder | escape }}"
               {%- if settings.predictive_search_enabled -%}
                 role="combobox"
                 aria-expanded="false"
@@ -62,26 +107,64 @@
                 spellcheck="false"
               {%- endif -%}
             >
-            <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+            <label class="visually-hidden" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
             <input type="hidden" name="options[prefix]" value="last">
+
             <button
               type="reset"
-              class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}"
+              class="reset__button pruv-search__reset{% if search.terms == blank %} hidden{% endif %}"
               aria-label="{{ 'general.search.reset' | t }}"
             >
-              <span class="svg-wrapper">
-                {{- 'icon-reset.svg' | inline_asset_content -}}
-              </span>
+              {%- comment -%}
+                Short label, full sentence in the accessible name: "Clear search
+                term" reads correctly to a screen reader but is far too long to
+                sit inside the field.
+              {%- endcomment -%}
+              Clear
             </button>
-            <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-              <span class="svg-wrapper">
-                {{- 'icon-search.svg' | inline_asset_content -}}
-              </span>
+
+            <button class="search__button pruv-search__submit" aria-label="{{ 'general.search.search' | t }}">
+              <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+                <path d="M4 12h15" />
+                <path d="M13 6l6 6-6 6" />
+              </svg>
             </button>
           </div>
 
+          {%- if terms.size > 0 -%}
+            <div class="pruv-search__quick" data-pruv-search-quick>
+              {%- if quick_label != blank -%}
+                <p class="pruv-search__quick-label">{{ quick_label | escape }}</p>
+              {%- endif -%}
+              <ul class="pruv-search__chips">
+                {%- for term in terms -%}
+                  {%- assign trimmed = term | strip -%}
+                  {%- if trimmed != blank -%}
+                    <li>
+                      {%- comment -%}
+                        A real search link, so a chip works with JavaScript off;
+                        pruv-search.js intercepts it to search in place instead.
+                      {%- endcomment -%}
+                      <a
+                        class="pruv-search__chip"
+                        href="{{ routes.search_url }}?q={{ trimmed | url_encode }}&options%5Bprefix%5D=last"
+                        data-pruv-search-term="{{ trimmed | escape }}"
+                      >
+                        {{- trimmed -}}
+                      </a>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
           {%- if settings.predictive_search_enabled -%}
-            <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+            <div
+              class="predictive-search predictive-search--header pruv-search__results"
+              tabindex="-1"
+              data-predictive-search
+            >
               {%- render 'loading-spinner', class: 'predictive-search__loading-state' -%}
             </div>
 
@@ -93,15 +176,6 @@
         {%- else -%}
           </search-form>
         {%- endif -%}
-        <button
-          type="button"
-          class="search-modal__close-button modal__close-button link link--text focus-inset"
-          aria-label="{{ 'accessibility.close' | t }}"
-        >
-          <span class="svg-wrapper">
-            {{- 'icon-close.svg' | inline_asset_content -}}
-          </span>
-        </button>
       </div>
     </div>
   </details>

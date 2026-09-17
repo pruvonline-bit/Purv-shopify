@@ -1,0 +1,695 @@
+/* Prüv — header search.
+
+   Dawn's search is a bordered input pinned under the header with a flat
+   dropdown. This turns it into a command palette: a scrim over the page and one
+   bone card holding the field, the popular terms and the live results.
+
+   It restyles Dawn's own markup rather than replacing the machinery, so
+   predictive-search.js keeps its hooks - [data-predictive-search], the
+   predictive-search[open] attribute, aria-selected roving through the rows -
+   and the whole thing still works with JavaScript off. Every rule is scoped
+   under .pruv-search, so nothing here can reach the search page or any other
+   form on the site.
+
+   Motion lives in assets/pruv-search.js, which sets its own starting states.
+   Without JavaScript the panel is simply there when the details element opens. */
+
+.pruv-search {
+  --ps-mono: 'Geist Mono', ui-monospace, monospace;
+  --ps-sans: 'Geist', system-ui, sans-serif;
+  --ps-white: 255, 255, 255;
+  --ps-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Scrim and panel
+   ========================================================================== */
+
+/* The announcement bar sits at z-index 4 and the header section at 3, so
+   everything inside the header - this panel included - is capped beneath the
+   bar, and the top of the panel disappears behind it. Lift the header section
+   itself while the search is open. :has() rather than a class set by script,
+   so it holds with JavaScript off too, where <details> still opens on its own. */
+.shopify-section.section-header:has(details-modal.pruv-search details[open]) {
+  z-index: 20;
+}
+
+.pruv-search .pruv-search__modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: none;
+  opacity: 1;
+  /* Dawn fades .search-modal in with animateMenuOpen. The GSAP entrance in
+     pruv-search.js owns that now, and running both double-fades the panel. */
+  animation: none;
+}
+
+.pruv-search .pruv-search__scrim {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--pruv-graphite), 0.62);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  backdrop-filter: blur(10px) saturate(1.1);
+}
+
+.pruv-search .pruv-search__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Dawn centres .search-modal__content both ways and gives it a full height;
+     this is a card that grows with its content from the top down. */
+  align-items: stretch;
+  justify-content: flex-start;
+  width: min(72rem, calc(100vw - 3.2rem));
+  height: auto;
+  max-height: min(78vh, 72rem);
+  margin: min(11vh, 8.4rem) auto 0;
+  padding: 2.4rem 2.4rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(var(--pruv-warm-grey), 0.24);
+  border-radius: 2.4rem;
+  background-color: rgb(var(--pruv-bone));
+  box-shadow: 0 60px 120px -60px rgba(0, 0, 0, 0.7), 0 4px 12px rgba(0, 0, 0, 0.12);
+  color: rgb(var(--pruv-graphite));
+}
+
+/* A copper hairline along the top edge and one faint bloom behind the field -
+   the same two-part treatment the section cards use, at panel scale. */
+.pruv-search .pruv-search__panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--pruv-copper), 0.7) 22%,
+    rgba(var(--pruv-copper), 0.7) 78%,
+    transparent
+  );
+}
+
+.pruv-search .pruv-search__panel::after {
+  content: '';
+  position: absolute;
+  top: -12rem;
+  right: -8rem;
+  width: 34rem;
+  height: 28rem;
+  background-image: radial-gradient(closest-side, rgba(var(--pruv-copper), 0.16), transparent);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Head
+   ========================================================================== */
+
+.pruv-search .pruv-search__head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.pruv-search .pruv-search__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0;
+  font-family: var(--ps-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .pruv-search__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: rgb(var(--pruv-copper));
+}
+
+/* The close control carries the keyboard shortcut, so the shortcut is found by
+   the people most likely to use it. */
+.pruv-search .pruv-search__close {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.5rem 0.5rem 1.1rem;
+  border: 0;
+  background: none;
+  color: rgba(var(--pruv-graphite), 0.55);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.pruv-search .pruv-search__close:hover {
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .pruv-search__close-key {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid rgba(var(--pruv-warm-grey), 0.4);
+  border-radius: 0.6rem;
+  font-family: var(--ps-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.1em;
+  color: inherit;
+}
+
+.pruv-search .pruv-search__close .svg-wrapper,
+.pruv-search .pruv-search__close svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: inherit;
+}
+
+/* ==========================================================================
+   The field
+   ========================================================================== */
+
+.pruv-search .pruv-search__form,
+.pruv-search .pruv-search__form-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.pruv-search .pruv-search__field {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 1.4rem;
+  padding: 0 0 1.6rem;
+  border: 0;
+  background: none;
+}
+
+/* The rule under the field: warm grey at rest, copper drawn in from the left
+   the moment the field takes focus. */
+.pruv-search .pruv-search__field::before,
+.pruv-search .pruv-search__field::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1.5px;
+}
+
+.pruv-search .pruv-search__field::before {
+  background-color: rgba(var(--pruv-warm-grey), 0.28);
+}
+
+.pruv-search .pruv-search__field::after {
+  background-color: rgb(var(--pruv-copper));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.55s var(--ps-ease-out);
+}
+
+.pruv-search .pruv-search__field:focus-within::after {
+  transform: scaleX(1);
+}
+
+.pruv-search .pruv-search__field-icon {
+  display: flex;
+  width: 2.2rem;
+  height: 2.2rem;
+  color: rgba(var(--pruv-graphite), 0.4);
+  transition: color 0.25s ease;
+}
+
+.pruv-search .pruv-search__field:focus-within .pruv-search__field-icon {
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .pruv-search__field-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pruv-search .pruv-search__input {
+  width: 100%;
+  min-height: 0;
+  padding: 0.6rem 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  font-family: var(--ps-sans);
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgb(var(--pruv-graphite));
+}
+
+.pruv-search .pruv-search__input:focus,
+.pruv-search .pruv-search__input:focus-visible {
+  outline: 0;
+  box-shadow: none;
+}
+
+.pruv-search .pruv-search__input::placeholder {
+  color: rgba(var(--pruv-graphite), 0.38);
+}
+
+.pruv-search .pruv-search__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pruv-search .pruv-search__reset {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.6rem 0.4rem;
+  border: 0;
+  background: none;
+  font-family: var(--ps-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(var(--pruv-graphite), 0.45);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.pruv-search .pruv-search__reset:hover {
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .pruv-search__reset.hidden {
+  display: none;
+}
+
+/* Dawn draws a hairline divider beside the reset button to separate it from the
+   search button inside its bordered field. There is no bordered field here. */
+.pruv-search .pruv-search__reset:not(:focus-visible)::after,
+.pruv-search .pruv-search__reset:not(:focus)::after {
+  display: none;
+}
+
+.pruv-search .pruv-search__submit {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(var(--pruv-graphite));
+  color: rgb(var(--pruv-bone));
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s var(--ps-ease-out);
+}
+
+/* component-search.css has .search__button:not(:focus-visible):not(.focused)
+   { background-color: inherit }, which is three classes and loads after this
+   file - so the disc needs the same shape of selector to keep its fill. */
+.pruv-search .pruv-search__submit:not(:focus-visible):not(.focused) {
+  background-color: rgb(var(--pruv-graphite));
+}
+
+.pruv-search .pruv-search__submit:hover,
+.pruv-search .pruv-search__submit:not(:focus-visible):not(.focused):hover {
+  background-color: rgb(var(--pruv-copper));
+  transform: translateX(2px);
+}
+
+.pruv-search .pruv-search__submit svg {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.pruv-search .pruv-search__field-icon svg,
+.pruv-search .pruv-search__submit svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.pruv-search .pruv-search__input:focus-visible,
+.pruv-search .pruv-search__close:focus-visible,
+.pruv-search .pruv-search__reset:focus-visible,
+.pruv-search .pruv-search__submit:focus-visible,
+.pruv-search .pruv-search__chip:focus-visible {
+  outline: 2px solid rgb(var(--pruv-copper));
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Popular terms
+   ========================================================================== */
+
+.pruv-search .pruv-search__quick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.2rem;
+  padding: 1.8rem 0 2.2rem;
+}
+
+/* Once there are real results, the suggestions have done their job. */
+.pruv-search predictive-search[open] .pruv-search__quick {
+  display: none;
+}
+
+.pruv-search .pruv-search__quick-label {
+  margin: 0;
+  font-family: var(--ps-mono);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(var(--pruv-graphite), 0.45);
+}
+
+.pruv-search .pruv-search__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pruv-search .pruv-search__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid rgba(var(--pruv-warm-grey), 0.3);
+  border-radius: 100px;
+  background-color: rgba(var(--ps-white), 0.6);
+  font-family: var(--ps-sans);
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: rgb(var(--pruv-graphite));
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ps-ease-out);
+}
+
+.pruv-search .pruv-search__chip:hover {
+  border-color: rgba(var(--pruv-copper), 0.6);
+  color: rgb(var(--pruv-copper));
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Results
+   ========================================================================== */
+
+/* Dawn hides this container until predictive-search sets [open] or [loading],
+   and that has to keep working: forcing display here would leave an empty
+   scroller under the field, stretching the panel before anyone has typed. */
+.pruv-search .pruv-search__results {
+  position: static;
+  top: auto;
+  min-height: 0;
+  margin: 0 -2.4rem;
+  padding: 0 2.4rem 2.4rem;
+  border: 0;
+  border-top: 1px solid rgba(var(--pruv-warm-grey), 0.2);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+/* predictive-search.js sets an inline max-height measured from the bottom of
+   the header down to the viewport floor - right for a dropdown, far too tall
+   for a panel that is already inside a max-height card. */
+.pruv-search .pruv-search__results[style] {
+  max-height: min(52vh, 48rem) !important;
+}
+
+.pruv-search predictive-search[open] .pruv-search__results,
+.pruv-search predictive-search[loading] .pruv-search__results {
+  display: block;
+}
+
+.pruv-search .pruv-search__results::-webkit-scrollbar {
+  width: 0.4rem;
+}
+
+.pruv-search .pruv-search__results::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: rgba(var(--pruv-warm-grey), 0.4);
+}
+
+.pruv-search .predictive-search__results-groups-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0 3.2rem;
+  padding: 0;
+  border: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .pruv-search .predictive-search__results-groups-wrapper:not(.predictive-search__results-groups-wrapper--no-products):not(.predictive-search__results-groups-wrapper--no-suggestions) {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
+}
+
+.pruv-search .predictive-search__result-group {
+  min-width: 0;
+  padding: 2rem 0 0;
+  border: 0;
+}
+
+.pruv-search .predictive-search__heading {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0 0 0.8rem;
+  padding: 0 1.2rem;
+  border: 0;
+  font-family: var(--ps-mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .predictive-search__heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: rgba(var(--pruv-warm-grey), 0.22);
+}
+
+.pruv-search .predictive-search__results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pruv-search .predictive-search__item {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border: 0;
+  border-radius: 1.2rem;
+  background: none;
+  text-align: left;
+  text-decoration: none;
+  color: rgb(var(--pruv-graphite));
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pruv-search .predictive-search__item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+/* Hover and the keyboard's own selection are the same state, so arrowing
+   through the list looks exactly like pointing at it. */
+.pruv-search .predictive-search__item:hover,
+.pruv-search [aria-selected='true'] .predictive-search__item,
+.pruv-search .predictive-search__item[aria-selected='true'] {
+  background-color: rgba(var(--pruv-copper), 0.08);
+  box-shadow: inset 2px 0 0 rgb(var(--pruv-copper));
+}
+
+.pruv-search .predictive-search__item:hover .predictive-search__item-heading,
+.pruv-search [aria-selected='true'] .predictive-search__item-heading {
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .predictive-search__item-heading {
+  margin: 0;
+  font-family: var(--ps-sans);
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.pruv-search .predictive-search__item-query-result mark,
+.pruv-search .predictive-search__item-query-result b {
+  background: none;
+  font-weight: 700;
+  color: rgb(var(--pruv-copper));
+}
+
+.pruv-search .predictive-search__item-vendor {
+  font-family: var(--ps-mono);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(var(--pruv-graphite), 0.45);
+}
+
+.pruv-search .predictive-search__item .price {
+  font-family: var(--ps-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgba(var(--pruv-graphite), 0.7);
+}
+
+/* The product thumbnail sits in its own tile: these are cut-out bottles on
+   white, and dropped straight onto bone they float with no edge. */
+.pruv-search .predictive-search__image {
+  flex: none;
+  width: 5.6rem;
+  height: 5.6rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(var(--pruv-warm-grey), 0.2);
+  border-radius: 1rem;
+  background-color: rgba(var(--ps-white), 0.85);
+  object-fit: contain;
+}
+
+/* --- the footer row ------------------------------------------------------- */
+
+.pruv-search .predictive-search__search-for-button {
+  position: sticky;
+  bottom: 0;
+  padding: 1.2rem 0 0;
+  border: 0;
+  background-image: linear-gradient(rgba(var(--pruv-bone), 0), rgb(var(--pruv-bone)) 38%);
+}
+
+.pruv-search .predictive-search__item--term {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.5rem 1.8rem;
+  border-radius: 100px;
+  background-color: rgb(var(--pruv-graphite));
+  font-family: var(--ps-mono);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgb(var(--pruv-bone));
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.pruv-search .predictive-search__item--term:hover,
+.pruv-search .predictive-search__item--term[aria-selected='true'] {
+  background-color: rgb(var(--pruv-copper));
+  box-shadow: none;
+  color: rgb(var(--pruv-bone));
+}
+
+.pruv-search .predictive-search__item--term .svg-wrapper,
+.pruv-search .predictive-search__item--term svg {
+  width: 1.6rem;
+  height: 1.6rem;
+  color: currentColor;
+}
+
+.pruv-search .predictive-search__loading-state {
+  padding: 2.4rem 0;
+}
+
+.pruv-search .spinner {
+  color: rgb(var(--pruv-copper));
+}
+
+/* ==========================================================================
+   Phones: the palette becomes a sheet
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+  .pruv-search .pruv-search__panel {
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: calc(1.6rem + env(safe-area-inset-top)) 1.6rem 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .pruv-search .pruv-search__input {
+    /* 16px or more, or iOS zooms the page on focus and the header jumps. */
+    font-size: 1.7rem;
+  }
+
+  .pruv-search .pruv-search__results {
+    max-height: none;
+    margin: 0 -1.6rem;
+    padding: 0 1.6rem calc(2.4rem + env(safe-area-inset-bottom));
+  }
+
+  .pruv-search .predictive-search__image {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-search *,
+  .pruv-search *::before,
+  .pruv-search *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
