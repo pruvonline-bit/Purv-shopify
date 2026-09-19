@@ -1,0 +1,85 @@
+================================================================================
+PRÜV SHOPIFY STORE - ADMIN PANEL SETUP GUIDE (OPTION 2: BUNDLE UPSELL)
+================================================================================
+
+This guide explains step-by-step how to create your bundle kit product in the 
+Shopify Admin Panel and connect it to the new Above-the-Fold Bundle Upsell block.
+
+--------------------------------------------------------------------------------
+STEP 1: CREATE YOUR BUNDLE PRODUCT IN SHOPIFY ADMIN
+--------------------------------------------------------------------------------
+1. Log in to your Shopify Admin (e.g., your-store.myshopify.com/admin).
+2. On the left sidebar, click on "Products", then click the "Add product" button.
+3. Fill in the product details:
+   - Title:
+     Example: "Prüv Complete Growth Ritual (2-Pack Duo)"
+     or "Hair Growth Elixir + Scalp Massager Kit"
+   
+   - Media / Images:
+     Upload a photo showing the bundle (e.g. both bottles or kit box).
+   
+   - Pricing (Crucial for automated savings display):
+     * Price: Enter the discounted bundle price (e.g., ₹1,499)
+     * Compare-at price: Enter the full regular total (e.g., ₹1,798)
+     -> Our theme automatically detects this difference and displays 
+        "SAVE ₹299" or "SAVE 15%" on the upsell card!
+   
+   - Inventory & Status:
+     * Set Status to "Active".
+     * Under "Publishing", ensure "Online Store" is checked.
+     * Track quantity as appropriate for your inventory.
+
+4. Click "Save".
+
+
+--------------------------------------------------------------------------------
+STEP 2: CONNECT THE BUNDLE IN THE SHOPIFY THEME EDITOR
+--------------------------------------------------------------------------------
+1. In Shopify Admin, go to "Online Store" -> "Themes".
+2. Next to your active theme, click the green "Customize" button.
+3. At the top of the editor, click the page dropdown (it says "Home page") and 
+   select "Products" -> "Default product".
+4. Look at the left sidebar under "Product information" (the first section).
+   You will see the Above-The-Fold hierarchy in this exact order:
+     1. Title (Product Name)
+     2. Product descriptor
+     3. Price
+     4. Rating (Reviews)
+     5. Key benefit line
+     6. Variant picker (Size)
+     7. Quantity selector
+     8. Buy buttons (Add to Cart - Dominating CTA)
+     9. Bundle upsell card  <--- CLICK THIS BLOCK
+5. In the block settings on the right sidebar:
+   - Click "Select product" under "Bundle product (from Admin)".
+   - Choose the bundle product you created in Step 1.
+   - (Optional) Customize the Card heading (e.g., "UPGRADE & SAVE MORE").
+   - (Optional) Customize the Savings badge (e.g., "SAVE 15%" or "BEST VALUE").
+   - (Optional) Customize the Button label (e.g., "Add Bundle").
+6. Click "Save" in the top-right corner.
+
+
+--------------------------------------------------------------------------------
+STEP 3: HOW TO CUSTOMIZE DESCRIPTOR & BENEFIT LINE
+--------------------------------------------------------------------------------
+You can customize the other above-the-fold elements anytime in Theme Editor:
+
+1. Product Descriptor:
+   - Click the "Product descriptor" block in the left sidebar.
+   - Enter your preferred subtitle (e.g. "Advanced Scalp & Follicle Energizing Elixir").
+   - (Alternatively, you can leave it blank and it will read from your product's 
+     built-in Subtitle metafield).
+
+2. Key Benefit Line:
+   - Click the "Key benefit line" block in the left sidebar.
+   - Change the text (e.g. "Clinically Proven • Visible Growth in 84 Days • 100% Water-Based").
+
+3. Reviews / Stars:
+   - Displays 5 copper stars (4.9 / 5.0 • 474 Reviews).
+   - Clicking it automatically smooth-scrolls down directly to the customer reviews section!
+
+
+================================================================================
+Everything is now structured with zero clutter, prominent product imagery, 
+and a high-contrast dominating Add to Cart CTA.
+================================================================================

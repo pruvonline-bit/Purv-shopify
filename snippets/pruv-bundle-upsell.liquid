@@ -1,0 +1,95 @@
+{% comment %}
+  Prüv PDP — Bundle Upsell Card (Option 2: Dedicated Bundle Product)
+  Renders immediately below the primary Add to Cart CTA.
+{% endcomment %}
+
+{%- liquid
+  assign bundle_prod = block.settings.bundle_product
+  assign has_bundle_prod = false
+  if bundle_prod != blank and bundle_prod.available
+    assign has_bundle_prod = true
+    assign bundle_variant = bundle_prod.selected_or_first_available_variant
+  endif
+
+  assign card_heading = block.settings.heading | default: 'UPGRADE & SAVE MORE'
+  assign card_badge = block.settings.badge_text | default: 'SAVE 15%'
+  assign btn_label = block.settings.button_label | default: 'Add Bundle'
+-%}
+
+<div class="pruv-bundle-upsell" {{ block.shopify_attributes }}>
+  <div class="pruv-bundle-card">
+    <div class="pruv-bundle-card__header">
+      <span class="pruv-bundle-card__label">{{ card_heading }}</span>
+      <span class="pruv-bundle-card__badge">{{ card_badge }}</span>
+    </div>
+
+    <div class="pruv-bundle-card__content">
+      <div class="pruv-bundle-card__media">
+        {%- if has_bundle_prod and bundle_prod.featured_image -%}
+          {{ bundle_prod.featured_image | image_url: width: 180 | image_tag: class: 'pruv-bundle-card__img', loading: 'lazy', alt: bundle_prod.title }}
+        {%- else -%}
+          <div class="pruv-bundle-card__placeholder">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pruv-bundle-card__details">
+        <h3 class="pruv-bundle-card__title">
+          {%- if has_bundle_prod -%}
+            {{ block.settings.title_override | default: bundle_prod.title | escape }}
+          {%- else -%}
+            {{ block.settings.title_override | default: 'The Complete Growth Ritual Duo' }}
+          {%- endif -%}
+        </h3>
+
+        <div class="pruv-bundle-card__pricing">
+          {%- if has_bundle_prod -%}
+            <span class="pruv-bundle-card__price">{{ bundle_prod.price | money }}</span>
+            {%- if bundle_prod.compare_at_price > bundle_prod.price -%}
+              <s class="pruv-bundle-card__compare">{{ bundle_prod.compare_at_price | money }}</s>
+              {%- assign savings_amount = bundle_prod.compare_at_price | minus: bundle_prod.price | money -%}
+              <span class="pruv-bundle-card__save-text">Save {{ savings_amount }}</span>
+            {%- endif -%}
+          {%- else -%}
+            <span class="pruv-bundle-card__price">{{ product.price | times: 1.7 | money }}</span>
+            <s class="pruv-bundle-card__compare">{{ product.price | times: 2 | money }}</s>
+            <span class="pruv-bundle-card__save-text">Save 15%</span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="pruv-bundle-card__action">
+        {%- if has_bundle_prod -%}
+          <product-form class="pruv-bundle-product-form">
+            {%- form 'product', bundle_prod, id: 'pruv-bundle-form', class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+              <input type="hidden" name="id" value="{{ bundle_variant.id }}">
+              <button
+                type="submit"
+                name="add"
+                class="pruv-bundle-card__btn button"
+                aria-label="{{ btn_label }}: {{ bundle_prod.title }}"
+              >
+                <span>{{ btn_label }}</span>
+                {%- render 'loading-spinner' -%}
+              </button>
+            {%- endform -%}
+          </product-form>
+        {%- else -%}
+          <button
+            type="button"
+            class="pruv-bundle-card__btn button"
+            title="Configure bundle product in Theme Editor"
+            onclick="document.querySelector('.product-form__submit')?.scrollIntoView({behavior:'smooth'})"
+          >
+            <span>{{ btn_label }}</span>
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

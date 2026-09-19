@@ -6,11 +6,23 @@
         "title": {
           "type": "title"
         },
-        "rating": {
-          "type": "rating"
+        "descriptor": {
+          "type": "descriptor",
+          "settings": {
+            "text": "Targeted Follicle-Stimulating & Scalp Recovery Elixir"
+          }
         },
         "price": {
           "type": "price"
+        },
+        "rating": {
+          "type": "rating"
+        },
+        "benefit_line": {
+          "type": "benefit_line",
+          "settings": {
+            "text": "Clinically Proven • Visible Density in 84 Days • 100% Water-Based"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -25,8 +37,17 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "bundle_upsell": {
+          "type": "bundle_upsell",
+          "settings": {
+            "heading": "UPGRADE & SAVE MORE",
+            "title_override": "The Complete Ritual Duo (Serum + Massager)",
+            "badge_text": "SAVE 15%",
+            "button_label": "Add Bundle"
           }
         },
         "tab_description": {
@@ -107,11 +128,14 @@
       },
       "block_order": [
         "title",
-        "rating",
+        "descriptor",
         "price",
+        "rating",
+        "benefit_line",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "bundle_upsell",
         "tab_description",
         "tab_benefits",
         "tab_ingredients",
@@ -136,56 +160,9 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
-    },
-    "benefits": {
-      "type": "pruv-product-benefits"
-    },
-    "ingredients": {
-      "type": "pruv-product-ingredients"
-    },
-    "how-to-use": {
-      "type": "pruv-product-how-to-use"
-    },
-    "clinical-results": {
-      "type": "pruv-product-results"
-    },
-    "disclosures": {
-      "type": "disclosures",
-      "settings": {
-        "padding_top": 36,
-        "padding_bottom": 0
-      }
-    },
-    "reviews": {
-      "type": "pruv-reviews"
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "Complete The Ritual",
-        "heading_size": "h2",
-        "products_to_show": 4,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": true,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
-      }
     }
   },
   "order": [
-    "main",
-    "benefits",
-    "ingredients",
-    "how-to-use",
-    "clinical-results",
-    "disclosures",
-    "reviews",
-    "related-products"
+    "main"
   ]
 }
