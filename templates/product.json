@@ -160,9 +160,13 @@
         "padding_top": 36,
         "padding_bottom": 12
       }
+    },
+    "outcome": {
+      "type": "pruv-product-outcome"
     }
   },
   "order": [
-    "main"
+    "main",
+    "outcome"
   ]
 }
