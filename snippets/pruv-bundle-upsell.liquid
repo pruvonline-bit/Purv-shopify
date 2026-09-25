@@ -24,42 +24,41 @@
     </div>
 
     <div class="pruv-bundle-card__content">
-      <div class="pruv-bundle-card__media">
-        {%- if has_bundle_prod and bundle_prod.featured_image -%}
-          {{ bundle_prod.featured_image | image_url: width: 180 | image_tag: class: 'pruv-bundle-card__img', loading: 'lazy', alt: bundle_prod.title }}
-        {%- else -%}
-          <div class="pruv-bundle-card__placeholder">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-          </div>
-        {%- endif -%}
-      </div>
-
-      <div class="pruv-bundle-card__details">
-        <h3 class="pruv-bundle-card__title">
-          {%- if has_bundle_prod -%}
-            {{ block.settings.title_override | default: bundle_prod.title | escape }}
+      <div class="pruv-bundle-card__product">
+        <div class="pruv-bundle-card__media">
+          {%- if has_bundle_prod and bundle_prod.featured_image -%}
+            {{ bundle_prod.featured_image | image_url: width: 140 | image_tag: class: 'pruv-bundle-card__img', loading: 'lazy', alt: bundle_prod.title }}
           {%- else -%}
-            {{ block.settings.title_override | default: 'The Complete Growth Ritual Duo' }}
+            <div class="pruv-bundle-card__placeholder">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <path d="M16 10a4 4 0 0 1-8 0"></path>
+              </svg>
+            </div>
           {%- endif -%}
-        </h3>
+        </div>
 
-        <div class="pruv-bundle-card__pricing">
-          {%- if has_bundle_prod -%}
-            <span class="pruv-bundle-card__price">{{ bundle_prod.price | money }}</span>
-            {%- if bundle_prod.compare_at_price > bundle_prod.price -%}
-              <s class="pruv-bundle-card__compare">{{ bundle_prod.compare_at_price | money }}</s>
-              {%- assign savings_amount = bundle_prod.compare_at_price | minus: bundle_prod.price | money -%}
-              <span class="pruv-bundle-card__save-text">Save {{ savings_amount }}</span>
+        <div class="pruv-bundle-card__details">
+          <h3 class="pruv-bundle-card__title">
+            {%- if has_bundle_prod -%}
+              {{ block.settings.title_override | default: bundle_prod.title | escape }}
+            {%- else -%}
+              {{ block.settings.title_override | default: 'The Complete Growth Ritual Duo' }}
             {%- endif -%}
-          {%- else -%}
-            <span class="pruv-bundle-card__price">{{ product.price | times: 1.7 | money }}</span>
-            <s class="pruv-bundle-card__compare">{{ product.price | times: 2 | money }}</s>
-            <span class="pruv-bundle-card__save-text">Save 15%</span>
-          {%- endif -%}
+          </h3>
+
+          <div class="pruv-bundle-card__pricing">
+            {%- if has_bundle_prod -%}
+              <span class="pruv-bundle-card__price">{{ bundle_prod.price | money }}</span>
+              {%- if bundle_prod.compare_at_price > bundle_prod.price -%}
+                <s class="pruv-bundle-card__compare">{{ bundle_prod.compare_at_price | money }}</s>
+              {%- endif -%}
+            {%- else -%}
+              <span class="pruv-bundle-card__price">{{ product.price | times: 1.7 | money }}</span>
+              <s class="pruv-bundle-card__compare">{{ product.price | times: 2 | money }}</s>
+            {%- endif -%}
+          </div>
         </div>
       </div>
 
@@ -71,10 +70,10 @@
               <button
                 type="submit"
                 name="add"
-                class="pruv-bundle-card__btn button"
+                class="pruv-bundle-card__btn"
                 aria-label="{{ btn_label }}: {{ bundle_prod.title }}"
               >
-                <span>{{ btn_label }}</span>
+                <span>+ {{ btn_label }}</span>
                 {%- render 'loading-spinner' -%}
               </button>
             {%- endform -%}
@@ -82,11 +81,11 @@
         {%- else -%}
           <button
             type="button"
-            class="pruv-bundle-card__btn button"
+            class="pruv-bundle-card__btn"
             title="Configure bundle product in Theme Editor"
             onclick="document.querySelector('.product-form__submit')?.scrollIntoView({behavior:'smooth'})"
           >
-            <span>{{ btn_label }}</span>
+            <span>+ {{ btn_label }}</span>
           </button>
         {%- endif -%}
       </div>

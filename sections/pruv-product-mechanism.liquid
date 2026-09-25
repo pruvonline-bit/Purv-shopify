@@ -1,0 +1,210 @@
+{{ 'section-pruv-mechanism.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-mechanism.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="pruv-mechanism color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding" data-section-id="{{ section.id }}">
+  <div class="page-width">
+    <!-- Header -->
+    <div class="pruv-mechanism__header" data-mechanism-header>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-mechanism__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-mechanism__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="pruv-mechanism__subtitle">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- 4 Mechanism Cards Grid (Not Paragraphs) -->
+    <div class="pruv-mechanism__grid">
+      <!-- Card 1: Redensyl -->
+      <div class="pruv-mechanism__card" data-mechanism-card>
+        <div class="pruv-mechanism__card-top">
+          <span class="pruv-mechanism__badge">01 • 3% ACTIVE</span>
+          <div class="pruv-mechanism__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+        </div>
+
+        <h3 class="pruv-mechanism__name">Redensyl™</h3>
+        <p class="pruv-mechanism__role">Follicle Stem Cell Reactivator</p>
+
+        <div class="pruv-mechanism__block">
+          <span class="pruv-mechanism__label">HOW IT WORKS:</span>
+          <p class="pruv-mechanism__action">Reactivates dormant stem cells at the follicle base, switching resting hairs into active growth.</p>
+        </div>
+
+        <div class="pruv-mechanism__outcome-tag">
+          <span class="pruv-mechanism__outcome-icon">🎯</span>
+          <span class="pruv-mechanism__outcome-text"><strong>Supports:</strong> Days 31–60 Baby Hair Sprouting</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Procapil -->
+      <div class="pruv-mechanism__card" data-mechanism-card>
+        <div class="pruv-mechanism__card-top">
+          <span class="pruv-mechanism__badge">02 • 2% ACTIVE</span>
+          <div class="pruv-mechanism__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+        </div>
+
+        <h3 class="pruv-mechanism__name">Procapil™</h3>
+        <p class="pruv-mechanism__role">Root Anchoring Complex</p>
+
+        <div class="pruv-mechanism__block">
+          <span class="pruv-mechanism__label">HOW IT WORKS:</span>
+          <p class="pruv-mechanism__action">Fortifies follicle sheath tissue to firmly anchor roots while boosting scalp micro-circulation.</p>
+        </div>
+
+        <div class="pruv-mechanism__outcome-tag">
+          <span class="pruv-mechanism__outcome-icon">🎯</span>
+          <span class="pruv-mechanism__outcome-text"><strong>Supports:</strong> Days 1–30 Shedding Reduction</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Anagain -->
+      <div class="pruv-mechanism__card" data-mechanism-card>
+        <div class="pruv-mechanism__card-top">
+          <span class="pruv-mechanism__badge">03 • 4% PHYTO</span>
+          <div class="pruv-mechanism__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
+        </div>
+
+        <h3 class="pruv-mechanism__name">Anagain™</h3>
+        <p class="pruv-mechanism__role">Growth Life-Cycle Extender</p>
+
+        <div class="pruv-mechanism__block">
+          <span class="pruv-mechanism__label">HOW IT WORKS:</span>
+          <p class="pruv-mechanism__action">Stimulates signal molecules in dermal papilla cells to extend active anagen phase and prolong strand life.</p>
+        </div>
+
+        <div class="pruv-mechanism__outcome-tag">
+          <span class="pruv-mechanism__outcome-icon">🎯</span>
+          <span class="pruv-mechanism__outcome-text"><strong>Supports:</strong> Sustained Density & Less Fall</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Copper Tripeptide-1 -->
+      <div class="pruv-mechanism__card" data-mechanism-card>
+        <div class="pruv-mechanism__card-top">
+          <span class="pruv-mechanism__badge">04 • BIO-PEPTIDE</span>
+          <div class="pruv-mechanism__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+        </div>
+
+        <h3 class="pruv-mechanism__name">Copper Tripeptide-1</h3>
+        <p class="pruv-mechanism__role">Cellular Follicle Thickener</p>
+
+        <div class="pruv-mechanism__block">
+          <span class="pruv-mechanism__label">HOW IT WORKS:</span>
+          <p class="pruv-mechanism__action">Enlarges miniaturized follicle chambers and boosts keratin matrix synthesis for thicker shaft diameter.</p>
+        </div>
+
+        <div class="pruv-mechanism__outcome-tag">
+          <span class="pruv-mechanism__outcome-icon">🎯</span>
+          <span class="pruv-mechanism__outcome-text"><strong>Supports:</strong> Days 61–90+ Fullness & Thickness</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Horizontal Carousel Navigation -->
+    <div class="pruv-mechanism__mobile-nav" data-mechanism-nav>
+      <div class="pruv-mechanism__dots" role="tablist" aria-label="Mechanism cards navigation">
+        <button type="button" class="pruv-mechanism__dot is-active" data-mechanism-dot="0" aria-label="Go to card 1"></button>
+        <button type="button" class="pruv-mechanism__dot" data-mechanism-dot="1" aria-label="Go to card 2"></button>
+        <button type="button" class="pruv-mechanism__dot" data-mechanism-dot="2" aria-label="Go to card 3"></button>
+        <button type="button" class="pruv-mechanism__dot" data-mechanism-dot="3" aria-label="Go to card 4"></button>
+      </div>
+      <span class="pruv-mechanism__swipe-hint">Swipe to explore &rarr;</span>
+    </div>
+
+    <!-- Micro Summary Strip -->
+    <div class="pruv-mechanism__summary-strip" data-mechanism-summary>
+      <span class="pruv-mechanism__summary-badge">SYNERGISTIC MECHANISM</span>
+      <p class="pruv-mechanism__summary-text">
+        Anchoring + Awakening + Extending + Thickening work simultaneously to reverse hair shedding at every biological stage.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv Formula Mechanism",
+  "tag": "section",
+  "class": "section pruv-mechanism-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE MECHANISM OF ACTION"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How Hero Actives Support The Outcome"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Every ingredient performs a specific biological mechanism to directly drive your 90-day transformation."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv Formula Mechanism"
+    }
+  ]
+}
+{% endschema %}

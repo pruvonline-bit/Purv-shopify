@@ -1683,57 +1683,82 @@ a.product__text {
 .pruv-pdp-price-card {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-bottom: 1.8rem;
+  gap: 0.35rem;
+  margin-bottom: 1.2rem;
 }
 
-.pruv-pdp-mrp-row {
+.pruv-pdp-price-primary-row {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 32rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pruv-pdp-final-price {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .pruv-pdp-mrp {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: rgba(138, 129, 117, 0.65);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #8A8175;
 }
 
 .pruv-pdp-mrp s {
-  color: rgba(138, 129, 117, 0.5);
+  color: #8A8175;
   text-decoration: line-through;
 }
 
 .pruv-pdp-save-badge {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #B87333;
-  border: 1px solid #B87333;
-  background-color: rgba(184, 115, 51, 0.08);
-  padding: 0.3rem 1.4rem;
+  border: 1px solid rgba(184, 115, 51, 0.35);
+  background-color: rgba(184, 115, 51, 0.1);
+  padding: 0.25rem 0.9rem;
   border-radius: 100px;
+  line-height: 1;
 }
 
-.pruv-pdp-final-price {
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 3.6rem;
-  font-weight: 700;
-  color: #1B1D1F;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  margin-top: 0.2rem;
+.pruv-pdp-tax-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.1rem;
 }
 
 .pruv-pdp-tax-label {
   font-family: 'Geist', system-ui, sans-serif;
   font-size: 1.2rem;
-  color: rgba(138, 129, 117, 0.5);
-  margin-top: 0.2rem;
+  color: #8A8175;
+  line-height: 1.3;
+}
+
+.pruv-pdp-tax-divider {
+  color: rgba(138, 129, 117, 0.4);
+  font-size: 1.1rem;
+}
+
+.pruv-pdp-shipping-policy {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  color: #8A8175;
+}
+
+.pruv-pdp-shipping-policy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .pruv-pdp-bestseller-badge {

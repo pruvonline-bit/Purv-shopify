@@ -968,66 +968,81 @@
   box-shadow: 0 8px 24px rgba(184, 115, 51, 0.35) !important;
 }
 
-/* 5. Bundle Upsell Card (Option 2) */
+/* 5. Bundle Upsell Card */
 .pruv-bundle-upsell {
   width: 100%;
-  margin: 1.4rem 0 2rem;
+  margin: 0.8rem 0 1.2rem;
+  box-sizing: border-box;
 }
 
 .pruv-bundle-card {
-  border-radius: 1.6rem;
-  border: 1.5px solid rgba(184, 115, 51, 0.24);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(250, 246, 240, 0.88) 100%);
-  padding: 1.3rem 1.5rem;
-  box-shadow: 0 4px 18px rgba(184, 115, 51, 0.08);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  border-radius: 1.2rem;
+  border: 1.5px solid rgba(184, 115, 51, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(250, 246, 240, 0.92) 100%);
+  padding: 0.9rem 1.1rem;
+  box-shadow: 0 2px 10px rgba(184, 115, 51, 0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .pruv-bundle-card:hover {
-  border-color: rgba(184, 115, 51, 0.45);
-  box-shadow: 0 6px 22px rgba(184, 115, 51, 0.14);
+  border-color: rgba(184, 115, 51, 0.4);
+  box-shadow: 0 4px 16px rgba(184, 115, 51, 0.1);
 }
 
 .pruv-bundle-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.65rem;
 }
 
 .pruv-bundle-card__label {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #B87333;
 }
 
 .pruv-bundle-card__badge {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   background: #B87333;
   color: #ffffff;
-  padding: 0.25rem 0.9rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 100px;
+  line-height: 1.2;
 }
 
 .pruv-bundle-card__content {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pruv-bundle-card__product {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .pruv-bundle-card__media {
-  width: 5.8rem;
-  height: 5.8rem;
-  border-radius: 1.2rem;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 0.8rem;
   background: #ffffff;
-  border: 1px solid rgba(138, 129, 117, 0.15);
+  border: 1px solid rgba(138, 129, 117, 0.12);
   overflow: hidden;
   flex-shrink: 0;
   display: flex;
@@ -1039,26 +1054,32 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 0.3rem;
+  padding: 0.2rem;
 }
 
 .pruv-bundle-card__placeholder {
   color: #B87333;
   opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pruv-bundle-card__details {
   flex: 1 1 auto;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .pruv-bundle-card__title {
   font-family: 'Geist', system-ui, sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.25;
   color: #1B1D1F;
-  margin: 0 0 0.4rem;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1067,29 +1088,24 @@
 .pruv-bundle-card__pricing {
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  white-space: nowrap !important;
 }
 
 .pruv-bundle-card__price {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.45rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #1B1D1F;
+  white-space: nowrap !important;
 }
 
 .pruv-bundle-card__compare {
   font-family: 'Geist Mono', monospace;
-  font-size: 1.2rem;
-  color: rgba(138, 129, 117, 0.5);
-  text-decoration: line-through;
-}
-
-.pruv-bundle-card__save-text {
-  font-family: 'Geist Mono', monospace;
   font-size: 1.1rem;
-  font-weight: 700;
-  color: #2e7d32;
+  color: rgba(138, 129, 117, 0.55);
+  text-decoration: line-through;
+  white-space: nowrap !important;
 }
 
 .pruv-bundle-card__action {
@@ -1097,49 +1113,175 @@
 }
 
 .pruv-bundle-card__btn {
-  min-height: 4rem !important;
-  padding: 0 1.6rem !important;
+  height: 3.2rem !important;
+  min-height: 3.2rem !important;
+  padding: 0 1.3rem !important;
   border-radius: 100px !important;
   background: #1B1D1F !important;
   color: #F5F2EC !important;
   font-family: 'Geist Mono', monospace !important;
-  font-size: 1.15rem !important;
+  font-size: 1.05rem !important;
   font-weight: 700 !important;
-  letter-spacing: 0.08em !important;
+  letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  border: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   cursor: pointer !important;
   transition: all 0.2s ease !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow: none !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+.pruv-bundle-card__btn:before,
+.pruv-bundle-card__btn:after {
+  display: none !important;
+  content: none !important;
 }
 
 .pruv-bundle-card__btn:hover {
   background: #B87333 !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 14px rgba(184, 115, 51, 0.3) !important;
+  color: #ffffff !important;
 }
 
 @media screen and (max-width: 749px) {
   .pruv-bundle-card__content {
-    gap: 1rem;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
   }
 
-  .pruv-bundle-card__media {
-    width: 4.8rem;
-    height: 4.8rem;
+  .pruv-bundle-card__product {
+    width: 100% !important;
   }
 
   .pruv-bundle-card__title {
-    font-size: 1.25rem;
+    font-size: 1.2rem !important;
+    white-space: normal !important;
+    line-height: 1.25 !important;
+  }
+
+  .pruv-bundle-card__action {
+    width: 100% !important;
+  }
+
+  .pruv-bundle-product-form {
+    width: 100% !important;
+    display: block !important;
   }
 
   .pruv-bundle-card__btn {
-    min-height: 3.6rem !important;
-    padding: 0 1.2rem !important;
+    width: 100% !important;
+    height: 3.4rem !important;
+    min-height: 3.4rem !important;
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ==========================================================================
+   10. Mobile UX Refinements & Compact Hierarchy (<750px)
+   ========================================================================== */
+@media screen and (max-width: 749px) {
+  /* Tighten spacing between PDP header elements */
+  .pruv-pdp-info > * + * {
+    margin: 0.8rem 0 0 !important;
+  }
+
+  /* Compact Product Title */
+  .pruv-pdp-info .product__title,
+  .pruv-pdp-info .product__title h1,
+  .product__title h1 {
+    font-size: clamp(2.1rem, 5.8vw, 2.5rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  /* Compact Subtitle / Descriptor */
+  .pruv-pdp-descriptor {
+    margin: 0 0 0.6rem !important;
+  }
+
+  .pruv-pdp-descriptor__text {
+    font-size: 1.25rem !important;
+    line-height: 1.35 !important;
+    color: #6E675F !important;
+  }
+
+  /* Compact Price Card */
+  .pruv-pdp-price-card {
+    gap: 0.25rem !important;
+    margin-bottom: 0.6rem !important;
+  }
+
+  .pruv-pdp-price-primary-row {
+    gap: 0.75rem !important;
+    align-items: baseline !important;
+  }
+
+  .pruv-pdp-final-price {
+    font-size: 2.6rem !important;
+    line-height: 1 !important;
+  }
+
+  .pruv-pdp-mrp {
+    font-size: 1.25rem !important;
+  }
+
+  .pruv-pdp-save-badge {
     font-size: 1.05rem !important;
+    padding: 0.2rem 0.75rem !important;
+  }
+
+  .pruv-pdp-tax-line {
+    gap: 0.5rem !important;
+    margin-top: 0.1rem !important;
+  }
+
+  .pruv-pdp-tax-label {
+    font-size: 1.15rem !important;
+  }
+
+  /* Compact Ratings Strip */
+  .pruv-pdp-rating-strip {
+    margin: 0.2rem 0 0.8rem !important;
+  }
+
+  .pruv-pdp-rating-strip .pruv-pdp-stars {
+    font-size: 1.45rem !important;
+    letter-spacing: 0.08rem !important;
+  }
+
+  .pruv-pdp-rating-score {
+    font-size: 1.2rem !important;
+  }
+
+  .pruv-pdp-rating-count {
+    font-size: 1.15rem !important;
+  }
+
+  /* Compact Benefit Line Pill */
+  .pruv-pdp-benefit-line {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.65rem !important;
+    padding: 0.65rem 1.1rem !important;
+    margin: 0 0 1rem !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pruv-pdp-benefit-line__icon {
+    margin-top: 0.15rem !important;
+  }
+
+  .pruv-pdp-benefit-line__text {
+    font-size: 1.15rem !important;
+    line-height: 1.35 !important;
+    letter-spacing: 0.005em !important;
   }
 }
 

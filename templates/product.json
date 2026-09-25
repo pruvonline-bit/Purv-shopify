@@ -69,61 +69,6 @@
             "use_product_description": false,
             "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>"
           }
-        },
-        "tab_ingredients": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Key ingredients",
-            "icon": "none",
-            "open_by_default": false,
-            "use_product_description": false,
-            "content": "<p>Edit this block in the theme editor to list the actives for this range, or move it into a product metafield if each product needs its own.</p>"
-          }
-        },
-        "tab_suited": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Suited for",
-            "icon": "none",
-            "open_by_default": false,
-            "use_product_description": false,
-            "content": "<p>All hair types. Especially suited to hard-water areas, humid climates, and scalps prone to buildup or flaking.</p>"
-          }
-        },
-        "tab_more_info": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "More information",
-            "icon": "none",
-            "open_by_default": false,
-            "use_product_description": false,
-            "content": "<p>Sulphate free, paraben free, cruelty free and vegan. Manufactured in India. Store away from direct sunlight.</p>"
-          }
-        },
-        "tab_lab_reports": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Lab reports",
-            "icon": "none",
-            "open_by_default": false,
-            "use_product_description": false,
-            "content": "<p>Dermatologically tested and safety assessed. Add links to your test certificates here.</p>"
-          }
-        },
-        "faqs": {
-          "type": "pruv_faqs",
-          "settings": {
-            "heading": "FAQs",
-            "metafield_namespace": "custom",
-            "metafield_key": "faqs",
-            "open_first": false
-          }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
-          }
         }
       },
       "block_order": [
@@ -137,13 +82,7 @@
         "buy_buttons",
         "bundle_upsell",
         "tab_description",
-        "tab_benefits",
-        "tab_ingredients",
-        "tab_suited",
-        "tab_more_info",
-        "tab_lab_reports",
-        "faqs",
-        "share"
+        "tab_benefits"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -163,10 +102,14 @@
     },
     "outcome": {
       "type": "pruv-product-outcome"
+    },
+    "mechanism": {
+      "type": "pruv-product-mechanism"
     }
   },
   "order": [
     "main",
-    "outcome"
+    "outcome",
+    "mechanism"
   ]
 }
