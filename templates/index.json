@@ -109,9 +109,9 @@
             "step_number": "1",
             "title": "RESET",
             "tagline": "Phase 01 · Scalp Detox & Demineralisation",
-            "description": "Dissolves stubborn calcium, magnesium and mineral crusts deposited by city hard water. Decongests follicular pores without stripping natural barrier lipids.",
-            "product_role": "TriShield Clarifying Shampoo",
-            "key_actives": "Tetrasodium EDTA · Salicylic Acid · Botanical Chelators",
+            "description": "Precision cleansing treatment for hair exposed to hard water, urban pollution and scalp imbalance. Chelating agents help release mineral buildup, Salicylic Acid clears accumulated residue, and a targeted microbiome-support complex helps preserve scalp equilibrium. The result is hair that feels exceptionally clean, refined and weightless, with a smoother, healthier-looking finish.",
+            "product_role": "Trishield Element Defense Shampoo",
+            "key_actives": "Sodium Gluconate · Salicylic Acid · Inulin Complex · Lactococcus Ferment Lysate · Niacinamide",
             "video": "shopify://files/videos/Shampoo_cleaning_hair_animation_20260912151914.mp4",
             "media_file": "",
             "viz": "auto",
@@ -125,10 +125,10 @@
           "settings": {
             "step_number": "2",
             "title": "SUPPORT",
-            "tagline": "Phase 02 · Microbiome & Follicle Nutrition",
-            "description": "Rebalances scalp pH, nourishes the microbial ecosystem, and floods the root zone with essential micronutrients to boost microcirculation.",
-            "product_role": "Follicle Tonic & Daily Conditioner",
-            "key_actives": "Probiotic Ferments · Niacinamide · Rosemary Peptides",
+            "tagline": "Phase 02 · Support the follicle. Strengthen the cycle. Build visible density.",
+            "description": "Concentrated scalp treatment designed to support fuller, denser-looking hair by acting across multiple pathways linked to the hair growth cycle. A targeted complex of HairVive Pro®, Procapil®, Baicapil®, AnaGain® and Aminexil works alongside Copper Tripeptide, Caffeine and Niacinamide to support follicle activity, hair anchoring and scalp vitality. The result is a stronger environment for healthier-looking growth, improved density and visibly more resilient hair over time.",
+            "product_role": "VECTOR-5 Advanced Multi-Pathway Structural Density Serum",
+            "key_actives": "HairVive Pro® (3%) · Procapil® (3%) · Baicapil® (3%) · AnaGain® (2%) · Aminexil (1.5%)",
             "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
             "media_file": "",
             "viz": "auto",
@@ -142,10 +142,10 @@
           "settings": {
             "step_number": "3",
             "title": "REPAIR",
-            "tagline": "Phase 03 · Bond Integrity & Cuticle Shield",
-            "description": "Reconstructs damaged keratin chains, seals lifted hair cuticles against humidity, and leaves a breathable shield against urban micro-pollutants.",
-            "product_role": "Keratin & Ceramide Deep Recovery Mask",
-            "key_actives": "Hydrolyzed Keratin · Ceramide NP · Argan Lipid Matrix",
+            "tagline": "Phase 03 · Reinforce the fiber. Restore its integrity.",
+            "description": "A concentrated blend of Ceramides, Hydrolyzed Keratin and Silk Proteins helps replenish structural support, while Shea Butter, Argan Oil and Panthenol restore softness and flexibility. Amodimethicone and conditioning polymers smooth the cuticle and help protect compromised lengths, leaving hair stronger, more resilient and visibly refined.",
+            "product_role": "Breakage Repair Keratin-Ceramide Hair Mask",
+            "key_actives": "Ceramides · Keratin · Silk Protein · Panthenol · Argan Oil",
             "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
             "media_file": "",
             "viz": "auto",
@@ -258,7 +258,41 @@
       ],
       "settings": {
         "eyebrow": "",
+        "heading": "What's your hair <strong>dealing with?</strong>",
         "text": "",
+        "concerns_legend": "Your hair concerns",
+        "counter_label": "{selected} of {max} selected",
+        "counter_cap_label": "{max} of {max} · deselect one to swap",
+        "cap_notice": "You can pick up to {max}. Deselect one to swap.",
+        "clear_label": "Clear",
+        "result_eyebrow": "Your routine",
+        "result_heading": "Your {steps}-step ritual",
+        "result_heading_single": "Start with one step",
+        "result_heading_empty": "Your complete {steps}-step ritual",
+        "result_prompt": "Pick your concerns to tailor it. Until then, here's the complete ritual.",
+        "count_label": "{count} steps",
+        "count_label_single": "1 step",
+        "result_optional_label": "Worth adding",
+        "optional_add_label": "Add",
+        "optional_added_label": "Added",
+        "view_product_label": "View",
+        "sold_out_label": "Sold out",
+        "core_threshold": 2,
+        "selection_cap": 3,
+        "show_optional": true,
+        "total_label": "Routine total",
+        "add_all_label": "Add {count} steps to cart",
+        "add_all_label_single": "Add 1 step to cart",
+        "adding_label": "Adding…",
+        "added_label": "Added",
+        "added_notice": "{count} items added to your cart.",
+        "unavailable_all_label": "Currently unavailable",
+        "error_label": "Couldn't add to cart. Try again.",
+        "show_mobile_sheet": true,
+        "sheet_add_label": "Add to cart",
+        "sheet_expand_label": "Show full routine",
+        "sheet_collapse_label": "Hide full routine",
+        "cross_link_label": "Not sure? Take the full hair test",
         "cross_link_url": "shopify://pages/hair-test",
         "color_scheme": "scheme-1",
         "padding_top": 48,
@@ -323,13 +357,65 @@
             "credit": "Shared with permission"
           }
         },
-        "day_1": { "type": "diary", "settings": { "day_label": "Day 1", "note": "Scalp felt clean rather than stripped." } },
-        "day_30": { "type": "diary", "settings": { "day_label": "Day 30", "note": "Less buildup by the second day after washing." } },
-        "day_60": { "type": "diary", "settings": { "day_label": "Day 60", "note": "Ends holding together between trims.", "milestone": true } },
-        "day_90": { "type": "diary", "settings": { "day_label": "Day 90", "note": "Wash day lasts longer. Roots feel lighter.", "milestone": true } },
-        "texture_1": { "type": "texture", "settings": { "zoom_label": "20x macro", "caption": "Cuticle laid flat after four weeks of the full ritual." } },
-        "review_1": { "type": "review", "settings": { "rating": 5, "quote": "My scalp still feels clean two days later, which has never happened with our water.", "name": "Ananya S.", "detail": "Bengaluru · 8 weeks in", "verified": true } },
-        "review_2": { "type": "review", "settings": { "rating": 5, "quote": "Switched after years of imported brands. The difference with Delhi water showed in two washes.", "name": "Kabir M.", "detail": "Delhi · 12 weeks in", "verified": true } }
+        "day_1": {
+          "type": "diary",
+          "settings": {
+            "day_label": "Day 1",
+            "note": "Scalp felt clean rather than stripped.",
+            "milestone": false
+          }
+        },
+        "day_30": {
+          "type": "diary",
+          "settings": {
+            "day_label": "Day 30",
+            "note": "Less buildup by the second day after washing.",
+            "milestone": false
+          }
+        },
+        "day_60": {
+          "type": "diary",
+          "settings": {
+            "day_label": "Day 60",
+            "note": "Ends holding together between trims.",
+            "milestone": true
+          }
+        },
+        "day_90": {
+          "type": "diary",
+          "settings": {
+            "day_label": "Day 90",
+            "note": "Wash day lasts longer. Roots feel lighter.",
+            "milestone": true
+          }
+        },
+        "texture_1": {
+          "type": "texture",
+          "settings": {
+            "zoom_label": "20x macro",
+            "caption": "Cuticle laid flat after four weeks of the full ritual."
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "My scalp still feels clean two days later, which has never happened with our water.",
+            "name": "Ananya S.",
+            "detail": "Bengaluru · 8 weeks in",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Switched after years of imported brands. The difference with Delhi water showed in two washes.",
+            "name": "Kabir M.",
+            "detail": "Delhi · 12 weeks in",
+            "verified": true
+          }
+        }
       },
       "block_order": [
         "case_1",
@@ -344,6 +430,15 @@
         "review_2"
       ],
       "settings": {
+        "eyebrow": "Real results",
+        "heading": "Drag the line. <strong>Judge for yourself.</strong>",
+        "text": "<p>Same person, same light, same frame — only the weeks in between are different.</p>",
+        "drag_hint": "Drag to compare",
+        "slider_label": "Reveal the before photo",
+        "diary_heading": "The 90-day diary",
+        "wall_heading": "Up close, and in their words",
+        "verified_label": "Verified buyer",
+        "disclaimer": "<p>Real customers, shared with permission. Photos are unretouched and cropped only. Individual results vary with hair type, water and routine. These are cosmetic products and are not intended to diagnose, treat or cure any condition.</p>",
         "color_scheme": "scheme-4",
         "padding_top": 72,
         "padding_bottom": 72
