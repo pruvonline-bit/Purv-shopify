@@ -9,21 +9,83 @@ document.addEventListener('DOMContentLoaded', function () {
     initCrossSell(section);
   });
 
+  /* Same approach as assets/pruv-routine-builder.js: cart-notification.js's
+     renderContents() only handles a single-line add, so pick every added line
+     out of the cart-notification-product section. False means "go to /cart". */
+  function renderCartUI(cartUI, response, returnFocusTo) {
+    if (!cartUI || !response.sections) return false;
+
+    if (cartUI.tagName === 'CART-DRAWER') {
+      cartUI.classList.remove('is-empty');
+      cartUI.renderContents(response);
+      return true;
+    }
+
+    var host = document.getElementById('cart-notification-product');
+    var source = response.sections['cart-notification-product'];
+    var added = response.items || [];
+    if (!host || !source || !added.length) return false;
+
+    var doc = new DOMParser().parseFromString(source, 'text/html');
+    var html = added
+      .map(function (item) {
+        var node = doc.querySelector('[id="cart-notification-product-' + item.key + '"]');
+        return node ? node.outerHTML : '';
+      })
+      .join('');
+    if (!html) return false;
+    host.innerHTML = html;
+
+    ['cart-notification-button', 'cart-icon-bubble'].forEach(function (id) {
+      var target = document.getElementById(id);
+      if (!target || !response.sections[id]) return;
+      try {
+        target.innerHTML = cartUI.getSectionInnerHTML(response.sections[id]);
+      } catch (e) {
+        target.innerHTML = response.sections[id];
+      }
+    });
+
+    if (cartUI.header && cartUI.header.reveal) cartUI.header.reveal();
+    cartUI.setActiveElement(returnFocusTo);
+    cartUI.open();
+    return true;
+  }
+
   function initCrossSell(section) {
     var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 1. 1-Click AJAX Add to Cart
-    var addBtn = section.querySelector('[data-cross-sell-add]');
-    if (addBtn) {
+    // 1. 1-Click AJAX Add to Cart (single pair product or full regimen bundle)
+    section.querySelectorAll('[data-cross-sell-add]').forEach(function (addBtn) {
       addBtn.addEventListener('click', function (e) {
         e.preventDefault();
+        var multiIds = addBtn.getAttribute('data-variant-ids');
         var variantId = addBtn.getAttribute('data-variant-id');
-        if (!variantId) return;
+        var items = multiIds
+          ? multiIds.split(',').filter(Boolean).map(function (id) {
+              return { id: id, quantity: 1 };
+            })
+          : variantId
+          ? [{ id: variantId, quantity: 1 }]
+          : [];
+        if (!items.length) return;
 
         var originalHTML = addBtn.innerHTML;
         addBtn.disabled = true;
         addBtn.innerHTML = '<span>Adding...</span>';
+
+        var cartUI = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+        var body = { items: items };
+        if (cartUI && typeof cartUI.getSectionsToRender === 'function') {
+          body.sections = cartUI
+            .getSectionsToRender()
+            .map(function (s) {
+              return s.id;
+            })
+            .join(',');
+          body.sections_url = window.location.pathname;
+        }
 
         fetch('/cart/add.js', {
           method: 'POST',
@@ -31,12 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
             'Content-Type': 'application/json',
             Accept: 'application/json',
           },
-          body: JSON.stringify({
-            id: variantId,
-            quantity: 1,
-          }),
+          body: JSON.stringify(body),
         })
           .then(function (response) {
+            if (!response.ok) throw new Error('Cart add failed: ' + response.status);
             return response.json();
           })
           .then(function (data) {
@@ -48,16 +108,18 @@ document.addEventListener('DOMContentLoaded', function () {
               <span>Added to Bag!</span>
             `;
 
-            // Broadcast cart update event for Dawn theme drawer
-            if (typeof pubsub !== 'undefined' && pubsub.publish) {
-              pubsub.publish('cart-update', { source: 'pruv-cross-sell', data: data });
+            if (typeof publish === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+              publish(PUB_SUB_EVENTS.cartUpdate, { source: 'pruv-cross-sell', cartData: data });
             }
 
-            // Also check for cart-drawer or open cart
-            var cartDrawer = document.querySelector('cart-drawer');
-            if (cartDrawer && typeof cartDrawer.renderContents === 'function') {
-              cartDrawer.renderContents(data);
+            var rendered = false;
+            try {
+              rendered = renderCartUI(cartUI, data, addBtn);
+            } catch (err) {
+              rendered = false;
             }
+            // The items are in the cart either way, so going there loses nothing.
+            if (!rendered) window.location.href = (window.routes && window.routes.cart_url) || '/cart';
 
             setTimeout(function () {
               addBtn.classList.remove('is-added');
@@ -74,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 2500);
           });
       });
-    }
+    });
 
     // 2. GSAP ScrollTrigger Animations
     if (hasGsap && !prefersReducedMotion) {
@@ -187,11 +249,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
 
-      var synergy = section.querySelector('[data-cross-sell-synergy]');
-      if (synergy) {
-        gsap.from(synergy, {
+      section.querySelectorAll('[data-cross-sell-regimen], [data-cross-sell-bundle]').forEach(function (block) {
+        gsap.from(block, {
           scrollTrigger: {
-            trigger: synergy,
+            trigger: block,
             start: 'top 88%',
             toggleActions: 'play none none none',
           },
@@ -200,7 +261,7 @@ document.addEventListener('DOMContentLoaded', function () {
           duration: 0.7,
           ease: 'power2.out',
         });
-      }
+      });
     }
   }
 

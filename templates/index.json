@@ -170,128 +170,68 @@
         "padding_bottom": 64
       }
     },
-    "routine_builder": {
-      "type": "pruv-routine-builder",
+    "concern_regimen": {
+      "type": "pruv-concern-regimen",
       "blocks": {
-        "slot_reset": {
-          "type": "product",
+        "thinning": {
+          "type": "regimen",
           "settings": {
-            "product": "pruv-1",
-            "title": "TriShield Shampoo",
-            "phase": "Reset",
-            "cadence": "2x a week",
-            "why_line": "Dissolves the mineral crust hard water leaves behind and decongests the scalp, so everything after it can work.",
-            "always_include": false
+            "concern": "Hair looks thinner or density feels reduced",
+            "headline": "Support the scalp. Start with the environment.",
+            "product_1": "product-2",
+            "frequency_1": "Daily",
+            "product_2": "pruv-1",
+            "frequency_2": "2–3x weekly"
           }
         },
-        "slot_support": {
-          "type": "product",
+        "rough": {
+          "type": "regimen",
           "settings": {
-            "product": "product-2",
-            "title": "VECTOR-5 Density Serum",
-            "phase": "Support",
-            "cadence": "Daily",
-            "why_line": "Works at the root across multiple pathways to rebuild density where hair has thinned.",
-            "always_include": true
+            "concern": "Hair feels rough, dull, coated, or flat",
+            "headline": "Reset buildup. Restore smoothness.",
+            "product_1": "pruv-1",
+            "frequency_1": "3x weekly",
+            "product_2": "product-3",
+            "frequency_2": "1x weekly"
           }
         },
-        "slot_repair": {
-          "type": "product",
+        "breakage": {
+          "type": "regimen",
           "settings": {
-            "product": "product-3",
-            "title": "Keratin Ceramide Mask",
-            "phase": "Repair",
-            "cadence": "Weekly",
-            "why_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down.",
-            "always_include": false
+            "concern": "Hair breaks, snaps, or feels weak",
+            "headline": "Clean smarter. Repair stronger.",
+            "product_1": "product-3",
+            "frequency_1": "1–2x weekly",
+            "product_2": "pruv-1",
+            "frequency_2": "2–3x weekly"
           }
         },
-        "concern_thinning": {
-          "type": "concern",
+        "full": {
+          "type": "regimen",
           "settings": {
-            "label": "Thinning or less density",
-            "sub_label": "More scalp showing, ponytail feels thinner",
-            "glyph": "thinning",
-            "weights": "0,3,1",
-            "reason": "thinning needs actives that work at the root, not just on the surface"
-          }
-        },
-        "concern_coated": {
-          "type": "concern",
-          "settings": {
-            "label": "Rough or coated hair",
-            "sub_label": "Hair feels coated, shampoo barely lathers",
-            "glyph": "coated",
-            "weights": "3,0,1",
-            "reason": "mineral buildup coats the cuticle and blocks everything applied after it"
-          }
-        },
-        "concern_breakage": {
-          "type": "concern",
-          "settings": {
-            "label": "Breakage or weak strands",
-            "sub_label": "Strands snap, ends feel rough and dry",
-            "glyph": "breakage",
-            "weights": "0,1,3",
-            "reason": "breakage needs structural repair inside the hair shaft, not just conditioning"
-          }
-        },
-        "concern_scalp": {
-          "type": "concern",
-          "settings": {
-            "label": "Oily, itchy or flaky scalp",
-            "sub_label": "Scalp feels congested, hair looks dull by day two",
-            "glyph": "scalp",
-            "weights": "3,0,0",
-            "reason": "a congested scalp has to be rebalanced before anything else can work"
+            "concern": "Full urban hair-stress regimen",
+            "headline": "Reset. Support. Repair.",
+            "product_1": "pruv-1",
+            "frequency_1": "2–4x weekly",
+            "role_1": "Reset",
+            "product_2": "product-2",
+            "frequency_2": "Daily",
+            "role_2": "Support",
+            "product_3": "product-3",
+            "frequency_3": "1–2x weekly",
+            "role_3": "Repair"
           }
         }
       },
       "block_order": [
-        "slot_reset",
-        "slot_support",
-        "slot_repair",
-        "concern_thinning",
-        "concern_coated",
-        "concern_breakage",
-        "concern_scalp"
+        "thinning",
+        "rough",
+        "breakage",
+        "full"
       ],
       "settings": {
         "eyebrow": "",
         "heading": "What's your hair <strong>dealing with?</strong>",
-        "text": "",
-        "concerns_legend": "Your hair concerns",
-        "counter_label": "{selected} of {max} selected",
-        "counter_cap_label": "{max} of {max} · deselect one to swap",
-        "cap_notice": "You can pick up to {max}. Deselect one to swap.",
-        "clear_label": "Clear",
-        "result_eyebrow": "Your routine",
-        "result_heading": "Your {steps}-step ritual",
-        "result_heading_single": "Start with one step",
-        "result_heading_empty": "Your complete {steps}-step ritual",
-        "result_prompt": "Pick your concerns to tailor it. Until then, here's the complete ritual.",
-        "count_label": "{count} steps",
-        "count_label_single": "1 step",
-        "result_optional_label": "Worth adding",
-        "optional_add_label": "Add",
-        "optional_added_label": "Added",
-        "view_product_label": "View",
-        "sold_out_label": "Sold out",
-        "core_threshold": 2,
-        "selection_cap": 3,
-        "show_optional": true,
-        "total_label": "Routine total",
-        "add_all_label": "Add {count} steps to cart",
-        "add_all_label_single": "Add 1 step to cart",
-        "adding_label": "Adding…",
-        "added_label": "Added",
-        "added_notice": "{count} items added to your cart.",
-        "unavailable_all_label": "Currently unavailable",
-        "error_label": "Couldn't add to cart. Try again.",
-        "show_mobile_sheet": true,
-        "sheet_add_label": "Add to cart",
-        "sheet_expand_label": "Show full routine",
-        "sheet_collapse_label": "Hide full routine",
         "cross_link_label": "Not sure? Take the full hair test",
         "cross_link_url": "shopify://pages/hair-test",
         "color_scheme": "scheme-1",
@@ -462,7 +402,7 @@
   "order": [
     "hero",
     "ritual_explainer",
-    "routine_builder",
+    "concern_regimen",
     "bestsellers",
     "proof",
     "hair_test_popup"

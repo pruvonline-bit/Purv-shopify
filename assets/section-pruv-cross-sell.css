@@ -315,65 +315,165 @@
 }
 
 /* ==========================================================================
-   Synergy Explanation Strip
+   Pair Regimen Strip
    ========================================================================== */
-.pruv-cross-sell__synergy-strip {
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
+.pruv-cross-sell__regimen,
+.pruv-cross-sell__bundle {
   max-width: 980px;
   margin: 0 auto;
   background: #ffffff;
   border: 1px solid rgba(184, 115, 51, 0.2);
   border-radius: 1.6rem;
-  padding: 1.6rem 2.2rem;
+  padding: 1.8rem 2.2rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
 }
 
-.pruv-cross-sell__synergy-icon {
-  width: 4.4rem;
-  height: 4.4rem;
-  border-radius: 1.2rem;
-  background: rgba(184, 115, 51, 0.1);
+.pruv-cross-sell__regimen-head {
+  margin-bottom: 1rem;
+}
+
+.pruv-cross-sell__regimen-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   color: #B87333;
+}
+
+.pruv-cross-sell__regimen-list,
+.pruv-cross-sell__bundle-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pruv-cross-sell__regimen-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1rem 0;
+  border-top: 1px dashed rgba(138, 129, 117, 0.22);
 }
 
-.pruv-cross-sell__synergy-text {
-  flex: 1 1 auto;
+.pruv-cross-sell__regimen-row:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
-.pruv-cross-sell__synergy-heading {
+.pruv-cross-sell__regimen-row:last-child {
+  padding-bottom: 0;
+}
+
+.pruv-cross-sell__regimen-name {
   font-family: 'Geist', system-ui, sans-serif;
-  font-size: 1.45rem;
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 600;
   color: #1B1D1F;
-  margin: 0 0 0.35rem;
+  line-height: 1.35;
 }
 
-.pruv-cross-sell__synergy-desc {
-  font-family: 'Geist', system-ui, sans-serif;
-  font-size: 1.25rem;
-  line-height: 1.45;
-  color: #8A8175;
-  margin: 0;
-}
-
-.pruv-cross-sell__synergy-badge {
+.pruv-cross-sell__regimen-freq {
   display: inline-block;
+  flex-shrink: 0;
   font-family: 'Geist Mono', monospace;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   color: #B87333;
   background: rgba(184, 115, 51, 0.1);
   border: 1px solid rgba(184, 115, 51, 0.25);
-  padding: 0.4rem 0.9rem;
+  padding: 0.35rem 0.9rem;
   border-radius: 100px;
   white-space: nowrap;
+}
+
+/* ==========================================================================
+   Full Urban Hair-Stress Regimen (Bundle)
+   ========================================================================== */
+.pruv-cross-sell__bundle {
+  margin-top: 2rem;
+  border: 1.5px solid #B87333;
+  box-shadow: 0 12px 32px rgba(184, 115, 51, 0.1);
+}
+
+.pruv-cross-sell__bundle-head {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.pruv-cross-sell__bundle-title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2rem, 2.4vw, 2.6rem);
+  font-weight: 700;
+  color: #1B1D1F;
+  letter-spacing: -0.02em;
+  margin: 0.6rem 0 0;
+}
+
+.pruv-cross-sell__bundle-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 1.8rem;
+}
+
+.pruv-cross-sell__bundle-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  background: #FAF6F0;
+  border-radius: 1.3rem;
+  padding: 1.4rem 1.2rem;
+}
+
+.pruv-cross-sell__bundle-thumb {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pruv-cross-sell__bundle-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.pruv-cross-sell__bundle-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pruv-cross-sell__bundle-step {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8A8175;
+}
+
+.pruv-cross-sell__bundle-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.pruv-cross-sell__bundle-footer .pruv-cross-sell__price {
+  margin: 0;
+}
+
+.pruv-cross-sell__add-btn--bundle {
+  width: auto;
+  flex: 0 1 auto;
 }
 
 /* ==========================================================================
@@ -480,32 +580,50 @@
     font-size: 1.15rem;
   }
 
-  .pruv-cross-sell__synergy-strip {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.3rem 1.1rem;
-    gap: 0.9rem;
+  .pruv-cross-sell__regimen,
+  .pruv-cross-sell__bundle {
+    padding: 1.4rem 1.2rem;
     border-radius: 1.3rem;
   }
 
-  .pruv-cross-sell__synergy-icon {
-    width: 3.6rem;
-    height: 3.6rem;
-    border-radius: 1rem;
+  .pruv-cross-sell__regimen-name {
+    font-size: 1.25rem;
   }
 
-  .pruv-cross-sell__synergy-heading {
-    font-size: 1.35rem;
-  }
-
-  .pruv-cross-sell__synergy-desc {
-    font-size: 1.16rem;
-    line-height: 1.35;
-  }
-
-  .pruv-cross-sell__synergy-badge {
-    margin-top: 0.2rem;
-    font-size: 0.9rem;
+  .pruv-cross-sell__regimen-freq {
+    font-size: 0.95rem;
     padding: 0.3rem 0.75rem;
+  }
+
+  .pruv-cross-sell__bundle-list {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .pruv-cross-sell__bundle-item {
+    flex-direction: row;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .pruv-cross-sell__bundle-thumb {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .pruv-cross-sell__bundle-text {
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .pruv-cross-sell__bundle-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .pruv-cross-sell__add-btn--bundle {
+    width: 100%;
   }
 }

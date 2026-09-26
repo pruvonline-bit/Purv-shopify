@@ -1,0 +1,434 @@
+{% comment %}
+  Prüv — Concern Regimen.
+
+  One tab per hair concern. Each tab is a fixed regimen: a primary product,
+  its cross-sell(s) and how often to use each, bought together in one click.
+  Without JavaScript the first regimen shows and its form posts natively to
+  /cart/add; assets/pruv-concern-regimen.js adds tab switching and an AJAX add
+  that opens the theme's cart notification/drawer.
+{% endcomment %}
+
+{{ 'section-pruv-concern-regimen.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-concern-regimen.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="pruv-regimen color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  data-pruv-regimen
+  data-section-id="{{ section.id }}"
+>
+  <div class="pruv-regimen__glow" aria-hidden="true"></div>
+  <div class="page-width">
+    <div class="pruv-regimen__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="pruv-regimen__eyebrow">
+          <span class="pruv-regimen__eyebrow-dot" aria-hidden="true"></span>
+          <span>{{ section.settings.eyebrow | escape }}</span>
+        </div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-regimen__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <p class="pruv-regimen__text">{{ section.settings.text | escape }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="pruv-regimen__tabs" role="tablist" aria-label="{{ section.settings.tabs_label | escape }}">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="pruv-regimen__tab"
+            role="tab"
+            id="RegimenTab-{{ block.id }}"
+            aria-controls="RegimenPanel-{{ block.id }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+            data-pruv-regimen-tab
+            {{ block.shopify_attributes }}
+          >
+            <span class="pruv-regimen__tab-num">{{ forloop.index | prepend: '0' }}</span>
+            <span class="pruv-regimen__tab-label">{{ block.settings.concern | escape }}</span>
+          </button>
+        {%- endfor -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign total = 0
+          assign compare_total = 0
+          assign line_count = 0
+          assign all_available = true
+        -%}
+        <div
+          class="pruv-regimen__panel"
+          role="tabpanel"
+          id="RegimenPanel-{{ block.id }}"
+          aria-labelledby="RegimenTab-{{ block.id }}"
+          data-pruv-regimen-panel
+          {% unless forloop.first %}
+            hidden
+          {% endunless %}
+        >
+          <div class="pruv-regimen__panel-head">
+            <p class="pruv-regimen__concern">{{ block.settings.concern | escape }}</p>
+            <h3 class="pruv-regimen__headline">{{ block.settings.headline | escape }}</h3>
+          </div>
+
+          <form
+            action="{{ routes.cart_add_url }}"
+            method="post"
+            class="pruv-regimen__form"
+            data-pruv-regimen-form
+          >
+            <ul class="pruv-regimen__products" role="list">
+              {%- for i in (1..3) -%}
+                {%- liquid
+                  assign product_key = 'product_' | append: i
+                  assign freq_key = 'frequency_' | append: i
+                  assign role_key = 'role_' | append: i
+                  assign item = block.settings[product_key]
+                  if item == blank
+                    continue
+                  endif
+                  assign variant = item.selected_or_first_available_variant
+                  assign role = block.settings[role_key]
+                  if role == blank
+                    if i == 1
+                      assign role = section.settings.primary_label
+                    else
+                      assign role = section.settings.pair_label
+                    endif
+                  endif
+                  assign line_count = line_count | plus: 1
+                  assign total = total | plus: variant.price
+                  if variant.compare_at_price > variant.price
+                    assign compare_total = compare_total | plus: variant.compare_at_price
+                  else
+                    assign compare_total = compare_total | plus: variant.price
+                  endif
+                  unless variant.available
+                    assign all_available = false
+                  endunless
+                -%}
+                <li class="pruv-regimen__product{% if i == 1 %} pruv-regimen__product--primary{% endif %}">
+                  <a href="{{ item.url }}" class="pruv-regimen__media" tabindex="-1" aria-hidden="true">
+                    {%- if item.featured_image != blank -%}
+                      {{
+                        item.featured_image
+                        | image_url: width: 480
+                        | image_tag: loading: 'lazy', alt: '', sizes: '(min-width: 750px) 260px, 72px'
+                      }}
+                    {%- else -%}
+                      {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-regimen__placeholder' }}
+                    {%- endif -%}
+                  </a>
+                  <div class="pruv-regimen__product-body">
+                    <span class="pruv-regimen__role">{{ role | escape }}</span>
+                    <h4 class="pruv-regimen__title">
+                      <a href="{{ item.url }}">{{ item.title | escape }}</a>
+                    </h4>
+                    <div class="pruv-regimen__meta">
+                      {%- if block.settings[freq_key] != blank -%}
+                        <span class="pruv-regimen__freq">{{ block.settings[freq_key] | escape }}</span>
+                      {%- endif -%}
+                      <span class="pruv-regimen__price">{{ variant.price | money }}</span>
+                    </div>
+                  </div>
+                  {%- assign line_index = line_count | minus: 1 -%}
+                  <input type="hidden" name="items[{{ line_index }}][id]" value="{{ variant.id }}" data-pruv-regimen-line>
+                  <input type="hidden" name="items[{{ line_index }}][quantity]" value="1">
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            {%- if line_count > 0 -%}
+              <div class="pruv-regimen__footer">
+                <div class="pruv-regimen__total">
+                  <span class="pruv-regimen__total-label">{{ section.settings.total_label | escape }}</span>
+                  <span class="pruv-regimen__total-price">
+                    {{ total | money }}
+                    {%- if compare_total > total -%}
+                      <s class="pruv-regimen__compare">{{ compare_total | money }}</s>
+                    {%- endif -%}
+                  </span>
+                </div>
+                <button
+                  type="submit"
+                  class="pruv-regimen__submit"
+                  data-pruv-regimen-submit
+                  {% unless all_available %}
+                    disabled
+                  {% endunless %}
+                >
+                  <span data-pruv-regimen-submit-label>
+                    {%- if all_available -%}
+                      {%- if line_count == 1 -%}
+                        {{ section.settings.add_label_single | escape }}
+                      {%- else -%}
+                        {{ section.settings.add_label | replace: '{count}', line_count | escape }}
+                      {%- endif -%}
+                    {%- else -%}
+                      {{ section.settings.sold_out_label | escape }}
+                    {%- endif -%}
+                  </span>
+                </button>
+              </div>
+              <p class="pruv-regimen__error" role="alert" data-pruv-regimen-error hidden></p>
+            {%- endif -%}
+          </form>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if section.settings.cross_link_label != blank and section.settings.cross_link_url != blank -%}
+      <p class="pruv-regimen__cross-link">
+        <a href="{{ section.settings.cross_link_url }}">{{ section.settings.cross_link_label | escape }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+
+  <script type="application/json" data-pruv-regimen-labels>
+    {
+      "adding": {{ section.settings.adding_label | json }},
+      "added": {{ section.settings.added_label | json }},
+      "error": {{ section.settings.error_label | json }}
+    }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv Concern Regimen",
+  "tag": "section",
+  "class": "section pruv-concern-regimen-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Find your regimen"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What's your hair <strong>dealing with?</strong>"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "tabs_label",
+      "label": "Tabs accessible label",
+      "default": "Hair concerns"
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "First product label",
+      "default": "Primary"
+    },
+    {
+      "type": "text",
+      "id": "pair_label",
+      "label": "Other products label",
+      "default": "Pair with"
+    },
+    {
+      "type": "text",
+      "id": "total_label",
+      "label": "Total label",
+      "default": "Regimen total"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Add to cart button",
+      "info": "{count} is replaced with the number of products.",
+      "default": "Add {count}-product regimen to bag"
+    },
+    {
+      "type": "text",
+      "id": "add_label_single",
+      "label": "Add to cart button (one product)",
+      "default": "Add to bag"
+    },
+    {
+      "type": "text",
+      "id": "adding_label",
+      "label": "Adding label",
+      "default": "Adding…"
+    },
+    {
+      "type": "text",
+      "id": "added_label",
+      "label": "Added label",
+      "default": "Added to bag"
+    },
+    {
+      "type": "text",
+      "id": "sold_out_label",
+      "label": "Unavailable label",
+      "default": "Currently unavailable"
+    },
+    {
+      "type": "text",
+      "id": "error_label",
+      "label": "Error message",
+      "default": "Couldn't add to cart. Try again."
+    },
+    {
+      "type": "text",
+      "id": "cross_link_label",
+      "label": "Link below section",
+      "default": "Not sure? Take the full hair test"
+    },
+    {
+      "type": "url",
+      "id": "cross_link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "regimen",
+      "name": "Concern regimen",
+      "settings": [
+        {
+          "type": "text",
+          "id": "concern",
+          "label": "Concern",
+          "default": "Hair looks thinner or density feels reduced"
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Headline",
+          "default": "Support the scalp. Start with the environment."
+        },
+        {
+          "type": "header",
+          "content": "Product 1 (primary)"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "frequency_1",
+          "label": "How often",
+          "default": "Daily"
+        },
+        {
+          "type": "text",
+          "id": "role_1",
+          "label": "Label override",
+          "info": "Leave blank to use the section's first product label."
+        },
+        {
+          "type": "header",
+          "content": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "frequency_2",
+          "label": "How often",
+          "default": "2–3x weekly"
+        },
+        {
+          "type": "text",
+          "id": "role_2",
+          "label": "Label override"
+        },
+        {
+          "type": "header",
+          "content": "Product 3 (optional)"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "frequency_3",
+          "label": "How often"
+        },
+        {
+          "type": "text",
+          "id": "role_3",
+          "label": "Label override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv Concern Regimen",
+      "blocks": [
+        { "type": "regimen" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -16,48 +16,58 @@
 {%- endstyle -%}
 
 {%- liquid
+  assign shampoo_name = 'Trishield Element Defense Shampoo'
+  assign serum_name = 'VECTOR-5 Advanced Multi-Pathway Structural Density Serum'
+  assign mask_name = 'Breakage Repair Keratin-Ceramide Hair Mask'
+
   assign current_handle = product.handle
-  assign target_handle = ''
-  assign current_step_num = '02'
-  assign current_step_label = 'Follicle Nutrition'
-  assign next_step_num = '01'
-  assign next_step_label = 'Scalp Purification'
-  assign synergy_title = 'Why They Work Better Together'
-  assign synergy_reason = 'Water-soluble peptide actives penetrate 3.2× deeper when the scalp barrier is cleared of hard-water mineral calcification by the Trishield Shampoo.'
+  assign target_handle = 'pruv-1'
+  assign concern = ''
+  assign headline = ''
+  assign current_name = product.title
+  assign current_freq = ''
+  assign target_name = shampoo_name
+  assign target_freq = ''
 
   if current_handle contains 'product-2' or product.title contains 'VECTOR-5' or product.title contains 'Density' or product.title contains 'Serum'
     assign target_handle = 'pruv-1'
-    assign current_step_num = '02'
-    assign current_step_label = 'Follicle Nutrition (Serum)'
-    assign next_step_num = '01'
-    assign next_step_label = 'Scalp Purification (Shampoo)'
-    assign synergy_title = 'The Purification & Penetration Synergy'
-    assign synergy_reason = 'Hard water coats scalp pores with insoluble calcium and magnesium deposits. The Trishield Shampoo chelate-cleanses these mineral shields, allowing VECTOR-5 elixir to absorb 3.2× deeper into the dermal papilla.'
+    assign concern = 'Hair looks thinner or density feels reduced'
+    assign headline = 'Support the scalp. Start with the environment.'
+    assign current_name = serum_name
+    assign current_freq = 'Daily'
+    assign target_name = shampoo_name
+    assign target_freq = '2–3x weekly'
   elsif current_handle contains 'pruv-1' or product.title contains 'Shampoo'
     assign target_handle = 'product-3'
-    assign current_step_num = '01'
-    assign current_step_label = 'Scalp Purification (Shampoo)'
-    assign next_step_num = '03'
-    assign next_step_label = 'Structural Repair (Mask)'
-    assign synergy_title = 'The Cleansing & Sealing Synergy'
-    assign synergy_reason = 'Once the hair cuticle is freed from heavy mineral buildup, the Keratin-Ceramide Mask delivers targeted lipid replenishment, sealing micro-fissures in damaged hair shafts and boosting tensile strength.'
+    assign concern = 'Hair feels rough, dull, coated, or flat'
+    assign headline = 'Reset buildup. Restore smoothness.'
+    assign current_name = shampoo_name
+    assign current_freq = '3x weekly'
+    assign target_name = mask_name
+    assign target_freq = '1x weekly'
   elsif current_handle contains 'product-3' or product.title contains 'Mask'
     assign target_handle = 'pruv-1'
-    assign current_step_num = '03'
-    assign current_step_label = 'Structural Repair (Mask)'
-    assign next_step_num = '01'
-    assign next_step_label = 'Scalp Purification (Shampoo)'
-    assign synergy_title = 'The Foundation & Fortification Synergy'
-    assign synergy_reason = 'Deep fiber repair requires a clean canvas. Using the Trishield Shampoo beforehand prevents heavy metal ions from competing with keratin binding sites on the hair cortex.'
-  else
-    assign target_handle = 'pruv-1'
+    assign concern = 'Hair breaks, snaps, or feels weak'
+    assign headline = 'Clean smarter. Repair stronger.'
+    assign current_name = mask_name
+    assign current_freq = '1–2x weekly'
+    assign target_name = shampoo_name
+    assign target_freq = '2–3x weekly'
   endif
 
   if section.settings.custom_target_product != blank
     assign target_product = section.settings.custom_target_product
+    assign target_name = target_product.title
   else
     assign target_product = all_products[target_handle]
   endif
+
+  assign eyebrow_text = section.settings.eyebrow | default: concern | default: 'Complete your regimen'
+  assign heading_text = section.settings.heading | default: headline | default: 'Pair it with its regimen partner'
+
+  assign bundle_shampoo = all_products['pruv-1']
+  assign bundle_serum = all_products['product-2']
+  assign bundle_mask = all_products['product-3']
 -%}
 
 <section
@@ -70,22 +80,20 @@
     <div class="pruv-cross-sell__header" data-cross-sell-header>
       <div class="pruv-cross-sell__eyebrow">
         <span class="pruv-cross-sell__eyebrow-dot" aria-hidden="true"></span>
-        <span>{{ section.settings.eyebrow | default: 'COMPLETE YOUR RITUAL' | escape }}</span>
+        <span>{{ eyebrow_text | escape }}</span>
       </div>
-      <h2 class="pruv-cross-sell__title">
-        {{ section.settings.heading | default: 'Pair With The Next Step For Exponential Results' }}
-      </h2>
-      <p class="pruv-cross-sell__subtitle">
-        {{ section.settings.subheading | default: 'Hair restoration is systemic. No single product works in isolation against environmental buildup and follicle dormancy.' | escape }}
-      </p>
+      <h2 class="pruv-cross-sell__title">{{ heading_text }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="pruv-cross-sell__subtitle">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
     </div>
 
-    <!-- Ritual Pair Experience -->
+    <!-- Primary + Cross-sell Pair -->
     <div class="pruv-cross-sell__experience" data-cross-sell-experience>
-      <!-- Left: Current Product In Hand -->
+      <!-- Left: Current Product (Primary) -->
       <div class="pruv-cross-sell__card pruv-cross-sell__card--current">
         <div class="pruv-cross-sell__card-top">
-          <span class="pruv-cross-sell__step-pill">STEP {{ current_step_num }} • IN HAND</span>
+          <span class="pruv-cross-sell__step-pill">PRIMARY • IN HAND</span>
         </div>
 
         <div class="pruv-cross-sell__media">
@@ -101,7 +109,9 @@
         </div>
 
         <div class="pruv-cross-sell__info">
-          <span class="pruv-cross-sell__role">{{ current_step_label }}</span>
+          {%- if current_freq != blank -%}
+            <span class="pruv-cross-sell__role">Use {{ current_freq }}</span>
+          {%- endif -%}
           <h3 class="pruv-cross-sell__product-title">{{ product.title }}</h3>
           <p class="pruv-cross-sell__price">{{ product.price | money }}</p>
           <div class="pruv-cross-sell__active-status">
@@ -113,23 +123,21 @@
         </div>
       </div>
 
-      <!-- Center: Synergy Connector -->
+      <!-- Center: Connector -->
       <div class="pruv-cross-sell__connector" aria-hidden="true">
         <div class="pruv-cross-sell__connector-line"></div>
         <div class="pruv-cross-sell__connector-badge">
           <span class="pruv-cross-sell__connector-plus">+</span>
-          <span class="pruv-cross-sell__connector-text">SYNERGY</span>
+          <span class="pruv-cross-sell__connector-text">PAIR</span>
         </div>
         <div class="pruv-cross-sell__connector-line"></div>
       </div>
 
-      <!-- Right: Target Next Step Product -->
+      <!-- Right: Cross-sell Product -->
       {%- if target_product != blank -%}
         <div class="pruv-cross-sell__card pruv-cross-sell__card--target">
           <div class="pruv-cross-sell__card-top">
-            <span class="pruv-cross-sell__step-pill pruv-cross-sell__step-pill--target">
-              STEP {{ next_step_num }} • RECOMMENDED PAIR
-            </span>
+            <span class="pruv-cross-sell__step-pill pruv-cross-sell__step-pill--target">RECOMMENDED PAIR</span>
           </div>
 
           <div class="pruv-cross-sell__media">
@@ -145,7 +153,9 @@
           </div>
 
           <div class="pruv-cross-sell__info">
-            <span class="pruv-cross-sell__role">{{ next_step_label }}</span>
+            {%- if target_freq != blank -%}
+              <span class="pruv-cross-sell__role">Use {{ target_freq }}</span>
+            {%- endif -%}
             <h3 class="pruv-cross-sell__product-title">
               <a href="{{ target_product.url }}">{{ target_product.title }}</a>
             </h3>
@@ -161,7 +171,6 @@
               {%- endif -%}
             </div>
 
-            <!-- 1-Click Direct Add to Cart -->
             {%- assign target_variant = target_product.selected_or_first_available_variant -%}
             <button
               type="button"
@@ -178,7 +187,7 @@
                   <line x1="3" y1="6" x2="21" y2="6"></line>
                   <path d="M16 10a4 4 0 0 1-8 0"></path>
                 </svg>
-                <span>+ Add Step {{ next_step_num }} to Bag</span>
+                <span>+ Add to Bag</span>
               {%- else -%}
                 <span>Sold Out</span>
               {%- endif -%}
@@ -188,24 +197,102 @@
       {%- endif -%}
     </div>
 
-    <!-- The Biological Synergy Explanation Strip -->
-    <div class="pruv-cross-sell__synergy-strip" data-cross-sell-synergy>
-      <div class="pruv-cross-sell__synergy-icon">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="10"></circle>
-          <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-          <line x1="9" y1="9" x2="9.01" y2="9"></line>
-          <line x1="15" y1="9" x2="15.01" y2="9"></line>
-        </svg>
+    <!-- Pair Regimen -->
+    {%- if current_freq != blank and target_freq != blank -%}
+      <div class="pruv-cross-sell__regimen" data-cross-sell-regimen>
+        <div class="pruv-cross-sell__regimen-head">
+          <span class="pruv-cross-sell__regimen-label">YOUR REGIMEN</span>
+        </div>
+        <ul class="pruv-cross-sell__regimen-list" role="list">
+          <li class="pruv-cross-sell__regimen-row">
+            <span class="pruv-cross-sell__regimen-name">{{ current_name }}</span>
+            <span class="pruv-cross-sell__regimen-freq">{{ current_freq }}</span>
+          </li>
+          <li class="pruv-cross-sell__regimen-row">
+            <span class="pruv-cross-sell__regimen-name">{{ target_name }}</span>
+            <span class="pruv-cross-sell__regimen-freq">{{ target_freq }}</span>
+          </li>
+        </ul>
       </div>
-      <div class="pruv-cross-sell__synergy-text">
-        <h4 class="pruv-cross-sell__synergy-heading">{{ synergy_title }}</h4>
-        <p class="pruv-cross-sell__synergy-desc">{{ synergy_reason }}</p>
+    {%- endif -%}
+
+    <!-- Full Urban Hair-Stress Regimen (3-product bundle) -->
+    {%- if bundle_shampoo != blank and bundle_serum != blank and bundle_mask != blank -%}
+      {%- liquid
+        assign v_shampoo = bundle_shampoo.selected_or_first_available_variant
+        assign v_serum = bundle_serum.selected_or_first_available_variant
+        assign v_mask = bundle_mask.selected_or_first_available_variant
+        assign bundle_total = v_shampoo.price | plus: v_serum.price | plus: v_mask.price
+        assign bundle_available = false
+        if v_shampoo.available and v_serum.available and v_mask.available
+          assign bundle_available = true
+        endif
+      -%}
+      <div class="pruv-cross-sell__bundle" data-cross-sell-bundle>
+        <div class="pruv-cross-sell__bundle-head">
+          <span class="pruv-cross-sell__regimen-label">FULL URBAN HAIR-STRESS REGIMEN</span>
+          <h3 class="pruv-cross-sell__bundle-title">Reset. Support. Repair.</h3>
+        </div>
+
+        <ul class="pruv-cross-sell__bundle-list" role="list">
+          <li class="pruv-cross-sell__bundle-item">
+            <div class="pruv-cross-sell__bundle-thumb">
+              {%- if bundle_shampoo.featured_image != blank -%}
+                {{ bundle_shampoo.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: bundle_shampoo.title }}
+              {%- endif -%}
+            </div>
+            <div class="pruv-cross-sell__bundle-text">
+              <span class="pruv-cross-sell__bundle-step">Reset</span>
+              <span class="pruv-cross-sell__regimen-name">{{ shampoo_name }}</span>
+              <span class="pruv-cross-sell__regimen-freq">2–4x weekly</span>
+            </div>
+          </li>
+          <li class="pruv-cross-sell__bundle-item">
+            <div class="pruv-cross-sell__bundle-thumb">
+              {%- if bundle_serum.featured_image != blank -%}
+                {{ bundle_serum.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: bundle_serum.title }}
+              {%- endif -%}
+            </div>
+            <div class="pruv-cross-sell__bundle-text">
+              <span class="pruv-cross-sell__bundle-step">Support</span>
+              <span class="pruv-cross-sell__regimen-name">{{ serum_name }}</span>
+              <span class="pruv-cross-sell__regimen-freq">Daily</span>
+            </div>
+          </li>
+          <li class="pruv-cross-sell__bundle-item">
+            <div class="pruv-cross-sell__bundle-thumb">
+              {%- if bundle_mask.featured_image != blank -%}
+                {{ bundle_mask.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: bundle_mask.title }}
+              {%- endif -%}
+            </div>
+            <div class="pruv-cross-sell__bundle-text">
+              <span class="pruv-cross-sell__bundle-step">Repair</span>
+              <span class="pruv-cross-sell__regimen-name">{{ mask_name }}</span>
+              <span class="pruv-cross-sell__regimen-freq">1–2x weekly</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="pruv-cross-sell__bundle-footer">
+          <span class="pruv-cross-sell__price">{{ bundle_total | money }}</span>
+          <button
+            type="button"
+            class="pruv-cross-sell__add-btn pruv-cross-sell__add-btn--bundle"
+            data-cross-sell-add
+            data-variant-ids="{{ v_shampoo.id }},{{ v_serum.id }},{{ v_mask.id }}"
+            {% unless bundle_available %}
+              disabled
+            {% endunless %}
+          >
+            {%- if bundle_available -%}
+              <span>+ Add Full Regimen to Bag</span>
+            {%- else -%}
+              <span>Sold Out</span>
+            {%- endif -%}
+          </button>
+        </div>
       </div>
-      <div class="pruv-cross-sell__synergy-badge">
-        <span>BIO-COMPOUNDING EFFECT</span>
-      </div>
-    </div>
+    {%- endif -%}
   </div>
 </section>
 
@@ -218,20 +305,19 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "SYSTEMIC SYNERGY"
+      "label": "Eyebrow override",
+      "info": "Leave blank to show the hair concern for the current product."
     },
     {
       "type": "text",
       "id": "heading",
-      "label": "Heading",
-      "default": "Complete Your Ritual: Pair With The Next Product"
+      "label": "Heading override",
+      "info": "Leave blank to show the regimen headline for the current product."
     },
     {
       "type": "text",
       "id": "subheading",
-      "label": "Subheading",
-      "default": "Hair restoration is systemic. No single formula works in isolation against environmental minerals and follicle dormancy."
+      "label": "Subheading"
     },
     {
       "type": "product",
