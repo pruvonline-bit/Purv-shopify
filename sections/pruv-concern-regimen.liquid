@@ -180,7 +180,11 @@
                       {%- if line_count == 1 -%}
                         {{ section.settings.add_label_single | escape }}
                       {%- else -%}
-                        {{ section.settings.add_label | replace: '{count}', line_count | escape }}
+                        {%- liquid
+                          assign count_token = '%7Bcount%7D' | url_decode
+                          assign add_text = section.settings.add_label | replace: count_token, line_count
+                          echo add_text | escape
+                        -%}
                       {%- endif -%}
                     {%- else -%}
                       {{ section.settings.sold_out_label | escape }}
