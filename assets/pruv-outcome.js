@@ -57,6 +57,20 @@ document.addEventListener('DOMContentLoaded', function () {
         var target = parseInt(this.getAttribute('data-phase-target'), 10);
         setActivePhase(target, true);
       });
+
+      btn.addEventListener('mouseenter', function () {
+        var target = parseInt(this.getAttribute('data-phase-target'), 10);
+        if (phaseCards[target]) {
+          phaseCards[target].classList.add('is-hovered');
+        }
+      });
+
+      btn.addEventListener('mouseleave', function () {
+        var target = parseInt(this.getAttribute('data-phase-target'), 10);
+        if (phaseCards[target]) {
+          phaseCards[target].classList.remove('is-hovered');
+        }
+      });
     });
 
     phaseCards.forEach(function (card) {

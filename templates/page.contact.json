@@ -7,8 +7,8 @@
           "type": "contact_card",
           "settings": {
             "label": "CALL",
-            "line_1": "+91 98765 43210",
-            "link": "tel:+919876543210",
+            "line_1": "+91-8826744417",
+            "link": "tel:+918826744417",
             "line_2": "Monday – Saturday",
             "line_3": "10am – 7pm IST"
           }
@@ -17,8 +17,8 @@
           "type": "contact_card",
           "settings": {
             "label": "EMAIL",
-            "line_1": "hello@pruv.in",
-            "link": "mailto:hello@pruv.in",
+            "line_1": "support@getpruv.com",
+            "link": "mailto:support@getpruv.com",
             "line_2": "We reply within 24 hours",
             "line_3": ""
           }
@@ -28,7 +28,7 @@
           "settings": {
             "label": "CHAT",
             "line_1": "WhatsApp us",
-            "link": "https://wa.me/919876543210",
+            "link": "https://wa.me/918826744417",
             "line_2": "Fastest way to reach the team",
             "line_3": "Order help, routine advice"
           }
@@ -36,31 +36,11 @@
         "card-4": {
           "type": "contact_card",
           "settings": {
-            "label": "HEADQUARTERS",
-            "line_1": "Prüv Labs",
+            "label": "SALES OFFICE",
+            "line_1": "D-242, First Floor",
             "link": "",
-            "line_2": "212 Okhla Industrial Estate, Phase III",
-            "line_3": "New Delhi 110020, India"
-          }
-        },
-        "card-5": {
-          "type": "contact_card",
-          "settings": {
-            "label": "CAREERS",
-            "line_1": "careers@pruv.in",
-            "link": "mailto:careers@pruv.in",
-            "line_2": "Formulation, operations and content roles",
-            "line_3": ""
-          }
-        },
-        "card-6": {
-          "type": "contact_card",
-          "settings": {
-            "label": "COLLABS",
-            "line_1": "partners@pruv.in",
-            "link": "mailto:partners@pruv.in",
-            "line_2": "Creators, clinics and retail partners",
-            "line_3": ""
+            "line_2": "Sector-63, Noida",
+            "line_3": "UP – 201301"
           }
         }
       },
@@ -68,17 +48,15 @@
         "card-1",
         "card-2",
         "card-3",
-        "card-4",
-        "card-5",
-        "card-6"
+        "card-4"
       ],
       "settings": {
         "heading": "Contact <strong>Information</strong>",
         "text": "<p>Questions about a formula, an order, or your routine? Reach the Prüv team directly — no bots, no ticket queues. We read and answer every message ourselves.</p>",
-        "map_embed_url": "https://maps.google.com/maps?q=Okhla%20Industrial%20Estate%20Phase%20III%2C%20New%20Delhi&t=&z=14&ie=UTF8&iwloc=&output=embed",
-        "map_title": "Prüv head office location on Google Maps",
+        "map_embed_url": "https://maps.google.com/maps?q=D-242%2C%20Sector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301&t=&z=14&ie=UTF8&iwloc=&output=embed",
+        "map_title": "Prüv sales office location on Google Maps",
         "map_directions_label": "Get directions",
-        "map_directions_url": "",
+        "map_directions_url": "https://maps.google.com/?q=D-242,+Sector+63,+Noida,+Uttar+Pradesh+201301",
         "color_scheme": "scheme-1",
         "padding_top": 80,
         "padding_bottom": 72
@@ -111,7 +89,7 @@
           "type": "question",
           "settings": {
             "question": "Can I change or cancel my order after placing it?",
-            "answer": "<p>If it has not been packed yet, email <a href=\"mailto:hello@pruv.in\">hello@pruv.in</a> with your order number and we will amend or cancel it. Once it is handed to the courier we cannot recall it — but you can refuse delivery and we will refund you in full.</p>"
+            "answer": "<p>If it has not been packed yet, email <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> with your order number and we will amend or cancel it. Once it is handed to the courier we cannot recall it — but you can refuse delivery and we will refund you in full.</p>"
           }
         },
         "q-1-4": {
@@ -172,28 +150,28 @@
           "type": "question",
           "settings": {
             "question": "What is your return policy?",
-            "answer": "<p>Unopened products can be returned within 14 days of delivery for a full refund. Email <a href=\"mailto:hello@pruv.in\">hello@pruv.in</a> with your order number and we will arrange a pickup.</p>"
+            "answer": "<p>Unopened products can be returned within 14 days of delivery for a full refund. Email <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> with your order number and we will arrange a pickup.</p>"
           }
         },
         "q-3-2": {
           "type": "question",
           "settings": {
             "question": "My product arrived damaged. What now?",
-            "answer": "<p>Send a photo of the parcel and the product to <a href=\"mailto:hello@pruv.in\">hello@pruv.in</a> within 48 hours of delivery. We will ship a replacement straight away — no return needed.</p>"
+            "answer": "<p>Send a photo of the parcel and the product to <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> within 48 hours of delivery. We will ship a replacement straight away — no return needed.</p>"
           }
         },
         "q-3-3": {
           "type": "question",
           "settings": {
             "question": "How do I choose the right routine for my hair?",
-            "answer": "<p>Tell us your water type, scalp condition and main concern at <a href=\"mailto:hello@pruv.in\">hello@pruv.in</a> and we will build you a routine. It is free, and there is no obligation to buy anything.</p>"
+            "answer": "<p>Tell us your water type, scalp condition and main concern at <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> and we will build you a routine. It is free, and there is no obligation to buy anything.</p>"
           }
         },
         "q-3-4": {
           "type": "question",
           "settings": {
             "question": "Where can I buy Prüv offline?",
-            "answer": "<p>Prüv is direct-to-consumer for now — here and on select marketplaces. Retail partnerships are in progress; reach out at <a href=\"mailto:partners@pruv.in\">partners@pruv.in</a>.</p>"
+            "answer": "<p>Prüv is direct-to-consumer for now — here and on select marketplaces. Retail partnerships are in progress; reach out at <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a>.</p>"
           }
         }
       },

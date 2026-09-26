@@ -222,18 +222,33 @@
   .pruv-pdp-info > .product-form__quantity {
     width: auto;
     flex: 0 0 auto;
-    margin: 0 1.2rem 2rem 0;
+    margin: 0 1.2rem 2rem 0 !important;
+    padding: 0;
   }
 
-  .pruv-pdp-info > .product-form__quantity + div {
+  .pruv-pdp-info > .product-form__quantity + div,
+  .pruv-pdp-info > .product-form__buy-buttons {
     width: auto;
     flex: 1 1 18rem;
     min-width: 0;
-    margin-bottom: 2rem;
+    margin: 0 0 2rem 0 !important;
+    align-self: flex-end;
   }
 
-  .pruv-pdp-info > .product-form__quantity + div .product-form {
-    margin-bottom: 0;
+  .pruv-pdp-info > .product-form__quantity + div .product-form,
+  .pruv-pdp-info > .product-form__buy-buttons .product-form {
+    margin: 0 !important;
+  }
+
+  .pruv-pdp-info > .product-form__quantity + div .product-form__buttons,
+  .pruv-pdp-info > .product-form__buy-buttons .product-form__buttons {
+    margin: 0 !important;
+    max-width: 100%;
+  }
+
+  .pruv-pdp-info > .product-form__quantity + div .product-form__submit,
+  .pruv-pdp-info > .product-form__buy-buttons .product-form__submit {
+    margin: 0 !important;
   }
 }
 
@@ -242,7 +257,9 @@
   border: 1.5px solid rgba(138, 129, 117, 0.15);
   background-color: rgba(255, 255, 255, 0.6);
   overflow: hidden;
-  min-height: 5rem;
+  height: 5.4rem !important;
+  min-height: 5.4rem !important;
+  box-sizing: border-box;
 }
 
 .pruv-pdp-info .quantity:after {
@@ -260,8 +277,14 @@
   color: #B87333;
 }
 
+.pruv-pdp-info .quantity__rules:empty {
+  display: none !important;
+  margin: 0 !important;
+}
+
 .pruv-pdp-info .product-form__submit {
-  min-height: 5rem;
+  height: 5.4rem !important;
+  min-height: 5.4rem !important;
   border-radius: 100px;
   background-color: #1B1D1F;
   color: #F5F2EC;
@@ -271,6 +294,8 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   box-shadow: none;
+  margin: 0 !important;
+  box-sizing: border-box !important;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -280,9 +305,29 @@
 }
 
 .pruv-pdp-info .product-form__submit:after,
-.pruv-pdp-info .product-form__submit:before {
-  box-shadow: none;
-  border: 0;
+.pruv-pdp-info .product-form__submit:before,
+.pruv-pdp-info .product-form__submit:hover:after,
+.pruv-pdp-info .product-form__submit:hover:before,
+.pruv-pdp-info .product-form__submit:focus:after,
+.pruv-pdp-info .product-form__submit:focus:before,
+.pruv-pdp-info .product-form__submit:focus-visible:after,
+.pruv-pdp-info .product-form__submit:focus-visible:before,
+.pruv-pdp-info .shopify-payment-button__button--unbranded:after,
+.pruv-pdp-info .shopify-payment-button__button--unbranded:before,
+.pruv-pdp-info .shopify-payment-button__button--unbranded:hover:after,
+.pruv-pdp-info .shopify-payment-button__button--unbranded:hover:before {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.pruv-pdp-info .product-form__submit,
+.pruv-pdp-info .product-form__submit:hover,
+.pruv-pdp-info .product-form__submit:focus,
+.pruv-pdp-info .product-form__submit:active {
+  outline: none !important;
 }
 
 .pruv-pdp-info .shopify-payment-button__button--unbranded {
@@ -945,6 +990,7 @@
 
 /* 4. Dominating CTA Enhancement */
 .pruv-pdp-info .product-form__submit {
+  height: 5.4rem !important;
   min-height: 5.4rem !important;
   border-radius: 100px !important;
   background: linear-gradient(135deg, #1B1D1F 0%, #2B2D30 100%) !important;
@@ -958,6 +1004,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
   cursor: pointer !important;
 }
 
@@ -1283,5 +1331,136 @@
     line-height: 1.35 !important;
     letter-spacing: 0.005em !important;
   }
+}
+
+/* ==========================================================================
+   Risk Reduction Strip (Visible below CTA / Bundle Upsell)
+   ========================================================================== */
+.pruv-risk-strip {
+  margin: 1.4rem 0 1.8rem;
+  background: #FAF6F0;
+  border: 1px solid rgba(184, 115, 51, 0.2);
+  border-radius: 1.4rem;
+  padding: 0.8rem 1rem;
+}
+
+.pruv-risk-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.pruv-risk-strip__item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.9rem;
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  font-family: inherit;
+}
+
+.pruv-risk-strip__item:hover {
+  background: rgba(184, 115, 51, 0.09);
+  transform: translateY(-1px);
+}
+
+.pruv-risk-strip__icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: rgba(184, 115, 51, 0.12);
+  color: #B87333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pruv-risk-strip__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pruv-risk-strip__title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pruv-risk-strip__sub {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.05rem;
+  color: #8A8175;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-risk-strip__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .pruv-risk-strip {
+    padding: 0.8rem;
+    margin: 1.2rem 0 1.4rem;
+  }
+}
+
+/* ==========================================================================
+   Compact Product Accordion Tweaks
+   ========================================================================== */
+.pruv-pdp-info .product__accordion summary {
+  padding: 1.2rem 3rem 1.2rem 0 !important;
+}
+
+.pruv-pdp-info .product__accordion .accordion__title {
+  font-size: 1.45rem !important;
+  font-weight: 600 !important;
+  color: #1B1D1F !important;
+}
+
+.pruv-pdp-info .product__accordion .accordion__content {
+  padding: 0 0 1.2rem !important;
+  font-size: 1.3rem !important;
+  line-height: 1.5 !important;
+  color: #4A453E !important;
+}
+
+/* Compact Step-by-Step Badge for Patch Test */
+.pruv-faq-step {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #B87333;
+  background: rgba(184, 115, 51, 0.1);
+  border: 1px solid rgba(184, 115, 51, 0.22);
+  padding: 0.15rem 0.55rem;
+  border-radius: 100px;
+  margin-right: 0.4rem;
+}
+
+.pruv-faq-highlight {
+  background: rgba(184, 115, 51, 0.06);
+  border-left: 2px solid #B87333;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0 0.8rem 0.8rem 0;
+  margin: 0.8rem 0;
+  font-size: 1.2rem;
+  color: #1B1D1F;
 }
 

@@ -1612,6 +1612,32 @@ a.product__text {
   box-shadow: 0 6px 20px rgba(184, 115, 51, 0.3) !important;
 }
 
+.product-form__submit:after,
+.product-form__submit:before,
+.product-form__submit:hover:after,
+.product-form__submit:hover:before,
+.product-form__submit:focus:after,
+.product-form__submit:focus:before,
+.product-form__submit:focus-visible:after,
+.product-form__submit:focus-visible:before,
+.shopify-payment-button__button--unbranded:after,
+.shopify-payment-button__button--unbranded:before,
+.shopify-payment-button__button--unbranded:hover:after,
+.shopify-payment-button__button--unbranded:hover:before {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.product-form__submit,
+.product-form__submit:hover,
+.product-form__submit:focus,
+.product-form__submit:active {
+  outline: none !important;
+}
+
 /* Trust Badges Strip */
 .pruv-pdp-trust {
   display: flex;

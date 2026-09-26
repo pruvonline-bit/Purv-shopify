@@ -1,0 +1,494 @@
+/* ==========================================================================
+   Prüv Product Usage — Bento Grid Layout & Luxury Protocol Styles
+   ========================================================================== */
+
+.pruv-usage {
+  position: relative;
+  overflow: hidden;
+  background-color: #FAF6F0;
+  color: #1B1D1F;
+}
+
+/* Header */
+.pruv-usage__header {
+  text-align: center;
+  max-width: 68rem;
+  margin: 0 auto 3rem;
+}
+
+.pruv-usage__eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B87333;
+  margin: 0 0 0.6rem;
+}
+
+.pruv-usage__title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.2rem, 2.8vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #1B1D1F;
+  margin: 0 0 0.7rem;
+}
+
+.pruv-usage__subtitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(1.3rem, 1.4vw, 1.5rem);
+  line-height: 1.5;
+  color: #8A8175;
+  margin: 0 auto;
+  max-width: 56rem;
+}
+
+/* ==========================================================================
+   Bento Grid Architecture
+   12-Column Responsive Layout
+   ========================================================================== */
+.pruv-usage__bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+/* Base Bento Tile */
+.pruv-usage__tile {
+  background: #ffffff;
+  border-radius: 1.8rem;
+  border: 1.5px solid rgba(138, 129, 117, 0.15);
+  padding: 2.2rem 2.2rem;
+  box-shadow: 0 4px 18px -2px rgba(27, 29, 31, 0.04);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.28s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pruv-usage__tile:hover {
+  border-color: rgba(184, 115, 51, 0.45);
+  box-shadow: 0 12px 28px -4px rgba(184, 115, 51, 0.12);
+  transform: translateY(-3px);
+}
+
+/* Subtle corner ambient glow on hover */
+.pruv-usage__tile::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(184, 115, 51, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  opacity: 0.6;
+}
+
+.pruv-usage__tile:hover::before {
+  opacity: 1;
+}
+
+/* Bento Tile Header */
+.pruv-usage__tile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
+}
+
+.pruv-usage__tile-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #B87333;
+  background: rgba(184, 115, 51, 0.08);
+  border: 1px solid rgba(184, 115, 51, 0.22);
+  padding: 0.25rem 0.8rem;
+  border-radius: 100px;
+}
+
+.pruv-usage__tile-icon {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 1.1rem;
+  background: rgba(250, 246, 240, 0.8);
+  border: 1px solid rgba(184, 115, 51, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #B87333;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.pruv-usage__tile:hover .pruv-usage__tile-icon {
+  transform: scale(1.06);
+  background-color: rgba(184, 115, 51, 0.12);
+}
+
+.pruv-usage__tile-title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  line-height: 1.22;
+  color: #1B1D1F;
+  margin: 0 0 0.6rem;
+  letter-spacing: -0.01em;
+}
+
+.pruv-usage__tile-summary {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: #8A8175;
+  margin: 0 0 1.6rem;
+}
+
+/* ==========================================================================
+   Tile 1: How Much to Use (Dosage - Span 7)
+   ========================================================================== */
+.pruv-usage__tile--dose {
+  grid-column: span 7;
+}
+
+.pruv-usage__dose-meter {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  background: #FAF6F0;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+  border-radius: 1.3rem;
+  padding: 1.2rem 1.4rem;
+  margin-top: auto;
+}
+
+.pruv-usage__dose-pipette {
+  position: relative;
+  width: 1.6rem;
+  height: 5.4rem;
+  background: rgba(138, 129, 117, 0.12);
+  border: 1.5px solid rgba(184, 115, 51, 0.3);
+  border-radius: 100px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.pruv-usage__dose-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 85%;
+  background: linear-gradient(180deg, #D4AF37 0%, #B87333 100%);
+  border-radius: 100px;
+  box-shadow: 0 0 10px rgba(184, 115, 51, 0.4);
+}
+
+.pruv-usage__dose-meta {
+  flex: 1 1 auto;
+}
+
+.pruv-usage__dose-stat {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  margin: 0 0 0.2rem;
+}
+
+.pruv-usage__dose-stat span {
+  font-size: 1.2rem;
+  color: #B87333;
+  font-weight: 600;
+}
+
+.pruv-usage__dose-desc {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.22rem;
+  color: #8A8175;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Tile 2: AM/PM Clarity (Timing - Span 5)
+   ========================================================================== */
+.pruv-usage__tile--timing {
+  grid-column: span 5;
+}
+
+.pruv-usage__timing-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+  margin-top: auto;
+}
+
+.pruv-usage__timing-card {
+  padding: 1.1rem 1rem;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+  background: #FAF6F0;
+  text-align: center;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.pruv-usage__timing-card--primary {
+  background: rgba(184, 115, 51, 0.08);
+  border-color: #B87333;
+}
+
+.pruv-usage__timing-badge {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #B87333;
+  margin-bottom: 0.3rem;
+}
+
+.pruv-usage__timing-name {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  margin: 0 0 0.2rem;
+}
+
+.pruv-usage__timing-note {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.1rem;
+  color: #8A8175;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* ==========================================================================
+   Tile 3: Frequency & Daily Cadence (Span 5)
+   ========================================================================== */
+.pruv-usage__tile--freq {
+  grid-column: span 5;
+}
+
+.pruv-usage__freq-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: auto;
+}
+
+.pruv-usage__freq-pill {
+  flex: 1;
+  text-align: center;
+  padding: 0.9rem 0.6rem;
+  background: #FAF6F0;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+}
+
+.pruv-usage__freq-pill--active {
+  background: #1B1D1F;
+  border-color: #1B1D1F;
+  color: #F5F2EC;
+}
+
+.pruv-usage__freq-pill-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: block;
+}
+
+.pruv-usage__freq-pill-sub {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.05rem;
+  opacity: 0.75;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   Tile 4: Where to Apply (Target Mapping - Span 7)
+   ========================================================================== */
+.pruv-usage__tile--where {
+  grid-column: span 7;
+}
+
+.pruv-usage__zones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+  margin-top: auto;
+}
+
+.pruv-usage__zone-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.1rem;
+  background: #FAF6F0;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(138, 129, 117, 0.12);
+}
+
+.pruv-usage__zone-bullet {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: #B87333;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(184, 115, 51, 0.4);
+}
+
+.pruv-usage__zone-label {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1B1D1F;
+}
+
+.pruv-usage__where-warning {
+  margin-top: 1rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  color: #B87333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Tablet & Mobile)
+   ========================================================================== */
+@media screen and (max-width: 990px) {
+  .pruv-usage__bento {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .pruv-usage__tile--dose,
+  .pruv-usage__tile--timing,
+  .pruv-usage__tile--freq,
+  .pruv-usage__tile--where {
+    grid-column: span 1;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-usage__header {
+    margin-bottom: 1.6rem;
+  }
+
+  .pruv-usage__title {
+    font-size: 2.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .pruv-usage__subtitle {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .pruv-usage__bento {
+    gap: 0.9rem;
+  }
+
+  .pruv-usage__tile {
+    padding: 1.3rem 1.15rem;
+    border-radius: 1.2rem;
+  }
+
+  .pruv-usage__tile-top {
+    margin-bottom: 1rem;
+  }
+
+  .pruv-usage__tile-icon {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 0.9rem;
+  }
+
+  .pruv-usage__tile-title {
+    font-size: 1.55rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .pruv-usage__tile-summary {
+    font-size: 1.18rem;
+    line-height: 1.35;
+    margin-bottom: 1.1rem;
+  }
+
+  .pruv-usage__dose-meter {
+    padding: 0.9rem 1.1rem;
+    gap: 1rem;
+    border-radius: 1.1rem;
+  }
+
+  .pruv-usage__dose-pipette {
+    height: 4.4rem;
+    width: 1.4rem;
+  }
+
+  .pruv-usage__dose-stat {
+    font-size: 1.45rem;
+  }
+
+  .pruv-usage__timing-split {
+    gap: 0.65rem;
+  }
+
+  .pruv-usage__timing-card {
+    padding: 0.85rem 0.75rem;
+    border-radius: 1rem;
+  }
+
+  .pruv-usage__timing-name {
+    font-size: 1.25rem;
+  }
+
+  .pruv-usage__timing-note {
+    font-size: 1.1rem;
+  }
+
+  .pruv-usage__freq-pills {
+    gap: 0.65rem;
+  }
+
+  .pruv-usage__freq-pill {
+    padding: 0.85rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .pruv-usage__freq-pill-title {
+    font-size: 1.45rem;
+  }
+
+  .pruv-usage__zones-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .pruv-usage__zone-item {
+    padding: 0.65rem 0.85rem;
+    border-radius: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-usage__tile,
+  .pruv-usage__tile-icon {
+    transition: none !important;
+  }
+}

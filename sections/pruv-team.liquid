@@ -39,7 +39,12 @@
                 | image_tag: loading: 'lazy', widths: '300, 450, 600', class: 'pruv-team__image', alt: block.settings.name | escape
               }}
             {%- else -%}
-              {{ 'product-apparel-1' | placeholder_svg_tag: 'pruv-team__image placeholder-svg' }}
+              <div class="pruv-team__avatar-placeholder">
+                <div class="pruv-team__avatar-seal">
+                  <span class="pruv-team__avatar-monogram">P</span>
+                </div>
+                <span class="pruv-team__avatar-tag">FOUNDING TEAM · 0{{ forloop.index }}</span>
+              </div>
             {%- endif -%}
           </div>
           {%- if block.settings.name != blank -%}

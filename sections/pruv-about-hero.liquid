@@ -13,22 +13,59 @@
     }
   }
 {%- endstyle -%}
-
 <div class="pruv-about-hero{% if section.settings.image != blank %} pruv-about-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div class="pruv-about-hero__inner page-width page-width--narrow" data-animate="fade-up">
+  <div class="pruv-about-hero__inner page-width" data-animate="fade-up">
     {%- if section.settings.eyebrow != blank -%}
-      <p class="pruv-about-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <div class="pruv-about-hero__badge">
+        <span class="pruv-about-hero__dot" aria-hidden="true"></span>
+        <span class="pruv-about-hero__eyebrow">{{ section.settings.eyebrow | escape }}</span>
+      </div>
     {%- endif -%}
     {%- if section.settings.heading != blank -%}
       <h1 class="pruv-about-hero__heading">{{ section.settings.heading }}</h1>
     {%- endif -%}
-    {%- if section.settings.text != blank -%}
-      <div class="pruv-about-hero__text rte">{{ section.settings.text }}</div>
+    {%- if section.settings.lead_text != blank -%}
+      <div class="pruv-about-hero__lead rte">{{ section.settings.lead_text }}</div>
+    {%- elsif section.settings.text != blank and section.blocks.size == 0 -%}
+      <div class="pruv-about-hero__lead rte">{{ section.settings.text }}</div>
     {%- endif -%}
   </div>
 
+  {%- if section.blocks.size > 0 -%}
+    <div class="pruv-about-hero__pillars page-width" data-animate="stagger">
+      {%- for block in section.blocks -%}
+        <div class="pruv-about-hero__pillar-card" {{ block.shopify_attributes }}>
+          <div class="pruv-about-hero__pillar-header">
+            <span class="pruv-about-hero__pillar-num">{{ block.settings.number | escape }}</span>
+            <span class="pruv-about-hero__pillar-label">{{ block.settings.title | escape }}</span>
+          </div>
+          {%- if block.settings.subtitle != blank -%}
+            <h2 class="pruv-about-hero__pillar-title">{{ block.settings.subtitle | escape }}</h2>
+          {%- endif -%}
+          {%- if block.settings.content != blank -%}
+            <p class="pruv-about-hero__pillar-content">{{ block.settings.content | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.principle_quote != blank -%}
+    <div class="pruv-about-hero__principle-wrapper page-width" data-animate="fade-up">
+      <div class="pruv-about-hero__principle-card">
+        <div class="pruv-about-hero__principle-badge">
+          <span class="pruv-about-hero__principle-dot" aria-hidden="true"></span>
+          <span>{{ section.settings.principle_tag | default: "CORE PRINCIPLE" | escape }}</span>
+        </div>
+        <blockquote class="pruv-about-hero__principle-quote">
+          “{{ section.settings.principle_quote | escape }}”
+        </blockquote>
+      </div>
+    </div>
+  {%- endif -%}
+
   {%- if section.settings.image != blank -%}
-    <div class="pruv-about-hero__media">
+    <div class="pruv-about-hero__media page-width">
       {{
         section.settings.image
         | image_url: width: 2000
@@ -58,13 +95,34 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Beyond doubt, <strong>beyond hard water.</strong>"
+      "default": "Engineered for Confidence. <strong>BEYOND DOUBT</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "lead_text",
+      "label": "Lead Intro Text"
     },
     {
       "type": "richtext",
       "id": "text",
-      "label": "Intro text",
-      "default": "<p>We believe great hair care starts with real science, not trends. Every Prüv formula is built and tested specifically against the hard water, humidity and pollution Indian hair deals with every day — measured, refined, and proven before it earns a place in your routine.</p>"
+      "label": "Fallback text (if no blocks)",
+      "default": "<p>At Prüv, we believe confidence is built on visible results, credible science and products that earn their place in your routine.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Core Principle Statement"
+    },
+    {
+      "type": "text",
+      "id": "principle_tag",
+      "label": "Principle Tag",
+      "default": "OUR FOUNDING PRINCIPLE"
+    },
+    {
+      "type": "textarea",
+      "id": "principle_quote",
+      "label": "Principle Quote",
+      "default": "Every claim should have a reason, every ingredient should have a role, and every product should have something to Prüv."
     },
     {
       "type": "image_picker",
@@ -86,7 +144,7 @@
       "type": "range",
       "id": "padding_top",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_top",
@@ -96,11 +154,42 @@
       "type": "range",
       "id": "padding_bottom",
       "min": 0,
-      "max": 100,
+      "max": 120,
       "step": 4,
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
-      "default": 56
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Brand Pillar",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number / Index",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Pillar Category",
+          "default": "PURPOSE"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Pillar Title",
+          "default": "Visible Confidence"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Pillar Content"
+        }
+      ]
     }
   ],
   "presets": [

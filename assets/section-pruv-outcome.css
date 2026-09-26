@@ -380,6 +380,8 @@
   flex-direction: column;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .pruv-outcome__phase-card:hover {
@@ -394,11 +396,143 @@
   box-shadow: 0 8px 24px rgba(184, 115, 51, 0.14);
 }
 
+/* Water Filling Animation inside Phase Cards */
+.pruv-outcome__water-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.pruv-outcome__water-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0%;
+  transition: height 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+  opacity: 0.25;
+}
+
+.pruv-outcome__phase-card:hover .pruv-outcome__water-level,
+.pruv-outcome__phase-card.is-hovered .pruv-outcome__water-level,
+.pruv-outcome__phase-card.is-active .pruv-outcome__water-level {
+  opacity: 1;
+}
+
+/* Step-by-Step Water Levels: 33% -> 66% -> 100% */
+.pruv-outcome__phase-card[data-water-fill="33"]:hover .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="33"].is-hovered .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="33"].is-active .pruv-outcome__water-level {
+  height: 33.33%;
+}
+
+.pruv-outcome__phase-card[data-water-fill="66"]:hover .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="66"].is-hovered .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="66"].is-active .pruv-outcome__water-level {
+  height: 66.66%;
+}
+
+.pruv-outcome__phase-card[data-water-fill="100"]:hover .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="100"].is-hovered .pruv-outcome__water-level,
+.pruv-outcome__phase-card[data-water-fill="100"].is-active .pruv-outcome__water-level {
+  height: 100%;
+}
+
+/* Water Waves on Surface */
+.pruv-outcome__water-wave {
+  position: absolute;
+  top: -16px;
+  left: 0;
+  width: 200%;
+  height: 18px;
+  background-repeat: repeat-x;
+  background-size: 50% 100%;
+}
+
+.pruv-outcome__water-wave--front {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 30' preserveAspectRatio='none'%3E%3Cpath d='M0,15 C100,28 200,2 300,15 C400,28 500,2 600,15 L600,30 L0,30 Z' fill='rgba(184,115,51,0.22)'/%3E%3C/svg%3E");
+  animation: pruvWaveAnimFront 4s linear infinite;
+  z-index: 2;
+}
+
+.pruv-outcome__water-wave--back {
+  top: -20px;
+  height: 22px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 30' preserveAspectRatio='none'%3E%3Cpath d='M0,12 C120,-3 180,27 300,12 C420,-3 480,27 600,12 L600,30 L0,30 Z' fill='rgba(218,165,105,0.14)'/%3E%3C/svg%3E");
+  animation: pruvWaveAnimBack 6s linear infinite;
+  z-index: 1;
+}
+
+@keyframes pruvWaveAnimFront {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes pruvWaveAnimBack {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+/* Fluid Body */
+.pruv-outcome__water-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(184, 115, 51, 0.12) 0%, rgba(184, 115, 51, 0.22) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+/* Rising Micro-bubbles */
+.pruv-outcome__water-bubble {
+  position: absolute;
+  bottom: -6px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: pruvBubbleRise 3s infinite ease-in;
+}
+
+.pruv-outcome__water-bubble--1 {
+  width: 5px;
+  height: 5px;
+  left: 25%;
+  animation-duration: 3.5s;
+  animation-delay: 0.3s;
+}
+
+.pruv-outcome__water-bubble--2 {
+  width: 3px;
+  height: 3px;
+  left: 60%;
+  animation-duration: 2.8s;
+  animation-delay: 1.2s;
+}
+
+.pruv-outcome__water-bubble--3 {
+  width: 4px;
+  height: 4px;
+  left: 82%;
+  animation-duration: 4.2s;
+  animation-delay: 0.7s;
+}
+
+@keyframes pruvBubbleRise {
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  25% { opacity: 0.8; }
+  75% { opacity: 0.8; }
+  100% { transform: translateY(-140px) scale(1.15); opacity: 0; }
+}
+
 .pruv-outcome__phase-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.8rem;
+  position: relative;
+  z-index: 3;
 }
 
 .pruv-outcome__phase-badge {
@@ -427,10 +561,14 @@
   line-height: 1.25;
   color: #1B1D1F;
   margin: 0 0 1.1rem;
+  position: relative;
+  z-index: 3;
 }
 
 .pruv-outcome__phase-section {
   margin-bottom: 0.9rem;
+  position: relative;
+  z-index: 3;
 }
 
 .pruv-outcome__phase-section:last-child {
@@ -512,155 +650,155 @@
    ========================================================================== */
 @media screen and (max-width: 749px) {
   .pruv-outcome__header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.6rem;
   }
 
   .pruv-outcome__grid {
-    gap: 1.2rem;
-    margin-bottom: 2.2rem;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
   }
 
   .pruv-outcome__col {
-    padding: 1.6rem 1.4rem;
-    border-radius: 1.4rem;
+    padding: 1.3rem 1.1rem;
+    border-radius: 1.2rem;
   }
 
   .pruv-outcome__col-head {
-    margin-bottom: 1.2rem;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
   }
 
   .pruv-outcome__col-title {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     margin-bottom: 0.2rem;
   }
 
   .pruv-outcome__col-desc {
-    font-size: 1.2rem;
-    line-height: 1.35;
+    font-size: 1.15rem;
+    line-height: 1.32;
   }
 
   .pruv-outcome__items-list {
-    gap: 0.7rem;
+    gap: 0.6rem;
   }
 
   .pruv-outcome__concern-item,
   .pruv-outcome__benefit-item {
-    padding: 0.8rem 1rem;
-    gap: 0.9rem;
-    border-radius: 1rem;
+    padding: 0.7rem 0.85rem;
+    gap: 0.75rem;
+    border-radius: 0.9rem;
   }
 
   .pruv-outcome__concern-icon {
-    width: 2.6rem;
-    height: 2.6rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 
   .pruv-outcome__concern-icon svg {
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .pruv-outcome__benefit-check {
-    width: 2rem;
-    height: 2rem;
+    width: 1.9rem;
+    height: 1.9rem;
   }
 
   .pruv-outcome__benefit-check svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1rem;
+    height: 1rem;
   }
 
   .pruv-outcome__concern-name,
   .pruv-outcome__benefit-name {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     margin-bottom: 0.15rem;
   }
 
   .pruv-outcome__concern-text,
   .pruv-outcome__benefit-text {
-    font-size: 1.16rem;
-    line-height: 1.35;
+    font-size: 1.12rem;
+    line-height: 1.32;
   }
 
   .pruv-outcome__science-tag {
-    font-size: 1rem;
-    padding: 0.1rem 0.55rem;
+    font-size: 0.95rem;
+    padding: 0.1rem 0.5rem;
   }
 
   .pruv-outcome__timeline-wrap {
-    padding: 1.8rem 1.4rem;
-    border-radius: 1.4rem;
-    margin-bottom: 2.2rem;
+    padding: 1.4rem 1.1rem;
+    border-radius: 1.2rem;
+    margin-bottom: 1.8rem;
   }
 
   .pruv-outcome__timeline-intro {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.1rem;
   }
 
   .pruv-outcome__timeline-heading {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   .pruv-outcome__timeline-sub {
-    font-size: 1.2rem;
-    line-height: 1.38;
+    font-size: 1.18rem;
+    line-height: 1.35;
   }
 
   .pruv-outcome__stepper-nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
-    margin-bottom: 1.4rem;
+    gap: 0.4rem;
+    margin-bottom: 1.2rem;
   }
 
   .pruv-outcome__step-btn {
-    padding: 0.6rem 0.4rem;
-    font-size: 1.05rem;
+    padding: 0.55rem 0.35rem;
+    font-size: 1rem;
     flex-direction: column;
-    gap: 0.15rem;
-    border-radius: 1rem;
+    gap: 0.1rem;
+    border-radius: 0.9rem;
     text-align: center;
     justify-content: center;
   }
 
   .pruv-outcome__step-num {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .pruv-outcome__rail-container {
-    margin-bottom: 1.4rem;
+    margin-bottom: 1.2rem;
   }
 
   .pruv-outcome__phase-card {
-    padding: 1.4rem 1.2rem;
-    border-radius: 1.2rem;
+    padding: 1.2rem 1.1rem;
+    border-radius: 1.1rem;
   }
 
   .pruv-outcome__phase-title {
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.42rem;
+    margin-bottom: 0.6rem;
   }
 
   .pruv-outcome__phase-consumer {
-    font-size: 1.2rem;
-    line-height: 1.38;
-  }
-
-  .pruv-outcome__phase-sci {
-    font-size: 1.14rem;
+    font-size: 1.18rem;
     line-height: 1.35;
   }
 
+  .pruv-outcome__phase-sci {
+    font-size: 1.12rem;
+    line-height: 1.32;
+  }
+
   .pruv-outcome__assurance-strip {
-    border-radius: 1.4rem;
+    border-radius: 1.2rem;
     flex-direction: column;
-    gap: 0.9rem;
-    padding: 1.2rem 1.4rem;
+    gap: 0.75rem;
+    padding: 1.1rem 1.2rem;
   }
 
   .pruv-outcome__assurance-item {
-    font-size: 1.1rem;
+    font-size: 1.08rem;
   }
 
   .pruv-outcome__assurance-divider {

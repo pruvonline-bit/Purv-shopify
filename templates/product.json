@@ -69,6 +69,36 @@
             "use_product_description": false,
             "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>"
           }
+        },
+        "tab_patch_safety": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Patch test & safety warnings",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p><strong>24-Hour Patch Test Protocol:</strong></p><ol><li><strong>Step 1:</strong> Squeeze 2 drops onto clean skin behind your ear or inner forearm.</li><li><strong>Step 2:</strong> Allow to dry naturally and leave untouched for 24 hours.</li><li><strong>Step 3:</strong> If zero redness, burning, or itchiness occurs, proceed with daily scalp application.</li></ol><p><strong>Safety Assurance:</strong> 100% water-matrix elixir formulated without Minoxidil, Sulfates, Silicones, Parabens, or Synthetic Dyes. Safe for colour-treated and keratin-treated hair. Non-comedogenic. For external scalp use only.</p>"
+          }
+        },
+        "tab_returns_policy": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Returns, replacements & guarantee",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p><strong>48-Hour Free Replacement:</strong> In the rare instance of transit damage, leakage, or pipette defect, email our care desk with an unboxing photo within 48 hours for immediate dispatch of a fresh bottle.</p><p><strong>90-Day Follicular Commitment:</strong> Hair density operates on 90-day biological cycles. If you follow the daily PM ritual for 90 days and need guidance, our trichology support team provides 1-on-1 consultation and satisfaction assistance.</p>"
+          }
+        },
+        "tab_risk_faqs": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Risk reduction FAQs",
+            "icon": "none",
+            "open_by_default": false,
+            "use_product_description": false,
+            "content": "<p><strong>Q: Will I experience initial shedding (\"dread shed\")?</strong><br>A: No. Unlike drug-based vasodilators (such as Minoxidil) which can cause sudden shedding phases, Prüv is a gentle, bio-peptide water formula designed to nourish the scalp barrier without abrupt follicular shock.</p><p><strong>Q: Can I apply this if I use hair oil or styling products?</strong><br>A: Always apply Prüv first directly to a clean scalp (dry or damp). Let it absorb for 60 seconds before applying any hair creams or styling products. Heavy oils should never be applied before the elixir, as oil creates a barrier blocking water absorption.</p><p><strong>Q: Does it cause hair stiffness or sticky residue?</strong><br>A: Absolutely not. Prüv is 100% water-based and dries completely clean in under 60 seconds with natural root bounce.</p>"
+          }
         }
       },
       "block_order": [
@@ -82,7 +112,10 @@
         "buy_buttons",
         "bundle_upsell",
         "tab_description",
-        "tab_benefits"
+        "tab_benefits",
+        "tab_patch_safety",
+        "tab_returns_policy",
+        "tab_risk_faqs"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -105,11 +138,23 @@
     },
     "mechanism": {
       "type": "pruv-product-mechanism"
+    },
+    "usage": {
+      "type": "pruv-product-usage"
+    },
+    "proof": {
+      "type": "pruv-product-proof"
+    },
+    "cross_sell": {
+      "type": "pruv-product-cross-sell"
     }
   },
   "order": [
     "main",
     "outcome",
-    "mechanism"
+    "mechanism",
+    "usage",
+    "proof",
+    "cross_sell"
   ]
 }

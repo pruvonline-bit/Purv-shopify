@@ -1,46 +1,223 @@
-/* Prüv — about hero: centered editorial intro, optional full-width image below */
+/* Prüv — about hero: centered editorial intro, Bento pillars grid, and Core Principle card */
+
+.pruv-about-hero {
+  position: relative;
+  overflow: hidden;
+}
 
 .pruv-about-hero__inner {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.6rem;
+  gap: 2rem;
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+.pruv-about-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 1.4rem;
+  background: rgba(184, 115, 51, 0.08);
+  border: 1px solid rgba(184, 115, 51, 0.22);
+  border-radius: 999px;
+}
+
+.pruv-about-hero__dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #B87333;
+  box-shadow: 0 0 0 3px rgba(184, 115, 51, 0.2);
 }
 
 .pruv-about-hero__eyebrow {
   margin: 0;
   font-family: 'Geist Mono', monospace;
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #B87333;
 }
 
 .pruv-about-hero__heading {
   margin: 0;
-  font-size: clamp(3.2rem, 5vw, 5.2rem);
-  line-height: 1.1;
+  font-size: clamp(3.4rem, 5.2vw, 5.6rem);
+  line-height: 1.08;
   font-weight: 400;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  color: #1B1D1F;
   text-wrap: balance;
 }
 
 .pruv-about-hero__heading strong {
-  font-weight: 700;
+  font-weight: 800;
+  color: #1B1D1F;
 }
 
-.pruv-about-hero__text {
-  max-width: 56ch;
-  font-size: 1.6rem;
+.pruv-about-hero__lead {
+  max-width: 68ch;
+  font-size: clamp(1.6rem, 1.8vw, 1.85rem);
   line-height: 1.65;
-  color: #8A8175;
+  color: #6C665F;
+  margin: 0 auto;
+}
+
+.pruv-about-hero__lead p {
   margin: 0;
 }
 
-.pruv-about-hero--with-image .pruv-about-hero__media {
+/* Bento Pillars Grid */
+.pruv-about-hero__pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.4rem;
+  margin-top: 5.6rem;
+}
+
+@media screen and (min-width: 800px) {
+  .pruv-about-hero__pillars {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.8rem;
+  }
+}
+
+.pruv-about-hero__pillar-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid rgba(27, 29, 31, 0.08);
+  border-radius: 2.2rem;
+  padding: 3.6rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  text-align: left;
+  box-shadow: 0 12px 32px -12px rgba(27, 29, 31, 0.06);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.pruv-about-hero__pillar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(184, 115, 51, 0.4);
+  box-shadow: 0 24px 48px -12px rgba(184, 115, 51, 0.12);
+}
+
+.pruv-about-hero__pillar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(27, 29, 31, 0.06);
+}
+
+.pruv-about-hero__pillar-num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #B87333;
+}
+
+.pruv-about-hero__pillar-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8A8175;
+}
+
+.pruv-about-hero__pillar-title {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1B1D1F;
+  letter-spacing: -0.01em;
+}
+
+.pruv-about-hero__pillar-content {
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.65;
+  color: #6C665F;
+}
+
+/* Core Principle Statement Card */
+.pruv-about-hero__principle-wrapper {
   margin-top: 4.8rem;
+}
+
+.pruv-about-hero__principle-card {
+  position: relative;
+  background: linear-gradient(135deg, #1B1D1F 0%, #25282B 100%);
+  border: 1px solid rgba(184, 115, 51, 0.3);
+  border-radius: 2.4rem;
+  padding: 4.4rem 4rem;
+  text-align: center;
+  box-shadow: 0 24px 50px -15px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.pruv-about-hero__principle-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(184, 115, 51, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.pruv-about-hero__principle-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.4rem 1.4rem;
+  background: rgba(184, 115, 51, 0.15);
+  border: 1px solid rgba(184, 115, 51, 0.35);
+  border-radius: 999px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E2A76F;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.pruv-about-hero__principle-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: #E2A76F;
+}
+
+.pruv-about-hero__principle-quote {
+  margin: 0;
+  font-size: clamp(2rem, 2.6vw, 2.8rem);
+  line-height: 1.4;
+  font-weight: 400;
+  color: #F5F2EC;
+  font-style: normal;
+  letter-spacing: -0.01em;
+  max-width: 58ch;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.pruv-about-hero--with-image .pruv-about-hero__media {
+  margin-top: 5.6rem;
   border-radius: 2.4rem;
   overflow: hidden;
 }
@@ -49,4 +226,40 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Mobile Viewport Refinements */
+@media screen and (max-width: 749px) {
+  .pruv-about-hero__inner {
+    gap: 1.6rem;
+  }
+
+  .pruv-about-hero__pillars {
+    margin-top: 3.6rem;
+    gap: 1.8rem;
+  }
+
+  .pruv-about-hero__pillar-card {
+    padding: 2.8rem 2.2rem;
+    border-radius: 1.8rem;
+  }
+
+  .pruv-about-hero__principle-wrapper {
+    margin-top: 3.2rem;
+  }
+
+  .pruv-about-hero__principle-card {
+    padding: 3.2rem 2rem;
+    border-radius: 2rem;
+  }
+
+  .pruv-about-hero__principle-quote {
+    font-size: 1.85rem;
+    line-height: 1.45;
+  }
+
+  .pruv-about-hero--with-image .pruv-about-hero__media {
+    margin-top: 3.6rem;
+    border-radius: 1.8rem;
+  }
 }

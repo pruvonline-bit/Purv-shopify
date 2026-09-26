@@ -2,27 +2,64 @@
   "sections": {
     "hero": {
       "type": "pruv-about-hero",
+      "blocks": {
+        "pillar-1": {
+          "type": "pillar",
+          "settings": {
+            "number": "01",
+            "title": "PURPOSE",
+            "subtitle": "Inspiring Visible Confidence",
+            "content": "To help people feel more confident in how they look by creating science-led personal care that delivers meaningful, visible improvement."
+          }
+        },
+        "pillar-2": {
+          "type": "pillar",
+          "settings": {
+            "number": "02",
+            "title": "MISSION",
+            "subtitle": "Disciplined High-Performance",
+            "content": "To build focused, high-performance systems for hair, scalp and skin that address real-world concerns with thoughtfully selected ingredients, intelligent formulation and clear, evidence-conscious communication. We aim to make advanced personal care easier to understand and easier to use — without exaggerated promises, unnecessary complexity or trend-led formulation."
+          }
+        },
+        "pillar-3": {
+          "type": "pillar",
+          "settings": {
+            "number": "03",
+            "title": "VISION",
+            "subtitle": "A Global Indian Standard",
+            "content": "To build Prüv into a globally relevant Indian personal-care brand at the intersection of science, performance and modern aesthetics — creating products for hair, skin, scalp and appearance that are designed around how people actually live."
+          }
+        }
+      },
+      "block_order": [
+        "pillar-1",
+        "pillar-2",
+        "pillar-3"
+      ],
       "settings": {
         "eyebrow": "About Prüv",
-        "heading": "Beyond doubt, <strong>beyond hard water.</strong>",
-        "text": "<p>We believe great hair care starts with real science, not trends. Every Prüv formula is built and tested specifically against the hard water, humidity and pollution Indian hair deals with every day — measured, refined, and proven before it earns a place in your routine.</p>",
+        "heading": "Engineered for Confidence. <strong>BEYOND DOUBT</strong>",
+        "lead_text": "<p>At Prüv, we believe confidence is built on visible results, credible science and products that earn their place in your routine.</p>",
+        "principle_tag": "OUR CORE PRINCIPLE",
+        "principle_quote": "Every claim should have a reason, every ingredient should have a role, and every product should have something to Prüv.",
         "color_scheme": "scheme-2",
-        "padding_top": 80,
-        "padding_bottom": 56
+        "padding_top": 88,
+        "padding_bottom": 72
       }
     },
     "founders": {
       "type": "pruv-story-split",
       "settings": {
         "eyebrow": "Our Founders",
-        "heading": "Two co-founders. <strong>One shared standard.</strong>",
-        "text": "<p>Prüv started with a simple frustration: nothing on the shelf was built for what Indian water and weather actually do to hair. So we set out to build it ourselves — testing against the water, not around it.</p><p>That curiosity turned into a structured, science-led approach to product development that still shapes every formula we make today.</p>",
+        "heading": "Three co-founders. <strong>One shared standard.</strong>",
+        "text": "<p>Prüv was created by Indian founders for modern routines - with a simple belief: personal care should make people feel more certain about what they are using, why it works, and how it fits into their lives.</p><p>We are building Prüv as a proof-led personal care house rooted in clarity, restraint and visible confidence. Our ambition is not to become another label built on trends, fear or exaggerated promises. Prüv exists to bring discipline to categories where consumers are often left confused by overclaims, ingredient noise and one-size-fits-all solutions.</p><p>We begin with haircare because modern Indian hair faces a connected set of daily stressors - hard water, pollution, humidity, heat, styling, scalp imbalance and breakage. These concerns rarely exist in isolation. They work together, affecting how hair looks, feels, behaves and ultimately how confident people feel in their everyday lives.</p><p>Our first ritual is built around three focused steps: Reset what daily exposure leaves behind. Repair the feel of weakened lengths. Support the scalp environment and visible density confidence.</p><p>Each Prüv product is designed with a clear role, advanced cosmetic actives and plain-English science. We believe care should be intelligent without being intimidating, premium without being excessive, and effective without relying on miracle language.</p><p>Haircare is our starting point. The larger vision is broader: to build a globally relevant Indian appearance-optimization brand for hair, skin, scalp and personal confidence.</p><p>Prüv is for people who want more than products. It is for people who want understanding, consistency and confidence built into the ritual.</p><p><strong>Quiet science. Visible confidence. Beyond Doubt.</strong></p>",
+        "image_asset": "pruv-about-founders.jpg",
         "image_position": "right",
         "button_label": "",
         "button_link": "",
         "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "product_science": {
@@ -31,12 +68,13 @@
         "eyebrow": "Product Science",
         "heading": "The biology of <strong>better care.</strong>",
         "text": "<p>We design solutions that reach the source of the concern, turning bioscience into formulations that outlast quick fixes.</p><p>Each formula is shaped through structured research, rigorous ingredient evaluation, and continuous testing and refinement — relevance over trends, performance over perception.</p>",
-        "image_position": "right",
+        "image_asset": "pruv-about-science.jpg",
+        "image_position": "left",
         "button_label": "",
         "button_link": "",
         "color_scheme": "scheme-2",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "process": {
@@ -85,14 +123,21 @@
           }
         }
       },
-      "block_order": ["step-1", "step-2", "step-3", "step-4", "step-5", "step-6"],
+      "block_order": [
+        "step-1",
+        "step-2",
+        "step-3",
+        "step-4",
+        "step-5",
+        "step-6"
+      ],
       "settings": {
         "eyebrow": "New Product Development",
         "heading": "Insight-led. <strong>Intentionally built.</strong>",
         "text": "<p>Every formula follows the same disciplined path from question to shelf.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "manufacturing": {
@@ -101,12 +146,13 @@
         "eyebrow": "Manufacturing Process",
         "heading": "Precision at <strong>every step.</strong>",
         "text": "<p>Our manufacturing process is built around control, consistency and quality. From sourcing and formulation to production and packaging, every stage follows strict checks to ensure safety, stability and performance.</p><p>Each batch is held to the same standard, so you get the same quality every time.</p>",
+        "image_asset": "pruv-about-manufacturing.jpg",
         "image_position": "right",
         "button_label": "",
         "button_link": "",
         "color_scheme": "scheme-2",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "team": {
@@ -115,40 +161,37 @@
         "member-1": {
           "type": "member",
           "settings": {
-            "name": "Founder Name",
+            "name": "Co-Founder",
             "role": "Co-Founder"
           }
         },
         "member-2": {
           "type": "member",
           "settings": {
-            "name": "Co-Founder Name",
+            "name": "Co-Founder",
             "role": "Co-Founder"
           }
         },
         "member-3": {
           "type": "member",
           "settings": {
-            "name": "Team Member",
-            "role": "Head of Formulation"
-          }
-        },
-        "member-4": {
-          "type": "member",
-          "settings": {
-            "name": "Team Member",
-            "role": "Creative Director"
+            "name": "Co-Founder",
+            "role": "Co-Founder"
           }
         }
       },
-      "block_order": ["member-1", "member-2", "member-3", "member-4"],
+      "block_order": [
+        "member-1",
+        "member-2",
+        "member-3"
+      ],
       "settings": {
         "eyebrow": "Our Team",
         "heading": "The ones who <strong>stand behind Prüv.</strong>",
         "text": "<p>A small, multidisciplinary team spanning research, formulation, design and operations — all working toward the same standard.</p>",
         "color_scheme": "scheme-1",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "timeline": {
@@ -157,48 +200,73 @@
         "milestone-1": {
           "type": "milestone",
           "settings": {
-            "year": "2019",
-            "label": "FEBRUARY",
-            "title": "The beginning",
-            "description": "It started in a kitchen with a homemade flaxseed hair gel. A simple experiment and a simple realisation: hair care could be more honest, more thoughtful, and grounded in what actually works."
+            "year": "01",
+            "label": "",
+            "title": "It Started With a Question",
+            "description": "Why should high-performance personal care be complicated, overpromised or disconnected from the conditions people actually live in?"
           }
         },
         "milestone-2": {
           "type": "milestone",
           "settings": {
-            "year": "2022",
-            "label": "MARCH",
-            "title": "From one solution to many",
-            "description": "A defining moment when we received funding on Shark Tank India, strengthening our belief in science-led hair care for a wider audience and solidifying our resolve to raise the standard."
+            "year": "02",
+            "label": "",
+            "title": "We Chose to Build Differently",
+            "description": "Prüv was created around a simple idea: combine credible science, purposeful formulation and elevated design — without relying on exaggerated claims or unnecessary complexity."
           }
         },
         "milestone-3": {
           "type": "milestone",
           "settings": {
-            "year": "2024",
-            "label": "JANUARY",
-            "title": "Scaling with intent",
-            "description": "Formulated specifically for Indian hard water and humid climates, expanding rituals across scalp health and bond repair with rigorous clinical testing."
+            "year": "03",
+            "label": "",
+            "title": "We Focused on the Real Environment",
+            "description": "Hard water. Pollution. Scalp imbalance. Hair fall. Breakage. We began by looking at the everyday factors that affect how hair actually behaves, rather than treating every concern in isolation."
           }
         },
         "milestone-4": {
           "type": "milestone",
           "settings": {
-            "year": "2026",
-            "label": "FUTURE",
-            "title": "Advancing further",
-            "description": "Continuing our relentless pursuit: real science, uncompromising efficacy, and intentional care tailored for every strand of Indian hair."
+            "year": "04",
+            "label": "",
+            "title": "The System Took Shape",
+            "description": "From that thinking came our first haircare system: RESET · SUPPORT · REPAIR — three focused steps designed to cleanse the environment, support the root and restore the fibre."
+          }
+        },
+        "milestone-5": {
+          "type": "milestone",
+          "settings": {
+            "year": "05",
+            "label": "",
+            "title": "Every Detail Was Refined",
+            "description": "Formulations, actives, textures, packaging and claims were repeatedly reviewed with one standard in mind: every ingredient should have a role, and every product should justify its place in the routine."
+          }
+        },
+        "milestone-6": {
+          "type": "milestone",
+          "settings": {
+            "year": "06",
+            "label": "",
+            "title": "This Is Only the Beginning",
+            "description": "Prüv begins with hair and scalp, but the ambition is broader: to build a globally relevant Indian personal-care brand for hair, skin and appearance — grounded in science, performance and modern design."
           }
         }
       },
-      "block_order": ["milestone-1", "milestone-2", "milestone-3", "milestone-4"],
+      "block_order": [
+        "milestone-1",
+        "milestone-2",
+        "milestone-3",
+        "milestone-4",
+        "milestone-5",
+        "milestone-6"
+      ],
       "settings": {
-        "eyebrow": "The Journey So Far",
-        "heading": "Shaped by curiosity and <strong>commitment to better hair.</strong>",
-        "text": "",
+        "eyebrow": "Built with Intent. From Question to System",
+        "heading": "Shaped by curiosity and <strong>commitment to performance beyond doubt.</strong>",
+        "text": "<p>Beyond doubt. Built to Prüv.</p>",
         "color_scheme": "scheme-2",
-        "padding_top": 72,
-        "padding_bottom": 72
+        "padding_top": 80,
+        "padding_bottom": 88
       }
     }
   },

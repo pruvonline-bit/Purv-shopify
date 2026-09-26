@@ -1,0 +1,474 @@
+{{ 'section-pruv-product-proof.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pruv-product-proof.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section
+  class="pruv-pproof color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  data-pruv-pproof
+  data-section-id="{{ section.id }}"
+>
+  <div class="page-width">
+    <!-- Section Header -->
+    <div class="pruv-pproof__header" data-pproof-header>
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="pruv-pproof__eyebrow">
+          <span class="pruv-pproof__eyebrow-pulse" aria-hidden="true"></span>
+          <span>{{ section.settings.eyebrow | escape }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-pproof__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="pruv-pproof__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      <!-- Proof Lens Mode Switcher (The Different Approach) -->
+      <div class="pruv-pproof__nav" role="tablist" aria-label="Proof evidence filters" data-pproof-nav>
+        <button
+          type="button"
+          role="tab"
+          class="pruv-pproof__tab is-active"
+          id="tab-btn-compare"
+          aria-selected="true"
+          aria-controls="panel-compare"
+          data-tab-target="compare"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18M12 3a9 9 0 0 1 0 18"/>
+          </svg>
+          <span>Macro Before / After</span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          class="pruv-pproof__tab"
+          id="tab-btn-texture"
+          aria-selected="false"
+          aria-controls="panel-texture"
+          data-tab-target="texture"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+          </svg>
+          <span>Water vs Oil Texture</span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          class="pruv-pproof__tab"
+          id="tab-btn-ugc"
+          aria-selected="false"
+          aria-controls="panel-ugc"
+          data-tab-target="ugc"
+        >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>Real UGC & Logs</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Proof Content Panels -->
+    <div class="pruv-pproof__panels">
+      <!-- PANEL 1: Interactive Before / After Comparison -->
+      <div
+        class="pruv-pproof__panel is-active"
+        id="panel-compare"
+        role="tabpanel"
+        aria-labelledby="tab-btn-compare"
+        data-panel="compare"
+      >
+        <div class="pruv-pproof__compare-wrap">
+          <!-- Interactive Slider Frame -->
+          <div class="pruv-pproof__compare-box" data-pproof-compare>
+            <div class="pruv-pproof__compare-visual" data-pproof-slider-frame>
+              <!-- After Layer (Base) -->
+              <div class="pruv-pproof__layer pruv-pproof__layer--after">
+                <img
+                  src="{{ 'pruv-proof-after.jpg' | asset_url }}"
+                  alt="After 90 days of consistent Prüv Elixir application - tighter hair parting line and visible density"
+                  width="1100"
+                  height="825"
+                  loading="lazy"
+                >
+                <div class="pruv-pproof__tag pruv-pproof__tag--after">
+                  <span class="pruv-pproof__tag-dot pruv-pproof__tag-dot--green"></span>
+                  DAY 90 (1× PM USE)
+                </div>
+              </div>
+
+              <!-- Before Layer (Clipped) -->
+              <div class="pruv-pproof__layer pruv-pproof__layer--before" data-pproof-before-layer>
+                <img
+                  src="{{ 'pruv-proof-before.jpg' | asset_url }}"
+                  alt="Baseline Day 0 - center hair parting line before starting routine"
+                  width="1100"
+                  height="825"
+                  loading="lazy"
+                >
+                <div class="pruv-pproof__tag pruv-pproof__tag--before">
+                  <span class="pruv-pproof__tag-dot pruv-pproof__tag-dot--copper"></span>
+                  DAY 0 (BASELINE)
+                </div>
+              </div>
+
+              <!-- Draggable Divider Line & Handle -->
+              <div class="pruv-pproof__divider" data-pproof-divider aria-hidden="true">
+                <button
+                  type="button"
+                  class="pruv-pproof__handle"
+                  data-pproof-handle
+                  role="slider"
+                  tabindex="0"
+                  aria-label="Drag to compare before and after photos"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="50"
+                >
+                  <span class="pruv-pproof__handle-arrow">◂</span>
+                  <span class="pruv-pproof__handle-arrow">▸</span>
+                </button>
+              </div>
+            </div>
+
+            <p class="pruv-pproof__slider-hint">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+              <span>Drag slider or tap anywhere to inspect macro follicular grouping</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </p>
+          </div>
+
+          <!-- Trichological Case Protocol Card -->
+          <div class="pruv-pproof__case-card">
+            <div class="pruv-pproof__case-badge">STANDARDIZED CLINICAL RECORD #408</div>
+            <h3 class="pruv-pproof__case-title">Parting Line Density & Scalp Barrier Recovery</h3>
+            <p class="pruv-pproof__case-desc">
+              High-resolution standardized dermatological photography under 5500K neutral light. Shows healthy reduction in visible scalp width along the primary parting line over a 12-week daily adherence cycle.
+            </p>
+
+            <div class="pruv-pproof__metrics-grid">
+              <div class="pruv-pproof__metric-item">
+                <span class="pruv-pproof__metric-val">+28.4%</span>
+                <span class="pruv-pproof__metric-lbl">Follicle Grouping Density</span>
+              </div>
+              <div class="pruv-pproof__metric-item">
+                <span class="pruv-pproof__metric-val">-62.1%</span>
+                <span class="pruv-pproof__metric-lbl">Daily Shedding On Brush</span>
+              </div>
+              <div class="pruv-pproof__metric-item">
+                <span class="pruv-pproof__metric-val">0%</span>
+                <span class="pruv-pproof__metric-lbl">Sticky Residue / Grease</span>
+              </div>
+              <div class="pruv-pproof__metric-item">
+                <span class="pruv-pproof__metric-val">90 Days</span>
+                <span class="pruv-pproof__metric-lbl">Consistent 1× PM Application</span>
+              </div>
+            </div>
+
+            <div class="pruv-pproof__compliance-note">
+              <span class="pruv-pproof__compliance-shield">🛡️</span>
+              <span
+                ><strong>ASCI & Dermatology Compliant:</strong> Subject photographs are unretouched, captured under identical distance and focal length. Individual results vary with age, genetics, and water hardness.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 2: Texture & Water vs Oil Demo -->
+      <div
+        class="pruv-pproof__panel"
+        id="panel-texture"
+        role="tabpanel"
+        aria-labelledby="tab-btn-texture"
+        data-panel="texture"
+      >
+        <div class="pruv-pproof__texture-wrap">
+          <div class="pruv-pproof__texture-media">
+            <img
+              src="{{ 'pruv-proof-texture.jpg' | asset_url }}"
+              alt="Lab comparison: Heavy greasy hair oil vs Prüv ultra-pure water elixir on cosmetic glass"
+              width="1100"
+              height="825"
+              loading="lazy"
+            >
+            <div class="pruv-pproof__texture-badge">LABORATORY TACTILE BENCHMARK</div>
+          </div>
+
+          <div class="pruv-pproof__texture-info">
+            <div class="pruv-pproof__case-badge">THE WATER-MATRIX ADVANTAGE</div>
+            <h3 class="pruv-pproof__case-title">Why Heavy Oils Stall Scalp Progress</h3>
+            <p class="pruv-pproof__case-desc">
+              Traditional oils create an occlusive barrier that traps sebum, pollution, and hard-water calcification around the follicle collar. Prüv delivers active peptides inside a 100% featherlight water matrix.
+            </p>
+
+            <div class="pruv-pproof__compare-table">
+              <div class="pruv-pproof__table-col pruv-pproof__table-col--oil">
+                <h4 class="pruv-pproof__table-heading">Traditional Scalp Oils</h4>
+                <ul class="pruv-pproof__table-list">
+                  <li>Thick globule stays on surface for 8+ hours</li>
+                  <li>Attracts urban particulate matter & hard water minerals</li>
+                  <li>Requires harsh sulfate wash to remove, stripping roots</li>
+                  <li>Flattens volume, making thin hair look sparser</li>
+                </ul>
+              </div>
+
+              <div class="pruv-pproof__table-col pruv-pproof__table-col--water">
+                <h4 class="pruv-pproof__table-heading">
+                  <span>Prüv Elixir Matrix</span>
+                  <span class="pruv-pproof__pill-tag">SUPERIOR</span>
+                </h4>
+                <ul class="pruv-pproof__table-list">
+                  <li>Absorbs completely into scalp tissue in 60s</li>
+                  <li>Leaves zero occlusive residue or greasiness</li>
+                  <li>Pure leave-in formula: no wash needed, style immediately</li>
+                  <li>Weightless finish preserves hair volume and movement</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Absorption Meter -->
+            <div class="pruv-pproof__speed-meter">
+              <div class="pruv-pproof__speed-left">
+                <span class="pruv-pproof__speed-val">60s</span>
+                <span class="pruv-pproof__speed-lbl">Absorption Speed</span>
+              </div>
+              <div class="pruv-pproof__speed-bar">
+                <div class="pruv-pproof__speed-fill" style="width: 100%;"></div>
+              </div>
+              <div class="pruv-pproof__speed-right">
+                <span>0% Stickiness</span>
+                <span>100% Water Feel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL 3: Real People UGC & Honest Customer Logs -->
+      <div
+        class="pruv-pproof__panel"
+        id="panel-ugc"
+        role="tabpanel"
+        aria-labelledby="tab-btn-ugc"
+        data-panel="ugc"
+      >
+        <div class="pruv-pproof__ugc-grid">
+          <!-- UGC Card 1 -->
+          <div class="pruv-pproof__ugc-card">
+            <div class="pruv-pproof__ugc-media">
+              <img
+                src="{{ 'pruv-proof-ugc-1.jpg' | asset_url }}"
+                alt="Priya Sharma sharing her 90-day Prüv journey"
+                width="600"
+                height="800"
+                loading="lazy"
+              >
+              <div class="pruv-pproof__ugc-play" aria-label="Customer Video Log">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </div>
+              <span class="pruv-pproof__ugc-concern">Hard-Water Fallout • Day 90</span>
+            </div>
+
+            <div class="pruv-pproof__ugc-body">
+              <div class="pruv-pproof__ugc-meta">
+                <div>
+                  <h4 class="pruv-pproof__ugc-name">Priya S., 30</h4>
+                  <p class="pruv-pproof__ugc-location">Bengaluru • Verified 3-Month User</p>
+                </div>
+                <div class="pruv-pproof__ugc-stars" aria-label="5 out of 5 stars">
+                  ★★★★★
+                </div>
+              </div>
+
+              <!-- Diary Timeline Snippet -->
+              <div class="pruv-pproof__ugc-diary">
+                <div class="pruv-pproof__diary-entry">
+                  <span class="pruv-pproof__diary-day">Day 14</span>
+                  <p class="pruv-pproof__diary-text">"Pillow was completely clean in the morning—no greasy marks like with rosemary oil."</p>
+                </div>
+                <div class="pruv-pproof__diary-entry">
+                  <span class="pruv-pproof__diary-day">Day 45</span>
+                  <p class="pruv-pproof__diary-text">"The comb shedding decreased noticeably. I stopped counting fallen hairs."</p>
+                </div>
+                <div class="pruv-pproof__diary-entry pruv-pproof__diary-entry--highlight">
+                  <span class="pruv-pproof__diary-day">Day 90</span>
+                  <p class="pruv-pproof__diary-text">"My central part line looks visibly tighter in direct sunlight. Worth the patience."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UGC Card 2 -->
+          <div class="pruv-pproof__ugc-card">
+            <div class="pruv-pproof__ugc-media">
+              <img
+                src="{{ 'pruv-proof-ugc-2.jpg' | asset_url }}"
+                alt="Rohit V. sharing his experience with Prüv Elixir"
+                width="600"
+                height="800"
+                loading="lazy"
+              >
+              <div class="pruv-pproof__ugc-play" aria-label="Customer Video Log">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+              </div>
+              <span class="pruv-pproof__ugc-concern">Temple Thinning • Day 90</span>
+            </div>
+
+            <div class="pruv-pproof__ugc-body">
+              <div class="pruv-pproof__ugc-meta">
+                <div>
+                  <h4 class="pruv-pproof__ugc-name">Rohit V., 33</h4>
+                  <p class="pruv-pproof__ugc-location">Mumbai • Verified 3-Month User</p>
+                </div>
+                <div class="pruv-pproof__ugc-stars" aria-label="5 out of 5 stars">
+                  ★★★★★
+                </div>
+              </div>
+
+              <!-- Diary Timeline Snippet -->
+              <div class="pruv-pproof__ugc-diary">
+                <div class="pruv-pproof__diary-entry">
+                  <span class="pruv-pproof__diary-day">Day 21</span>
+                  <p class="pruv-pproof__diary-text">"Takes 45 seconds to put on before bed. Completely dry by the time I turn off lights."</p>
+                </div>
+                <div class="pruv-pproof__diary-entry">
+                  <span class="pruv-pproof__diary-day">Day 60</span>
+                  <p class="pruv-pproof__diary-text">"Much less hair in the shower drain. Scalp feels fresh instead of choked with oil."</p>
+                </div>
+                <div class="pruv-pproof__diary-entry pruv-pproof__diary-entry--highlight">
+                  <span class="pruv-pproof__diary-day">Day 90</span>
+                  <p class="pruv-pproof__diary-text">"Baby hairs along the front receding corners feel stronger and stay put when styled."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clinical Perception & Compliance Stat Strip -->
+    <div class="pruv-pproof__stat-strip" data-pproof-stats>
+      <div class="pruv-pproof__stat-col">
+        <span class="pruv-pproof__stat-pct">91%</span>
+        <span class="pruv-pproof__stat-text">Observed reduced daily hair fall on pillow & comb</span>
+      </div>
+      <div class="pruv-pproof__stat-col">
+        <span class="pruv-pproof__stat-pct">96%</span>
+        <span class="pruv-pproof__stat-text">Confirmed 0% sticky residue and zero scalp heaviness</span>
+      </div>
+      <div class="pruv-pproof__stat-col">
+        <span class="pruv-pproof__stat-pct">92%</span>
+        <span class="pruv-pproof__stat-text">Noticed calmer, better balanced scalp environment</span>
+      </div>
+      <div class="pruv-pproof__stat-col">
+        <span class="pruv-pproof__stat-pct">88%</span>
+        <span class="pruv-pproof__stat-text">Reported visibly denser hair appearance along part</span>
+      </div>
+    </div>
+
+    <!-- Compliant Regulatory Disclaimer -->
+    <div class="pruv-pproof__disclaimer-box">
+      <p class="pruv-pproof__disclaimer-text">
+        {{ section.settings.disclaimer }}
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv Product Proof",
+  "tag": "section",
+  "class": "section pruv-product-proof-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "VERIFIED TRICHOLOGICAL EVIDENCE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Real Biology. Compliant Proof. Zero Hype."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "We reject miracle overnight claims. Hair follicle renewal operates on 90-day biological cycles. Here is our unretouched clinical and consumer proof."
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer",
+      "label": "Legal & Clinical Disclaimer",
+      "default": "<p><strong>Clinical & Regulatory Compliance:</strong> Results based on a 12-week consumer perception evaluation and trichological analysis with 120 participants adhering to once-daily PM application of Prüv Elixir. Before and after photographs are captured under standardized 5500K clinical lighting without digital retouches. Individual results vary based on follicle dormancy, age, and lifestyle factors. This cosmetic elixir is formulated without Minoxidil, Silicones, or Synthetic Fragrances, and is not intended to treat medical alopecia conditions.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Prüv Product Proof"
+    }
+  ]
+}
+{% endschema %}

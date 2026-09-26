@@ -27,8 +27,8 @@
 
   {%- style -%}
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+      padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
     }
 
     @media screen and (min-width: 750px) {
@@ -719,6 +719,8 @@
                   {% render 'pruv-pdp-faqs', block: block, product: product %}
                 {%- when 'bundle_upsell' -%}
                   {% render 'pruv-bundle-upsell', block: block, product: product, section_id: section.id %}
+                {%- when 'risk_reduction' -%}
+                  {% render 'pruv-risk-reduction', block: block, section_id: section.id %}
               {%- endcase -%}
             {%- endfor -%}
             <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -937,6 +939,61 @@
           "id": "button_label",
           "label": "Button label",
           "default": "Add Bundle"
+        }
+      ]
+    },
+    {
+      "type": "risk_reduction",
+      "name": "Risk reduction strip",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_1_title",
+          "label": "Badge 1 Title",
+          "default": "Patch Test First"
+        },
+        {
+          "type": "text",
+          "id": "badge_1_sub",
+          "label": "Badge 1 Subtext",
+          "default": "24h behind-ear protocol"
+        },
+        {
+          "type": "text",
+          "id": "badge_2_title",
+          "label": "Badge 2 Title",
+          "default": "48h Replacements"
+        },
+        {
+          "type": "text",
+          "id": "badge_2_sub",
+          "label": "Badge 2 Subtext",
+          "default": "Transit damage & defect cover"
+        },
+        {
+          "type": "text",
+          "id": "badge_3_title",
+          "label": "Badge 3 Title",
+          "default": "Zero Dread Shed"
+        },
+        {
+          "type": "text",
+          "id": "badge_3_sub",
+          "label": "Badge 3 Subtext",
+          "default": "0% Minoxidil & Silicones"
+        },
+        {
+          "type": "text",
+          "id": "badge_4_title",
+          "label": "Badge 4 Title",
+          "default": "90-Day Assurance"
+        },
+        {
+          "type": "text",
+          "id": "badge_4_sub",
+          "label": "Badge 4 Subtext",
+          "default": "Trichology care support"
         }
       ]
     },

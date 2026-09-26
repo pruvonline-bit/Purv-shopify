@@ -3,8 +3,8 @@
 
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-top: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px;
   }
 
   @media screen and (min-width: 750px) {
@@ -173,7 +173,18 @@
       <!-- 3 Phase Cards Grid -->
       <div class="pruv-outcome__timeline-cards">
         <!-- Phase 1 -->
-        <div class="pruv-outcome__phase-card is-active" data-phase-card="0">
+        <div class="pruv-outcome__phase-card is-active" data-phase-card="0" data-water-fill="33">
+          <div class="pruv-outcome__water-wrap" aria-hidden="true">
+            <div class="pruv-outcome__water-level">
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--back"></div>
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--front"></div>
+              <div class="pruv-outcome__water-body">
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--1"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--2"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--3"></span>
+              </div>
+            </div>
+          </div>
           <div class="pruv-outcome__phase-top">
             <span class="pruv-outcome__phase-badge">PHASE 01 • WEEKS 1–4</span>
             <span class="pruv-outcome__phase-tag">DAYS 1–30</span>
@@ -190,7 +201,18 @@
         </div>
 
         <!-- Phase 2 -->
-        <div class="pruv-outcome__phase-card" data-phase-card="1">
+        <div class="pruv-outcome__phase-card" data-phase-card="1" data-water-fill="66">
+          <div class="pruv-outcome__water-wrap" aria-hidden="true">
+            <div class="pruv-outcome__water-level">
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--back"></div>
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--front"></div>
+              <div class="pruv-outcome__water-body">
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--1"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--2"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--3"></span>
+              </div>
+            </div>
+          </div>
           <div class="pruv-outcome__phase-top">
             <span class="pruv-outcome__phase-badge">PHASE 02 • WEEKS 5–8</span>
             <span class="pruv-outcome__phase-tag">DAYS 31–60</span>
@@ -207,7 +229,18 @@
         </div>
 
         <!-- Phase 3 -->
-        <div class="pruv-outcome__phase-card" data-phase-card="2">
+        <div class="pruv-outcome__phase-card" data-phase-card="2" data-water-fill="100">
+          <div class="pruv-outcome__water-wrap" aria-hidden="true">
+            <div class="pruv-outcome__water-level">
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--back"></div>
+              <div class="pruv-outcome__water-wave pruv-outcome__water-wave--front"></div>
+              <div class="pruv-outcome__water-body">
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--1"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--2"></span>
+                <span class="pruv-outcome__water-bubble pruv-outcome__water-bubble--3"></span>
+              </div>
+            </div>
+          </div>
           <div class="pruv-outcome__phase-top">
             <span class="pruv-outcome__phase-badge">PHASE 03 • WEEKS 9–12</span>
             <span class="pruv-outcome__phase-tag">DAYS 61–90+</span>

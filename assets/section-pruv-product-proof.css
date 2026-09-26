@@ -1,0 +1,1022 @@
+/* ==========================================================================
+   Prüv Product Proof — Trichological Evidence, Texture Demo & UGC Hub
+   ========================================================================== */
+
+.pruv-pproof {
+  position: relative;
+  isolation: isolate;
+  background-color: #FAF6F0;
+  overflow: hidden;
+}
+
+/* Background Subtle Ambience Glow */
+.pruv-pproof::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 115, 51, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.pruv-pproof .page-width {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Section Header
+   ========================================================================== */
+.pruv-pproof__header {
+  text-align: center;
+  max-width: 68ch;
+  margin: 0 auto 3.6rem;
+}
+
+.pruv-pproof__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B87333;
+  background: rgba(184, 115, 51, 0.08);
+  border: 1px solid rgba(184, 115, 51, 0.22);
+  padding: 0.4rem 1.2rem;
+  border-radius: 100px;
+  margin-bottom: 1.4rem;
+}
+
+.pruv-pproof__eyebrow-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #B87333;
+  box-shadow: 0 0 8px #B87333;
+  animation: pruvProofPulse 2s infinite ease-in-out;
+}
+
+@keyframes pruvProofPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 0.4;
+  }
+}
+
+.pruv-pproof__heading {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.6rem, 3.5vw, 3.8rem);
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.2rem;
+}
+
+.pruv-pproof__subheading {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #8A8175;
+  margin: 0 0 2.2rem;
+}
+
+/* ==========================================================================
+   Proof Lens Mode Switcher (Tabs)
+   ========================================================================== */
+.pruv-pproof__nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #ffffff;
+  padding: 0.5rem;
+  border-radius: 100px;
+  border: 1px solid rgba(138, 129, 117, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  max-width: 100%;
+  overflow-x: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.pruv-pproof__nav::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.pruv-pproof__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: transparent;
+  border: none;
+  border-radius: 100px;
+  padding: 0.8rem 1.6rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #8A8175;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+.pruv-pproof__tab svg {
+  color: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.pruv-pproof__tab:hover {
+  color: #1B1D1F;
+}
+
+.pruv-pproof__tab.is-active {
+  background: #1B1D1F;
+  color: #F5F2EC;
+  box-shadow: 0 4px 12px rgba(27, 29, 31, 0.2);
+}
+
+.pruv-pproof__tab.is-active svg {
+  color: #B87333;
+}
+
+/* ==========================================================================
+   Panels Container & Transition
+   ========================================================================== */
+.pruv-pproof__panels {
+  position: relative;
+}
+
+.pruv-pproof__panel {
+  display: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.pruv-pproof__panel.is-active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   PANEL 1: Before / After Comparison Slider Frame
+   ========================================================================== */
+.pruv-pproof__compare-wrap {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.pruv-pproof__compare-box {
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  padding: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.pruv-pproof__compare-visual {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1.4rem;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  cursor: ew-resize;
+  background-color: #1B1D1F;
+}
+
+.pruv-pproof__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.pruv-pproof__layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pruv-pproof__layer--before {
+  z-index: 2;
+  clip-path: polygon(0 0, var(--slider-pos, 50%) 0, var(--slider-pos, 50%) 100%, 0 100%);
+}
+
+.pruv-pproof__tag {
+  position: absolute;
+  top: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: rgba(27, 29, 31, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.pruv-pproof__tag--before {
+  left: 1.4rem;
+}
+
+.pruv-pproof__tag--after {
+  right: 1.4rem;
+}
+
+.pruv-pproof__tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pruv-pproof__tag-dot--copper {
+  background-color: #B87333;
+  box-shadow: 0 0 6px #B87333;
+}
+
+.pruv-pproof__tag-dot--green {
+  background-color: #4CAF50;
+  box-shadow: 0 0 6px #4CAF50;
+}
+
+/* Draggable Divider & Grip Handle */
+.pruv-pproof__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--slider-pos, 50%);
+  width: 2px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.pruv-pproof__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background: #1B1D1F;
+  border: 2px solid #B87333;
+  color: #FAF6F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35), 0 0 0 4px rgba(184, 115, 51, 0.2);
+  cursor: ew-resize;
+  pointer-events: auto;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.pruv-pproof__handle:hover,
+.pruv-pproof__handle:focus-visible {
+  transform: translate(-50%, -50%) scale(1.1);
+  background-color: #B87333;
+  color: #ffffff;
+  outline: none;
+}
+
+.pruv-pproof__slider-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  color: #8A8175;
+  margin: 1.1rem 0 0.3rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Trichological Case Protocol Card
+   ========================================================================== */
+.pruv-pproof__case-card {
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  padding: 2.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.pruv-pproof__case-badge {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #B87333;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.pruv-pproof__case-title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+}
+
+.pruv-pproof__case-desc {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #8A8175;
+  margin: 0 0 2rem;
+}
+
+.pruv-pproof__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.pruv-pproof__metric-item {
+  background: #FAF6F0;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+  border-radius: 1.2rem;
+  padding: 1.2rem;
+}
+
+.pruv-pproof__metric-val {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.pruv-pproof__metric-lbl {
+  display: block;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #8A8175;
+  line-height: 1.3;
+}
+
+.pruv-pproof__compliance-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  background: rgba(184, 115, 51, 0.06);
+  border: 1px solid rgba(184, 115, 51, 0.18);
+  border-radius: 1.2rem;
+  padding: 1.1rem 1.3rem;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: #8A8175;
+}
+
+.pruv-pproof__compliance-shield {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.pruv-pproof__compliance-note strong {
+  color: #1B1D1F;
+}
+
+/* ==========================================================================
+   PANEL 2: Texture & Water vs Oil Demo
+   ========================================================================== */
+.pruv-pproof__texture-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem;
+  align-items: center;
+}
+
+.pruv-pproof__texture-media {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  padding: 1.2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.pruv-pproof__texture-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 1.4rem;
+  display: block;
+}
+
+.pruv-pproof__texture-badge {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 2.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(27, 29, 31, 0.8);
+  backdrop-filter: blur(8px);
+  color: #FAF6F0;
+  padding: 0.35rem 0.9rem;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pruv-pproof__texture-info {
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  padding: 2.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.pruv-pproof__compare-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.pruv-pproof__table-col {
+  padding: 1.4rem;
+  border-radius: 1.4rem;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+}
+
+.pruv-pproof__table-col--oil {
+  background: #FAF6F0;
+}
+
+.pruv-pproof__table-col--water {
+  background: rgba(184, 115, 51, 0.08);
+  border-color: #B87333;
+}
+
+.pruv-pproof__table-heading {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pruv-pproof__pill-tag {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #B87333;
+  background: rgba(184, 115, 51, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
+.pruv-pproof__table-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pruv-pproof__table-list li {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #8A8175;
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.pruv-pproof__table-list li:last-child {
+  margin-bottom: 0;
+}
+
+.pruv-pproof__table-col--oil .pruv-pproof__table-list li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  color: #e53935;
+  font-weight: bold;
+}
+
+.pruv-pproof__table-col--water .pruv-pproof__table-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #B87333;
+  font-weight: bold;
+}
+
+.pruv-pproof__speed-meter {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  background: #FAF6F0;
+  border: 1px solid rgba(138, 129, 117, 0.14);
+  border-radius: 1.4rem;
+  padding: 1.2rem 1.6rem;
+}
+
+.pruv-pproof__speed-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.pruv-pproof__speed-val {
+  font-family: 'Geist Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  line-height: 1;
+}
+
+.pruv-pproof__speed-lbl {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.1rem;
+  color: #8A8175;
+}
+
+.pruv-pproof__speed-bar {
+  flex: 1 1 auto;
+  height: 8px;
+  background: rgba(138, 129, 117, 0.16);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.pruv-pproof__speed-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #D4AF37 0%, #B87333 100%);
+  border-radius: 100px;
+}
+
+.pruv-pproof__speed-right {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.05rem;
+  color: #B87333;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* ==========================================================================
+   PANEL 3: Real People UGC & Honest Customer Logs
+   ========================================================================== */
+.pruv-pproof__ugc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
+}
+
+.pruv-pproof__ugc-card {
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pruv-pproof__ugc-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+}
+
+.pruv-pproof__ugc-media {
+  position: relative;
+  background: #1B1D1F;
+}
+
+.pruv-pproof__ugc-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pruv-pproof__ugc-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background: rgba(27, 29, 31, 0.7);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.pruv-pproof__ugc-play:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+  background-color: #B87333;
+}
+
+.pruv-pproof__ugc-concern {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.2rem;
+  right: 1.2rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: rgba(27, 29, 31, 0.75);
+  backdrop-filter: blur(6px);
+  color: #FAF6F0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.8rem;
+  text-align: center;
+}
+
+.pruv-pproof__ugc-body {
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pruv-pproof__ugc-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+}
+
+.pruv-pproof__ugc-name {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1B1D1F;
+  margin: 0 0 0.2rem;
+}
+
+.pruv-pproof__ugc-location {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  color: #8A8175;
+  margin: 0;
+}
+
+.pruv-pproof__ugc-stars {
+  color: #D4AF37;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+.pruv-pproof__ugc-diary {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.pruv-pproof__diary-entry {
+  padding: 0.9rem 1.1rem;
+  background: #FAF6F0;
+  border: 1px solid rgba(138, 129, 117, 0.12);
+  border-radius: 1.1rem;
+}
+
+.pruv-pproof__diary-entry--highlight {
+  background: rgba(184, 115, 51, 0.08);
+  border-color: rgba(184, 115, 51, 0.35);
+}
+
+.pruv-pproof__diary-day {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #B87333;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+}
+
+.pruv-pproof__diary-text {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: #1B1D1F;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Clinical Perception & Compliance Stat Strip
+   ========================================================================== */
+.pruv-pproof__stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  background: #ffffff;
+  border: 1px solid rgba(138, 129, 117, 0.16);
+  border-radius: 2rem;
+  padding: 2.4rem;
+  margin-top: 3.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.pruv-pproof__stat-col {
+  text-align: center;
+  padding: 0 1rem;
+  position: relative;
+}
+
+.pruv-pproof__stat-col:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: rgba(138, 129, 117, 0.16);
+}
+
+.pruv-pproof__stat-pct {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: clamp(3rem, 4vw, 4.4rem);
+  font-weight: 700;
+  color: #B87333;
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.pruv-pproof__stat-text {
+  display: block;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: #8A8175;
+}
+
+/* ==========================================================================
+   Compliant Regulatory Disclaimer Box
+   ========================================================================== */
+.pruv-pproof__disclaimer-box {
+  margin-top: 2rem;
+  padding: 1.4rem 2rem;
+  background: rgba(138, 129, 117, 0.06);
+  border-radius: 1.4rem;
+  border: 1px solid rgba(138, 129, 117, 0.12);
+}
+
+.pruv-pproof__disclaimer-text {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #8A8175;
+  margin: 0;
+  text-align: center;
+}
+
+.pruv-pproof__disclaimer-text strong {
+  color: #1B1D1F;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media screen and (max-width: 990px) {
+  .pruv-pproof__compare-wrap,
+  .pruv-pproof__texture-wrap {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .pruv-pproof__ugc-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .pruv-pproof__stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2rem;
+  }
+
+  .pruv-pproof__stat-col:nth-child(2)::after {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-pproof__header {
+    margin-bottom: 1.8rem;
+  }
+
+  .pruv-pproof__heading {
+    font-size: 2.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .pruv-pproof__subheading {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    margin-bottom: 1.4rem;
+  }
+
+  .pruv-pproof__compare-box {
+    padding: 0.8rem;
+    border-radius: 1.3rem;
+  }
+
+  .pruv-pproof__case-card {
+    padding: 1.4rem 1.2rem;
+    border-radius: 1.3rem;
+  }
+
+  .pruv-pproof__case-title {
+    font-size: 1.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .pruv-pproof__case-desc {
+    font-size: 1.22rem;
+    line-height: 1.4;
+    margin-bottom: 1.4rem;
+  }
+
+  .pruv-pproof__metrics-grid {
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .pruv-pproof__metric-item {
+    padding: 0.9rem;
+    border-radius: 1rem;
+  }
+
+  .pruv-pproof__metric-val {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .pruv-pproof__metric-lbl {
+    font-size: 1.05rem;
+  }
+
+  .pruv-pproof__texture-media {
+    padding: 0.8rem;
+    border-radius: 1.3rem;
+  }
+
+  .pruv-pproof__texture-info {
+    padding: 1.4rem 1.2rem;
+    border-radius: 1.3rem;
+  }
+
+  .pruv-pproof__compare-table {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .pruv-pproof__table-col {
+    padding: 1.1rem;
+  }
+
+  .pruv-pproof__speed-meter {
+    padding: 1rem 1.2rem;
+    gap: 1rem;
+  }
+
+  .pruv-pproof__speed-val {
+    font-size: 1.6rem;
+  }
+
+  .pruv-pproof__ugc-card {
+    grid-template-columns: 1fr;
+    border-radius: 1.4rem;
+  }
+
+  .pruv-pproof__ugc-media {
+    height: 220px;
+  }
+
+  .pruv-pproof__ugc-body {
+    padding: 1.4rem 1.2rem;
+  }
+
+  .pruv-pproof__ugc-name {
+    font-size: 1.5rem;
+  }
+
+  .pruv-pproof__ugc-diary {
+    gap: 0.65rem;
+  }
+
+  .pruv-pproof__diary-entry {
+    padding: 0.75rem 0.9rem;
+  }
+
+  .pruv-pproof__stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1.4rem 1rem;
+    gap: 1.2rem 0.8rem;
+    border-radius: 1.4rem;
+    margin-top: 2rem;
+  }
+
+  .pruv-pproof__stat-col {
+    padding: 0 0.5rem;
+  }
+
+  .pruv-pproof__stat-col:not(:last-child)::after {
+    display: none;
+  }
+
+  .pruv-pproof__stat-pct {
+    font-size: 2.6rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .pruv-pproof__stat-text {
+    font-size: 1.1rem;
+    line-height: 1.35;
+  }
+
+  .pruv-pproof__disclaimer-box {
+    padding: 1rem 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .pruv-pproof__nav {
+    width: 100%;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pruv-pproof__nav::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .pruv-pproof__tab {
+    padding: 0.65rem 1.1rem;
+    font-size: 1.15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pruv-pproof__tab,
+  .pruv-pproof__handle,
+  .pruv-pproof__panel,
+  .pruv-pproof__eyebrow-pulse {
+    transition: none !important;
+    animation: none !important;
+  }
+}

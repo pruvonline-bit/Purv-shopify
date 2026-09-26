@@ -1,0 +1,116 @@
+{% doc %}
+  Risk Reduction Strip — visible below CTA / bundle upsell.
+  Compact trust signals covering Patch Test, Returns/Replacement, Safety Warnings & FAQs.
+  Clicking any badge smoothly scrolls to and opens the matching FAQ accordion tab.
+{% enddoc %}
+
+<div class="pruv-risk-strip" data-risk-strip {{ block.shopify_attributes }}>
+  <div class="pruv-risk-strip__grid">
+    <!-- Item 1: Patch Test -->
+    <button
+      type="button"
+      class="pruv-risk-strip__item"
+      data-target-tab="tab_patch_safety"
+      aria-label="View Patch Test and Safety Details"
+    >
+      <span class="pruv-risk-strip__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </span>
+      <span class="pruv-risk-strip__text">
+        <span class="pruv-risk-strip__title">{{ block.settings.badge_1_title | default: 'Patch Test First' }}</span>
+        <span class="pruv-risk-strip__sub">{{ block.settings.badge_1_sub | default: '24h behind-ear guide' }}</span>
+      </span>
+    </button>
+
+    <!-- Item 2: Returns / Replacements -->
+    <button
+      type="button"
+      class="pruv-risk-strip__item"
+      data-target-tab="tab_returns_policy"
+      aria-label="View Returns and Replacement Policy"
+    >
+      <span class="pruv-risk-strip__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      </span>
+      <span class="pruv-risk-strip__text">
+        <span class="pruv-risk-strip__title">{{ block.settings.badge_2_title | default: '48h Replacements' }}</span>
+        <span class="pruv-risk-strip__sub">{{ block.settings.badge_2_sub | default: 'Transit damage & defect cover' }}</span>
+      </span>
+    </button>
+
+    <!-- Item 3: Clean & Safe -->
+    <button
+      type="button"
+      class="pruv-risk-strip__item"
+      data-target-tab="tab_patch_safety"
+      aria-label="View Safety and Ingredients Warnings"
+    >
+      <span class="pruv-risk-strip__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+        </svg>
+      </span>
+      <span class="pruv-risk-strip__text">
+        <span class="pruv-risk-strip__title">{{ block.settings.badge_3_title | default: 'Zero Dread Shed' }}</span>
+        <span class="pruv-risk-strip__sub">{{ block.settings.badge_3_sub | default: '0% Minoxidil & Silicones' }}</span>
+      </span>
+    </button>
+
+    <!-- Item 4: FAQs & Assurance -->
+    <button
+      type="button"
+      class="pruv-risk-strip__item"
+      data-target-tab="tab_risk_faqs"
+      aria-label="View Risk Reduction FAQs"
+    >
+      <span class="pruv-risk-strip__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </span>
+      <span class="pruv-risk-strip__text">
+        <span class="pruv-risk-strip__title">{{ block.settings.badge_4_title | default: 'Usage FAQs' }}</span>
+        <span class="pruv-risk-strip__sub">{{ block.settings.badge_4_sub | default: 'Safety & routine clarity' }}</span>
+      </span>
+    </button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var strip = document.querySelector('[data-risk-strip]');
+    if (!strip) return;
+
+    strip.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-target-tab]');
+      if (!btn) return;
+      var targetTabKey = btn.getAttribute('data-target-tab');
+      if (!targetTabKey) return;
+
+      // Find the corresponding details accordion
+      var allDetails = document.querySelectorAll('.product__accordion details');
+      var matchedDetails = null;
+
+      allDetails.forEach(function (d) {
+        if (d.id && d.id.indexOf(targetTabKey) !== -1) {
+          matchedDetails = d;
+        }
+      });
+
+      if (matchedDetails) {
+        matchedDetails.open = true;
+        matchedDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  })();
+</script>

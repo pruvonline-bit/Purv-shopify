@@ -87,10 +87,10 @@
 
 /* Milestone Item */
 .pruv-timeline__item {
-  flex: 0 0 22rem;
-  width: 22rem;
-  max-width: 24rem;
-  min-width: 20rem;
+  flex: 0 0 28rem;
+  width: 28rem;
+  max-width: 32rem;
+  min-width: 25rem;
   scroll-snap-align: start;
   scroll-margin-left: max(5rem, calc((100vw - 120rem) / 2));
   scroll-margin-inline-start: max(5rem, calc((100vw - 120rem) / 2));
@@ -332,10 +332,10 @@
   }
 
   .pruv-timeline__item {
-    flex: 0 0 16.5rem;
-    width: 16.5rem;
-    max-width: 16.5rem;
-    min-width: 15rem;
+    flex: 0 0 22rem;
+    width: 22rem;
+    max-width: 24rem;
+    min-width: 20rem;
     scroll-margin-left: 2rem;
     scroll-margin-inline-start: 2rem;
   }

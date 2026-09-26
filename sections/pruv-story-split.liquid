@@ -19,19 +19,32 @@
   }
 {%- endstyle -%}
 
-<div class="pruv-story-split{% if section.settings.image == blank %} pruv-story-split--text-only{% else %} pruv-story-split--image-{{ section.settings.image_position }}{% endif %} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+<div class="pruv-story-split{% if section.settings.image == blank and section.settings.image_asset == blank %} pruv-story-split--text-only{% else %} pruv-story-split--image-{{ section.settings.image_position }}{% endif %} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
   <div class="pruv-story-split__row page-width">
-    {%- if section.settings.image != blank -%}
+    {%- if section.settings.image != blank or section.settings.image_asset != blank -%}
       <div class="pruv-story-split__media" data-animate="from-left">
-        {{
-          section.settings.image
-          | image_url: width: 1200
-          | image_tag:
-            loading: 'lazy',
-            widths: '400, 600, 900, 1200',
-            class: 'pruv-story-split__image',
-            alt: section.settings.image.alt | default: section.settings.heading | escape
-        }}
+        <div class="pruv-story-split__media-inner">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                widths: '400, 600, 900, 1200',
+                class: 'pruv-story-split__image',
+                alt: section.settings.image.alt | default: section.settings.heading | escape
+            }}
+          {%- elsif section.settings.image_asset != blank -%}
+            <img
+              src="{{ section.settings.image_asset | asset_url }}"
+              loading="lazy"
+              class="pruv-story-split__image"
+              alt="{{ section.settings.heading | escape }}"
+              width="1200"
+              height="900"
+            >
+          {%- endif -%}
+        </div>
       </div>
     {%- endif -%}
     <div class="pruv-story-split__content" data-animate="from-right">
@@ -89,6 +102,12 @@
       "id": "image",
       "label": "Image",
       "info": "Leave blank for a centered text-only block."
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme Asset Image",
+      "info": "Image filename in assets/ (e.g. pruv-about-founders.jpg) if no image is uploaded."
     },
     {
       "type": "select",
