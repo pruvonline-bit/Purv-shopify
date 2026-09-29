@@ -381,3 +381,64 @@ product-component.pruv-product-card-component {
     padding: 0.5rem 0.8rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   System Role Pills (RESET, SUPPORT, REPAIR)
+   -------------------------------------------------------------------------- */
+.pruv-card-role-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+}
+
+.pruv-role-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Geist Mono', monospace, inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  line-height: 1;
+}
+
+.pruv-role-pill__dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* RESET */
+.pruv-role-pill--reset {
+  background-color: rgba(45, 79, 84, 0.08);
+  border: 1px solid rgba(45, 79, 84, 0.28);
+  color: #244145;
+}
+.pruv-role-pill--reset .pruv-role-pill__dot {
+  background-color: #2D4F54;
+}
+
+/* SUPPORT */
+.pruv-role-pill--support {
+  background-color: rgba(184, 115, 51, 0.1);
+  border: 1px solid rgba(184, 115, 51, 0.35);
+  color: #8F521B;
+}
+.pruv-role-pill--support .pruv-role-pill__dot {
+  background-color: #B87333;
+}
+
+/* REPAIR */
+.pruv-role-pill--repair {
+  background-color: rgba(133, 72, 88, 0.09);
+  border: 1px solid rgba(133, 72, 88, 0.32);
+  color: #6B2E3E;
+}
+.pruv-role-pill--repair .pruv-role-pill__dot {
+  background-color: #8A3D51;
+}
+

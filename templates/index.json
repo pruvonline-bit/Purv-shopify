@@ -109,14 +109,14 @@
             "step_number": "1",
             "title": "RESET",
             "tagline": "Phase 01 · Scalp Detox & Demineralisation",
-            "description": "Precision cleansing treatment for hair exposed to hard water, urban pollution and scalp imbalance. Chelating agents help release mineral buildup, Salicylic Acid clears accumulated residue, and a targeted microbiome-support complex helps preserve scalp equilibrium. The result is hair that feels exceptionally clean, refined and weightless, with a smoother, healthier-looking finish.",
+            "description": "Your water may be making your hair feel rough. Precision cleansing engineered for hair exposed to hard water, urban pollution, and buildup. Decongests follicles and resets scalp equilibrium for hair that feels exceptionally clean and weightless.",
             "product_role": "Trishield Element Defense Shampoo",
             "key_actives": "Sodium Gluconate · Salicylic Acid · Inulin Complex · Lactococcus Ferment Lysate · Niacinamide",
             "video": "shopify://files/videos/Shampoo_cleaning_hair_animation_20260912151914.mp4",
             "media_file": "",
             "viz": "auto",
             "time_badge": "10s Read · 2x/week",
-            "button_label": "Explore Reset",
+            "button_label": "Shop Shampoo",
             "button_link": "shopify://collections/all"
           }
         },
@@ -125,15 +125,15 @@
           "settings": {
             "step_number": "2",
             "title": "SUPPORT",
-            "tagline": "Phase 02 · Support the follicle. Strengthen the cycle. Build visible density.",
-            "description": "Concentrated scalp treatment designed to support fuller, denser-looking hair by acting across multiple pathways linked to the hair growth cycle. A targeted complex of HairVive Pro®, Procapil®, Baicapil®, AnaGain® and Aminexil works alongside Copper Tripeptide, Caffeine and Niacinamide to support follicle activity, hair anchoring and scalp vitality. The result is a stronger environment for healthier-looking growth, improved density and visibly more resilient hair over time.",
-            "product_role": "VECTOR-5 Advanced Multi-Pathway Structural Density Serum",
+            "tagline": "Phase 02 · Support the Follicle. Build Visible Density.",
+            "description": "Fuller-looking hair starts at the scalp. Formulated for thinning appearance, low density confidence, and scalp uncertainty. Acts across multiple pathways with HairVive Pro®, Procapil®, Baicapil®, AnaGain®, and Aminexil to reinforce anchoring and support fuller growth.",
+            "product_role": "Vector-5 Advance Multi Pathway Structural Density Serum",
             "key_actives": "HairVive Pro® (3%) · Procapil® (3%) · Baicapil® (3%) · AnaGain® (2%) · Aminexil (1.5%)",
             "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
             "media_file": "",
             "viz": "auto",
             "time_badge": "10s Read · Daily",
-            "button_label": "Explore Support",
+            "button_label": "Shop Serum",
             "button_link": "shopify://collections/all"
           }
         },
@@ -142,15 +142,15 @@
           "settings": {
             "step_number": "3",
             "title": "REPAIR",
-            "tagline": "Phase 03 · Reinforce the fiber. Restore its integrity.",
-            "description": "A concentrated blend of Ceramides, Hydrolyzed Keratin and Silk Proteins helps replenish structural support, while Shea Butter, Argan Oil and Panthenol restore softness and flexibility. Amodimethicone and conditioning polymers smooth the cuticle and help protect compromised lengths, leaving hair stronger, more resilient and visibly refined.",
-            "product_role": "Breakage Repair Keratin-Ceramide Hair Mask",
+            "tagline": "Phase 03 · Reinforce the Fiber. Restore Integrity.",
+            "description": "For hair that snaps before it shines. Targeted recovery for breakage-prone, weak, rough or overworked lengths. A concentrated matrix of Ceramides and Hydrolyzed Keratin rebuilds damaged protein bonds while shielding lengths against friction and heat.",
+            "product_role": "Breakage Repair Keratin-Ceramide Mask",
             "key_actives": "Ceramides · Keratin · Silk Protein · Panthenol · Argan Oil",
             "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
             "media_file": "",
             "viz": "auto",
             "time_badge": "10s Read · Weekly",
-            "button_label": "Explore Repair",
+            "button_label": "Shop Mask",
             "button_link": "shopify://collections/all"
           }
         }
@@ -176,8 +176,8 @@
         "thinning": {
           "type": "regimen",
           "settings": {
-            "concern": "Hair looks thinner or density feels reduced",
-            "headline": "Support the scalp. Start with the environment.",
+            "concern": "Thinning appearance & reduced density",
+            "headline": "Fuller-looking hair starts at the scalp.",
             "product_1": "product-2",
             "frequency_1": "Daily",
             "product_2": "pruv-1",
@@ -187,8 +187,8 @@
         "rough": {
           "type": "regimen",
           "settings": {
-            "concern": "Hair feels rough, dull, coated, or flat",
-            "headline": "Reset buildup. Restore smoothness.",
+            "concern": "Rough, dull, coated-feeling hair",
+            "headline": "Your water may be making your hair feel rough.",
             "product_1": "pruv-1",
             "frequency_1": "3x weekly",
             "product_2": "product-3",
@@ -198,8 +198,8 @@
         "breakage": {
           "type": "regimen",
           "settings": {
-            "concern": "Hair breaks, snaps, or feels weak",
-            "headline": "Clean smarter. Repair stronger.",
+            "concern": "Breakage-prone, weak or rough lengths",
+            "headline": "For hair that snaps before it shines.",
             "product_1": "product-3",
             "frequency_1": "1–2x weekly",
             "product_2": "pruv-1",
@@ -209,7 +209,7 @@
         "full": {
           "type": "regimen",
           "settings": {
-            "concern": "Full urban hair-stress regimen",
+            "concern": "Full 3-Step System (Reset · Support · Repair)",
             "headline": "Reset. Support. Repair.",
             "product_1": "pruv-1",
             "frequency_1": "2–4x weekly",

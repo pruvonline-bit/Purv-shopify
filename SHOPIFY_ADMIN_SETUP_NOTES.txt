@@ -83,3 +83,48 @@ You can customize the other above-the-fold elements anytime in Theme Editor:
 Everything is now structured with zero clutter, prominent product imagery, 
 and a high-contrast dominating Add to Cart CTA.
 ================================================================================
+
+
+================================================================================
+STEP 4: 3-SKU CATALOG FRAMEWORK SETUP (ROLES, CLAIMS & CTAs)
+================================================================================
+
+Our theme is wired with native automatic detection and support for your 3 core SKUs:
+
+1. PRODUCT 1 (SUPPORT):
+   - Title / SKU: Vector-5 Advance Multi Pathway Structural Density Serum
+   - System Role: SUPPORT (Phase 02 · Density & Follicular Stimulation)
+   - Primary Problem: Thinning appearance, low density confidence, scalp uncertainty
+   - Website Claim: Fuller-looking hair starts at the scalp.
+   - CTA Label: Shop Serum
+   - Tags: SUPPORT, Serum, Density, Thinning
+
+2. PRODUCT 2 (RESET):
+   - Title / SKU: Trishield Element Defense Shampoo
+   - System Role: RESET (Phase 01 · Scalp Detox & Demineralisation)
+   - Primary Problem: Rough, dull, coated-feeling hair from hard water, pollution and buildup and supports scalp health
+   - Website Claim: Your water may be making your hair feel rough.
+   - CTA Label: Shop Shampoo
+   - Tags: RESET, Shampoo, Hard Water, Clarifying
+
+3. PRODUCT 3 (REPAIR):
+   - Title / SKU: Breakage Repair Keratin-Ceramide Mask
+   - System Role: REPAIR (Phase 03 · Cuticle Seal & Fiber Recovery)
+   - Primary Problem: Breakage-prone, weak, rough or overworked lengths
+   - Website Claim: For hair that snaps before it shines.
+   - CTA Label: Shop Mask
+   - Tags: REPAIR, Mask, Keratin, Breakage
+
+--------------------------------------------------------------------------------
+OPTIONAL CUSTOM METAFIELDS (For Fine-Grained Admin Control)
+--------------------------------------------------------------------------------
+Go to Shopify Admin -> Settings -> Custom data -> Products:
+1. `custom.system_role`     (Single line text: RESET | SUPPORT | REPAIR)
+2. `custom.website_claim`   (Single line text)
+3. `custom.consumer_problem`(Multi-line text)
+4. `custom.cta_label`       (Single line text: e.g. "Shop Serum", "Shop Shampoo")
+
+If these metafields are left empty, the theme automatically falls back to the 
+curated catalog definitions based on product titles and handles.
+================================================================================
+

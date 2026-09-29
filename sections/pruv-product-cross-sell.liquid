@@ -17,8 +17,8 @@
 
 {%- liquid
   assign shampoo_name = 'Trishield Element Defense Shampoo'
-  assign serum_name = 'VECTOR-5 Advanced Multi-Pathway Structural Density Serum'
-  assign mask_name = 'Breakage Repair Keratin-Ceramide Hair Mask'
+  assign serum_name = 'Vector-5 Advance Multi Pathway Structural Density Serum'
+  assign mask_name = 'Breakage Repair Keratin-Ceramide Mask'
 
   assign current_handle = product.handle
   assign target_handle = 'pruv-1'
@@ -29,26 +29,26 @@
   assign target_name = shampoo_name
   assign target_freq = ''
 
-  if current_handle contains 'product-2' or product.title contains 'VECTOR-5' or product.title contains 'Density' or product.title contains 'Serum'
+  if current_handle contains 'product-2' or product.title contains 'VECTOR-5' or product.title contains 'Vector' or product.title contains 'Density' or product.title contains 'Serum'
     assign target_handle = 'pruv-1'
-    assign concern = 'Hair looks thinner or density feels reduced'
-    assign headline = 'Support the scalp. Start with the environment.'
+    assign concern = 'Thinning appearance, low density confidence, scalp uncertainty'
+    assign headline = 'Fuller-looking hair starts at the scalp.'
     assign current_name = serum_name
     assign current_freq = 'Daily'
     assign target_name = shampoo_name
     assign target_freq = '2–3x weekly'
-  elsif current_handle contains 'pruv-1' or product.title contains 'Shampoo'
+  elsif current_handle contains 'pruv-1' or product.title contains 'Trishield' or product.title contains 'Shampoo'
     assign target_handle = 'product-3'
-    assign concern = 'Hair feels rough, dull, coated, or flat'
-    assign headline = 'Reset buildup. Restore smoothness.'
+    assign concern = 'Rough, dull, coated-feeling hair from hard water and buildup'
+    assign headline = 'Your water may be making your hair feel rough.'
     assign current_name = shampoo_name
     assign current_freq = '3x weekly'
     assign target_name = mask_name
     assign target_freq = '1x weekly'
-  elsif current_handle contains 'product-3' or product.title contains 'Mask'
+  elsif current_handle contains 'product-3' or product.title contains 'Breakage' or product.title contains 'Mask' or product.title contains 'Keratin'
     assign target_handle = 'pruv-1'
-    assign concern = 'Hair breaks, snaps, or feels weak'
-    assign headline = 'Clean smarter. Repair stronger.'
+    assign concern = 'Breakage-prone, weak, rough or overworked lengths'
+    assign headline = 'For hair that snaps before it shines.'
     assign current_name = mask_name
     assign current_freq = '1–2x weekly'
     assign target_name = shampoo_name

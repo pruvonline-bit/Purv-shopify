@@ -7,24 +7,24 @@
           "type": "product",
           "settings": {
             "product": "pruv-1",
-            "axis": "Environment & scalp",
-            "hero_line": "Built for the water and air your hair actually lives in — hardwater defence, pollution defence and microbiome care in one daily wash."
+            "axis": "RESET · Scalp & Water Defense",
+            "hero_line": "Your water may be making your hair feel rough. Built for the water and air your hair actually lives in — hard water demineralisation, pollution defence and microbiome reset."
           }
         },
         "product_serum": {
           "type": "product",
           "settings": {
             "product": "product-2",
-            "axis": "Density & thinning",
-            "hero_line": "Works at the root across multiple pathways to rebuild structural density where hair has thinned."
+            "axis": "SUPPORT · Follicular Density",
+            "hero_line": "Fuller-looking hair starts at the scalp. Works at the root across multiple pathways to rebuild structural density where hair has thinned."
           }
         },
         "product_mask": {
           "type": "product",
           "settings": {
             "product": "product-3",
-            "axis": "Damage & dryness",
-            "hero_line": "Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have worn it down."
+            "axis": "REPAIR · Fiber Integrity",
+            "hero_line": "For hair that snaps before it shines. Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have compromised fiber strength."
           }
         },
         "q_gender": {

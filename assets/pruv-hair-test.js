@@ -303,7 +303,7 @@
               ? h('a', {
                   class: 'pruv-quiz__card-cta' + (isHero ? '' : ' pruv-quiz__card-cta--ghost'),
                   href: p.url,
-                  text: isHero ? 'Shop this' : 'View'
+                  text: p.ctaLabel || (isHero ? 'Shop this' : 'View')
                 })
               : null
           ])

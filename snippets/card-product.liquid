@@ -51,6 +51,46 @@
       endif
     endif
 
+    assign prod_title_lower = card_product.title | downcase
+    assign prod_handle_lower = card_product.handle | downcase
+
+    assign pruv_system_role = card_product.metafields.custom.system_role
+    if pruv_system_role == blank
+      if prod_handle_lower contains 'product-2' or prod_title_lower contains 'vector' or prod_title_lower contains 'serum' or prod_title_lower contains 'density'
+        assign pruv_system_role = 'SUPPORT'
+      elsif prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo' or prod_title_lower contains 'element'
+        assign pruv_system_role = 'RESET'
+      elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
+        assign pruv_system_role = 'REPAIR'
+      endif
+    endif
+
+    assign pruv_claim = card_product.metafields.custom.website_claim
+    if pruv_claim == blank
+      case pruv_system_role
+        when 'RESET'
+          assign pruv_claim = 'Your water may be making your hair feel rough.'
+        when 'SUPPORT'
+          assign pruv_claim = 'Fuller-looking hair starts at the scalp.'
+        when 'REPAIR'
+          assign pruv_claim = 'For hair that snaps before it shines.'
+      endcase
+    endif
+
+    assign pruv_cta_label = card_product.metafields.custom.cta_label
+    if pruv_cta_label == blank
+      case pruv_system_role
+        when 'RESET'
+          assign pruv_cta_label = 'Shop Shampoo'
+        when 'SUPPORT'
+          assign pruv_cta_label = 'Shop Serum'
+        when 'REPAIR'
+          assign pruv_cta_label = 'Shop Mask'
+        else
+          assign pruv_cta_label = 'Add to Cart'
+      endcase
+    endif
+
     assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id
   -%}
 
@@ -78,13 +118,23 @@
       </a>
 
       <div class="pruv-card-info">
+        {%- if pruv_system_role != blank -%}
+          <div class="pruv-card-role-row">
+            <span class="pruv-role-pill pruv-role-pill--{{ pruv_system_role | downcase }}">
+              <span class="pruv-role-pill__dot" aria-hidden="true"></span>
+              {{ pruv_system_role }}
+            </span>
+          </div>
+        {%- endif -%}
+
         <h3 class="pruv-card-title">
           <a href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
         </h3>
 
-        {%- if pruv_highlight != blank -%}
+        {%- assign display_tagline = pruv_claim | default: pruv_highlight -%}
+        {%- if display_tagline != blank -%}
           <div class="pruv-card-tagline-wrapper">
-            <span class="pruv-card-tagline">{{ pruv_highlight }}</span>
+            <span class="pruv-card-tagline" title="{{ display_tagline | escape }}">{{ display_tagline }}</span>
           </div>
         {%- endif -%}
 
@@ -144,7 +194,7 @@
               >
                 <span>
                   {%- if card_product.selected_or_first_available_variant.available -%}
-                    ADD TO CART
+                    {{ pruv_cta_label | upcase }}
                   {%- else -%}
                     {{ 'products.product.sold_out' | t }}
                   {%- endif -%}

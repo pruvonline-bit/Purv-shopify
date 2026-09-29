@@ -107,18 +107,68 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
+                    {%- liquid
+                      assign prod_title_lower = product.title | downcase
+                      assign prod_handle_lower = product.handle | downcase
+
+                      assign pruv_system_role = product.metafields.custom.system_role
+                      if pruv_system_role == blank
+                        if prod_handle_lower contains 'product-2' or prod_title_lower contains 'vector' or prod_title_lower contains 'serum' or prod_title_lower contains 'density'
+                          assign pruv_system_role = 'SUPPORT'
+                        elsif prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo' or prod_title_lower contains 'element'
+                          assign pruv_system_role = 'RESET'
+                        elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
+                          assign pruv_system_role = 'REPAIR'
+                        endif
+                      endif
+                    -%}
+                    {%- if pruv_system_role != blank -%}
+                      <div class="pruv-pdp-role-wrap" style="margin-bottom: 0.8rem;">
+                        <span class="pruv-role-pill pruv-role-pill--{{ pruv_system_role | downcase }}">
+                          <span class="pruv-role-pill__dot" aria-hidden="true"></span>
+                          {{ pruv_system_role }}
+                        </span>
+                      </div>
+                    {%- endif -%}
                     <h1 class="pruv-pdp-title-text">{{ product.title | escape }}</h1>
                   </div>
                 {%- when 'descriptor' -%}
-                  {%- assign descriptor_text = block.settings.text | default: product.metafields.descriptors.subtitle.value | default: product.metafields.custom.descriptor.value -%}
-                  {%- if descriptor_text == blank -%}
-                    {%- assign descriptor_text = 'Advanced Scalp & Follicle Energizing Elixir' -%}
-                  {%- endif -%}
+                  {%- liquid
+                    assign prod_title_lower = product.title | downcase
+                    assign prod_handle_lower = product.handle | downcase
+                    assign default_descriptor = 'Advanced Scalp & Follicle Energizing Elixir'
+                    if prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo'
+                      assign default_descriptor = 'Scalp Detox & Hard Water Demineralising Treatment'
+                    elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
+                      assign default_descriptor = 'Deep Recovery & Keratin-Ceramide Reconstructing Mask'
+                    endif
+                    assign descriptor_text = product.metafields.descriptors.subtitle.value | default: product.metafields.custom.descriptor.value
+                    if descriptor_text == blank and block.settings.text != blank and block.settings.text != 'Advanced Scalp & Follicle Energizing Elixir' and block.settings.text != 'Targeted Follicle-Stimulating & Scalp Recovery Elixir'
+                      assign descriptor_text = block.settings.text
+                    endif
+                    if descriptor_text == blank
+                      assign descriptor_text = default_descriptor
+                    endif
+                  -%}
                   <div class="pruv-pdp-descriptor" {{ block.shopify_attributes }}>
                     <p class="pruv-pdp-descriptor__text">{{ descriptor_text | escape }}</p>
                   </div>
                 {%- when 'benefit_line' -%}
-                  {%- assign benefit_text = block.settings.text | default: 'Clinically Proven • Visible Growth in 84 Days • 100% Water-Based' -%}
+                  {%- liquid
+                    assign prod_title_lower = product.title | downcase
+                    assign prod_handle_lower = product.handle | downcase
+                    assign default_benefit = product.metafields.custom.website_claim
+                    if default_benefit == blank
+                      if prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo'
+                        assign default_benefit = 'Your water may be making your hair feel rough.'
+                      elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
+                        assign default_benefit = 'For hair that snaps before it shines.'
+                      else
+                        assign default_benefit = 'Fuller-looking hair starts at the scalp.'
+                      endif
+                    endif
+                    assign benefit_text = product.metafields.custom.website_claim | default: default_benefit
+                  -%}
                   <div class="pruv-pdp-benefit-line" {{ block.shopify_attributes }}>
                     <span class="pruv-pdp-benefit-line__icon" aria-hidden="true">
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
