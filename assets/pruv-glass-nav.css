@@ -14,6 +14,14 @@
   box-shadow: 0 8px 24px rgba(27, 29, 31, 0.06);
 }
 
+/* High contrast for navbar logo on dark headers */
+.header-wrapper.color-scheme-4 .header__heading-logo,
+.header-wrapper.color-scheme-3 .header__heading-logo,
+.header-wrapper.color-scheme-5 .header__heading-logo,
+.header-wrapper--border-bottom.color-scheme-4 .header__heading-logo {
+  filter: invert(1) hue-rotate(180deg) brightness(1.28) contrast(1.12);
+}
+
 /* ==========================================================================
    Desktop Header & Navigation Styling (Matching Reference)
    - Uppercase bold navlinks, no underlines
@@ -27,6 +35,18 @@
     align-items: center !important;
     padding-top: 1.6rem !important;
     padding-bottom: 1.6rem !important;
+  }
+
+  .header__heading-logo-wrapper {
+    width: auto !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .header__heading-logo {
+    max-height: 5.2rem !important;
+    width: auto !important;
+    object-fit: contain;
   }
 
   .header--middle-left .header__inline-menu {
@@ -189,7 +209,7 @@
   }
 
   .header__heading-logo {
-    max-height: 3.4rem !important;
+    max-height: 4.4rem !important;
     width: auto !important;
     object-fit: contain;
   }
