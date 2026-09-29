@@ -74,75 +74,91 @@
         "show_rating": true,
         "show_free_shipping_tag": true,
         "quick_add": "standard",
-        "enable_filtering": true,
+        "enable_filtering": false,
         "filter_type": "drawer",
-        "enable_sorting": true,
+        "enable_sorting": false,
+        "show_header": true,
+        "header_eyebrow": "Phase 01–03 · Reset. Support. Repair.",
+        "header_heading": "Our Collection",
+        "header_subheading": "<p>Scalp-first formulations engineered for Indian hard water, urban pollution, and structural density.</p>",
+        "header_alignment": "center",
         "padding_top": 24,
         "padding_bottom": 36
       }
     },
-    "reviews": {
-      "type": "pruv-reviews",
+    "concern_regimen": {
+      "type": "pruv-concern-regimen",
       "blocks": {
-        "review-1": {
-          "type": "review",
+        "thinning": {
+          "type": "regimen",
           "settings": {
-            "rating": 5,
-            "title": "Top notch",
-            "quote": "It is a boon for hair fall issues and regular use reduces hair breakage and promotes hair growth. Foams well and cleans my scalp off dirt and excess oil while leaving my hair deeply moisturized and tangle free.",
-            "name": "Vineeta Bhatnagar",
-            "product_tag": "TRISHIELD SHAMPOO"
+            "concern": "Thinning appearance & reduced density",
+            "headline": "Fuller-looking hair starts at the scalp.",
+            "product_1": "product-2",
+            "frequency_1": "Daily",
+            "product_2": "pruv-1",
+            "frequency_2": "2–3x weekly"
           }
         },
-        "review-2": {
-          "type": "review",
+        "rough": {
+          "type": "regimen",
           "settings": {
-            "rating": 5,
-            "title": "Most effective",
-            "quote": "Switched after years of trying imported brands. The difference with hard water was obvious in two washes. Scalp feels exceptionally clean and calm.",
-            "name": "Kabir M.",
-            "product_tag": "TRISHIELD SHAMPOO"
+            "concern": "Rough, dull, coated-feeling hair",
+            "headline": "Your water may be making your hair feel rough.",
+            "product_1": "pruv-1",
+            "frequency_1": "3x weekly",
+            "product_2": "product-3",
+            "frequency_2": "1x weekly"
           }
         },
-        "review-3": {
-          "type": "review",
+        "breakage": {
+          "type": "regimen",
           "settings": {
-            "rating": 5,
-            "title": "Game changer",
-            "quote": "Living in Mumbai, my hair used to feel coated by evening. Three washes in and that's gone completely. Best ritual investment I've made.",
-            "name": "Devika R.",
-            "product_tag": "KERATIN CERAMIDE MASK"
+            "concern": "Breakage-prone, weak or rough lengths",
+            "headline": "For hair that snaps before it shines.",
+            "product_1": "product-3",
+            "frequency_1": "1–2x weekly",
+            "product_2": "pruv-1",
+            "frequency_2": "2–3x weekly"
           }
         },
-        "review-4": {
-          "type": "review",
+        "full": {
+          "type": "regimen",
           "settings": {
-            "rating": 5,
-            "title": "Wonderful",
-            "quote": "My scalp actually feels clean 48 hours later, even with our hard water. First shampoo and scalp ritual that's ever done that.",
-            "name": "Ananya S.",
-            "product_tag": "TRISHIELD SHAMPOO"
+            "concern": "Full 3-Step System (Reset · Support · Repair)",
+            "headline": "Reset. Support. Repair.",
+            "product_1": "pruv-1",
+            "frequency_1": "2–4x weekly",
+            "role_1": "Reset",
+            "product_2": "product-2",
+            "frequency_2": "Daily",
+            "role_2": "Support",
+            "product_3": "product-3",
+            "frequency_3": "1–2x weekly",
+            "role_3": "Repair"
           }
         }
       },
       "block_order": [
-        "review-1",
-        "review-2",
-        "review-3",
-        "review-4"
+        "thinning",
+        "rough",
+        "breakage",
+        "full"
       ],
       "settings": {
-        "eyebrow": "OUR PHILOSOPHY",
-        "heading": "What you say <strong>matters the most.</strong>",
+        "eyebrow": "",
+        "heading": "What's your hair <strong>dealing with?</strong>",
+        "cross_link_label": "Not sure? Take the full hair test",
+        "cross_link_url": "shopify://pages/hair-test",
         "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "reviews"
+    "concern_regimen"
   ]
 }

@@ -126,6 +126,29 @@
           </aside>
         {%- endif -%}
 
+        {%- if section.settings.show_header -%}
+          <div class="pruv-collection-header page-width pruv-collection-header--{{ section.settings.header_alignment | default: 'center' }}">
+            {%- if section.settings.header_eyebrow != blank -%}
+              <div class="pruv-collection-header__eyebrow">
+                <span class="pruv-collection-header__eyebrow-dot" aria-hidden="true"></span>
+                <span>{{ section.settings.header_eyebrow | escape }}</span>
+              </div>
+            {%- endif -%}
+
+            <h2 class="pruv-collection-header__title">
+              {{ section.settings.header_heading | default: 'Our Collection' }}
+            </h2>
+
+            {%- if section.settings.header_subheading != blank -%}
+              <div class="pruv-collection-header__subheading rte">
+                {{ section.settings.header_subheading }}
+              </div>
+            {%- endif -%}
+
+            <div class="pruv-collection-header__divider" aria-hidden="true"></div>
+          </div>
+        {%- endif -%}
+
         <div
           class="product-grid-container{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
           id="ProductGridContainer"
@@ -316,6 +339,44 @@
       ],
       "default": "default",
       "label": "t:sections.all.image_shape.label"
+    },
+    {
+      "type": "header",
+      "content": "Collection Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "default": true,
+      "label": "Show collection header"
+    },
+    {
+      "type": "text",
+      "id": "header_eyebrow",
+      "label": "Eyebrow",
+      "default": "Phase 01–03 · Reset. Support. Repair."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "header_heading",
+      "label": "Heading",
+      "default": "Our Collection"
+    },
+    {
+      "type": "richtext",
+      "id": "header_subheading",
+      "label": "Subheading",
+      "default": "<p>Scalp-first formulations engineered for Indian hard water, urban pollution, and structural density.</p>"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ],
+      "default": "center"
     },
     {
       "type": "checkbox",

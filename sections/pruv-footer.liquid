@@ -15,7 +15,14 @@
   endif
 -%}
 
-<footer class="pruv-footer color-{{ section.settings.color_scheme }}">
+{%- liquid
+  assign invert_logo = section.settings.invert_logo_for_dark
+  if invert_logo == nil
+    assign invert_logo = true
+  endif
+-%}
+
+<footer class="pruv-footer color-{{ section.settings.color_scheme }}{% if invert_logo %} pruv-footer--invert-logo{% endif %}">
   <div class="pruv-footer__panel">
     <div class="pruv-footer__row page-width">
       <div class="pruv-footer__col pruv-footer__col--newsletter">
@@ -49,9 +56,10 @@
                     aria-describedby="PruvFooterNewsletter-success"
                   {% endif %}
                   placeholder="Your email address"
+                  aria-label="Your email address"
                   required
                 >
-                <label class="field__label" for="NewsletterForm--{{ section.id }}">Your email address</label>
+                <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">Your email address</label>
                 <button
                   type="submit"
                   class="newsletter-form__button field__button"
@@ -189,11 +197,18 @@
   <div class="pruv-footer__brand page-width">
     {%- if settings.logo != blank -%}
       {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-      {{
-        settings.logo
-        | image_url: width: 400
-        | image_tag: class: 'pruv-footer__logo', alt: logo_alt, widths: '100, 150, 200, 300, 400'
-      }}
+      {%- assign footer_logo_width = section.settings.logo_width | default: 280 -%}
+      <div class="pruv-footer__logo-wrapper" style="--footer-logo-width: {{ footer_logo_width }}px;">
+        {{
+          settings.logo
+          | image_url: width: 800
+          | image_tag:
+            class: 'pruv-footer__logo',
+            alt: logo_alt,
+            widths: '200, 300, 400, 600, 800',
+            style: 'width: var(--footer-logo-width, 280px); max-width: 90vw; height: auto;'
+        }}
+      </div>
     {%- else -%}
       <p class="pruv-footer__logo-text">{{ shop.name }}</p>
     {%- endif -%}
@@ -310,6 +325,23 @@
     {
       "type": "header",
       "content": "Logo lockup"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 140,
+      "max": 440,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo width",
+      "default": 280
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_logo_for_dark",
+      "label": "Enhance logo contrast on dark background",
+      "info": "Brightens the dark lettering while keeping copper dots intact.",
+      "default": true
     },
     {
       "type": "text",

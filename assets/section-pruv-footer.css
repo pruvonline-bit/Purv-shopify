@@ -60,33 +60,90 @@
   color: rgb(var(--color-foreground));
 }
 
-/* pill the newsletter field + inset the round submit button, on top of Dawn's
-   real newsletter-form markup/behavior */
+/* Pill newsletter field + vertically centered input & placeholder */
 .pruv-footer .newsletter-form__field-wrapper .field {
-  --inputs-radius: 3.2rem;
+  --inputs-radius: 9999px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 5.2rem;
+  min-height: 5.2rem;
+  border-radius: 9999px;
+}
+
+.pruv-footer .field:before,
+.pruv-footer .field:after {
+  border-radius: 9999px;
 }
 
 .pruv-footer .field__input {
-  padding-inline-end: 5.6rem;
+  height: 100% !important;
+  min-height: 5.2rem !important;
+  padding: 0 5.6rem 0 2.4rem !important;
+  margin: 0 !important;
+  border-radius: 9999px;
+  font-size: 1.45rem;
+  font-family: inherit;
+  line-height: normal;
+  color: rgb(var(--color-foreground));
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.pruv-footer .field__input::placeholder {
+  opacity: 1 !important;
+  color: rgba(var(--color-foreground), 0.5);
+  font-family: inherit;
+  font-size: 1.45rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.pruv-footer .field__input:focus,
+.pruv-footer .field__input:not(:placeholder-shown),
+.pruv-footer .field__input:-webkit-autofill {
+  padding: 0 5.6rem 0 2.4rem !important;
+  margin: 0 !important;
+}
+
+.pruv-footer .field__label {
+  display: none !important;
 }
 
 .pruv-footer .newsletter-form__button {
   position: absolute;
   top: 50%;
-  right: 0.6rem;
+  right: 0.8rem;
   transform: translateY(-50%);
-  width: 4rem;
-  height: 4rem;
-  border-radius: 100%;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #B87333;
-  color: #F5F2EC;
+  background-color: transparent;
+  color: rgb(var(--color-foreground));
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+  z-index: 2;
+}
+
+.pruv-footer .newsletter-form__button:hover {
+  transform: translateY(-50%) translateX(2px);
+  color: #B87333;
+}
+
+.pruv-footer .newsletter-form__button .svg-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .pruv-footer .newsletter-form__button:focus-visible {
-  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline: 0.2rem solid #B87333;
   outline-offset: 0.2rem;
 }
 
@@ -215,10 +272,26 @@
   padding-block: 4.8rem;
 }
 
+.pruv-footer__logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .pruv-footer__logo {
   display: inline-block;
-  width: 18rem;
+  width: var(--footer-logo-width, 28rem);
+  max-width: 90vw;
   height: auto;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+/* High contrast mode for dark backgrounds: brightens lettering to crisp off-white/cream while preserving the copper accents */
+.pruv-footer.color-scheme-4 .pruv-footer__logo,
+.pruv-footer.color-scheme-3 .pruv-footer__logo,
+.pruv-footer.color-scheme-5 .pruv-footer__logo,
+.pruv-footer--invert-logo .pruv-footer__logo {
+  filter: invert(1) hue-rotate(180deg) brightness(1.28) contrast(1.12);
 }
 
 .pruv-footer__logo-text {

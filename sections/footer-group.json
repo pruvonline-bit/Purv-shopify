@@ -28,12 +28,6 @@
             "url": "shopify://pages/about-us"
           }
         },
-        "lab_notes": {
-          "type": "nav_link",
-          "settings": {
-            "label": "Lab Notes"
-          }
-        },
         "contact": {
           "type": "nav_link",
           "settings": {
@@ -45,7 +39,6 @@
       "block_order": [
         "shop",
         "about",
-        "lab_notes",
         "contact"
       ],
       "settings": {
@@ -62,6 +55,8 @@
         "contact_link_label": "Contact Us",
         "contact_link_url": "shopify://pages/contact",
         "payment_enable": false,
+        "logo_width": 280,
+        "invert_logo_for_dark": true,
         "tagline": "",
         "legal_entity": "",
         "registration_number": ""
