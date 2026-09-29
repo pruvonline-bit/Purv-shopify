@@ -115,7 +115,6 @@
             "video": "shopify://files/videos/Shampoo_cleaning_hair_animation_20260912151914.mp4",
             "media_file": "",
             "viz": "auto",
-            "time_badge": "10s Read · 2x/week",
             "button_label": "Shop Shampoo",
             "button_link": "shopify://collections/all"
           }
@@ -132,7 +131,6 @@
             "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
             "media_file": "",
             "viz": "auto",
-            "time_badge": "10s Read · Daily",
             "button_label": "Shop Serum",
             "button_link": "shopify://collections/all"
           }
@@ -149,7 +147,6 @@
             "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
             "media_file": "",
             "viz": "auto",
-            "time_badge": "10s Read · Weekly",
             "button_label": "Shop Mask",
             "button_link": "shopify://collections/all"
           }
@@ -191,7 +188,7 @@
             "headline": "Your water may be making your hair feel rough.",
             "product_1": "pruv-1",
             "frequency_1": "3x weekly",
-            "product_2": "product-3",
+            "product_2": "pruv-breakage-repair-keratin-ceramide-hair-mask",
             "frequency_2": "1x weekly"
           }
         },
@@ -200,7 +197,7 @@
           "settings": {
             "concern": "Breakage-prone, weak or rough lengths",
             "headline": "For hair that snaps before it shines.",
-            "product_1": "product-3",
+            "product_1": "pruv-breakage-repair-keratin-ceramide-hair-mask",
             "frequency_1": "1–2x weekly",
             "product_2": "pruv-1",
             "frequency_2": "2–3x weekly"
@@ -217,7 +214,7 @@
             "product_2": "product-2",
             "frequency_2": "Daily",
             "role_2": "Support",
-            "product_3": "product-3",
+            "product_3": "pruv-breakage-repair-keratin-ceramide-hair-mask",
             "frequency_3": "1–2x weekly",
             "role_3": "Repair"
           }
@@ -408,4 +405,3 @@
     "hair_test_popup"
   ]
 }
-

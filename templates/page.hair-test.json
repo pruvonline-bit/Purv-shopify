@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hair_test": {
@@ -22,7 +31,7 @@
         "product_mask": {
           "type": "product",
           "settings": {
-            "product": "product-3",
+            "product": "pruv-breakage-repair-keratin-ceramide-hair-mask",
             "axis": "REPAIR · Fiber Integrity",
             "hero_line": "For hair that snaps before it shines. Keratin and ceramides rebuild the hair shaft where friction, heat and dryness have compromised fiber strength."
           }
