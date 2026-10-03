@@ -9,6 +9,34 @@
  */
 {
   "sections": {
+    "page_tabs": {
+      "type": "pruv-page-tabs",
+      "blocks": {
+        "tab_product": {
+          "type": "tab",
+          "settings": {
+            "label": "Prüv",
+            "link": "/products/pruv-vector-5-advanced-multi-pathway-structural-density"
+          }
+        },
+        "tab_science": {
+          "type": "tab",
+          "settings": {
+            "label": "VivinePro",
+            "link": "/pages/hair-vivinepro"
+          }
+        }
+      },
+      "block_order": [
+        "tab_product",
+        "tab_science"
+      ],
+      "settings": {
+        "aria_label": "Vector-5 product and Hair VivinePro science pages",
+        "padding_top": 14,
+        "padding_bottom": 14
+      }
+    },
     "hero": {
       "type": "pruv-hero",
       "blocks": {
@@ -397,6 +425,7 @@
     }
   },
   "order": [
+    "page_tabs",
     "hero",
     "ritual_explainer",
     "concern_regimen",
