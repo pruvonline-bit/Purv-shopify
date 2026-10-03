@@ -156,11 +156,12 @@
                   {%- endif -%}
                 </li>
               {%- endfor -%}
-              {%- if section.settings.feature_link_label != blank and section.settings.feature_link_url != blank -%}
+              {%- assign feature_url = section.settings.feature_link_url | default: '/pages/hair-vivinepro' -%}
+              {%- if section.settings.feature_link_label != blank -%}
                 <li>
                   <a
                     id="HeaderDrawer-feature"
-                    href="{{ section.settings.feature_link_url }}"
+                    href="{{ feature_url }}"
                     class="menu-drawer__menu-item list-menu__item link link--text focus-inset pruv-drawer__link pruv-drawer__link--feature"
                   >
                     <span class="pruv-drawer__link-reveal">

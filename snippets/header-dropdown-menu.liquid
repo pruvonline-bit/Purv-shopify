@@ -99,8 +99,9 @@
         {%- endif -%}
       </li>
     {%- endfor -%}
-    {%- if section.settings.feature_link_label != blank and section.settings.feature_link_url != blank -%}
-      {%- assign feature_path = section.settings.feature_link_url | split: '?' | first -%}
+    {%- assign feature_url = section.settings.feature_link_url | default: '/pages/hair-vivinepro' -%}
+    {%- if section.settings.feature_link_label != blank -%}
+      {%- assign feature_path = feature_url | split: '?' | first -%}
       {%- assign feature_current = false -%}
       {%- if feature_path != '/' and request.path contains feature_path -%}
         {%- assign feature_current = true -%}
@@ -108,7 +109,7 @@
       <li>
         <a
           id="HeaderMenu-feature"
-          href="{{ section.settings.feature_link_url }}"
+          href="{{ feature_url }}"
           class="header__menu-item list-menu__item link link--text focus-inset header__menu-item--feature{% if feature_current %} is-current{% endif %}"
           {% if feature_current %}
             aria-current="page"
