@@ -336,3 +336,68 @@
 html.pruv-drawer-gsap .menu-drawer {
   transition: none !important;
 }
+
+/* Highlighted nav link (header setting "Highlighted nav link", e.g. VivinePro):
+   copper outlined pill with a pulsing dot so it reads apart from the plain links. */
+.header__menu-item.header__menu-item--feature {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.7rem !important;
+  padding: 0.6rem 1.6rem !important;
+  border: 1px solid rgba(184, 115, 51, 0.7) !important;
+  border-radius: 999px !important;
+  background: rgba(184, 115, 51, 0.14) !important;
+  color: #D89858 !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+}
+
+.header__menu-item.header__menu-item--feature span {
+  color: inherit !important;
+}
+
+.header__menu-item.header__menu-item--feature:hover,
+.header__menu-item.header__menu-item--feature.is-current {
+  background: #B87333 !important;
+  border-color: #B87333 !important;
+  color: #F5F2EC !important;
+}
+
+.header__menu-item.header__menu-item--feature:hover span,
+.header__menu-item.header__menu-item--feature.is-current span {
+  color: #F5F2EC !important;
+}
+
+.header__feature-dot {
+  position: relative;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.header__feature-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pruv-feature-pulse 1.8s ease-out infinite;
+}
+
+@keyframes pruv-feature-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__feature-dot::after {
+    animation: none;
+  }
+}
+
+/* Mobile drawer: same link, copper text */
+.menu-drawer__menu-item.pruv-drawer__link--feature,
+.menu-drawer__menu-item.pruv-drawer__link--feature .pruv-drawer__link-text {
+  color: #B87333 !important;
+}

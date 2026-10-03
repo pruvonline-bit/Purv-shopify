@@ -99,5 +99,25 @@
         {%- endif -%}
       </li>
     {%- endfor -%}
+    {%- if section.settings.feature_link_label != blank and section.settings.feature_link_url != blank -%}
+      {%- assign feature_path = section.settings.feature_link_url | split: '?' | first -%}
+      {%- assign feature_current = false -%}
+      {%- if feature_path != '/' and request.path contains feature_path -%}
+        {%- assign feature_current = true -%}
+      {%- endif -%}
+      <li>
+        <a
+          id="HeaderMenu-feature"
+          href="{{ section.settings.feature_link_url }}"
+          class="header__menu-item list-menu__item link link--text focus-inset header__menu-item--feature{% if feature_current %} is-current{% endif %}"
+          {% if feature_current %}
+            aria-current="page"
+          {% endif %}
+        >
+          <span class="header__feature-dot" aria-hidden="true"></span>
+          <span>{{- section.settings.feature_link_label | escape -}}</span>
+        </a>
+      </li>
+    {%- endif -%}
   </ul>
 </nav>

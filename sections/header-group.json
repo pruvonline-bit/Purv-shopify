@@ -58,6 +58,8 @@
         "menu_color_scheme": "scheme-1",
         "logo_position": "middle-left",
         "menu": "main-menu",
+        "feature_link_label": "VivinePro",
+        "feature_link_url": "/pages/hair-vivinepro",
         "menu_type_desktop": "dropdown",
         "sticky_header_type": "always",
         "show_line_separator": true,
