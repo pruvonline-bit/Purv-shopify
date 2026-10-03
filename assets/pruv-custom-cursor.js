@@ -42,6 +42,32 @@
   var lastTouch = 0;
   var frame = null;
 
+  /* A <dialog> opened with showModal() (e.g. the hair-test popup) lives in the
+     browser's top layer, which paints above every z-index on the page - so the
+     cursor, still hidden by `cursor: none`, ended up underneath it and nothing
+     was visible over the modal. While a modal is open the cursor elements are
+     moved inside it, which puts them in the same top layer; they return to
+     <body> once it closes. */
+  function openModal() {
+    var dialogs = document.querySelectorAll('dialog[open]');
+    for (var i = dialogs.length - 1; i >= 0; i--) {
+      var isModal = true;
+      try {
+        isModal = dialogs[i].matches(':modal');
+      } catch (e) {
+        // Older browsers without :modal - treat any open dialog as modal.
+      }
+      if (isModal) return dialogs[i];
+    }
+    return null;
+  }
+
+  function syncLayer() {
+    var host = openModal() || document.body;
+    if (dot.parentNode !== host) host.appendChild(dot);
+    if (ring.parentNode !== host) host.appendChild(ring);
+  }
+
   function place(el, x, y) {
     el.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) translate(-50%,-50%)';
   }
@@ -82,6 +108,7 @@
     if (event.pointerType === 'touch') return;
     if (Date.now() - lastTouch < 500) return;
 
+    syncLayer();
     activate(event.clientX, event.clientY);
     mouseX = event.clientX;
     mouseY = event.clientY;
@@ -106,4 +133,7 @@
     { capture: true, passive: true }
   );
   window.addEventListener('blur', deactivate);
+  // `close` doesn't bubble, so listen in the capture phase to bring the cursor
+  // back to <body> the moment any dialog closes.
+  document.addEventListener('close', syncLayer, true);
 })();
