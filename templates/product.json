@@ -1,10 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-product",
       "blocks": {
         "title": {
-          "type": "title"
+          "type": "title",
+          "settings": {}
         },
         "descriptor": {
           "type": "descriptor",
@@ -13,10 +23,12 @@
           }
         },
         "price": {
-          "type": "price"
+          "type": "price",
+          "settings": {}
         },
         "rating": {
-          "type": "rating"
+          "type": "rating",
+          "settings": {}
         },
         "benefit_line": {
           "type": "benefit_line",
@@ -32,7 +44,8 @@
           }
         },
         "quantity_selector": {
-          "type": "quantity_selector"
+          "type": "quantity_selector",
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -53,50 +66,50 @@
         "tab_description": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Product Description",
-            "icon": "none",
             "open_by_default": true,
             "use_product_description": true,
+            "heading": "Product Description",
+            "icon": "none",
             "content": ""
           }
         },
         "tab_benefits": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Key benefits",
-            "icon": "none",
             "open_by_default": false,
             "use_product_description": false,
+            "heading": "Key benefits",
+            "icon": "none",
             "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>"
           }
         },
         "tab_patch_safety": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Patch test & safety warnings",
-            "icon": "none",
             "open_by_default": false,
             "use_product_description": false,
+            "heading": "Patch test & safety warnings",
+            "icon": "none",
             "content": "<p><strong>24-Hour Patch Test Protocol:</strong></p><ol><li><strong>Step 1:</strong> Squeeze 2 drops onto clean skin behind your ear or inner forearm.</li><li><strong>Step 2:</strong> Allow to dry naturally and leave untouched for 24 hours.</li><li><strong>Step 3:</strong> If zero redness, burning, or itchiness occurs, proceed with daily scalp application.</li></ol><p><strong>Safety Assurance:</strong> 100% water-matrix elixir formulated without Minoxidil, Sulfates, Silicones, Parabens, or Synthetic Dyes. Safe for colour-treated and keratin-treated hair. Non-comedogenic. For external scalp use only.</p>"
           }
         },
         "tab_returns_policy": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Returns, replacements & guarantee",
-            "icon": "none",
             "open_by_default": false,
             "use_product_description": false,
+            "heading": "Returns, replacements & guarantee",
+            "icon": "none",
             "content": "<p><strong>48-Hour Free Replacement:</strong> In the rare instance of transit damage, leakage, or pipette defect, email our care desk with an unboxing photo within 48 hours for immediate dispatch of a fresh bottle.</p><p><strong>90-Day Follicular Commitment:</strong> Hair density operates on 90-day biological cycles. If you follow the daily PM ritual for 90 days and need guidance, our trichology support team provides 1-on-1 consultation and satisfaction assistance.</p>"
           }
         },
         "tab_risk_faqs": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Risk reduction FAQs",
-            "icon": "none",
             "open_by_default": false,
             "use_product_description": false,
+            "heading": "Risk reduction FAQs",
+            "icon": "none",
             "content": "<p><strong>Q: Will I experience initial shedding (\"dread shed\")?</strong><br>A: No. Unlike drug-based vasodilators (such as Minoxidil) which can cause sudden shedding phases, Prüv is a gentle, bio-peptide water formula designed to nourish the scalp barrier without abrupt follicular shock.</p><p><strong>Q: Can I apply this if I use hair oil or styling products?</strong><br>A: Always apply Prüv first directly to a clean scalp (dry or damp). Let it absorb for 60 seconds before applying any hair creams or styling products. Heavy oils should never be applied before the elixir, as oil creates a barrier blocking water absorption.</p><p><strong>Q: Does it cause hair stiffness or sticky residue?</strong><br>A: Absolutely not. Prüv is 100% water-based and dries completely clean in under 60 seconds with natural root bounce.</p>"
           }
         }
@@ -120,13 +133,13 @@
       "settings": {
         "enable_sticky_info": true,
         "color_scheme": "scheme-1",
-        "media_position": "left",
-        "gallery_layout": "thumbnail",
         "media_size": "medium",
         "constrain_to_viewport": true,
         "media_fit": "contain",
-        "image_zoom": "lightbox",
+        "gallery_layout": "thumbnail",
         "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 36,
@@ -134,7 +147,8 @@
       }
     },
     "outcome": {
-      "type": "pruv-product-outcome"
+      "type": "pruv-product-outcome",
+      "settings": {}
     },
     "mechanism": {
       "type": "pruv-product-mechanism",
@@ -145,13 +159,16 @@
       }
     },
     "usage": {
-      "type": "pruv-product-usage"
+      "type": "pruv-product-usage",
+      "settings": {}
     },
     "proof": {
-      "type": "pruv-product-proof"
+      "type": "pruv-product-proof",
+      "settings": {}
     },
     "cross_sell": {
-      "type": "pruv-product-cross-sell"
+      "type": "pruv-product-cross-sell",
+      "settings": {}
     }
   },
   "order": [

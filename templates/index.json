@@ -163,8 +163,8 @@
         "subheading": "",
         "show_connectors": true,
         "color_scheme": "scheme-4",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "padding_top": 0,
+        "padding_bottom": 16
       }
     },
     "concern_regimen": {
@@ -177,8 +177,13 @@
             "headline": "Fuller-looking hair starts at the scalp.",
             "product_1": "pruv-vector-5-advanced-multi-pathway-structural-density",
             "frequency_1": "Daily",
+            "role_1": "",
             "product_2": "pruv-trishield-element-defense-shampoo",
-            "frequency_2": "2–3x weekly"
+            "frequency_2": "2–3x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "rough": {
@@ -188,8 +193,13 @@
             "headline": "Your water may be making your hair feel rough.",
             "product_1": "pruv-trishield-element-defense-shampoo",
             "frequency_1": "3x weekly",
+            "role_1": "",
             "product_2": "pruv-breakage-repair-keratin-ceramide-hair-mask",
-            "frequency_2": "1x weekly"
+            "frequency_2": "1x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "breakage": {
@@ -199,8 +209,13 @@
             "headline": "For hair that snaps before it shines.",
             "product_1": "pruv-breakage-repair-keratin-ceramide-hair-mask",
             "frequency_1": "1–2x weekly",
+            "role_1": "",
             "product_2": "pruv-trishield-element-defense-shampoo",
-            "frequency_2": "2–3x weekly"
+            "frequency_2": "2–3x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "full": {
@@ -229,6 +244,17 @@
       "settings": {
         "eyebrow": "",
         "heading": "What's your hair <strong>dealing with?</strong>",
+        "text": "",
+        "tabs_label": "Hair concerns",
+        "primary_label": "Primary",
+        "pair_label": "Pair with",
+        "total_label": "Regimen total",
+        "add_label": "Add {count}-product regimen to bag",
+        "add_label_single": "Add to bag",
+        "adding_label": "Adding…",
+        "added_label": "Added to bag",
+        "sold_out_label": "Currently unavailable",
+        "error_label": "Couldn't add to cart. Try again.",
         "cross_link_label": "Not sure? Take the full hair test",
         "cross_link_url": "shopify://pages/hair-test",
         "color_scheme": "scheme-1",
