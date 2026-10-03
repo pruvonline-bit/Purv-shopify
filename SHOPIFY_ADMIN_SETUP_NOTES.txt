@@ -169,3 +169,12 @@ page. Template: page.hair-vivinepro. Every number / claim marked XX%, [XX] or
                              How to Use / FAQs
    - VivinePro buy CTA ..... add-to-cart for the serum
 ================================================================================
+
+5. Page tabs (PRÜV | VIVINEPRO pill switcher under the header):
+   - Shown on the Vector-5 serum product page and on /pages/hair-vivinepro.
+     The tab for the page you are on is highlighted.
+   - Edit labels/links in Customize -> "Prüv page tabs" (first section) on
+     both the Default product template and the hair-vivinepro page template.
+   - On product pages it only appears for the product chosen in
+     "Only show on this product" (preset to the Vector-5 serum).
+================================================================================
