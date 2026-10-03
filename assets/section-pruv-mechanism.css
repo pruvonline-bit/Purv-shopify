@@ -385,3 +385,23 @@
     transition: none !important;
   }
 }
+
+/* Optional "science page" link, shown only on the chosen product */
+.pruv-mechanism__science-link {
+  display: block;
+  width: fit-content;
+  margin: 2rem auto 0;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #B87333;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(184, 115, 51, 0.4);
+  padding-bottom: 0.3rem;
+}
+
+.pruv-mechanism__science-link:hover {
+  border-bottom-color: #B87333;
+}

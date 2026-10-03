@@ -1,0 +1,132 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-mechanism{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    {%- render 'pruv-vivine-header' -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ol class="pruv-vivine-mechanism__flow list-unstyled" data-animate="fade-up" role="list">
+        {%- for block in section.blocks -%}
+          <li class="pruv-vivine-mechanism__step" {{ block.shopify_attributes }}>
+            <span class="pruv-vivine-mechanism__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            <h3 class="pruv-vivine-mechanism__name">{{ block.settings.title | escape }}</h3>
+            <p class="pruv-vivine-mechanism__text">{{ block.settings.text | escape }}</p>
+          </li>
+          {%- unless forloop.last -%}
+            <li class="pruv-vivine-mechanism__arrow" aria-hidden="true">
+              {%- render 'pruv-vivine-icon', icon: 'arrow' -%}
+            </li>
+          {%- endunless -%}
+        {%- endfor -%}
+      </ol>
+    {%- endif -%}
+
+    {%- if section.settings.summary != blank -%}
+      <p class="pruv-vivine-mechanism__summary">{{ section.settings.summary | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro mechanism",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "info": "Optional. Lets buttons link to this section."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Mechanism of action"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How <strong>Hair VivinePro™</strong> works"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>[Placeholder] One line on the root-cause approach.</p>"
+    },
+    {
+      "type": "text",
+      "id": "summary",
+      "label": "Summary strip",
+      "default": "[Placeholder] Root cause → cellular response → visible result, in one sentence."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "[Placeholder] What happens at this step."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "VivinePro mechanism",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Hair VivinePro™ reaches the follicle" } },
+        { "type": "step", "settings": { "title": "Follicle cells are re-energised" } },
+        { "type": "step", "settings": { "title": "Longer, stronger growth phase" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,178 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+{%- assign cta_product = section.settings.product -%}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-cta{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  {%- render 'pruv-vivine-header', render_header: false -%}
+  <div class="page-width">
+    <div class="pruv-vivine-cta__card" data-animate="fade-up">
+      <div class="pruv-vivine-cta__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 900
+            | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 750px) 40vw, 100vw'
+          }}
+        {%- elsif cta_product.featured_media != blank -%}
+          {{
+            cta_product.featured_media
+            | image_url: width: 900
+            | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 750px) 40vw, 100vw', alt: cta_product.title
+          }}
+        {%- else -%}
+          {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div>
+        <div class="pruv-vivine__header">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="pruv-vivine__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="pruv-vivine__title">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <div class="pruv-vivine__subtitle">{{ section.settings.subheading }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- if cta_product != blank -%}
+          {%- assign cta_variant = cta_product.selected_or_first_available_variant -%}
+          <p class="pruv-vivine-cta__product">{{ cta_product.title | escape }}</p>
+          <p class="pruv-vivine-cta__price">
+            <span>{{ cta_variant.price | money }}</span>
+            {%- if cta_variant.compare_at_price > cta_variant.price -%}
+              <s>{{ cta_variant.compare_at_price | money }}</s>
+            {%- endif -%}
+          </p>
+
+          <div class="pruv-vivine-cta__actions">
+            <product-form data-hide-errors="true">
+              {%- assign cta_form_id = 'VivineCtaForm-' | append: section.id -%}
+              {%- form 'product', cta_product, id: cta_form_id, class: 'form' -%}
+                <input type="hidden" name="id" value="{{ cta_variant.id }}"{% unless cta_variant.available %} disabled{% endunless %}>
+                <button
+                  type="submit"
+                  name="add"
+                  class="pruv-vivine__btn"
+                  {% unless cta_variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                  <span>
+                    {%- if cta_variant.available -%}
+                      {{ section.settings.button_label | escape }}
+                    {%- else -%}
+                      {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                  </span>
+                  {%- render 'loading-spinner' -%}
+                </button>
+              {%- endform -%}
+            </product-form>
+            <a href="{{ cta_product.url }}" class="pruv-vivine__btn pruv-vivine__btn--ghost">
+              {{- section.settings.link_label | escape -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro buy CTA",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "info": "Optional. Lets buttons link to this section."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Falls back to the product's main image."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Start your 84-day ritual"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Give your follicles <strong>Hair VivinePro™</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Apply nightly to a clean scalp. Visible results build over 84 days of consistent use.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Product link label",
+      "default": "View product"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 72
+    }
+  ],
+  "presets": [
+    {
+      "name": "VivinePro buy CTA"
+    }
+  ]
+}
+{% endschema %}

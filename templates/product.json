@@ -137,7 +137,12 @@
       "type": "pruv-product-outcome"
     },
     "mechanism": {
-      "type": "pruv-product-mechanism"
+      "type": "pruv-product-mechanism",
+      "settings": {
+        "science_link_label": "Discover the science of Hair VivinePro",
+        "science_link_url": "/pages/hair-vivinepro",
+        "science_link_product": "pruv-vector-5-advanced-multi-pathway-structural-density"
+      }
     },
     "usage": {
       "type": "pruv-product-usage"

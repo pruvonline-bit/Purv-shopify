@@ -1,0 +1,216 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign columns = ''
+  for i in (1..4)
+    assign key = 'col_' | append: i
+    if section.settings[key] != blank
+      assign columns = columns | append: i | append: ','
+    endif
+  endfor
+  assign columns = columns | split: ','
+-%}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-compare{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    {%- render 'pruv-vivine-header' -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div data-animate="fade-up">
+        <div class="pruv-vivine-compare__scroll" role="region" aria-label="{{ section.settings.heading | strip_html | escape }}" tabindex="0">
+          <table class="pruv-vivine-compare__table">
+            <thead>
+              <tr>
+                <th scope="col"><span class="visually-hidden">Criteria</span></th>
+                {%- for i in columns -%}
+                  {%- assign key = 'col_' | append: i -%}
+                  <th scope="col"{% if i == '1' and section.settings.highlight_first %} class="is-highlight"{% endif %}>
+                    {{- section.settings[key] | escape -}}
+                  </th>
+                {%- endfor -%}
+              </tr>
+            </thead>
+            <tbody>
+              {%- for block in section.blocks -%}
+                <tr {{ block.shopify_attributes }}>
+                  <th scope="row">{{ block.settings.criterion | escape }}</th>
+                  {%- for i in columns -%}
+                    {%- assign key = 'cell_' | append: i -%}
+                    {%- assign value = block.settings[key] | strip -%}
+                    <td{% if i == '1' and section.settings.highlight_first %} class="is-highlight"{% endif %}>
+                      {%- if value == '✓' or value == 'yes' or value == 'Yes' -%}
+                        <span class="pruv-vivine-compare__yes" role="img" aria-label="Yes">{%- render 'pruv-vivine-icon', icon: 'check' -%}</span>
+                      {%- elsif value == '✗' or value == 'x' or value == 'no' or value == 'No' -%}
+                        <span class="pruv-vivine-compare__no" role="img" aria-label="No">{%- render 'pruv-vivine-icon', icon: 'cross' -%}</span>
+                      {%- else -%}
+                        {{ value | escape }}
+                      {%- endif -%}
+                    </td>
+                  {%- endfor -%}
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+        </div>
+        <p class="pruv-vivine-compare__hint" aria-hidden="true">Swipe to compare →</p>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="pruv-vivine__footnote">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro comparison",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "info": "Optional. Lets buttons link to this section."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "How it compares"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Vector-5 vs <strong>the usual options</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "paragraph",
+      "content": "In each row, type ✓ / yes or ✗ / no to show an icon, or any other text to show as is. Leave a column heading empty to hide that column."
+    },
+    {
+      "type": "text",
+      "id": "col_1",
+      "label": "Column 1 heading",
+      "default": "Prüv Vector-5"
+    },
+    {
+      "type": "text",
+      "id": "col_2",
+      "label": "Column 2 heading",
+      "default": "Minoxidil"
+    },
+    {
+      "type": "text",
+      "id": "col_3",
+      "label": "Column 3 heading",
+      "default": "Finasteride"
+    },
+    {
+      "type": "text",
+      "id": "col_4",
+      "label": "Column 4 heading",
+      "default": "Redensyl-only serums"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlight_first",
+      "label": "Highlight column 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Footnote",
+      "default": "Comparison based on publicly available information. Not medical advice — consult a dermatologist for prescription treatments."
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "criterion",
+          "label": "Criterion",
+          "default": "Drug-free"
+        },
+        {
+          "type": "text",
+          "id": "cell_1",
+          "label": "Column 1",
+          "default": "✓"
+        },
+        {
+          "type": "text",
+          "id": "cell_2",
+          "label": "Column 2",
+          "default": "✗"
+        },
+        {
+          "type": "text",
+          "id": "cell_3",
+          "label": "Column 3",
+          "default": "✗"
+        },
+        {
+          "type": "text",
+          "id": "cell_4",
+          "label": "Column 4",
+          "default": "✓"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "VivinePro comparison",
+      "blocks": [
+        { "type": "row" }
+      ]
+    }
+  ]
+}
+{% endschema %}

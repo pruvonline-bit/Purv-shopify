@@ -237,3 +237,23 @@
     font-size: 3rem;
   }
 }
+
+/* Optional expert-card fields (credentials / bio) — only rendered when filled in */
+.pruv-team__credentials {
+  margin: 0.8rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #8A8175;
+}
+
+.pruv-team__bio {
+  margin-top: 1rem;
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: #8A8175;
+  text-align: left;
+}
+
+.pruv-team__bio p {
+  margin: 0 0 0.8rem;
+}

@@ -1,0 +1,176 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-timeline{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    {%- if section.settings.stat != blank -%}
+      <div class="pruv-vivine__header" data-animate="fade-up" style="margin-bottom: 0.8rem;">
+        <p class="pruv-vivine-timeline__stat">{{ section.settings.stat | escape }}</p>
+      </div>
+    {%- endif -%}
+    {%- render 'pruv-vivine-header' -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="pruv-vivine-timeline__track" data-animate="stagger">
+        {%- for block in section.blocks -%}
+          <div class="pruv-vivine-timeline__stage" {{ block.shopify_attributes }}>
+            <div class="pruv-vivine-timeline__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 1080px) 25vw, (min-width: 750px) 50vw, 80vw', alt: block.settings.title
+                }}
+              {%- else -%}
+                <span>{{ block.settings.label | escape }}</span>
+              {%- endif -%}
+            </div>
+            <div class="pruv-vivine-timeline__body">
+              <span class="pruv-vivine__badge">{{ block.settings.label | escape }}</span>
+              <h3 class="pruv-vivine-timeline__name">{{ block.settings.title | escape }}</h3>
+              <p class="pruv-vivine-timeline__text">{{ block.settings.text | escape }}</p>
+              <div class="pruv-vivine-timeline__bar" aria-hidden="true">
+                <span style="width: {{ block.settings.progress }}%;"></span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="pruv-vivine__footnote">{{ section.settings.footnote | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro timeline",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "info": "Optional. Lets buttons link to this section, e.g. #results."
+    },
+    {
+      "type": "text",
+      "id": "stat",
+      "label": "Headline stat",
+      "default": "XX%"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Clinically observed results"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "of users saw <strong>visible new growth</strong> in 84 days"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>[Placeholder] Short description of what changes at each stage of the 84-day ritual.</p>"
+    },
+    {
+      "type": "text",
+      "id": "footnote",
+      "label": "Study footnote",
+      "default": "[Study: N participants, 84 days, study type / lab name — replace before launch]"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Day label",
+          "default": "Day 0"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Baseline"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "[Placeholder] What the scalp and hair look like at this stage."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Before / after image"
+        },
+        {
+          "type": "range",
+          "id": "progress",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Progress bar",
+          "default": 25
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "VivinePro timeline",
+      "blocks": [
+        { "type": "stage", "settings": { "label": "Day 0", "title": "Baseline", "progress": 5 } },
+        { "type": "stage", "settings": { "label": "Day 1–28", "title": "Less shedding", "progress": 35 } },
+        { "type": "stage", "settings": { "label": "Day 28–56", "title": "New baby hair", "progress": 65 } },
+        { "type": "stage", "settings": { "label": "Day 56–84", "title": "Visible density", "progress": 100 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

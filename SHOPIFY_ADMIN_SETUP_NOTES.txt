@@ -128,3 +128,44 @@ If these metafields are left empty, the theme automatically falls back to the
 curated catalog definitions based on product titles and handles.
 ================================================================================
 
+
+
+================================================================================
+STEP 5: HAIR VIVINEPRO SCIENCE PAGE (/pages/hair-vivinepro)
+================================================================================
+
+A long-form science page for the Vector-5 serum, modelled on Arata's MitoActive
+page. Template: page.hair-vivinepro. Every number / claim marked XX%, [XX] or
+[Placeholder] MUST be replaced with real, approved data before launch.
+
+1. Create the page:
+   - Online Store -> Pages -> Add page
+   - Title: "Hair VivinePro"   (URL handle must be: hair-vivinepro)
+   - Right sidebar -> Theme template: "hair-vivinepro"
+   - Leave the content box empty -> Save.
+
+2. Add it to the menu:
+   - Online Store -> Navigation -> Main menu -> Add menu item
+   - Name: "Science" (or "Hair VivinePro"), Link: Pages -> Hair VivinePro.
+
+3. Serum product page link (already pre-set in the theme):
+   - The "Formula Mechanism" section on product pages shows
+     "Discover the science of Hair VivinePro ->" ONLY on the Vector-5 serum.
+   - Change it in Customize -> Products -> Default product -> Formula Mechanism
+     -> "Science page link". Empty the Link field to hide it.
+
+4. Fill in the content (Customize -> Pages -> hair-vivinepro):
+   - VivinePro hero ........ headline, claims, hero image
+   - VivinePro timeline .... headline stat, 4 day-stages (before/after images),
+                             study footnote
+   - VivinePro benefits .... 4 "why you need it" cards
+   - VivinePro ingredients . Hair VivinePro spotlight (%, description, image),
+                             4 supporting actives, full INCI list
+   - VivinePro mechanism ... 3-step flow
+   - VivinePro pathways .... biomarker cards (expand on tap)
+   - VivinePro comparison .. table; type yes/no (or a tick/cross) for icons
+   - Prüv team (experts) ... photo, name, role, credentials, bio
+   - Prüv FAQs ............. tabs: Description / Ingredients / Key Benefits /
+                             How to Use / FAQs
+   - VivinePro buy CTA ..... add-to-cart for the serum
+================================================================================

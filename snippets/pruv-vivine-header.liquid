@@ -1,0 +1,32 @@
+{%- comment -%}
+  Shared header + padding for the Hair VivinePro page sections (pruv-vivine-*).
+  Reads eyebrow / heading / subheading / padding_top / padding_bottom from section.settings.
+{%- endcomment -%}
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+{%- if render_header != false -%}
+  {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+    <div class="pruv-vivine__header" data-animate="fade-up">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="pruv-vivine__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pruv-vivine__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <div class="pruv-vivine__subtitle">{{ section.settings.subheading }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

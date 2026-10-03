@@ -43,7 +43,7 @@
                 <div class="pruv-team__avatar-seal">
                   <span class="pruv-team__avatar-monogram">P</span>
                 </div>
-                <span class="pruv-team__avatar-tag">FOUNDING TEAM · 0{{ forloop.index }}</span>
+                <span class="pruv-team__avatar-tag">{{ section.settings.placeholder_tag | default: 'FOUNDING TEAM' | escape }} · 0{{ forloop.index }}</span>
               </div>
             {%- endif -%}
           </div>
@@ -52,6 +52,12 @@
           {%- endif -%}
           {%- if block.settings.role != blank -%}
             <p class="pruv-team__role">{{ block.settings.role | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.credentials != blank -%}
+            <p class="pruv-team__credentials">{{ block.settings.credentials | escape }}</p>
+          {%- endif -%}
+          {%- if block.settings.bio != blank -%}
+            <div class="pruv-team__bio rte">{{ block.settings.bio }}</div>
           {%- endif -%}
         </div>
       {%- endfor -%}
@@ -82,6 +88,13 @@
       "id": "text",
       "label": "Text",
       "default": "<p>A small, multidisciplinary team spanning research, formulation, design and operations — all working toward the same standard.</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_tag",
+      "label": "Label on photo placeholder",
+      "default": "FOUNDING TEAM",
+      "info": "Shown on members without a photo."
     },
     {
       "type": "color_scheme",
@@ -135,6 +148,18 @@
           "id": "role",
           "label": "Role",
           "default": "Co-Founder"
+        },
+        {
+          "type": "text",
+          "id": "credentials",
+          "label": "Credentials",
+          "info": "Optional, e.g. MBBS, MD (Dermatology). Shown under the role."
+        },
+        {
+          "type": "richtext",
+          "id": "bio",
+          "label": "Bio",
+          "info": "Optional. Use for expert / advisor cards."
         }
       ]
     }

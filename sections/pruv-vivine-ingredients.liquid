@@ -1,0 +1,233 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-ingredients{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    {%- render 'pruv-vivine-header' -%}
+
+    <div class="pruv-vivine-ingredients__spotlight" data-animate="fade-up">
+      <div class="pruv-vivine-ingredients__spotlight-media">
+        {%- if section.settings.spotlight_image != blank -%}
+          {{
+            section.settings.spotlight_image
+            | image_url: width: 900
+            | image_tag: loading: 'lazy', widths: '450, 700, 900', sizes: '(min-width: 750px) 40vw, 100vw', alt: section.settings.spotlight_name
+          }}
+        {%- else -%}
+          <span class="pruv-vivine-ingredients__molecule">{{ section.settings.spotlight_name | escape }}</span>
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.spotlight_badge != blank -%}
+          <span class="pruv-vivine__badge">{{ section.settings.spotlight_badge | escape }}</span>
+        {%- endif -%}
+        <h3 class="pruv-vivine-ingredients__name">{{ section.settings.spotlight_name | escape }}</h3>
+        {%- if section.settings.spotlight_text != blank -%}
+          <div class="pruv-vivine-ingredients__desc">{{ section.settings.spotlight_text }}</div>
+        {%- endif -%}
+        {%- if section.settings.spotlight_note != blank -%}
+          <p class="pruv-vivine-ingredients__note">
+            <span class="pruv-vivine__icon" style="width: 2.8rem; height: 2.8rem;">{%- render 'pruv-vivine-icon', icon: 'flask' -%}</span>
+            {{ section.settings.spotlight_note | escape }}
+          </p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      {%- if section.settings.support_title != blank -%}
+        <p class="pruv-vivine-ingredients__support-title">{{ section.settings.support_title | escape }}</p>
+      {%- endif -%}
+      <div class="pruv-vivine-ingredients__grid" data-animate="stagger">
+        {%- for block in section.blocks -%}
+          <div class="pruv-vivine-ingredients__active" {{ block.shopify_attributes }}>
+            {%- if block.settings.badge != blank -%}
+              <span class="pruv-vivine__badge">{{ block.settings.badge | escape }}</span>
+            {%- endif -%}
+            <h4 class="pruv-vivine-ingredients__active-name">{{ block.settings.name | escape }}</h4>
+            {%- if block.settings.role != blank -%}
+              <p class="pruv-vivine-ingredients__active-role">{{ block.settings.role | escape }}</p>
+            {%- endif -%}
+            <p class="pruv-vivine-ingredients__active-text">{{ block.settings.text | escape }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.inci != blank -%}
+      <details class="pruv-vivine-disclosure pruv-vivine-ingredients__inci">
+        <summary>
+          <span>{{ section.settings.inci_label | default: 'Full ingredient list' | escape }}</span>
+          <span class="pruv-vivine-disclosure__plus" aria-hidden="true"></span>
+        </summary>
+        <div class="pruv-vivine-disclosure__content">{{ section.settings.inci }}</div>
+      </details>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro ingredients",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "default": "science",
+      "info": "Optional. Lets buttons link to this section."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Key ingredient"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Meet the active behind <strong>the results</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Hero ingredient spotlight"
+    },
+    {
+      "type": "text",
+      "id": "spotlight_name",
+      "label": "Name",
+      "default": "Hair VivinePro™"
+    },
+    {
+      "type": "text",
+      "id": "spotlight_badge",
+      "label": "Badge",
+      "default": "X% Hero active"
+    },
+    {
+      "type": "image_picker",
+      "id": "spotlight_image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "spotlight_text",
+      "label": "Description",
+      "default": "<p>[Placeholder] What Hair VivinePro is, where it comes from and what makes it a first-of-its-kind active. Replace with supplier-approved copy.</p>"
+    },
+    {
+      "type": "text",
+      "id": "spotlight_note",
+      "label": "Validation note",
+      "default": "[Validated through in-vitro and in-vivo studies — confirm with supplier]"
+    },
+    {
+      "type": "header",
+      "content": "Supporting actives"
+    },
+    {
+      "type": "text",
+      "id": "support_title",
+      "label": "Supporting actives title",
+      "default": "Supported by 4 proven actives"
+    },
+    {
+      "type": "header",
+      "content": "Full ingredient list"
+    },
+    {
+      "type": "text",
+      "id": "inci_label",
+      "label": "Toggle label",
+      "default": "Full ingredient list"
+    },
+    {
+      "type": "richtext",
+      "id": "inci",
+      "label": "Ingredient list (INCI)",
+      "default": "<p>[Placeholder] Aqua, …, Hair VivinePro™, … — paste the full INCI list from the pack.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "active",
+      "name": "Supporting active",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge",
+          "default": "3% Active"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Redensyl™"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Follicle stem cell reactivator"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "How it works",
+          "default": "Reactivates dormant stem cells at the follicle base, switching resting hairs into active growth."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "VivinePro ingredients",
+      "blocks": [
+        { "type": "active" }
+      ]
+    }
+  ]
+}
+{% endschema %}

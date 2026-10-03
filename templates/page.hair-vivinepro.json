@@ -1,0 +1,614 @@
+{
+  "sections": {
+    "hero": {
+      "type": "pruv-vivine-hero",
+      "settings": {
+        "eyebrow": "The science behind Vector-5",
+        "heading": "Breakthrough hair growth, powered by <strong>Hair VivinePro™</strong>",
+        "subheading": "<p>[Placeholder] One-line description of what Hair VivinePro is and why it is different. Replace with approved claim copy.</p>",
+        "product": "pruv-vector-5-advanced-multi-pathway-structural-density",
+        "button_label": "Shop the serum",
+        "secondary_label": "See the science",
+        "secondary_anchor": "science",
+        "dark": false,
+        "padding_top": 56,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "claim_1": {
+          "type": "claim",
+          "settings": {
+            "icon": "sprout",
+            "text": "Visible new growth in XX days"
+          }
+        },
+        "claim_2": {
+          "type": "claim",
+          "settings": {
+            "icon": "shield",
+            "text": "Up to XX% less hair fall"
+          }
+        },
+        "claim_3": {
+          "type": "claim",
+          "settings": {
+            "icon": "bolt",
+            "text": "Re-energises tired follicles"
+          }
+        },
+        "claim_4": {
+          "type": "claim",
+          "settings": {
+            "icon": "water",
+            "text": "100% water-based, drug-free"
+          }
+        }
+      },
+      "block_order": [
+        "claim_1",
+        "claim_2",
+        "claim_3",
+        "claim_4"
+      ]
+    },
+    "results": {
+      "type": "pruv-vivine-timeline",
+      "settings": {
+        "anchor": "results",
+        "stat": "XX%",
+        "eyebrow": "Clinically observed results",
+        "heading": "of users saw <strong>visible new growth</strong> in 84 days",
+        "subheading": "<p>Hair grows in cycles. Here is what changes at each stage of the 84-day Vector-5 ritual.</p>",
+        "footnote": "[Study: N participants, 84 days, study type / lab name — replace before launch]",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 0",
+            "title": "Baseline",
+            "text": "[Placeholder] Thinning areas, visible scalp, higher daily shedding.",
+            "progress": 5
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 1–28",
+            "title": "Less shedding",
+            "text": "[Placeholder] Roots anchor better and daily hair fall starts to settle.",
+            "progress": 35
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 28–56",
+            "title": "New baby hair",
+            "text": "[Placeholder] Dormant follicles wake up and fine new hairs appear along the hairline and parting.",
+            "progress": 65
+          }
+        },
+        "stage_4": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 56–84",
+            "title": "Visible density",
+            "text": "[Placeholder] New strands thicken, and the scalp looks fuller and less see-through.",
+            "progress": 100
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3",
+        "stage_4"
+      ]
+    },
+    "why": {
+      "type": "pruv-vivine-why",
+      "settings": {
+        "eyebrow": "Why you need it",
+        "heading": "Why your scalp needs <strong>Vector-5</strong>",
+        "dark": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "sprout",
+            "title": "Boosts hair growth",
+            "text": "[Placeholder] Extends the active growth (anagen) phase so each strand grows longer."
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "title": "Reduces hair fall",
+            "text": "[Placeholder] Strengthens the root anchor so fewer strands shed daily."
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "bolt",
+            "title": "Energises follicles",
+            "text": "[Placeholder] Hair VivinePro re-energises follicle cells at the root."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "leaf",
+            "title": "Calms the scalp",
+            "text": "[Placeholder] Soothes an inflamed, stressed scalp so follicles can work."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ]
+    },
+    "ingredients": {
+      "type": "pruv-vivine-ingredients",
+      "settings": {
+        "anchor": "science",
+        "eyebrow": "Key ingredient",
+        "heading": "Meet the active behind <strong>the results</strong>",
+        "spotlight_name": "Hair VivinePro™",
+        "spotlight_badge": "X% Hero active",
+        "spotlight_text": "<p>[Placeholder] What Hair VivinePro is, where it comes from and what makes it a first-of-its-kind active. Replace with supplier-approved copy.</p>",
+        "spotlight_note": "[Validated through in-vitro and in-vivo studies — confirm with supplier]",
+        "support_title": "Supported by 4 proven actives",
+        "inci_label": "Full ingredient list",
+        "inci": "<p>[Placeholder] Aqua, …, Hair VivinePro™, … — paste the full INCI list from the pack.</p>",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "active_1": {
+          "type": "active",
+          "settings": {
+            "badge": "3% Active",
+            "name": "Redensyl™",
+            "role": "Follicle stem cell reactivator",
+            "text": "Reactivates dormant stem cells at the follicle base, switching resting hairs into active growth."
+          }
+        },
+        "active_2": {
+          "type": "active",
+          "settings": {
+            "badge": "2% Active",
+            "name": "Procapil™",
+            "role": "Root anchoring complex",
+            "text": "Fortifies follicle sheath tissue to firmly anchor roots while boosting scalp micro-circulation."
+          }
+        },
+        "active_3": {
+          "type": "active",
+          "settings": {
+            "badge": "4% Phyto",
+            "name": "Anagain™",
+            "role": "Growth life-cycle extender",
+            "text": "Stimulates signal molecules in dermal papilla cells to extend the active anagen phase and prolong strand life."
+          }
+        },
+        "active_4": {
+          "type": "active",
+          "settings": {
+            "badge": "Bio-peptide",
+            "name": "Copper Tripeptide-1",
+            "role": "Cellular follicle thickener",
+            "text": "Supports miniaturised follicles and keratin matrix synthesis for a thicker-looking shaft."
+          }
+        }
+      },
+      "block_order": [
+        "active_1",
+        "active_2",
+        "active_3",
+        "active_4"
+      ]
+    },
+    "mechanism": {
+      "type": "pruv-vivine-mechanism",
+      "settings": {
+        "eyebrow": "Mechanism of action",
+        "heading": "How <strong>Hair VivinePro™</strong> works",
+        "subheading": "<p>[Placeholder] One line on the root-cause approach.</p>",
+        "summary": "[Placeholder] Root cause → cellular response → visible result, in one sentence.",
+        "dark": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Hair VivinePro™ reaches the follicle",
+            "text": "[Placeholder] The water-based formula carries the active to the root."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Follicle cells are re-energised",
+            "text": "[Placeholder] The cellular pathway it activates."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Longer, stronger growth phase",
+            "text": "[Placeholder] More hairs stay in growth, for longer, with thicker strands."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "pathways": {
+      "type": "pruv-vivine-pathways",
+      "settings": {
+        "eyebrow": "Pathways & biomarkers",
+        "heading": "The biology it <strong>switches on</strong>",
+        "subheading": "<p>[Placeholder] The markers measured in the Hair VivinePro studies. Tap each to learn more.</p>",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "pathway_1": {
+          "type": "pathway",
+          "settings": {
+            "name": "Marker 1",
+            "subtitle": "[Placeholder] What it controls",
+            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+          }
+        },
+        "pathway_2": {
+          "type": "pathway",
+          "settings": {
+            "name": "Marker 2",
+            "subtitle": "[Placeholder] What it controls",
+            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+          }
+        },
+        "pathway_3": {
+          "type": "pathway",
+          "settings": {
+            "name": "Marker 3",
+            "subtitle": "[Placeholder] What it controls",
+            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+          }
+        },
+        "pathway_4": {
+          "type": "pathway",
+          "settings": {
+            "name": "Marker 4",
+            "subtitle": "[Placeholder] What it controls",
+            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "pathway_1",
+        "pathway_2",
+        "pathway_3",
+        "pathway_4"
+      ]
+    },
+    "compare": {
+      "type": "pruv-vivine-compare",
+      "settings": {
+        "eyebrow": "How it compares",
+        "heading": "Vector-5 vs <strong>the usual options</strong>",
+        "col_1": "Prüv Vector-5",
+        "col_2": "Minoxidil",
+        "col_3": "Finasteride",
+        "col_4": "Redensyl-only serums",
+        "highlight_first": true,
+        "footnote": "Comparison based on publicly available information. Not medical advice — consult a dermatologist for prescription treatments.",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "criterion": "Drug-free, cosmetic formula",
+            "cell_1": "✓",
+            "cell_2": "✗",
+            "cell_3": "✗",
+            "cell_4": "✓"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "criterion": "Prescription needed",
+            "cell_1": "No",
+            "cell_2": "Often",
+            "cell_3": "Yes",
+            "cell_4": "No"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "criterion": "Targets multiple pathways",
+            "cell_1": "✓",
+            "cell_2": "✗",
+            "cell_3": "✗",
+            "cell_4": "✗"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "criterion": "Initial “shedding phase” reported",
+            "cell_1": "No",
+            "cell_2": "Common",
+            "cell_3": "Possible",
+            "cell_4": "No"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "criterion": "Suitable for men & women",
+            "cell_1": "✓",
+            "cell_2": "✓",
+            "cell_3": "Men only",
+            "cell_4": "✓"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "criterion": "Format",
+            "cell_1": "Water-based scalp serum",
+            "cell_2": "Topical solution / foam",
+            "cell_3": "Oral tablet",
+            "cell_4": "Scalp serum"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "criterion": "Time to visible results",
+            "cell_1": "[XX] days",
+            "cell_2": "3–6 months",
+            "cell_3": "3–6 months",
+            "cell_4": "[XX] days"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ]
+    },
+    "experts": {
+      "type": "pruv-team",
+      "settings": {
+        "eyebrow": "The experts",
+        "heading": "Developed with <strong>hair-science experts</strong>",
+        "text": "<p>[Placeholder] The scientists, dermatologists and formulators behind Hair VivinePro and Vector-5.</p>",
+        "placeholder_tag": "EXPERT",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "member_1": {
+          "type": "member",
+          "settings": {
+            "name": "Expert Name",
+            "role": "Dermatologist",
+            "credentials": "[MBBS, MD — placeholder]",
+            "bio": "<p>[Placeholder] Short bio and their role in developing the formula.</p>"
+          }
+        },
+        "member_2": {
+          "type": "member",
+          "settings": {
+            "name": "Expert Name",
+            "role": "Trichologist",
+            "credentials": "[Credentials — placeholder]",
+            "bio": "<p>[Placeholder] Short bio.</p>"
+          }
+        },
+        "member_3": {
+          "type": "member",
+          "settings": {
+            "name": "Expert Name",
+            "role": "Lead Formulator",
+            "credentials": "[Credentials — placeholder]",
+            "bio": "<p>[Placeholder] Short bio.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "member_1",
+        "member_2",
+        "member_3"
+      ]
+    },
+    "faqs": {
+      "type": "pruv-faqs",
+      "settings": {
+        "heading": "Everything you need to know",
+        "open_first": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "category",
+          "settings": {
+            "label": "Description"
+          }
+        },
+        "faq_2": {
+          "type": "question",
+          "settings": {
+            "question": "What is Vector-5?",
+            "answer": "<p>Vector-5 Advance Multi Pathway Structural Density Serum is a water-based scalp serum built around Hair VivinePro™, supported by Redensyl™, Procapil™, Anagain™ and Copper Tripeptide-1. It works at the root to support fuller-looking, denser hair.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "question",
+          "settings": {
+            "question": "Who is it for?",
+            "answer": "<p>All hair and scalp types, for both men and women, dealing with thinning, low density or increased hair fall.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "category",
+          "settings": {
+            "label": "Ingredients"
+          }
+        },
+        "faq_5": {
+          "type": "question",
+          "settings": {
+            "question": "What is Hair VivinePro™?",
+            "answer": "<p>[Placeholder] Supplier-approved explanation of Hair VivinePro™.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "question",
+          "settings": {
+            "question": "What is it free from?",
+            "answer": "<p>Formulated without Minoxidil, sulfates, silicones, parabens or synthetic dyes.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "category",
+          "settings": {
+            "label": "Key Benefits"
+          }
+        },
+        "faq_8": {
+          "type": "question",
+          "settings": {
+            "question": "What results can I expect?",
+            "answer": "<p>[Placeholder] Less shedding in the first month, new baby hair by month two, visible density by day 84 with consistent use.</p>"
+          }
+        },
+        "faq_9": {
+          "type": "category",
+          "settings": {
+            "label": "How to Use"
+          }
+        },
+        "faq_10": {
+          "type": "question",
+          "settings": {
+            "question": "How do I apply it?",
+            "answer": "<ol><li>Start with a clean, dry or damp scalp.</li><li>Part your hair and apply drops directly to thinning areas.</li><li>Massage gently for 60 seconds.</li><li>Do not rinse. Use daily for at least 84 days.</li></ol>"
+          }
+        },
+        "faq_11": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with hair oil or styling products?",
+            "answer": "<p>Apply Vector-5 first, directly to a clean scalp. Let it absorb for 60 seconds before any creams or styling products. Never apply heavy oils before the serum, as oil blocks water absorption.</p>"
+          }
+        },
+        "faq_12": {
+          "type": "category",
+          "settings": {
+            "label": "FAQs"
+          }
+        },
+        "faq_13": {
+          "type": "question",
+          "settings": {
+            "question": "Will I experience initial shedding?",
+            "answer": "<p>Vector-5 is a gentle, drug-free water formula, so it is not designed to cause the sudden shedding phase sometimes reported with drug-based treatments.</p>"
+          }
+        },
+        "faq_14": {
+          "type": "question",
+          "settings": {
+            "question": "Does it leave residue?",
+            "answer": "<p>No. It is 100% water-based and dries clean in under 60 seconds.</p>"
+          }
+        },
+        "faq_15": {
+          "type": "question",
+          "settings": {
+            "question": "Should I do a patch test?",
+            "answer": "<p>Yes. Apply 2 drops behind your ear or on your inner forearm and wait 24 hours. If there is no redness, burning or itching, start daily scalp use.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10",
+        "faq_11",
+        "faq_12",
+        "faq_13",
+        "faq_14",
+        "faq_15"
+      ]
+    },
+    "cta": {
+      "type": "pruv-vivine-cta",
+      "settings": {
+        "product": "pruv-vector-5-advanced-multi-pathway-structural-density",
+        "eyebrow": "Start your 84-day ritual",
+        "heading": "Give your follicles <strong>Hair VivinePro™</strong>",
+        "subheading": "<p>Apply daily to a clean scalp. Visible results build over 84 days of consistent use.</p>",
+        "button_label": "Add to cart",
+        "link_label": "View product",
+        "dark": true,
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "results",
+    "why",
+    "ingredients",
+    "mechanism",
+    "pathways",
+    "compare",
+    "experts",
+    "faqs",
+    "cta"
+  ]
+}

@@ -143,6 +143,14 @@
         Anchoring + Awakening + Extending + Thickening work simultaneously to reverse hair shedding at every biological stage.
       </p>
     </div>
+
+    {%- if section.settings.science_link_url != blank and section.settings.science_link_label != blank -%}
+      {%- if section.settings.science_link_product == blank or section.settings.science_link_product.id == product.id -%}
+        <a href="{{ section.settings.science_link_url }}" class="pruv-mechanism__science-link">
+          {{- section.settings.science_link_label | escape }} &rarr;
+        </a>
+      {%- endif -%}
+    {%- endif -%}
   </div>
 </section>
 
@@ -169,6 +177,28 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Every ingredient performs a specific biological mechanism to directly drive your 90-day transformation."
+    },
+    {
+      "type": "header",
+      "content": "Science page link"
+    },
+    {
+      "type": "text",
+      "id": "science_link_label",
+      "label": "Link label",
+      "default": "Discover the science of Hair VivinePro"
+    },
+    {
+      "type": "url",
+      "id": "science_link_url",
+      "label": "Link",
+      "info": "e.g. /pages/hair-vivinepro. Leave empty to hide the link."
+    },
+    {
+      "type": "product",
+      "id": "science_link_product",
+      "label": "Only show on this product",
+      "info": "Leave empty to show on every product page."
     },
     {
       "type": "header",

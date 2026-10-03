@@ -1,0 +1,946 @@
+/* Prüv — Hair VivinePro science page (page.hair-vivinepro).
+   Shared by every pruv-vivine-* section. Palette follows pruv-brand-tokens.css:
+   Deep Graphite #1B1D1F / Bone #F5F2EC / Oxidized Copper #B87333 / Warm Grey #8A8175. */
+
+.pruv-vivine {
+  position: relative;
+  overflow: hidden;
+  background-color: #FAF6F0;
+  color: #1B1D1F;
+}
+
+.pruv-vivine--dark {
+  background-color: #1B1D1F;
+  color: #F5F2EC;
+}
+
+.pruv-vivine *,
+.pruv-vivine *::before,
+.pruv-vivine *::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Shared header ---------- */
+.pruv-vivine__header {
+  text-align: center;
+  max-width: 72rem;
+  margin: 0 auto 3.2rem;
+}
+
+.pruv-vivine__eyebrow {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B87333;
+  margin: 0 0 0.8rem;
+}
+
+.pruv-vivine__title {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 3vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: inherit;
+  margin: 0 0 0.9rem;
+}
+
+.pruv-vivine__title strong,
+.pruv-vivine__title em {
+  color: #B87333;
+  font-style: normal;
+}
+
+.pruv-vivine__subtitle {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(1.4rem, 1.5vw, 1.6rem);
+  line-height: 1.55;
+  color: #8A8175;
+  margin: 0 auto;
+  max-width: 58rem;
+}
+
+.pruv-vivine--dark .pruv-vivine__subtitle {
+  color: rgba(245, 242, 236, 0.7);
+}
+
+.pruv-vivine__subtitle p {
+  margin: 0;
+}
+
+.pruv-vivine__footnote {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: #8A8175;
+  text-align: center;
+  margin: 2rem auto 0;
+  max-width: 64rem;
+}
+
+.pruv-vivine__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 50%;
+  background: rgba(184, 115, 51, 0.12);
+  color: #B87333;
+  flex-shrink: 0;
+}
+
+.pruv-vivine__icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.pruv-vivine__badge {
+  display: inline-block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #B87333;
+  border: 1px solid rgba(184, 115, 51, 0.4);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+}
+
+.pruv-vivine__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  min-height: 4.8rem;
+  padding: 0 2.8rem;
+  border-radius: 999px;
+  background: #B87333;
+  color: #F5F2EC;
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pruv-vivine__btn:hover {
+  background: #9C622B;
+}
+
+.pruv-vivine__btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pruv-vivine__btn--ghost {
+  background: transparent;
+  color: inherit;
+  border: 1px solid currentColor;
+}
+
+.pruv-vivine__btn--ghost:hover {
+  background: rgba(184, 115, 51, 0.1);
+}
+
+/* ---------- Hero ---------- */
+.pruv-vivine-hero__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4.8rem;
+  align-items: center;
+}
+
+.pruv-vivine-hero .pruv-vivine__header {
+  text-align: left;
+  margin: 0 0 2.4rem;
+}
+
+.pruv-vivine-hero .pruv-vivine__title {
+  font-size: clamp(3rem, 4.4vw, 5.2rem);
+}
+
+.pruv-vivine-hero .pruv-vivine__subtitle {
+  margin: 0;
+}
+
+.pruv-vivine-hero__claims {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  margin: 0 0 3.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pruv-vivine-hero__claim {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.pruv-vivine-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.pruv-vivine-hero__media {
+  position: relative;
+  border-radius: 2.4rem;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: radial-gradient(circle at 50% 40%, rgba(184, 115, 51, 0.25), rgba(184, 115, 51, 0.04) 70%);
+}
+
+.pruv-vivine-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pruv-vivine-hero__media-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #B87333;
+}
+
+/* ---------- Timeline ---------- */
+.pruv-vivine-timeline__stat {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(4.4rem, 7vw, 8rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #B87333;
+  margin: 0 0 0.6rem;
+}
+
+.pruv-vivine-timeline__track {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.pruv-vivine-timeline__stage {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid rgba(27, 29, 31, 0.08);
+  border-radius: 1.8rem;
+  overflow: hidden;
+}
+
+.pruv-vivine--dark .pruv-vivine-timeline__stage {
+  background: rgba(245, 242, 236, 0.05);
+  border-color: rgba(245, 242, 236, 0.12);
+}
+
+.pruv-vivine-timeline__media {
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(160deg, rgba(184, 115, 51, 0.16), rgba(138, 129, 117, 0.08));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pruv-vivine-timeline__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pruv-vivine-timeline__media span {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A8175;
+}
+
+.pruv-vivine-timeline__body {
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1;
+}
+
+.pruv-vivine-timeline__name {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.pruv-vivine-timeline__text {
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #8A8175;
+  margin: 0;
+  flex: 1;
+}
+
+.pruv-vivine-timeline__bar {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: rgba(184, 115, 51, 0.15);
+  overflow: hidden;
+  margin-top: 0.6rem;
+}
+
+.pruv-vivine-timeline__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #B87333;
+}
+
+/* ---------- Why (benefit grid) ---------- */
+.pruv-vivine-why__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.pruv-vivine-why__item {
+  padding: 2.4rem 2rem;
+  border-radius: 1.8rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(27, 29, 31, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.pruv-vivine--dark .pruv-vivine-why__item {
+  background: rgba(245, 242, 236, 0.05);
+  border-color: rgba(245, 242, 236, 0.12);
+}
+
+.pruv-vivine-why__title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.pruv-vivine-why__text {
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: #8A8175;
+  margin: 0;
+}
+
+.pruv-vivine--dark .pruv-vivine-why__text {
+  color: rgba(245, 242, 236, 0.7);
+}
+
+/* ---------- Ingredients ---------- */
+.pruv-vivine-ingredients__spotlight {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 3.2rem;
+  border-radius: 2.4rem;
+  background: #1B1D1F;
+  color: #F5F2EC;
+  margin-bottom: 3.2rem;
+}
+
+.pruv-vivine-ingredients__spotlight-media {
+  aspect-ratio: 1 / 1;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(184, 115, 51, 0.45), rgba(184, 115, 51, 0.05) 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pruv-vivine-ingredients__spotlight-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pruv-vivine-ingredients__molecule {
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: clamp(2.4rem, 3vw, 3.4rem);
+  font-weight: 800;
+  color: #F5F2EC;
+  text-align: center;
+  padding: 2rem;
+}
+
+.pruv-vivine-ingredients__name {
+  font-size: clamp(2.8rem, 3.6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 1.2rem 0 1.2rem;
+  color: #F5F2EC;
+}
+
+.pruv-vivine-ingredients__desc {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: rgba(245, 242, 236, 0.78);
+}
+
+.pruv-vivine-ingredients__desc p {
+  margin: 0 0 1rem;
+}
+
+.pruv-vivine-ingredients__note {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  color: #B87333;
+}
+
+.pruv-vivine-ingredients__support-title {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8A8175;
+  margin: 0 0 1.6rem;
+  text-align: center;
+}
+
+.pruv-vivine-ingredients__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.pruv-vivine-ingredients__active {
+  background: #FFFFFF;
+  border: 1px solid rgba(27, 29, 31, 0.08);
+  border-radius: 1.8rem;
+  padding: 2rem;
+}
+
+.pruv-vivine-ingredients__active-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 1.2rem 0 0.4rem;
+}
+
+.pruv-vivine-ingredients__active-role {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #B87333;
+  margin: 0 0 1rem;
+}
+
+.pruv-vivine-ingredients__active-text {
+  font-size: 1.35rem;
+  line-height: 1.55;
+  color: #8A8175;
+  margin: 0;
+}
+
+/* ---------- Shared <details> disclosure ---------- */
+.pruv-vivine-disclosure {
+  border: 1px solid rgba(27, 29, 31, 0.12);
+  border-radius: 1.6rem;
+  background: #FFFFFF;
+  overflow: hidden;
+}
+
+.pruv-vivine--dark .pruv-vivine-disclosure {
+  background: rgba(245, 242, 236, 0.05);
+  border-color: rgba(245, 242, 236, 0.14);
+}
+
+.pruv-vivine-disclosure > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  padding: 1.8rem 2.2rem;
+}
+
+.pruv-vivine-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.pruv-vivine-disclosure__plus {
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  border: 1px solid rgba(184, 115, 51, 0.5);
+  flex-shrink: 0;
+}
+
+.pruv-vivine-disclosure__plus::before,
+.pruv-vivine-disclosure__plus::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1rem;
+  height: 1.5px;
+  background: #B87333;
+  transform: translate(-50%, -50%);
+  transition: transform 0.25s ease;
+}
+
+.pruv-vivine-disclosure__plus::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.pruv-vivine-disclosure[open] .pruv-vivine-disclosure__plus::after {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.pruv-vivine-disclosure__content {
+  padding: 0 2.2rem 2.2rem;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #8A8175;
+}
+
+.pruv-vivine--dark .pruv-vivine-disclosure__content {
+  color: rgba(245, 242, 236, 0.72);
+}
+
+.pruv-vivine-disclosure__content p {
+  margin: 0 0 1rem;
+}
+
+.pruv-vivine-disclosure__content p:last-child {
+  margin-bottom: 0;
+}
+
+.pruv-vivine-ingredients__inci {
+  margin-top: 2.4rem;
+}
+
+.pruv-vivine-ingredients__inci summary {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+/* ---------- Mechanism flow ---------- */
+.pruv-vivine-mechanism__flow {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.pruv-vivine-mechanism__step {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  padding: 2.8rem 2.4rem;
+  border-radius: 2rem;
+  background: rgba(245, 242, 236, 0.05);
+  border: 1px solid rgba(245, 242, 236, 0.14);
+}
+
+.pruv-vivine:not(.pruv-vivine--dark) .pruv-vivine-mechanism__step {
+  background: #FFFFFF;
+  border-color: rgba(27, 29, 31, 0.08);
+}
+
+.pruv-vivine-mechanism__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 50%;
+  background: #B87333;
+  color: #F5F2EC;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.6rem;
+}
+
+.pruv-vivine-mechanism__name {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 0.8rem;
+}
+
+.pruv-vivine-mechanism__text {
+  font-size: 1.4rem;
+  line-height: 1.55;
+  margin: 0;
+  opacity: 0.75;
+}
+
+.pruv-vivine-mechanism__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.8rem;
+  flex-shrink: 0;
+  color: #B87333;
+}
+
+.pruv-vivine-mechanism__arrow svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.pruv-vivine-mechanism__summary {
+  margin: 2.8rem auto 0;
+  max-width: 72rem;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  padding: 1.6rem 2.4rem;
+  border-radius: 999px;
+  border: 1px solid rgba(184, 115, 51, 0.4);
+}
+
+/* ---------- Pathways ---------- */
+.pruv-vivine-pathways__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem;
+  align-items: start;
+}
+
+.pruv-vivine-pathways__name {
+  display: block;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #B87333;
+}
+
+.pruv-vivine-pathways__sub {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+/* ---------- Comparison table ---------- */
+.pruv-vivine-compare__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 2rem;
+  border: 1px solid rgba(27, 29, 31, 0.1);
+  background: #FFFFFF;
+}
+
+.pruv-vivine-compare__table {
+  width: 100%;
+  min-width: 72rem;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+  line-height: 1.45;
+}
+
+.pruv-vivine-compare__table th,
+.pruv-vivine-compare__table td {
+  padding: 1.6rem 1.8rem;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(27, 29, 31, 0.08);
+}
+
+.pruv-vivine-compare__table tr:last-child td,
+.pruv-vivine-compare__table tr:last-child th {
+  border-bottom: 0;
+}
+
+.pruv-vivine-compare__table thead th {
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8A8175;
+}
+
+.pruv-vivine-compare__table tbody th {
+  text-align: left;
+  font-weight: 700;
+  color: #1B1D1F;
+}
+
+.pruv-vivine-compare__table th:first-child,
+.pruv-vivine-compare__table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #FFFFFF;
+  min-width: 16rem;
+}
+
+.pruv-vivine-compare__table td {
+  color: #8A8175;
+}
+
+.pruv-vivine-compare__table .is-highlight {
+  background: rgba(184, 115, 51, 0.08);
+  color: #1B1D1F;
+  font-weight: 600;
+}
+
+.pruv-vivine-compare__table thead .is-highlight {
+  background: #B87333;
+  color: #F5F2EC;
+}
+
+.pruv-vivine-compare__yes,
+.pruv-vivine-compare__no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+}
+
+.pruv-vivine-compare__yes {
+  background: rgba(184, 115, 51, 0.15);
+  color: #B87333;
+}
+
+.pruv-vivine-compare__no {
+  background: rgba(138, 129, 117, 0.15);
+  color: #8A8175;
+}
+
+.pruv-vivine-compare__yes svg,
+.pruv-vivine-compare__no svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.pruv-vivine-compare__hint {
+  display: none;
+  font-family: 'Geist Mono', monospace;
+  font-size: 1.1rem;
+  color: #8A8175;
+  text-align: right;
+  margin: 0.8rem 0 0;
+}
+
+/* ---------- CTA ---------- */
+.pruv-vivine-cta__card {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 3.2rem;
+  border-radius: 2.4rem;
+  background: rgba(245, 242, 236, 0.06);
+  border: 1px solid rgba(245, 242, 236, 0.14);
+}
+
+.pruv-vivine:not(.pruv-vivine--dark) .pruv-vivine-cta__card {
+  background: #FFFFFF;
+  border-color: rgba(27, 29, 31, 0.08);
+}
+
+.pruv-vivine-cta__media {
+  aspect-ratio: 1 / 1;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  background: #F5F2EC;
+}
+
+.pruv-vivine-cta__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.pruv-vivine-cta .pruv-vivine__header {
+  text-align: left;
+  margin: 0 0 1.6rem;
+}
+
+.pruv-vivine-cta .pruv-vivine__subtitle {
+  margin: 0;
+}
+
+.pruv-vivine-cta__product {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+
+.pruv-vivine-cta__price {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 2.4rem;
+  font-size: 2.4rem;
+  font-weight: 800;
+}
+
+.pruv-vivine-cta__price s {
+  font-size: 1.5rem;
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+.pruv-vivine-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.pruv-vivine-cta__actions product-form,
+.pruv-vivine-cta__actions form {
+  margin: 0;
+}
+
+.pruv-vivine-cta__actions .loading__spinner {
+  display: none;
+}
+
+.pruv-vivine-cta__actions .loading .loading__spinner {
+  display: inline-block;
+}
+
+/* ---------- Tablet ---------- */
+@media screen and (max-width: 1080px) {
+  .pruv-vivine-timeline__track,
+  .pruv-vivine-why__grid,
+  .pruv-vivine-ingredients__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- Mobile ---------- */
+@media screen and (max-width: 749px) {
+  .pruv-vivine__header {
+    margin-bottom: 2.4rem;
+  }
+
+  .pruv-vivine-hero__grid,
+  .pruv-vivine-ingredients__spotlight,
+  .pruv-vivine-cta__card {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  .pruv-vivine-hero__media {
+    order: -1;
+    aspect-ratio: 1 / 1;
+  }
+
+  .pruv-vivine-hero__claims {
+    grid-template-columns: 1fr;
+  }
+
+  .pruv-vivine-hero__actions .pruv-vivine__btn,
+  .pruv-vivine-cta__actions .pruv-vivine__btn,
+  .pruv-vivine-cta__actions product-form {
+    width: 100%;
+  }
+
+  .pruv-vivine-ingredients__spotlight,
+  .pruv-vivine-cta__card {
+    padding: 2rem;
+  }
+
+  .pruv-vivine-timeline__track,
+  .pruv-vivine-why__grid,
+  .pruv-vivine-ingredients__grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1.2rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem 0.8rem;
+    scrollbar-width: none;
+  }
+
+  .pruv-vivine-timeline__track::-webkit-scrollbar,
+  .pruv-vivine-why__grid::-webkit-scrollbar,
+  .pruv-vivine-ingredients__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pruv-vivine-timeline__stage,
+  .pruv-vivine-why__item,
+  .pruv-vivine-ingredients__active {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+
+  .pruv-vivine-mechanism__flow {
+    flex-direction: column;
+  }
+
+  .pruv-vivine-mechanism__arrow {
+    width: 100%;
+    height: 4rem;
+  }
+
+  .pruv-vivine-mechanism__arrow svg {
+    transform: rotate(90deg);
+  }
+
+  .pruv-vivine-mechanism__summary {
+    border-radius: 1.6rem;
+  }
+
+  .pruv-vivine-pathways__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pruv-vivine-compare__hint {
+    display: block;
+  }
+
+  .pruv-vivine-compare__table {
+    min-width: 60rem;
+    font-size: 1.3rem;
+  }
+
+  .pruv-vivine-compare__table th,
+  .pruv-vivine-compare__table td {
+    padding: 1.2rem;
+  }
+
+  .pruv-vivine-compare__table th:first-child,
+  .pruv-vivine-compare__table td:first-child {
+    min-width: 12rem;
+  }
+}

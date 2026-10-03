@@ -1,0 +1,131 @@
+{{ 'section-pruv-vivine.css' | asset_url | stylesheet_tag }}
+
+<section
+  {% if section.settings.anchor != blank %}id="{{ section.settings.anchor | handleize }}"{% endif %}
+  class="pruv-vivine pruv-vivine-pathways{% if section.settings.dark %} pruv-vivine--dark{% endif %} section-{{ section.id }}-padding"
+>
+  <div class="page-width">
+    {%- render 'pruv-vivine-header' -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="pruv-vivine-pathways__grid" data-animate="stagger">
+        {%- for block in section.blocks -%}
+          <details class="pruv-vivine-disclosure" {{ block.shopify_attributes }}>
+            <summary>
+              <span>
+                <span class="pruv-vivine-pathways__name">{{ block.settings.name | escape }}</span>
+                {%- if block.settings.subtitle != blank -%}
+                  <span class="pruv-vivine-pathways__sub">{{ block.settings.subtitle | escape }}</span>
+                {%- endif -%}
+              </span>
+              <span class="pruv-vivine-disclosure__plus" aria-hidden="true"></span>
+            </summary>
+            <div class="pruv-vivine-disclosure__content">{{ block.settings.detail }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "VivinePro pathways",
+  "tag": "section",
+  "class": "section pruv-vivine-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Anchor ID",
+      "info": "Optional. Lets buttons link to this section."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Pathways & biomarkers"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The biology it <strong>switches on</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>[Placeholder] The markers measured in the Hair VivinePro studies. Tap each to learn more.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "dark",
+      "label": "Dark background",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pathway",
+      "name": "Pathway / biomarker",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Marker name",
+          "default": "Marker 1"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Short description",
+          "default": "[Placeholder] What it controls"
+        },
+        {
+          "type": "richtext",
+          "id": "detail",
+          "label": "Detail (shown when opened)",
+          "default": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "VivinePro pathways",
+      "blocks": [
+        { "type": "pathway", "settings": { "name": "Marker 1" } },
+        { "type": "pathway", "settings": { "name": "Marker 2" } },
+        { "type": "pathway", "settings": { "name": "Marker 3" } },
+        { "type": "pathway", "settings": { "name": "Marker 4" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
