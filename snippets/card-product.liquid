@@ -96,11 +96,6 @@
 
   <product-component view-event-payload="{{ card_product | standard_event_data: 'view', context: product_view_context | escape }}" class="pruv-product-card-component">
     <div class="pruv-product-card">
-      <div class="pruv-card-badges-stack">
-        <span class="pruv-badge-bestseller">BEST SELLER</span>
-        <span class="pruv-badge-payday">PAYDAY</span>
-      </div>
-
       <a href="{{ card_product.url }}" class="pruv-card-media-wrapper">
         {%- if card_product.featured_media -%}
           {{

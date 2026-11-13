@@ -604,9 +604,7 @@ a.button.button--hero-solid-secondary,
 .pruv-hero__marquee-track {
   display: flex;
   align-items: center;
-  gap: 5.6rem;
   width: max-content;
-  padding: 0 2.8rem;
   animation: pruv-marquee 28s linear infinite;
 }
 
@@ -628,6 +626,7 @@ a.button.button--hero-solid-secondary,
   display: flex;
   align-items: center;
   height: 3.2rem;
+  margin-right: 5.6rem;
 }
 
 .pruv-hero__logo img {

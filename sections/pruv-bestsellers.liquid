@@ -55,10 +55,6 @@
             {%- for product in shown_products limit: section.settings.products_to_show -%}
               <div class="pruv-bestsellers__slide" data-pruv-bs-slide data-slide-index="{{ forloop.index0 }}">
                 <div class="pruv-product-card">
-                  <div class="pruv-card-badges-stack">
-                    <span class="pruv-badge-bestseller">BEST SELLER</span>
-                    <span class="pruv-badge-payday">PAYDAY</span>
-                  </div>
                   <a href="{{ product.url }}" class="pruv-card-media-wrapper" data-pruv-bs-media>
                     {%- if product.featured_image != blank -%}
                       {{

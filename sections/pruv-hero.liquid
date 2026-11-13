@@ -259,7 +259,7 @@
         {%- endif -%}
         <div class="pruv-hero__marquee">
           <div class="pruv-hero__marquee-track">
-            {%- for i in (1..2) -%}
+            {%- for i in (1..4) -%}
               {%- for block in section.blocks -%}
                 <div class="pruv-hero__logo" {% if i == 1 %}{{ block.shopify_attributes }}{% else %}aria-hidden="true"{% endif %}>
                   {%- if block.settings.logo != blank -%}
