@@ -1,0 +1,313 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "descriptor": {
+          "type": "descriptor",
+          "settings": {
+            "text": "Advanced Multi-Pathway Structural Density Serum"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "rating": {
+          "type": "rating",
+          "settings": {}
+        },
+        "benefit_line": {
+          "type": "benefit_line",
+          "settings": {
+            "text": "Daily support for fuller-looking hair."
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "tab_description": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": true,
+            "use_product_description": true,
+            "heading": "Product Description",
+            "icon": "none",
+            "content": ""
+          }
+        },
+        "tab_how_to_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "How to use",
+            "icon": "none",
+            "content": "<p>Leave-on scalp serum. Part the hair, apply to the scalp using the dropper, and leave on. Dose and frequency: awaiting brand confirmation.</p>"
+          }
+        },
+        "tab_returns_policy": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "Returns, refunds & replacements",
+            "icon": "none",
+            "content": "<p><strong>7-day window:</strong> contact us within 7 days of delivery if the product arrives damaged, leaking or defective, is incorrect or materially different from what you ordered, shows signs of tampering, or an item is missing.</p><p><strong>How to claim:</strong> email <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> or WhatsApp +91-8826744421 (10:00 AM to 5:00 PM) with your order number, the product name, a short description and clear photos or video of the product, packaging and shipping label.</p><p><strong>Replacements and refunds:</strong> where appropriate we may offer a replacement instead of a refund. Approved refunds go back to the original payment method and are generally processed within 5 to 7 business days; the time to show in your account depends on your bank or card issuer.</p><p><strong>Opened or used products:</strong> as a personal-care product, opened, used or unsealed items are not ordinarily accepted for return, including change of mind or dissatisfaction with an individual result, except where damaged, defective or incorrect, or where the law requires. This does not affect your statutory rights.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "descriptor",
+        "price",
+        "rating",
+        "benefit_line",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "tab_description",
+        "tab_how_to_use",
+        "tab_returns_policy"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "hero": {
+      "type": "pruv-ingredient-hero",
+      "settings": {
+        "eyebrow": "The hero ingredient",
+        "heading": "HAIRVIVINE®-PRO",
+        "subheading": "Pumpkin-derived science. A focused approach to hair density.",
+        "science_label": "The science",
+        "link_label": "Explore the ingredient research",
+        "link_url": "/pages/hair-vivinepro",
+        "note": "Research on the ingredient does not establish the performance of the finished Vector-5 formula."
+      }
+    },
+    "supporting": {
+      "type": "pruv-trishield-formula",
+      "blocks": {
+        "a1": {
+          "type": "group",
+          "settings": {
+            "title": "Procapil",
+            "ingredients": "Exact branded complex: awaiting brand confirmation",
+            "text": "Supporting active. Documented role awaiting brand confirmation."
+          }
+        },
+        "a2": {
+          "type": "group",
+          "settings": {
+            "title": "Baicapil",
+            "ingredients": "Botanical complex: awaiting brand confirmation",
+            "text": "Supporting active. Documented role awaiting brand confirmation."
+          }
+        },
+        "a3": {
+          "type": "group",
+          "settings": {
+            "title": "AnaGain",
+            "ingredients": "Pea sprout active: awaiting brand confirmation",
+            "text": "Supporting active. Documented role awaiting brand confirmation."
+          }
+        },
+        "a4": {
+          "type": "group",
+          "settings": {
+            "title": "Aminexil",
+            "ingredients": "Exact identity: awaiting brand confirmation",
+            "text": "Supporting active. Substantiated role awaiting brand confirmation."
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ],
+      "settings": {
+        "eyebrow": "Supporting formula",
+        "heading": "Selected to work alongside the hero",
+        "subheading": "Provisional list. Only manufacturer-confirmed ingredients will be published.",
+        "inci": ""
+      }
+    },
+    "audience": {
+      "type": "pruv-trishield-concerns",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "Visible thinning",
+            "text": "For hair that looks less dense than it used to."
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Widening part",
+            "text": "For a part line that looks wider."
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "title": "Reduced fullness",
+            "text": "For hair that looks flatter and less full."
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "Who it is for",
+        "heading": "Daily support for fuller-looking hair",
+        "subheading": "A scalp serum for hair that looks less full."
+      }
+    },
+    "usage": {
+      "type": "pruv-trishield-usage",
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "title": "Part",
+            "text": "Part the hair to expose the scalp."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "title": "Apply",
+            "text": "Apply the approved dose to the scalp using the dropper."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "title": "Leave on",
+            "text": "Leave on. Do not rinse."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ],
+      "settings": {
+        "eyebrow": "How to use",
+        "heading": "Part. Apply. Leave on.",
+        "frequency": ""
+      }
+    },
+    "evidence": {
+      "type": "pruv-trishield-evidence",
+      "settings": {
+        "heading": "The research behind the formula",
+        "subheading": "Ingredient research is shown separately from finished-product testing."
+      }
+    },
+    "faq": {
+      "type": "pruv-trishield-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How many applications are in one bottle?",
+            "answer": "<p>This depends on the approved dose, which is awaiting brand confirmation.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "Should I apply it to my scalp or my hair lengths?",
+            "answer": "<p>Vector-5 is a scalp serum. Apply it to the scalp, not the lengths.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "What results can I expect?",
+            "answer": "<p>Visible changes vary from person to person and take time. We suggest taking photographs under the same lighting, angle and parting to compare.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I notice irritation or increased shedding?",
+            "answer": "<p>Stop using the product and consult a doctor or dermatologist. A patch test does not guarantee against later reactions.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "What if the bottle arrives damaged?",
+            "answer": "<p>Contact us within 7 days of delivery at <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> or WhatsApp +91-8826744421 with your order number and clear photos or video of the product, packaging and shipping label. We will review the claim and, where appropriate, offer a replacement or refund.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "heading": "Your questions, answered"
+      }
+    },
+    "cross_sell": {
+      "type": "pruv-product-cross-sell",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "hero",
+    "supporting",
+    "audience",
+    "usage",
+    "evidence",
+    "faq",
+    "cross_sell"
+  ]
+}

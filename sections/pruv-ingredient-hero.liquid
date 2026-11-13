@@ -1,0 +1,47 @@
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts pruv-ts--dark pruv-ts-hero">
+  <div class="page-width">
+    <div class="pruv-ts-hero__grid">
+      <div class="pruv-ts-hero__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '400, 700, 1000', alt: section.settings.heading }}
+        {%- else -%}
+          <div class="pruv-ts-hero__placeholder" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
+      <div class="pruv-ts-hero__copy">
+        {%- if section.settings.eyebrow != blank -%}<p class="pruv-ts__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+        <h2 class="pruv-ts-hero__title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subheading != blank -%}<p class="pruv-ts-hero__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+        <span class="pruv-ts-hero__rule" aria-hidden="true"></span>
+        {%- if section.settings.explanation != blank -%}<div class="pruv-ts-hero__text">{{ section.settings.explanation }}</div>{%- endif -%}
+        {%- if section.settings.science != blank -%}
+          <details class="pruv-ts__more"><summary>{{ section.settings.science_label | escape }}</summary><div>{{ section.settings.science }}</div></details>
+        {%- endif -%}
+        {%- if section.settings.link_url != blank and section.settings.link_label != blank -%}
+          <a class="pruv-ts-hero__link" href="{{ section.settings.link_url }}">{{ section.settings.link_label | escape }} →</a>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}<p class="pruv-ts-hero__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv ingredient hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Ingredient image (seeds / extract)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The hero ingredient" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "HAIRVIVINE®-PRO" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Pumpkin-derived science. A focused approach to hair density." },
+    { "type": "richtext", "id": "explanation", "label": "Explanation", "info": "Identify the water-based extract and why it was selected. Confirm the exact raw material first." },
+    { "type": "text", "id": "science_label", "label": "Expandable label", "default": "The science" },
+    { "type": "richtext", "id": "science", "label": "Expandable science", "info": "Attributed supplier/study findings only. Leave empty to hide." },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore the ingredient research" },
+    { "type": "url", "id": "link_url", "label": "Link" },
+    { "type": "textarea", "id": "note", "label": "Evidence note", "default": "Research on the ingredient does not establish the performance of the finished Vector-5 formula." }
+  ],
+  "presets": [{ "name": "Prüv ingredient hero" }]
+}
+{% endschema %}

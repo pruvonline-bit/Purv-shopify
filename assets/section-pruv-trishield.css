@@ -42,3 +42,20 @@
   .pruv-ts { padding: 4rem 0; }
   .pruv-ts__grid, .pruv-ts__steps, .pruv-ts__media { grid-template-columns: 1fr; }
 }
+
+/* Ingredient hero */
+.pruv-ts-hero { padding: 7rem 0; }
+.pruv-ts-hero__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.pruv-ts-hero__media img { width: 100%; height: auto; border-radius: 2rem; display: block; }
+.pruv-ts-hero__placeholder { aspect-ratio: 1; border-radius: 2rem; background: rgba(246,241,233,.08); border: 1px dashed rgba(246,241,233,.25); }
+.pruv-ts-hero__title { margin: 0 0 1.2rem; font-size: clamp(3.6rem, 6vw, 6.4rem); line-height: 1.05; font-style: normal; font-weight: 700; letter-spacing: .01em; }
+.pruv-ts-hero__sub { margin: 0; font-size: 2rem; line-height: 1.4; }
+.pruv-ts-hero__rule { display: block; width: 6rem; height: 2px; margin: 2.4rem 0; background: var(--ts-copper); }
+.pruv-ts-hero__text { font-size: 1.6rem; line-height: 1.7; }
+.pruv-ts-hero__text p { margin: 0 0 1rem; }
+.pruv-ts-hero__link { display: inline-block; margin-top: 2rem; color: var(--ts-copper); font-weight: 600; font-size: 1.5rem; text-decoration: none; }
+.pruv-ts-hero__note { margin: 2rem 0 0; font-size: 1.2rem; line-height: 1.5; opacity: .75; }
+@media (max-width: 749px) {
+  .pruv-ts-hero { padding: 4.4rem 0; }
+  .pruv-ts-hero__grid { grid-template-columns: 1fr; gap: 2.8rem; }
+}

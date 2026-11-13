@@ -1,0 +1,93 @@
+{{ 'section-pruv-faq-master.css' | asset_url | stylesheet_tag }}
+{%- capture nl %}
+{% endcapture -%}
+
+<section class="pruv-fm" data-pruv-fm>
+  <div class="page-width">
+    <div class="pruv-fm__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="pruv-fm__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h1 class="pruv-fm__title">{{ section.settings.heading | escape }}</h1>
+      {%- if section.settings.subheading != blank -%}<p class="pruv-fm__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </div>
+
+    <label class="pruv-fm__search">
+      <span class="visually-hidden">{{ section.settings.search_label | escape }}</span>
+      <input type="search" placeholder="{{ section.settings.search_label | escape }}" data-fm-search autocomplete="off">
+    </label>
+
+    <div class="pruv-fm__tabs" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+      {%- for block in section.blocks -%}
+        <button type="button" role="tab" class="pruv-fm__tab" id="fm-tab-{{ forloop.index }}" aria-controls="fm-panel-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-fm-tab="{{ forloop.index }}" {{ block.shopify_attributes }}>
+          <span class="pruv-fm__tab-num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <span>{{ block.settings.title | escape }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+
+    <p class="pruv-fm__empty" data-fm-empty hidden>{{ section.settings.empty_text | escape }}</p>
+
+    {%- for block in section.blocks -%}
+      <div class="pruv-fm__panel" role="tabpanel" id="fm-panel-{{ forloop.index }}" aria-labelledby="fm-tab-{{ forloop.index }}" data-fm-panel="{{ forloop.index }}" {% unless forloop.first %}hidden{% endunless %}>
+        {%- assign pairs = block.settings.qa | split: '|||' -%}
+        {%- for pair in pairs -%}
+          {%- assign pair = pair | strip -%}
+          {%- if pair == blank -%}{%- continue -%}{%- endif -%}
+          {%- assign lines = pair | split: nl -%}
+          {%- assign q = lines.first | strip -%}
+          {%- assign q_start = q | slice: 0, 3 -%}
+          {%- if q_start == '## ' -%}
+            <h2 class="pruv-fm__group">{{ q | remove_first: '## ' | escape }}</h2>
+          {%- else -%}
+            {%- assign a = pair | remove_first: lines.first | strip -%}
+            <details class="pruv-fm__item" data-fm-item>
+              <summary>{{ q | escape }}</summary>
+              <div class="pruv-fm__answer">{{ a | escape | newline_to_br }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div class="pruv-fm__help">
+          <h3>{{ section.settings.help_heading | escape }}</h3>
+          <p>{{ section.settings.help_text | escape }}</p>
+          <ul>
+            {%- if section.settings.support_email != blank -%}<li><a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email | escape }}</a></li>{%- endif -%}
+            {%- if section.settings.support_phone != blank -%}<li>{{ section.settings.support_phone | escape }}</li>{%- endif -%}
+            {%- if section.settings.support_hours != blank -%}<li>{{ section.settings.support_hours | escape }}</li>{%- endif -%}
+          </ul>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<script src="{{ 'pruv-faq-master.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Prüv FAQ master",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "RESET · SUPPORT · REPAIR" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Answers about our products, orders, shipping and returns." },
+    { "type": "text", "id": "search_label", "label": "Search placeholder", "default": "Search FAQs" },
+    { "type": "text", "id": "empty_text", "label": "No results text", "default": "No questions match your search." },
+    { "type": "header", "content": "Still need help card" },
+    { "type": "text", "id": "help_heading", "label": "Heading", "default": "Still need help?" },
+    { "type": "textarea", "id": "help_text", "label": "Text", "default": "Include your order number so we can resolve your request faster." },
+    { "type": "text", "id": "support_email", "label": "Email", "default": "support@getpruv.com" },
+    { "type": "text", "id": "support_phone", "label": "Phone / WhatsApp", "default": "+91-8826744421" },
+    { "type": "text", "id": "support_hours", "label": "Hours", "default": "Customer support: 10:00 AM to 5:00 PM" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "FAQ tab",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tab title" },
+        { "type": "textarea", "id": "qa", "label": "Questions and answers", "info": "Separate each question from the next with |||. Put the question on the first line and the answer below it. A line starting with ## makes a group heading." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Prüv FAQ master" }]
+}
+{% endschema %}
