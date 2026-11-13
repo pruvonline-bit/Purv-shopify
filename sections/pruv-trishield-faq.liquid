@@ -1,0 +1,32 @@
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts">
+  <div class="page-width">
+    <div class="pruv-ts__head">
+      <h2 class="pruv-ts__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="pruv-ts__faq">
+      {%- for block in section.blocks -%}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question | escape }}</summary>
+          <div>{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv FAQ",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your questions answered" }
+  ],
+  "blocks": [
+    { "type": "faq", "name": "Question", "settings": [
+      { "type": "text", "id": "question", "label": "Question" },
+      { "type": "richtext", "id": "answer", "label": "Answer" }
+    ] }
+  ],
+  "presets": [{ "name": "Prüv FAQ" }]
+}
+{% endschema %}

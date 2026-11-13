@@ -1,0 +1,41 @@
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts">
+  <div class="page-width">
+    <div class="pruv-ts__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="pruv-ts__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="pruv-ts__title">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.frequency != blank -%}<p class="pruv-ts__sub">{{ section.settings.frequency | escape }}</p>{%- endif -%}
+    </div>
+    <ol class="pruv-ts__steps">
+      {%- for block in section.blocks -%}
+        <li {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv how to use",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How to use" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Wet. Lather. Rinse." },
+    { "type": "text", "id": "frequency", "label": "Approved frequency", "info": "Enter the single manufacturer-approved frequency. Leave empty until confirmed." }
+  ],
+  "blocks": [
+    { "type": "step", "name": "Step", "settings": [
+      { "type": "text", "id": "title", "label": "Title" },
+      { "type": "textarea", "id": "text", "label": "Text" }
+    ] }
+  ],
+  "max_blocks": 4,
+  "presets": [{ "name": "Prüv how to use", "blocks": [
+    { "type": "step", "settings": { "title": "Wet", "text": "Wet hair and scalp thoroughly." } },
+    { "type": "step", "settings": { "title": "Lather", "text": "Massage a small amount into the scalp and work through the lengths." } },
+    { "type": "step", "settings": { "title": "Rinse", "text": "Rinse thoroughly. Follow with conditioner or mask." } }
+  ] }]
+}
+{% endschema %}

@@ -1,0 +1,129 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": {} },
+        "descriptor": { "type": "descriptor", "settings": { "text": "Keratin-Ceramide Hair Mask" } },
+        "price": { "type": "price", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "benefit_line": { "type": "benefit_line", "settings": { "text": "Softer lengths. Easier detangling. Less friction." } },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": false, "show_gift_card_recipient": false } },
+        "tab_description": {
+          "type": "collapsible_tab",
+          "settings": { "open_by_default": true, "use_product_description": true, "heading": "Product Description", "icon": "none", "content": "" }
+        },
+        "tab_how_to_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "How to use",
+            "icon": "none",
+            "content": "<p>Rinse-off mask for hair lengths. After shampooing, gently squeeze out excess water, distribute through mid-lengths and ends, leave for the recommended time on the pack, then rinse thoroughly.</p>"
+          }
+        },
+        "tab_returns_policy": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "Returns & replacements",
+            "icon": "none",
+            "content": "<p>If your jar arrives damaged, with a broken seal or a cracked lid, email our care desk with an unboxing photo and we will help with a replacement.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "descriptor",
+        "price",
+        "rating",
+        "benefit_line",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "tab_description",
+        "tab_how_to_use",
+        "tab_returns_policy"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "audience": {
+      "type": "pruv-trishield-concerns",
+      "blocks": {
+        "c1": { "type": "card", "settings": { "title": "Tangles and friction", "text": "For hair that knots and snags when you comb or detangle." } },
+        "c2": { "type": "card", "settings": { "title": "Dry, rough lengths", "text": "For mid-lengths and ends that feel dry and rough to the touch." } },
+        "c3": { "type": "card", "settings": { "title": "Breakage-prone ends", "text": "For lengths that snap during everyday grooming." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "eyebrow": "Who it is for", "heading": "For hair that snaps before it shines", "subheading": "A rinse-off conditioning treatment for hair lengths." }
+    },
+    "pair": {
+      "type": "pruv-trishield-system",
+      "blocks": {
+        "keratin": { "type": "system", "settings": { "title": "Hydrolyzed Keratin", "ingredients": "Protein-derived conditioning", "text": "Hydrolyzed keratin, selected for hair-fibre conditioning." } },
+        "ceramide": { "type": "system", "settings": { "title": "Ceramide Complex", "ingredients": "Lipid-focused conditioning", "text": "A ceramide complex, selected for the lipid-focused conditioning system." } }
+      },
+      "block_order": ["keratin", "ceramide"],
+      "settings": {
+        "eyebrow": "Hero ingredients",
+        "heading": "Keratin and ceramides. A considered conditioning pair.",
+        "more_label": "More about this ingredient",
+        "note": "Paired with a rich conditioning base for smoother-feeling, more manageable lengths. Ingredient roles describe intended function, not guaranteed results."
+      }
+    },
+    "system": {
+      "type": "pruv-trishield-formula",
+      "blocks": {
+        "g1": { "type": "group", "settings": { "title": "Conditioning base", "ingredients": "Behentrimonium-based ingredients and fatty alcohols", "text": "Contribute to the conditioning structure, slip and feel." } },
+        "g2": { "type": "group", "settings": { "title": "Emollients", "ingredients": "Shea Butter, Argan Oil, Coconut Oil", "text": "Emollient support for a rich conditioning experience." } },
+        "g3": { "type": "group", "settings": { "title": "Supporting conditioners", "ingredients": "Panthenol, Hydrolyzed Silk, conditioning polymers", "text": "Supporting ingredients that help hair feel soft and manageable." } }
+      },
+      "block_order": ["g1", "g2", "g3"],
+      "settings": { "eyebrow": "The conditioning system", "heading": "The formula behind the feel", "subheading": "Ingredient function does not by itself prove finished-product performance.", "inci": "" }
+    },
+    "texture": { "type": "pruv-trishield-texture", "settings": { "heading": "Texture and application", "subheading": "Real cream texture, applied to lengths and rinsed off." } },
+    "usage": {
+      "type": "pruv-trishield-usage",
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Cleanse", "text": "Shampoo as usual and rinse." } },
+        "s2": { "type": "step", "settings": { "title": "Apply to lengths", "text": "Gently squeeze out excess water, then distribute through mid-lengths and ends." } },
+        "s3": { "type": "step", "settings": { "title": "Leave", "text": "Leave on for the recommended time on the pack." } },
+        "s4": { "type": "step", "settings": { "title": "Rinse", "text": "Rinse thoroughly." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": { "eyebrow": "How to use", "heading": "Cleanse. Apply. Leave. Rinse.", "frequency": "" }
+    },
+    "evidence": { "type": "pruv-trishield-evidence", "settings": { "heading": "Evidence and expectations" } },
+    "faq": {
+      "type": "pruv-trishield-faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Is breakage the same as hair fall?", "answer": "<p>No. Breakage is hair snapping along the length. Hair fall is shedding at the root. This mask is a lengths treatment and does not address every cause of hair loss.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Is this a salon keratin straightening treatment?", "answer": "<p>No. It is a rinse-off conditioning mask. It does not chemically straighten or permanently reconstruct hair.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Can it permanently repair split ends?", "answer": "<p>No. It can improve how hair looks and feels, but it does not permanently restore split ends.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "What if the jar arrives damaged?", "answer": "<p>Email our care desk with an unboxing photo and we will help with a replacement.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": { "heading": "Your questions answered" }
+    },
+    "cross_sell": { "type": "pruv-product-cross-sell", "settings": {} }
+  },
+  "order": ["main", "audience", "pair", "system", "texture", "usage", "evidence", "faq", "cross_sell"]
+}

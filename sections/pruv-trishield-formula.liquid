@@ -1,0 +1,47 @@
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts">
+  <div class="page-width">
+    <div class="pruv-ts__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="pruv-ts__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="pruv-ts__title">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="pruv-ts__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </div>
+    <div class="pruv-ts__grid">
+      {%- for block in section.blocks -%}
+        <div class="pruv-ts__card" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p class="pruv-ts__ingredients">{{ block.settings.ingredients | escape }}</p>
+          <p>{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.inci != blank -%}
+      <div class="pruv-ts__inci"><strong>Full ingredients (INCI)</strong>{{ section.settings.inci | escape }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv formula",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Inside the formula" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What each ingredient is there to do" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Ingredient function does not by itself prove finished-product performance." },
+    { "type": "textarea", "id": "inci", "label": "Complete INCI", "info": "Paste only the manufacturer-approved final INCI. Leave empty to hide." }
+  ],
+  "blocks": [
+    { "type": "group", "name": "Ingredient group", "settings": [
+      { "type": "text", "id": "title", "label": "Group", "default": "Mineral-binding" },
+      { "type": "text", "id": "ingredients", "label": "Ingredients" },
+      { "type": "textarea", "id": "text", "label": "Role" }
+    ] }
+  ],
+  "presets": [{ "name": "Prüv formula", "blocks": [
+    { "type": "group", "settings": { "title": "Mineral-binding", "ingredients": "Sodium Gluconate, Disodium EDTA", "text": "Chelating ingredients that bind minerals; actual removal from hair depends on the finished formula." } },
+    { "type": "group", "settings": { "title": "Cleansing", "ingredients": "Cleansing surfactant blend", "text": "Helps wash away everyday dirt, excess oil and buildup." } },
+    { "type": "group", "settings": { "title": "Microbiome care", "ingredients": "Inulin, Alpha-Glucan Oligosaccharide, Lactococcus Ferment Lysate", "text": "Prebiotic and ferment-derived ingredients. A ferment lysate is not a live probiotic." } },
+    { "type": "group", "settings": { "title": "Conditioning support", "ingredients": "Polyquaternium-10, Hydrolyzed Keratin, Glycerin, Betaine, Panthenol", "text": "Supporting ingredients that condition and support hair feel." } }
+  ] }]
+}
+{% endschema %}

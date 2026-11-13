@@ -1,0 +1,89 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": {} },
+        "descriptor": { "type": "descriptor", "settings": { "text": "Element Defense Shampoo" } },
+        "price": { "type": "price", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "benefit_line": { "type": "benefit_line", "settings": { "text": "A fresh start for hair that feels weighed down." } },
+        "variant_picker": { "type": "variant_picker", "settings": { "picker_type": "button", "swatch_shape": "circle" } },
+        "quantity_selector": { "type": "quantity_selector", "settings": {} },
+        "buy_buttons": { "type": "buy_buttons", "settings": { "show_dynamic_checkout": false, "show_gift_card_recipient": false } },
+        "tab_description": {
+          "type": "collapsible_tab",
+          "settings": { "open_by_default": true, "use_product_description": true, "heading": "Product Description", "icon": "none", "content": "" }
+        },
+        "tab_how_to_use": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "How to use",
+            "icon": "none",
+            "content": "<p>Rinse-off shampoo. Wet hair and scalp, massage in to lather, then rinse thoroughly.</p>"
+          }
+        },
+        "tab_returns_policy": {
+          "type": "collapsible_tab",
+          "settings": {
+            "open_by_default": false,
+            "use_product_description": false,
+            "heading": "Returns & replacements",
+            "icon": "none",
+            "content": "<p>If your Trishield arrives damaged, leaking or with a faulty pump, email our care desk with an unboxing photo and we will help with a replacement.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "descriptor",
+        "price",
+        "rating",
+        "benefit_line",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "tab_description",
+        "tab_how_to_use",
+        "tab_returns_policy"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "concerns": { "type": "pruv-trishield-concerns", "settings": {} },
+    "system": { "type": "pruv-trishield-system", "settings": {} },
+    "formula": { "type": "pruv-trishield-formula", "settings": {} },
+    "texture": { "type": "pruv-trishield-texture", "settings": {} },
+    "usage": { "type": "pruv-trishield-usage", "settings": {} },
+    "evidence": { "type": "pruv-trishield-evidence", "settings": {} },
+    "faq": {
+      "type": "pruv-trishield-faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "Does this soften my water?", "answer": "<p>No. Trishield is a shampoo used during washing, not a water-treatment device.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "Is it fragrance-free?", "answer": "<p>No. The formula includes Parfum.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "Does it treat dandruff or hair loss?", "answer": "<p>No. Trishield is a cleansing shampoo for everyday buildup. It is not a treatment for dandruff or hair loss.</p>" } },
+        "q4": { "type": "faq", "settings": { "question": "What does microbiome care mean here?", "answer": "<p>The formula includes prebiotic and ferment-derived ingredients selected for scalp care. It does not claim to treat scalp conditions.</p>" } },
+        "q5": { "type": "faq", "settings": { "question": "Do I need conditioner or a mask?", "answer": "<p>Trishield is a cleansing step. Follow with a separate conditioning step such as the Prüv Hair Mask.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {}
+    },
+    "cross_sell": { "type": "pruv-product-cross-sell", "settings": {} }
+  },
+  "order": ["main", "concerns", "system", "formula", "texture", "usage", "evidence", "faq", "cross_sell"]
+}

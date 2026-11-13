@@ -126,7 +126,7 @@
                       <div class="pruv-pdp-role-wrap" style="margin-bottom: 0.8rem;">
                         <span class="pruv-role-pill pruv-role-pill--{{ pruv_system_role | downcase }}">
                           <span class="pruv-role-pill__dot" aria-hidden="true"></span>
-                          {{ pruv_system_role }}
+                          {{ pruv_system_role }}{% if pruv_system_role == 'RESET' %} · RINSE-OFF CLEANSER{% elsif pruv_system_role == 'REPAIR' %} · RINSE-OFF HAIR MASK{% endif %}
                         </span>
                       </div>
                     {%- endif -%}
@@ -138,9 +138,10 @@
                     assign prod_handle_lower = product.handle | downcase
                     assign default_descriptor = 'Advanced Scalp & Follicle Energizing Elixir'
                     if prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo'
-                      assign default_descriptor = 'Scalp Detox & Hard Water Demineralising Treatment'
+                      assign default_descriptor = 'Element Defense Shampoo'
                     elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
-                      assign default_descriptor = 'Deep Recovery & Keratin-Ceramide Reconstructing Mask'
+                      assign default_descriptor = 'Keratin-Ceramide Hair Mask'
+                      assign mask_secondary = 'Deep Conditioning Treatment'
                     endif
                     assign descriptor_text = product.metafields.descriptors.subtitle.value | default: product.metafields.custom.descriptor.value
                     if descriptor_text == blank and block.settings.text != blank and block.settings.text != 'Advanced Scalp & Follicle Energizing Elixir' and block.settings.text != 'Targeted Follicle-Stimulating & Scalp Recovery Elixir'
@@ -152,6 +153,9 @@
                   -%}
                   <div class="pruv-pdp-descriptor" {{ block.shopify_attributes }}>
                     <p class="pruv-pdp-descriptor__text">{{ descriptor_text | escape }}</p>
+                    {%- if mask_secondary != blank -%}
+                      <p class="pruv-pdp-descriptor__text">{{ mask_secondary }}</p>
+                    {%- endif -%}
                   </div>
                 {%- when 'benefit_line' -%}
                   {%- liquid
@@ -160,9 +164,11 @@
                     assign default_benefit = product.metafields.custom.website_claim
                     if default_benefit == blank
                       if prod_handle_lower contains 'pruv-1' or prod_title_lower contains 'trishield' or prod_title_lower contains 'shampoo'
-                        assign default_benefit = 'Your water may be making your hair feel rough.'
+                        assign default_benefit = 'A fresh start for hair that feels weighed down.'
+                        assign trishield_strip = true
                       elsif prod_handle_lower contains 'product-3' or prod_title_lower contains 'keratin' or prod_title_lower contains 'mask' or prod_title_lower contains 'breakage'
-                        assign default_benefit = 'For hair that snaps before it shines.'
+                        assign default_benefit = 'Softer lengths. Easier detangling. Less friction.'
+                        assign mask_ingredient_line = 'With Hydrolyzed Keratin + Ceramide Complex'
                       else
                         assign default_benefit = 'Fuller-looking hair starts at the scalp.'
                       endif
@@ -175,6 +181,12 @@
                     </span>
                     <span class="pruv-pdp-benefit-line__text">{{ benefit_text | escape }}</span>
                   </div>
+                  {%- if mask_ingredient_line != blank -%}
+                    <p class="pruv-pdp-system-strip">{{ mask_ingredient_line }}</p>
+                  {%- endif -%}
+                  {%- if trishield_strip -%}
+                    <p class="pruv-pdp-system-strip">Hard-Water Defense · Pollution Cleansing · Microbiome Care</p>
+                  {%- endif -%}
                 {%- when 'price' -%}
                   {%- assign current_variant = product.selected_or_first_available_variant -%}
                   {%- assign target_price = current_variant.price | default: product.price -%}
@@ -591,27 +603,17 @@
                     show_pickup_availability: true
                   -%}
                 {%- when 'rating' -%}
+                  {%- if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count != blank -%}
                   <div class="pruv-pdp-rating-strip" {{ block.shopify_attributes }}>
                     <div class="pruv-pdp-rating-link">
                       <span class="pruv-pdp-stars" aria-hidden="true">★★★★★</span>
-                      <span class="pruv-pdp-rating-score">
-                        {%- if product.metafields.reviews.rating.value != blank -%}
-                          {{ product.metafields.reviews.rating.value }}
-                        {%- else -%}
-                          4.9
-                        {%- endif -%}
-                      </span>
+                      <span class="pruv-pdp-rating-score">{{ product.metafields.reviews.rating.value }}</span>
                       <span class="pruv-pdp-rating-divider">/ 5.0</span>
                       <span class="pruv-pdp-rating-dot">•</span>
-                      <span class="pruv-pdp-rating-count">
-                        {%- if product.metafields.reviews.rating_count != blank -%}
-                          ({{ product.metafields.reviews.rating_count }} Reviews)
-                        {%- else -%}
-                          (474 Reviews)
-                        {%- endif -%}
-                      </span>
+                      <span class="pruv-pdp-rating-count">({{ product.metafields.reviews.rating_count }} Reviews)</span>
                     </div>
                   </div>
+                  {%- endif -%}
                 {%- when 'complementary' -%}
                   <product-recommendations
                     class="complementary-products quick-add-hidden{% if block.settings.make_collapsible_row %} is-accordion{% endif %}{% if block.settings.enable_quick_add %} complementary-products-contains-quick-add{% endif %}"

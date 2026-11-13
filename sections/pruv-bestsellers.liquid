@@ -121,13 +121,6 @@
                       endif
 
                       assign review_cnt = product.metafields.reviews.rating_count
-                      if review_cnt == blank or review_cnt == 0
-                        if product.title contains 'Serum'
-                          assign review_cnt = 474
-                        else
-                          assign review_cnt = 226
-                        endif
-                      endif
 
                       assign display_tagline = pruv_claim | default: highlight
                     -%}
@@ -151,6 +144,7 @@
                       </div>
                     {%- endif -%}
 
+                    {%- if review_cnt != blank and review_cnt != 0 -%}
                     <div class="pruv-card-rating-row">
                       <div class="pruv-card-rating-stars" aria-hidden="true">
                         <span>★</span><span>★</span><span>★</span><span>★</span><span class="star-dim">★</span>
@@ -158,6 +152,7 @@
                       <span class="pruv-card-rating-divider">|</span>
                       <span class="pruv-card-review-count">{{ review_cnt }} REVIEWS</span>
                     </div>
+                    {%- endif -%}
 
                     <div class="pruv-card-price-stack">
                       {%- if product.compare_at_price > product.price -%}

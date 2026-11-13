@@ -1,0 +1,49 @@
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts pruv-ts--dark">
+  <div class="page-width">
+    <div class="pruv-ts__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="pruv-ts__eyebrow">{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      <h2 class="pruv-ts__title">{{ section.settings.heading | escape }}</h2>
+    </div>
+    <div class="pruv-ts__grid">
+      {%- for block in section.blocks -%}
+        <div class="pruv-ts__card" {{ block.shopify_attributes }}>
+          <span class="pruv-ts__num">{{ forloop.index | prepend: '0' }}</span>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p class="pruv-ts__ingredients">{{ block.settings.ingredients | escape }}</p>
+          <p>{{ block.settings.text | escape }}</p>
+          {%- if block.settings.more != blank -%}
+            <details class="pruv-ts__more"><summary>{{ section.settings.more_label | escape }}</summary><div>{{ block.settings.more }}</div></details>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}<p class="pruv-ts__note">{{ section.settings.note | escape }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prüv three systems",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Trishield system" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Three systems. One cleansing ritual." },
+    { "type": "text", "id": "more_label", "label": "Expandable label", "default": "More about this system" },
+    { "type": "textarea", "id": "note", "label": "Footnote", "default": "Ingredient roles describe their intended function in the formula, not guaranteed results." }
+  ],
+  "blocks": [
+    { "type": "system", "name": "System card", "settings": [
+      { "type": "text", "id": "title", "label": "Heading", "default": "Address mineral buildup" },
+      { "type": "text", "id": "ingredients", "label": "Ingredient line", "default": "Sodium Gluconate + Disodium EDTA" },
+      { "type": "textarea", "id": "text", "label": "Short explanation" },
+      { "type": "richtext", "id": "more", "label": "Expandable detail (optional)" }
+    ] }
+  ],
+  "max_blocks": 3,
+  "presets": [{ "name": "Prüv three systems", "blocks": [
+    { "type": "system", "settings": { "title": "Address mineral buildup", "ingredients": "Sodium Gluconate + Disodium EDTA", "text": "Mineral-binding ingredients selected for the hard-water cleansing system." } },
+    { "type": "system", "settings": { "title": "Wash away daily buildup", "ingredients": "Targeted cleansing blend", "text": "Cleansing ingredients help wash away everyday dirt, excess oil and residue." } },
+    { "type": "system", "settings": { "title": "Consider the scalp environment", "ingredients": "Inulin + Alpha-Glucan Oligosaccharide + Lactococcus Ferment Lysate", "text": "Prebiotic and ferment-derived ingredients selected for the scalp-care system." } }
+  ] }]
+}
+{% endschema %}

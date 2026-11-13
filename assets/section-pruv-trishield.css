@@ -1,0 +1,44 @@
+/* Trishield product page sections */
+.pruv-ts { --ts-graphite:#1c1e20; --ts-bone:#f6f1e9; --ts-copper:#b87333; --ts-text:#2b2b2b; padding: 5.6rem 0; color: var(--ts-text); background: var(--ts-bone); }
+.pruv-ts--dark { background: var(--ts-graphite); color: var(--ts-bone); }
+.pruv-ts__head { max-width: 72rem; margin: 0 auto 3.6rem; text-align: center; }
+.pruv-ts__eyebrow { margin: 0 0 1rem; font-size: 1.2rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ts-copper); font-weight: 600; }
+.pruv-ts__title { margin: 0 0 1.2rem; font-size: clamp(2.6rem, 4vw, 4rem); line-height: 1.15; font-style: normal; font-weight: 600; }
+.pruv-ts__sub { margin: 0; font-size: 1.6rem; line-height: 1.6; opacity: .85; }
+.pruv-ts--dark .pruv-ts__sub { opacity: .85; }
+.pruv-ts__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr)); gap: 2rem; }
+.pruv-ts__card { border: 1px solid rgba(28,30,32,.14); border-radius: 1.6rem; padding: 2.6rem 2.2rem; background: #fff; }
+.pruv-ts--dark .pruv-ts__card { background: rgba(246,241,233,.05); border-color: rgba(246,241,233,.18); }
+.pruv-ts__num { display: block; margin-bottom: 1.4rem; font-size: 1.3rem; letter-spacing: .16em; color: var(--ts-copper); font-weight: 700; }
+.pruv-ts__icon { width: 3.6rem; height: 3.6rem; margin-bottom: 1.4rem; color: var(--ts-copper); }
+.pruv-ts__icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.pruv-ts__card h3 { margin: 0 0 .8rem; font-size: 2rem; line-height: 1.25; font-style: normal; }
+.pruv-ts__ingredients { margin: 0 0 1.2rem; font-size: 1.3rem; font-weight: 600; letter-spacing: .02em; color: var(--ts-copper); }
+.pruv-ts__card p { margin: 0; font-size: 1.5rem; line-height: 1.6; }
+.pruv-ts__more { margin-top: 1.4rem; border-top: 1px solid rgba(128,128,128,.25); padding-top: 1rem; }
+.pruv-ts__more summary { cursor: pointer; font-size: 1.3rem; font-weight: 600; }
+.pruv-ts__more div { margin-top: .8rem; font-size: 1.4rem; line-height: 1.6; }
+.pruv-ts__note { max-width: 72rem; margin: 2.4rem auto 0; text-align: center; font-size: 1.2rem; line-height: 1.5; opacity: .75; }
+.pruv-ts__steps { counter-reset: step; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin: 0; padding: 0; }
+.pruv-ts__steps li { counter-increment: step; background: #fff; border: 1px solid rgba(28,30,32,.14); border-radius: 1.6rem; padding: 2.4rem; }
+.pruv-ts__steps li::before { content: "0" counter(step); display: block; margin-bottom: 1rem; font-size: 1.3rem; letter-spacing: .16em; font-weight: 700; color: var(--ts-copper); }
+.pruv-ts__steps h3 { margin: 0 0 .6rem; font-size: 2rem; font-style: normal; }
+.pruv-ts__steps p { margin: 0; font-size: 1.5rem; line-height: 1.6; }
+.pruv-ts__media { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+.pruv-ts__media figure { margin: 0; }
+.pruv-ts__media img, .pruv-ts__media video { width: 100%; height: auto; border-radius: 1.6rem; display: block; }
+.pruv-ts__media figcaption { margin-top: .8rem; font-size: 1.3rem; opacity: .8; }
+.pruv-ts__faq { max-width: 80rem; margin: 0 auto; }
+.pruv-ts__faq details { border-bottom: 1px solid rgba(28,30,32,.18); padding: 1.6rem 0; }
+.pruv-ts__faq summary { cursor: pointer; font-size: 1.7rem; font-weight: 600; list-style: none; }
+.pruv-ts__faq summary::-webkit-details-marker { display: none; }
+.pruv-ts__faq summary::after { content: "+"; float: right; color: var(--ts-copper); }
+.pruv-ts__faq details[open] summary::after { content: "–"; }
+.pruv-ts__faq details > div { margin-top: 1rem; font-size: 1.5rem; line-height: 1.7; }
+.pruv-ts__inci { max-width: 80rem; margin: 2.4rem auto 0; font-size: 1.3rem; line-height: 1.7; }
+.pruv-ts__inci strong { display: block; margin-bottom: .6rem; }
+.pruv-pdp-system-strip { margin: .8rem 0 0; font-size: 1.2rem; letter-spacing: .08em; text-transform: uppercase; color: #3a3a3a; font-weight: 600; }
+@media (max-width: 749px) {
+  .pruv-ts { padding: 4rem 0; }
+  .pruv-ts__grid, .pruv-ts__steps, .pruv-ts__media { grid-template-columns: 1fr; }
+}

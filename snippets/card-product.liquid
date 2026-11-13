@@ -43,13 +43,6 @@
     endif
 
     assign review_cnt = card_product.metafields.reviews.rating_count
-    if review_cnt == blank or review_cnt == 0
-      if card_product.title contains 'Serum'
-        assign review_cnt = 474
-      else
-        assign review_cnt = 226
-      endif
-    endif
 
     assign prod_title_lower = card_product.title | downcase
     assign prod_handle_lower = card_product.handle | downcase
@@ -133,6 +126,7 @@
           </div>
         {%- endif -%}
 
+        {%- if review_cnt != blank and review_cnt != 0 -%}
         <div class="pruv-card-rating-row">
           <div class="pruv-card-rating-stars" aria-hidden="true">
             <span>★</span><span>★</span><span>★</span><span>★</span><span class="star-dim">★</span>
@@ -140,6 +134,7 @@
           <span class="pruv-card-rating-divider">|</span>
           <span class="pruv-card-review-count">{{ review_cnt }} REVIEWS</span>
         </div>
+        {%- endif -%}
 
         <div class="pruv-card-price-stack">
           {%- if card_product.compare_at_price > card_product.price -%}

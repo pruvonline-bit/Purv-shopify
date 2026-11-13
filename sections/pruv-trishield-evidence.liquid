@@ -1,0 +1,38 @@
+{%- if section.blocks.size > 0 -%}
+{{ 'section-pruv-trishield.css' | asset_url | stylesheet_tag }}
+<section class="pruv-ts pruv-ts--dark">
+  <div class="page-width">
+    <div class="pruv-ts__head">
+      <h2 class="pruv-ts__title">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.subheading != blank -%}<p class="pruv-ts__sub">{{ section.settings.subheading | escape }}</p>{%- endif -%}
+    </div>
+    <div class="pruv-ts__grid">
+      {%- for block in section.blocks -%}
+        <div class="pruv-ts__card" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p class="pruv-ts__ingredients">{{ block.settings.method | escape }}</p>
+          <p>{{ block.settings.result | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Prüv evidence",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How Trishield was evaluated" },
+    { "type": "text", "id": "subheading", "label": "Subheading" }
+  ],
+  "blocks": [
+    { "type": "test", "name": "Test", "settings": [
+      { "type": "text", "id": "title", "label": "Test name" },
+      { "type": "text", "id": "method", "label": "Method / sample" },
+      { "type": "textarea", "id": "result", "label": "Result (only documented findings)" }
+    ] }
+  ],
+  "presets": [{ "name": "Prüv evidence" }]
+}
+{% endschema %}

@@ -16,6 +16,8 @@
   assign btn_label = block.settings.button_label | default: 'Add Bundle'
 -%}
 
+{%- comment -%} Hidden until a real bundle product is configured (no placeholder button or invented pricing). {%- endcomment -%}
+{%- if has_bundle_prod -%}
 <div class="pruv-bundle-upsell" {{ block.shopify_attributes }}>
   <div class="pruv-bundle-card">
     <div class="pruv-bundle-card__header">
@@ -54,9 +56,6 @@
               {%- if bundle_prod.compare_at_price > bundle_prod.price -%}
                 <s class="pruv-bundle-card__compare">{{ bundle_prod.compare_at_price | money }}</s>
               {%- endif -%}
-            {%- else -%}
-              <span class="pruv-bundle-card__price">{{ product.price | times: 1.7 | money }}</span>
-              <s class="pruv-bundle-card__compare">{{ product.price | times: 2 | money }}</s>
             {%- endif -%}
           </div>
         </div>
@@ -78,17 +77,9 @@
               </button>
             {%- endform -%}
           </product-form>
-        {%- else -%}
-          <button
-            type="button"
-            class="pruv-bundle-card__btn"
-            title="Configure bundle product in Theme Editor"
-            onclick="document.querySelector('.product-form__submit')?.scrollIntoView({behavior:'smooth'})"
-          >
-            <span>+ {{ btn_label }}</span>
-          </button>
         {%- endif -%}
       </div>
     </div>
   </div>
 </div>
+{%- endif -%}
