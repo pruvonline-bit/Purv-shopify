@@ -398,7 +398,7 @@
           "type": "row",
           "settings": {
             "criterion": "Time to visible results",
-            "cell_1": "120 days",
+            "cell_1": "84 days",
             "cell_2": "3–6 months",
             "cell_3": "3–6 months",
             "cell_4": "200 days"
