@@ -330,6 +330,7 @@
         "day_1": {
           "type": "diary",
           "settings": {
+            "image": "shopify://shop_images/Clinical_Scalp_Baseline_Portrait-1.webp",
             "day_label": "Day 1",
             "note": "Scalp felt clean rather than stripped.",
             "milestone": false
