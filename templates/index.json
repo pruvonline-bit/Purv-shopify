@@ -115,7 +115,7 @@
             "key_actives": "Sodium Gluconate · Salicylic Acid · Inulin Complex · Lactococcus Ferment Lysate · Niacinamide",
             "video": "shopify://files/videos/Shampoo_cleaning_hair_animation_20260912151914.mp4",
             "media_file": "",
-            "viz": "auto",
+            "viz": "reset",
             "button_label": "Shop Shampoo",
             "button_link": "shopify://products/pruv-trishield-element-defense-shampoo"
           }
@@ -123,15 +123,15 @@
         "step-support": {
           "type": "step",
           "settings": {
-            "step_number": "2",
+            "step_number": "3",
             "title": "SUPPORT",
-            "tagline": "Phase 02 · Support the Follicle. Build Visible Density.",
+            "tagline": "Phase 03 · Support the Follicle. Build Visible Density.",
             "description": "Fuller-looking hair starts at the scalp. Formulated for thinning appearance, low density confidence, and scalp uncertainty. Acts across multiple pathways with HairVive Pro®, Procapil®, Baicapil®, AnaGain®, and Aminexil to reinforce anchoring and support fuller growth.",
             "product_role": "Vector-5 Advance Multi Pathway Structural Density Serum",
             "key_actives": "HairVive Pro® (3%) · Procapil® (3%) · Baicapil® (3%) · AnaGain® (2%) · Aminexil (1.5%)",
             "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
             "media_file": "",
-            "viz": "auto",
+            "viz": "support",
             "button_label": "Shop Serum",
             "button_link": "shopify://products/pruv-vector-5-advanced-multi-pathway-structural-density"
           }
@@ -139,15 +139,15 @@
         "step-repair": {
           "type": "step",
           "settings": {
-            "step_number": "3",
+            "step_number": "2",
             "title": "REPAIR",
-            "tagline": "Phase 03 · Reinforce the Fiber. Restore Integrity.",
+            "tagline": "Phase 02 · Reinforce the Fiber. Restore Integrity.",
             "description": "For hair that snaps before it shines. Targeted recovery for breakage-prone, weak, rough or overworked lengths. A concentrated matrix of Ceramides and Hydrolyzed Keratin rebuilds damaged protein bonds while shielding lengths against friction and heat.",
             "product_role": "Breakage Repair Keratin-Ceramide Mask",
             "key_actives": "Ceramides · Keratin · Silk Protein · Panthenol · Argan Oil",
             "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
             "media_file": "",
-            "viz": "auto",
+            "viz": "repair",
             "button_label": "Shop Mask",
             "button_link": "shopify://products/pruv-breakage-repair-keratin-ceramide-hair-mask"
           }
@@ -155,12 +155,12 @@
       },
       "block_order": [
         "step-reset",
-        "step-support",
-        "step-repair"
+        "step-repair",
+        "step-support"
       ],
       "settings": {
         "eyebrow": "",
-        "heading": "Learn in Seconds: <em>Reset. Support. Repair.</em>",
+        "heading": "Learn in Seconds: <em>Reset. Repair. Support.</em>",
         "subheading": "",
         "show_connectors": true,
         "color_scheme": "scheme-4",
@@ -222,17 +222,17 @@
         "full": {
           "type": "regimen",
           "settings": {
-            "concern": "Full 3-Step System (Reset · Support · Repair)",
-            "headline": "Reset. Support. Repair.",
+            "concern": "Full 3-Step System (Reset · Repair · Support)",
+            "headline": "Reset. Repair. Support.",
             "product_1": "pruv-trishield-element-defense-shampoo",
             "frequency_1": "2–4x weekly",
             "role_1": "Reset",
-            "product_2": "pruv-vector-5-advanced-multi-pathway-structural-density",
-            "frequency_2": "Daily",
-            "role_2": "Support",
-            "product_3": "pruv-breakage-repair-keratin-ceramide-hair-mask",
-            "frequency_3": "1–2x weekly",
-            "role_3": "Repair"
+            "product_2": "pruv-breakage-repair-keratin-ceramide-hair-mask",
+            "frequency_2": "1–2x weekly",
+            "role_2": "Repair",
+            "product_3": "pruv-vector-5-advanced-multi-pathway-structural-density",
+            "frequency_3": "Daily",
+            "role_3": "Support"
           }
         }
       },

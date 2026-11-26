@@ -74,9 +74,9 @@
                   when 1
                     assign viz = 'reset'
                   when 2
-                    assign viz = 'support'
-                  when 3
                     assign viz = 'repair'
+                  when 3
+                    assign viz = 'support'
                   else
                     assign viz = 'none'
                 endcase
@@ -231,7 +231,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "Heading",
-      "default": "Learn in Seconds: <em>Reset. Support. Repair.</em>"
+      "default": "Learn in Seconds: <em>Reset. Repair. Support.</em>"
     },
     {
       "type": "richtext",
@@ -345,7 +345,7 @@
           "type": "select",
           "id": "viz",
           "label": "Built-in animated diagram",
-          "info": "Used only when no video or image is set. Auto picks by position: 1st Reset, 2nd Support, 3rd Repair.",
+          "info": "Used only when no video or image is set. Auto picks by position: 1st Reset, 2nd Repair, 3rd Support.",
           "options": [
             { "value": "auto", "label": "Auto" },
             { "value": "reset", "label": "Reset — mineral crust dissolving" },
