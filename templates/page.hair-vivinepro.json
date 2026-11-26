@@ -11,18 +11,6 @@
   "sections": {
     "hero": {
       "type": "pruv-vivine-hero",
-      "settings": {
-        "eyebrow": "The science behind Vector-5",
-        "heading": "Breakthrough hair growth, powered by <strong>Hair VivinePro™</strong>",
-        "subheading": "<p>[Placeholder] One-line description of what Hair VivinePro is and why it is different. Replace with approved claim copy.</p>",
-        "product": "pruv-vector-5-advanced-multi-pathway-structural-density",
-        "button_label": "Shop the serum",
-        "secondary_label": "See the science",
-        "secondary_anchor": "science",
-        "dark": false,
-        "padding_top": 56,
-        "padding_bottom": 64
-      },
       "blocks": {
         "claim_1": {
           "type": "claim",
@@ -58,10 +46,70 @@
         "claim_2",
         "claim_3",
         "claim_4"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "The science behind Vector-5",
+        "heading": "Breakthrough hair growth, powered by <strong>Hair VivinePro™</strong>",
+        "subheading": "<p>[Placeholder] One-line description of what Hair VivinePro is and why it is different. Replace with approved claim copy.</p>",
+        "product": "pruv-vector-5-advanced-multi-pathway-structural-density",
+        "button_label": "Shop the serum",
+        "secondary_label": "See the science",
+        "secondary_anchor": "science",
+        "dark": false,
+        "padding_top": 56,
+        "padding_bottom": 64
+      }
     },
     "results": {
       "type": "pruv-vivine-timeline",
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 0",
+            "title": "Baseline",
+            "text": "Thinning areas, visible scalp, higher daily shedding.",
+            "image": "shopify://shop_images/Clinical_Scalp_Baseline_Portrait-1.webp",
+            "progress": 5
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 1–28",
+            "title": "Less shedding",
+            "text": "Roots anchor better and daily hair fall starts to settle.",
+            "image": "shopify://shop_images/Day_30_Haircare_Progress_Close-Up-2.webp",
+            "progress": 35
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 28–56",
+            "title": "New baby hair",
+            "text": "Dormant follicles wake up and fine new hairs appear along the hairline and parting.",
+            "image": "shopify://shop_images/Day_60_Hair_Quality_Improvement-3.webp",
+            "progress": 65
+          }
+        },
+        "stage_4": {
+          "type": "stage",
+          "settings": {
+            "label": "Day 56–84",
+            "title": "Visible density",
+            "text": "New strands thicken, and the scalp looks fuller and less see-through.",
+            "image": "shopify://shop_images/Day_90_Maintained_Hair_Results-4.webp",
+            "progress": 100
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3",
+        "stage_4"
+      ],
       "settings": {
         "anchor": "results",
         "stat": "XX%",
@@ -72,61 +120,10 @@
         "dark": false,
         "padding_top": 64,
         "padding_bottom": 64
-      },
-      "blocks": {
-        "stage_1": {
-          "type": "stage",
-          "settings": {
-            "label": "Day 0",
-            "title": "Baseline",
-            "text": "[Placeholder] Thinning areas, visible scalp, higher daily shedding.",
-            "progress": 5
-          }
-        },
-        "stage_2": {
-          "type": "stage",
-          "settings": {
-            "label": "Day 1–28",
-            "title": "Less shedding",
-            "text": "[Placeholder] Roots anchor better and daily hair fall starts to settle.",
-            "progress": 35
-          }
-        },
-        "stage_3": {
-          "type": "stage",
-          "settings": {
-            "label": "Day 28–56",
-            "title": "New baby hair",
-            "text": "[Placeholder] Dormant follicles wake up and fine new hairs appear along the hairline and parting.",
-            "progress": 65
-          }
-        },
-        "stage_4": {
-          "type": "stage",
-          "settings": {
-            "label": "Day 56–84",
-            "title": "Visible density",
-            "text": "[Placeholder] New strands thicken, and the scalp looks fuller and less see-through.",
-            "progress": 100
-          }
-        }
-      },
-      "block_order": [
-        "stage_1",
-        "stage_2",
-        "stage_3",
-        "stage_4"
-      ]
+      }
     },
     "why": {
       "type": "pruv-vivine-why",
-      "settings": {
-        "eyebrow": "Why you need it",
-        "heading": "Why your scalp needs <strong>Vector-5</strong>",
-        "dark": true,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "benefit_1": {
           "type": "benefit",
@@ -166,25 +163,19 @@
         "benefit_2",
         "benefit_3",
         "benefit_4"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Why you need it",
+        "heading": "Why your scalp needs <strong>Vector-5</strong>",
+        "subheading": "",
+        "dark": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "ingredients": {
       "type": "pruv-vivine-ingredients",
-      "settings": {
-        "anchor": "science",
-        "eyebrow": "Key ingredient",
-        "heading": "Meet the active behind <strong>the results</strong>",
-        "spotlight_name": "Hair VivinePro™",
-        "spotlight_badge": "X% Hero active",
-        "spotlight_text": "<p>[Placeholder] What Hair VivinePro is, where it comes from and what makes it a first-of-its-kind active. Replace with supplier-approved copy.</p>",
-        "spotlight_note": "[Validated through in-vitro and in-vivo studies — confirm with supplier]",
-        "support_title": "Supported by 4 proven actives",
-        "inci_label": "Full ingredient list",
-        "inci": "<p>[Placeholder] Aqua, …, Hair VivinePro™, … — paste the full INCI list from the pack.</p>",
-        "dark": false,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "active_1": {
           "type": "active",
@@ -228,19 +219,26 @@
         "active_2",
         "active_3",
         "active_4"
-      ]
+      ],
+      "settings": {
+        "anchor": "science",
+        "eyebrow": "Key ingredient",
+        "heading": "Meet the active behind <strong>the results</strong>",
+        "subheading": "",
+        "spotlight_name": "Hair VivinePro™",
+        "spotlight_badge": "X% Hero active",
+        "spotlight_text": "<p>[Placeholder] What Hair VivinePro is, where it comes from and what makes it a first-of-its-kind active. Replace with supplier-approved copy.</p>",
+        "spotlight_note": "[Validated through in-vitro and in-vivo studies — confirm with supplier]",
+        "support_title": "Supported by 4 proven actives",
+        "inci_label": "Full ingredient list",
+        "inci": "<p>[Placeholder] Aqua, …, Hair VivinePro™, … — paste the full INCI list from the pack.</p>",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "mechanism": {
       "type": "pruv-vivine-mechanism",
-      "settings": {
-        "eyebrow": "Mechanism of action",
-        "heading": "How <strong>Hair VivinePro™</strong> works",
-        "subheading": "<p>[Placeholder] One line on the root-cause approach.</p>",
-        "summary": "[Placeholder] Root cause → cellular response → visible result, in one sentence.",
-        "dark": true,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "step_1": {
           "type": "step",
@@ -268,18 +266,20 @@
         "step_1",
         "step_2",
         "step_3"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "Mechanism of action",
+        "heading": "How <strong>Hair VivinePro™</strong> works",
+        "subheading": "<p>[Placeholder] One line on the root-cause approach.</p>",
+        "summary": "[Placeholder] Root cause → cellular response → visible result, in one sentence.",
+        "dark": true,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "pathways": {
       "type": "pruv-vivine-pathways",
-      "settings": {
-        "eyebrow": "Pathways & biomarkers",
-        "heading": "The biology it <strong>switches on</strong>",
-        "subheading": "<p>[Placeholder] The markers measured in the Hair VivinePro studies. Tap each to learn more.</p>",
-        "dark": false,
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "pathway_1": {
           "type": "pathway",
@@ -319,23 +319,19 @@
         "pathway_2",
         "pathway_3",
         "pathway_4"
-      ]
-    },
-    "compare": {
-      "type": "pruv-vivine-compare",
+      ],
       "settings": {
-        "eyebrow": "How it compares",
-        "heading": "Vector-5 vs <strong>the usual options</strong>",
-        "col_1": "Prüv Vector-5",
-        "col_2": "Minoxidil",
-        "col_3": "Finasteride",
-        "col_4": "Redensyl-only serums",
-        "highlight_first": true,
-        "footnote": "Comparison based on publicly available information. Not medical advice — consult a dermatologist for prescription treatments.",
+        "anchor": "",
+        "eyebrow": "Pathways & biomarkers",
+        "heading": "The biology it <strong>switches on</strong>",
+        "subheading": "<p>[Placeholder] The markers measured in the Hair VivinePro studies. Tap each to learn more.</p>",
         "dark": false,
         "padding_top": 64,
         "padding_bottom": 64
-      },
+      }
+    },
+    "compare": {
+      "type": "pruv-vivine-compare",
       "blocks": {
         "row_1": {
           "type": "row",
@@ -416,19 +412,25 @@
         "row_5",
         "row_6",
         "row_7"
-      ]
+      ],
+      "settings": {
+        "anchor": "",
+        "eyebrow": "How it compares",
+        "heading": "Vector-5 vs <strong>the usual options</strong>",
+        "subheading": "",
+        "col_1": "Prüv Vector-5",
+        "col_2": "Minoxidil",
+        "col_3": "Finasteride",
+        "col_4": "Redensyl-only serums",
+        "highlight_first": true,
+        "footnote": "Comparison based on publicly available information. Not medical advice — consult a dermatologist for prescription treatments.",
+        "dark": false,
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "experts": {
       "type": "pruv-team",
-      "settings": {
-        "eyebrow": "The experts",
-        "heading": "Developed with <strong>hair-science experts</strong>",
-        "text": "<p>[Placeholder] The scientists, dermatologists and formulators behind Hair VivinePro and Vector-5.</p>",
-        "placeholder_tag": "EXPERT",
-        "color_scheme": "scheme-1",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "member_1": {
           "type": "member",
@@ -462,17 +464,19 @@
         "member_1",
         "member_2",
         "member_3"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "The experts",
+        "heading": "Developed with <strong>hair-science experts</strong>",
+        "text": "<p>[Placeholder] The scientists, dermatologists and formulators behind Hair VivinePro and Vector-5.</p>",
+        "placeholder_tag": "EXPERT",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "faqs": {
       "type": "pruv-faqs",
-      "settings": {
-        "heading": "Everything you need to know",
-        "open_first": true,
-        "color_scheme": "scheme-2",
-        "padding_top": 64,
-        "padding_bottom": 72
-      },
       "blocks": {
         "faq_1": {
           "type": "category",
@@ -591,11 +595,20 @@
         "faq_13",
         "faq_14",
         "faq_15"
-      ]
+      ],
+      "settings": {
+        "heading": "Everything you need to know",
+        "text": "",
+        "open_first": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
     },
     "cta": {
       "type": "pruv-vivine-cta",
       "settings": {
+        "anchor": "",
         "product": "pruv-vector-5-advanced-multi-pathway-structural-density",
         "eyebrow": "Start your 84-day ritual",
         "heading": "Give your follicles <strong>Hair VivinePro™</strong>",
