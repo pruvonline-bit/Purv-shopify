@@ -78,7 +78,7 @@
         "coupon_code": "",
         "show_button_1": false,
         "button_label_1": "Shop TriShield",
-        "button_link_1": "shopify://collections/all",
+        "button_link_1": "shopify://products/pruv-trishield-element-defense-shampoo",
         "button_style_1": "pill-black",
         "button_custom_bg": "",
         "button_custom_text": "",
@@ -117,7 +117,7 @@
             "media_file": "",
             "viz": "auto",
             "button_label": "Shop Shampoo",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://products/pruv-trishield-element-defense-shampoo"
           }
         },
         "step-support": {
@@ -133,7 +133,7 @@
             "media_file": "",
             "viz": "auto",
             "button_label": "Shop Serum",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://products/pruv-vector-5-advanced-multi-pathway-structural-density"
           }
         },
         "step-repair": {
@@ -149,7 +149,7 @@
             "media_file": "",
             "viz": "auto",
             "button_label": "Shop Mask",
-            "button_link": "shopify://collections/all"
+            "button_link": "shopify://products/pruv-breakage-repair-keratin-ceramide-hair-mask"
           }
         }
       },

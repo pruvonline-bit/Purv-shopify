@@ -254,7 +254,7 @@
 
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
@@ -281,7 +281,7 @@
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -297,7 +297,7 @@
 
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <h1 class="header__heading">
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if settings.logo != blank -%}
@@ -324,7 +324,7 @@
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
-        </h1>
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -552,26 +552,32 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
+{%- liquid
+  # Organization + WebSite structured data. The brand is written "Prüv"; "Pruv" (the shop name
+  # and domain spelling) is kept as an alternate name so both spellings resolve to the brand.
+  assign org_same_as = ''
+  assign org_social_links = settings.social_instagram_link | append: '|' | append: settings.social_youtube_link | append: '|' | append: settings.social_facebook_link | append: '|' | append: settings.social_twitter_link | append: '|' | append: settings.social_pinterest_link | append: '|' | append: settings.social_tiktok_link | append: '|' | append: settings.social_tumblr_link | append: '|' | append: settings.social_snapchat_link | append: '|' | append: settings.social_vimeo_link | split: '|'
+  for link in org_social_links
+    assign link = link | strip
+    if link != blank
+      assign org_same_as = org_same_as | append: '|' | append: link
+    endif
+  endfor
+  assign org_same_as = org_same_as | remove_first: '|' | split: '|'
+  assign site_url = request.origin | append: routes.root_url
+-%}
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
-    {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ request.origin | append: page.url | json }}
+    "@id": {{ site_url | append: '#organization' | json }},
+    "name": "Prüv",
+    "alternateName": [{{ shop.name | json }}, "getpruv"],
+    "url": {{ site_url | json }},
+    {%- if settings.logo %}
+    "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {%- endif %}
+    "sameAs": {{ org_same_as | json }}
   }
 </script>
 
@@ -579,15 +585,18 @@
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": {{ shop.name | json }},
+      "@id": {{ site_url | append: '#website' | json }},
+      "name": "Prüv",
+      "alternateName": [{{ shop.name | json }}, "getpruv"],
+      "url": {{ site_url | json }},
+      "publisher": { "@id": {{ site_url | append: '#organization' | json }} },
       "potentialAction": {
         "@type": "SearchAction",
         "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
-      },
-      "url": {{ request.origin | append: page.url | json }}
+      }
     }
   </script>
 {%- endif -%}

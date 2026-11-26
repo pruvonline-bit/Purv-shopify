@@ -2,7 +2,22 @@
   assign og_title = page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
-  assign og_description = page_description | default: shop.description | default: shop.name
+  # Social previews fall back to the product/collection/article text before the generic shop text,
+  # so a page without its own meta description never shares just the shop name.
+  case request.page_type
+    when 'product'
+      assign og_fallback_description = product.description
+    when 'collection'
+      assign og_fallback_description = collection.description
+    when 'article'
+      assign og_fallback_description = article.excerpt_or_content
+    when 'blog'
+      assign og_fallback_description = blog.title
+    when 'page'
+      assign og_fallback_description = page.content
+  endcase
+  assign og_fallback_description = og_fallback_description | strip_html | strip_newlines | truncate: 200
+  assign og_description = page_description | default: og_fallback_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
     assign og_type = 'product'

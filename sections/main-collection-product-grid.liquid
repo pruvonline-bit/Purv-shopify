@@ -135,9 +135,9 @@
               </div>
             {%- endif -%}
 
-            <h2 class="pruv-collection-header__title">
-              {{ section.settings.header_heading | default: 'Our Collection' }}
-            </h2>
+            <h1 class="pruv-collection-header__title">
+              {{ section.settings.header_heading | default: collection.title }}
+            </h1>
 
             {%- if section.settings.header_subheading != blank -%}
               <div class="pruv-collection-header__subheading rte">

@@ -105,6 +105,7 @@
               >
                 <span class="pruv-proof__day-media">
                   {%- if block.settings.image != blank -%}
+                    {%- assign diary_alt = block.settings.image.alt | default: block.settings.day_label | default: block.settings.note | escape -%}
                     {{
                       block.settings.image
                       | image_url: width: 640
@@ -112,7 +113,7 @@
                         loading: 'lazy',
                         widths: '240, 400, 640',
                         sizes: '(min-width: 990px) 20vw, 60vw',
-                        alt: block.settings.day_label
+                        alt: diary_alt
                     }}
                   {%- else -%}
                     {{ 'lifestyle-1' | placeholder_svg_tag: 'pruv-proof__placeholder' }}

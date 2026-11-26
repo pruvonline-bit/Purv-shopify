@@ -105,6 +105,11 @@
   if show_button_2 == nil
     assign show_button_2 = true
   endif
+
+  # The banner artwork usually carries the visible headline, so the page needs a real H1
+  # for search engines and screen readers when the Heading setting is left empty.
+  assign seo_heading = section.settings.seo_heading | strip
+  assign hero_image_alt = section.settings.image.alt | default: section.settings.image_mobile.alt | default: seo_heading | escape
 -%}
 
 <section
@@ -138,6 +143,7 @@
               widths: widths,
               fetchpriority: fetch_priority,
               class: 'pruv-hero__image',
+              alt: hero_image_alt,
               loading: 'eager'
           }}
         {%- elsif section.settings.image_mobile != blank -%}
@@ -148,6 +154,7 @@
               sizes: '100vw',
               fetchpriority: fetch_priority,
               class: 'pruv-hero__image',
+              alt: hero_image_alt,
               loading: 'eager'
           }}
         {%- else -%}
@@ -157,6 +164,11 @@
     </div>
 
     <div class="pruv-hero__container">
+      {%- if section.settings.heading == blank or show_content == false -%}
+        {%- if seo_heading != blank -%}
+          <h1 class="visually-hidden">{{ seo_heading | escape }}</h1>
+        {%- endif -%}
+      {%- endif -%}
       {%- if show_content -%}
         {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank or section.settings.coupon_code != blank or section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
           <div
@@ -526,6 +538,13 @@
       "id": "heading",
       "label": "Heading",
       "default": "Grab your essentials"
+    },
+    {
+      "type": "text",
+      "id": "seo_heading",
+      "label": "Page heading for search engines",
+      "info": "Used as the page's hidden H1 and as the banner image's alt text when the Heading above is empty, for example when the headline is part of the banner artwork.",
+      "default": "Hair care made for India's hard water"
     },
     {
       "type": "select",
