@@ -331,7 +331,7 @@
           "type": "diary",
           "settings": {
             "image": "shopify://shop_images/Clinical_Scalp_Baseline_Portrait-1.webp",
-            "day_label": "Day 1",
+            "day_label": "",
             "note": "Scalp felt clean rather than stripped.",
             "milestone": false
           }
@@ -340,7 +340,7 @@
           "type": "diary",
           "settings": {
             "image": "shopify://shop_images/Day_30_Haircare_Progress_Close-Up-2.webp",
-            "day_label": "Day 30",
+            "day_label": "",
             "note": "Less buildup by the second day after washing.",
             "milestone": false
           }
@@ -349,7 +349,7 @@
           "type": "diary",
           "settings": {
             "image": "shopify://shop_images/Day_60_Hair_Quality_Improvement-3.webp",
-            "day_label": "Day 60",
+            "day_label": "",
             "note": "Ends holding together between trims.",
             "milestone": true
           }
@@ -358,7 +358,7 @@
           "type": "diary",
           "settings": {
             "image": "shopify://shop_images/Day_90_Maintained_Hair_Results-4.webp",
-            "day_label": "Day 90",
+            "day_label": "",
             "note": "Wash day lasts longer. Roots feel lighter.",
             "milestone": true
           }
