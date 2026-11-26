@@ -242,6 +242,22 @@
   margin-bottom: 0.8rem;
 }
 
+/* Mobile: the price moves above the MRP line (see component-pruv-card.css), so the gap
+   before the button comes from the MRP line instead of the price. */
+@media screen and (max-width: 749px) {
+  .pruv-bestsellers__slide .pruv-card-price-stack .pruv-card-final-price {
+    margin-bottom: 0.3rem;
+  }
+
+  .pruv-bestsellers__slide .pruv-card-price-stack .pruv-card-price-top {
+    margin-bottom: 0.8rem;
+  }
+
+  .pruv-bestsellers__slide .pruv-card-price-stack .pruv-card-save-pill {
+    padding: 0.2rem 0.6rem;
+  }
+}
+
 .pruv-bestsellers__slide .button--pruv-add-to-cart {
   min-height: 3.8rem !important;
   padding: 0.85rem 1.6rem !important;

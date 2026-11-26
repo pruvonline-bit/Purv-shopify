@@ -139,18 +139,18 @@
         <div class="pruv-card-price-stack">
           {%- if card_product.compare_at_price > card_product.price -%}
             <div class="pruv-card-price-top">
-              <span class="pruv-card-mrp">MRP {{ card_product.compare_at_price | money }}</span>
+              <span class="pruv-card-mrp">MRP {{ card_product.compare_at_price | money_without_trailing_zeros }}</span>
               {%- assign savings = card_product.compare_at_price | minus: card_product.price | times: 100.0 | divided_by: card_product.compare_at_price | round -%}
               <span class="pruv-card-save-pill">SAVE {{ savings }}%</span>
             </div>
           {%- else -%}
-            {%- assign fake_mrp = card_product.price | times: 1.33 | round -%}
+            {%- assign fake_mrp = card_product.price | times: 1.33 | divided_by: 100 | round | times: 100 -%}
             <div class="pruv-card-price-top">
-              <span class="pruv-card-mrp">MRP {{ fake_mrp | money }}</span>
+              <span class="pruv-card-mrp">MRP {{ fake_mrp | money_without_trailing_zeros }}</span>
               <span class="pruv-card-save-pill">SAVE 25%</span>
             </div>
           {%- endif -%}
-          <div class="pruv-card-final-price">{{ card_product.price | money }}</div>
+          <div class="pruv-card-final-price">{{ card_product.price | money_without_trailing_zeros }}</div>
         </div>
 
         <div class="pruv-card-actions">
