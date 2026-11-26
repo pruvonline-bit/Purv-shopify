@@ -325,7 +325,7 @@
         "anchor": "",
         "eyebrow": "Pathways & biomarkers",
         "heading": "The biology it <strong>switches on</strong>",
-        "subheading": "<p>[Placeholder] The markers measured in the Hair VivinePro studies. Tap each to learn more.</p>",
+        "subheading": "<p><br/>FOUR COMPLEMENTARY BIOLOGICAL APPROACHES<br/><br/></p>",
         "dark": false,
         "padding_top": 64,
         "padding_bottom": 64
@@ -398,10 +398,10 @@
           "type": "row",
           "settings": {
             "criterion": "Time to visible results",
-            "cell_1": "[XX] days",
+            "cell_1": "120 days",
             "cell_2": "3–6 months",
             "cell_3": "3–6 months",
-            "cell_4": "[XX] days"
+            "cell_4": "200 days"
           }
         }
       },
@@ -466,6 +466,7 @@
         "member_2",
         "member_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "The experts",
         "heading": "Developed with <strong>hair-science experts</strong>",
