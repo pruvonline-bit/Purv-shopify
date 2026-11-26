@@ -357,6 +357,7 @@
         "day_90": {
           "type": "diary",
           "settings": {
+            "image": "shopify://shop_images/Day_90_Maintained_Hair_Results-4.webp",
             "day_label": "Day 90",
             "note": "Wash day lasts longer. Roots feel lighter.",
             "milestone": true
