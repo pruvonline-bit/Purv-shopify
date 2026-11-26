@@ -12,17 +12,14 @@
     "banner": {
       "type": "pruv-collection-hero",
       "settings": {
-        "image": "shopify://shop_images/Gemini_Generated_Image_sh0zwqsh0zwqsh0z.png",
-        "image_mobile": "shopify://shop_images/Cosmetologist_designing_haircare__2026082w91244.jpg",
+        "image": "shopify://shop_images/Doctor-Formulated_Haircare_Collection-1.webp",
+        "image_mobile": "shopify://shop_images/Pruv_Doctor-Formulated_Haircare_Collection-2.webp",
         "layout_type": "full_width",
         "height": "medium",
         "mobile_height": "medium",
         "overlay_opacity": 35,
         "overlay_style": "gradient",
         "color_scheme": "scheme-5",
-        "eyebrow": "Limited Time",
-        "heading": "Sale is live! Grab your essentials",
-        "subheading": "<p>Save on your favourite hair and scalp rituals, for a limited time only.</p>",
         "position_mode": "grid",
         "canvas_pos_x": 50,
         "canvas_pos_y": 50,
@@ -33,8 +30,11 @@
         "content_position": "center",
         "mobile_content_position": "bottom",
         "mobile_content_alignment": "center",
-        "show_content": true,
+        "show_content": false,
+        "eyebrow": "Limited Time",
+        "heading": "Sale is live! Grab your essentials",
         "heading_size": "medium",
+        "subheading": "<p>Save on your favourite hair and scalp rituals, for a limited time only.</p>",
         "promo_code": "",
         "show_button_1": true,
         "button_label_1": "Shop now",
@@ -55,7 +55,7 @@
         "show_ticker": false,
         "ticker_text": "PAYDAY: SAVE FLAT 25% ON ALL ORDERS. USE PAYDAY",
         "ticker_speed": 22,
-        "ticker_bg_color": "#B87333",
+        "ticker_bg_color": "#b87333",
         "ticker_text_color": "#ffffff",
         "show_breadcrumb": true
       }
@@ -69,6 +69,11 @@
         "color_scheme": "scheme-1",
         "image_ratio": "square",
         "image_shape": "default",
+        "show_header": true,
+        "header_eyebrow": "Phase 01–03 · Reset. Support. Repair.",
+        "header_heading": "Shop all Prüv hair care",
+        "header_subheading": "<p>Scalp-first formulations engineered for Indian hard water, urban pollution, and structural density.</p>",
+        "header_alignment": "center",
         "show_secondary_image": false,
         "show_vendor": false,
         "show_rating": true,
@@ -77,11 +82,6 @@
         "enable_filtering": false,
         "filter_type": "drawer",
         "enable_sorting": false,
-        "show_header": true,
-        "header_eyebrow": "Phase 01–03 · Reset. Support. Repair.",
-        "header_heading": "Shop all Prüv hair care",
-        "header_subheading": "<p>Scalp-first formulations engineered for Indian hard water, urban pollution, and structural density.</p>",
-        "header_alignment": "center",
         "padding_top": 24,
         "padding_bottom": 36
       }
@@ -96,8 +96,13 @@
             "headline": "Fuller-looking hair starts at the scalp.",
             "product_1": "product-2",
             "frequency_1": "Daily",
+            "role_1": "",
             "product_2": "pruv-1",
-            "frequency_2": "2–3x weekly"
+            "frequency_2": "2–3x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "rough": {
@@ -107,8 +112,13 @@
             "headline": "Your water may be making your hair feel rough.",
             "product_1": "pruv-1",
             "frequency_1": "3x weekly",
+            "role_1": "",
             "product_2": "product-3",
-            "frequency_2": "1x weekly"
+            "frequency_2": "1x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "breakage": {
@@ -118,8 +128,13 @@
             "headline": "For hair that snaps before it shines.",
             "product_1": "product-3",
             "frequency_1": "1–2x weekly",
+            "role_1": "",
             "product_2": "pruv-1",
-            "frequency_2": "2–3x weekly"
+            "frequency_2": "2–3x weekly",
+            "role_2": "",
+            "product_3": "",
+            "frequency_3": "",
+            "role_3": ""
           }
         },
         "full": {
@@ -148,6 +163,17 @@
       "settings": {
         "eyebrow": "",
         "heading": "What's your hair <strong>dealing with?</strong>",
+        "text": "",
+        "tabs_label": "Hair concerns",
+        "primary_label": "Primary",
+        "pair_label": "Pair with",
+        "total_label": "Regimen total",
+        "add_label": "Add {count}-product regimen to bag",
+        "add_label_single": "Add to bag",
+        "adding_label": "Adding…",
+        "added_label": "Added to bag",
+        "sold_out_label": "Currently unavailable",
+        "error_label": "Couldn't add to cart. Try again.",
         "cross_link_label": "Not sure? Take the full hair test",
         "cross_link_url": "shopify://pages/hair-test",
         "color_scheme": "scheme-1",
