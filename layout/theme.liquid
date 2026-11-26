@@ -22,7 +22,8 @@
       assign brand_home_title = 'Prüv (Pruv) — Hard Water Hair Care for Thinning & Breakage | India'
       assign brand_description = "Prüv (Pruv) is a 3-step hair care system made for India's hard water: Trishield shampoo, Vector-5 density serum and a keratin-ceramide mask. Free shipping on prepaid orders above ₹999."
 
-      assign seo_title = page_title | strip
+      # page_title arrives HTML-escaped; decode it once so the escape on output doesn't double it ("&amp;amp;").
+      assign seo_title = page_title | replace: '&quot;', '"' | replace: '&#39;', "'" | replace: '&lt;', '<' | replace: '&gt;', '>' | replace: '&amp;', '&' | strip
       if request.page_type == 'index'
         if seo_title == blank or seo_title == shop.name or seo_title == brand_name
           assign seo_title = brand_home_title
