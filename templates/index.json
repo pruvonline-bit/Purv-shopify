@@ -366,6 +366,7 @@
         "texture_1": {
           "type": "texture",
           "settings": {
+            "image": "shopify://shop_images/Healthy_Glossy_Center-Parted_Hair.jpg",
             "zoom_label": "20x macro",
             "caption": "Cuticle laid flat after four weeks of the full ritual."
           }
