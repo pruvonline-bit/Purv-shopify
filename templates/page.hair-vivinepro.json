@@ -130,7 +130,7 @@
           "settings": {
             "icon": "sprout",
             "title": "Boosts hair growth",
-            "text": "[Placeholder] Extends the active growth (anagen) phase so each strand grows longer."
+            "text": "Extends the active growth (anagen) phase so each strand grows longer."
           }
         },
         "benefit_2": {
@@ -138,7 +138,7 @@
           "settings": {
             "icon": "shield",
             "title": "Reduces hair fall",
-            "text": "[Placeholder] Strengthens the root anchor so fewer strands shed daily."
+            "text": "Strengthens the root anchor so fewer strands shed daily."
           }
         },
         "benefit_3": {
@@ -146,7 +146,7 @@
           "settings": {
             "icon": "bolt",
             "title": "Energises follicles",
-            "text": "[Placeholder] Hair VivinePro re-energises follicle cells at the root."
+            "text": "Hair VivinePro re-energises follicle cells at the root."
           }
         },
         "benefit_4": {
@@ -154,7 +154,7 @@
           "settings": {
             "icon": "leaf",
             "title": "Calms the scalp",
-            "text": "[Placeholder] Soothes an inflamed, stressed scalp so follicles can work."
+            "text": "Soothes an inflamed, stressed scalp so follicles can work."
           }
         }
       },
