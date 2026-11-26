@@ -1,10 +1,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@500;600&family=Instrument+Serif:ital@1&display=swap"
   rel="stylesheet"
 >
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'section-pruv-footer.css' | asset_url | stylesheet_tag }}
 
@@ -23,112 +22,116 @@
 -%}
 
 <footer class="pruv-footer color-{{ section.settings.color_scheme }}{% if invert_logo %} pruv-footer--invert-logo{% endif %}">
-  <div class="pruv-footer__panel">
-    <div class="pruv-footer__row page-width">
-      <div class="pruv-footer__col pruv-footer__col--newsletter">
-        {%- if section.settings.newsletter_enable -%}
+  <div class="pruv-footer__inner page-width">
+    {%- comment -%} 1. Oversized newsletter call to action {%- endcomment -%}
+    {%- if section.settings.newsletter_enable -%}
+      <div class="pruv-footer__cta">
+        <div class="pruv-footer__cta-copy">
           {%- if section.settings.newsletter_eyebrow != blank -%}
-            <p class="pruv-footer__eyebrow">{{ section.settings.newsletter_eyebrow | escape }}</p>
+            <p class="pruv-footer__eyebrow">
+              <span class="pruv-footer__eyebrow-dot" aria-hidden="true"></span>
+              {{- section.settings.newsletter_eyebrow | escape -}}
+            </p>
           {%- endif -%}
           {%- if section.settings.newsletter_heading != blank -%}
-            <h2 class="pruv-footer__heading">{{ section.settings.newsletter_heading }}</h2>
+            <h2 class="pruv-footer__headline">{{ section.settings.newsletter_heading }}</h2>
           {%- endif -%}
+        </div>
 
-          {%- form 'customer', id: 'PruvFooterNewsletter', class: 'newsletter-form' -%}
+        <div class="pruv-footer__cta-form">
+          {%- form 'customer', id: 'PruvFooterNewsletter', class: 'pruv-footer__form' -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
-            <div class="newsletter-form__field-wrapper">
-              <div class="field">
-                <input
-                  id="NewsletterForm--{{ section.id }}"
-                  type="email"
-                  name="contact[email]"
-                  class="field__input"
-                  value="{{ form.email }}"
-                  aria-required="true"
-                  autocorrect="off"
-                  autocapitalize="off"
-                  autocomplete="email"
-                  {% if form.errors %}
-                    autofocus
-                    aria-invalid="true"
-                    aria-describedby="PruvFooterNewsletter-error"
-                  {% elsif form.posted_successfully? %}
-                    aria-describedby="PruvFooterNewsletter-success"
-                  {% endif %}
-                  placeholder="Your email address"
-                  aria-label="Your email address"
-                  required
-                >
-                <label class="field__label visually-hidden" for="NewsletterForm--{{ section.id }}">Your email address</label>
-                <button
-                  type="submit"
-                  class="newsletter-form__button field__button"
-                  name="commit"
-                  aria-label="{{ 'newsletter.button_label' | t }}"
-                >
-                  <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
-                </button>
-              </div>
-              {%- if form.errors -%}
-                <small class="newsletter-form__message form__message" id="PruvFooterNewsletter-error">
-                  <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
-                  {{- form.errors.translated_fields.email | capitalize }}
-                  {{ form.errors.messages.email -}}
-                </small>
-              {%- endif -%}
-            </div>
-            {%- if form.posted_successfully? -%}
-              <h3
-                class="newsletter-form__message newsletter-form__message--success form__message"
-                id="PruvFooterNewsletter-success"
-                tabindex="-1"
-                autofocus
+            <label class="visually-hidden" for="NewsletterForm--{{ section.id }}">Your email address</label>
+            <div class="pruv-footer__field">
+              <input
+                id="NewsletterForm--{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                class="pruv-footer__input"
+                value="{{ form.email }}"
+                aria-required="true"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                {% if form.errors %}
+                  autofocus
+                  aria-invalid="true"
+                  aria-describedby="PruvFooterNewsletter-error"
+                {% elsif form.posted_successfully? %}
+                  aria-describedby="PruvFooterNewsletter-success"
+                {% endif %}
+                placeholder="Your email address"
+                required
               >
-                <span class="svg-wrapper">{{- 'icon-success.svg' | inline_asset_content -}}</span>
-                {{- 'newsletter.success' | t }}
-              </h3>
+              <button type="submit" class="pruv-footer__submit" name="commit" aria-label="{{ 'newsletter.button_label' | t }}">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <p class="pruv-footer__form-message pruv-footer__form-message--error" id="PruvFooterNewsletter-error">
+                {{- form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email -}}
+              </p>
+            {%- endif -%}
+            {%- if form.posted_successfully? -%}
+              <p class="pruv-footer__form-message pruv-footer__form-message--success" id="PruvFooterNewsletter-success" tabindex="-1" autofocus>
+                {{- 'newsletter.success' | t -}}
+              </p>
             {%- endif -%}
           {%- endform -%}
-
           {%- if section.settings.newsletter_subtext != blank -%}
             <div class="pruv-footer__subtext rte">{{ section.settings.newsletter_subtext }}</div>
           {%- endif -%}
-        {%- endif -%}
-
-        <div class="pruv-footer__contact-row">
-          <div class="pruv-footer__contact-links">
-            {%- if section.settings.phone != blank -%}
-              <a class="pruv-footer__contact-item" href="tel:{{ section.settings.phone | remove: ' ' }}">
-                <svg class="pruv-footer__contact-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path
-                    d="M7.5 3.5C6.5 3.5 5.5 4.3 5.2 5.4C4.6 8 5.4 11.5 8.2 14.8C11 18.1 14.2 19.7 16.9 19.4C18.1 19.3 19.1 18.4 19.4 17.2L19.9 15.3C20 14.9 19.8 14.5 19.4 14.3L16.4 13C16 12.8 15.6 12.9 15.3 13.2L14.2 14.5C12.4 13.5 11 11.9 10.2 10L11.4 8.8C11.7 8.5 11.7 8.1 11.6 7.7L10.4 4.6C10.2 4.2 9.8 4 9.4 4.1L7.5 3.5Z"
-                    stroke="currentColor"
-                    stroke-width="1.3"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                {{ section.settings.phone }}
-              </a>
-            {%- endif -%}
-            {%- if section.settings.email != blank -%}
-              <a class="pruv-footer__contact-item" href="mailto:{{ section.settings.email }}">
-                <svg class="pruv-footer__contact-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <rect x="3.5" y="5.5" width="17" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/>
-                  <path d="M4.5 7L12 12.5L19.5 7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {{ section.settings.email }}
-              </a>
-            {%- endif -%}
-          </div>
-          {%- if section.settings.show_social and has_social_icons -%}
-            {%- render 'social-icons', class: 'pruv-footer__social' -%}
-          {%- endif -%}
         </div>
       </div>
+    {%- endif -%}
 
-      <div class="pruv-footer__col pruv-footer__col--links">
-        {%- if section.blocks.size > 0 -%}
-          <div class="pruv-footer__link-group">
+    {%- comment -%} 2. Brand + link columns on a hairline grid {%- endcomment -%}
+    {%- liquid
+      assign show_contact_col = false
+      if section.settings.phone != blank or section.settings.email != blank
+        assign show_contact_col = true
+      endif
+      if section.settings.show_social and has_social_icons
+        assign show_contact_col = true
+      endif
+    -%}
+    <div class="pruv-footer__grid">
+      <div class="pruv-footer__brand">
+        {%- assign footer_logo_width = section.settings.logo_width | default: 220 -%}
+        <a href="{{ routes.root_url }}" class="pruv-footer__brand-link" style="--footer-logo-width: {{ footer_logo_width }}px;">
+          {%- if settings.logo != blank -%}
+            {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+            <span class="pruv-footer__logo-wrapper">
+              {{
+                settings.logo
+                | image_url: width: 800
+                | image_tag:
+                  class: 'pruv-footer__logo',
+                  alt: logo_alt,
+                  loading: 'lazy',
+                  widths: '200, 300, 400, 600, 800',
+                  sizes: '(min-width: 750px) 320px, 60vw'
+              }}
+            </span>
+          {%- else -%}
+            <span class="pruv-footer__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+        {%- if section.settings.tagline != blank -%}
+          <p class="pruv-footer__tagline">{{ section.settings.tagline | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="pruv-footer__cols">
+      {%- if section.blocks.size > 0 -%}
+        <nav class="pruv-footer__col" aria-label="{{ section.settings.links_heading | default: 'Footer' | escape }}">
+          {%- if section.settings.links_heading != blank -%}
+            <p class="pruv-footer__col-heading">{{ section.settings.links_heading | escape }}</p>
+          {%- endif -%}
+          <ul class="pruv-footer__list list-unstyled">
             {%- for block in section.blocks -%}
               {%- liquid
                 assign link_url = block.settings.url
@@ -139,7 +142,7 @@
                   endif
                 endif
               -%}
-              <div class="pruv-footer__link-item" {{ block.shopify_attributes }}>
+              <li {{ block.shopify_attributes }}>
                 <a
                   {% if link_url == blank %}
                     role="link" aria-disabled="true"
@@ -148,79 +151,114 @@
                   {% endif %}
                   class="pruv-footer__link"
                 >
-                  {{- block.settings.label | escape -}}
+                  <span class="pruv-footer__link-text">{{ block.settings.label | escape }}</span>
+                  <span class="pruv-footer__link-arrow" aria-hidden="true">↗</span>
                 </a>
-              </div>
+              </li>
             {%- endfor -%}
-          </div>
-        {%- endif -%}
+          </ul>
+        </nav>
+      {%- endif -%}
 
-        <div class="pruv-footer__help">
-          {%- if section.settings.help_heading != blank -%}
-            <p class="pruv-footer__help-heading">{{ section.settings.help_heading | escape }}</p>
+      <div class="pruv-footer__col">
+        {%- if section.settings.help_heading != blank -%}
+          <p class="pruv-footer__col-heading">{{ section.settings.help_heading | escape }}</p>
+        {%- endif -%}
+        <ul class="pruv-footer__list list-unstyled">
+          {%- if section.settings.contact_link_label != blank -%}
+            {%- assign footer_contact_url = section.settings.contact_link_url | default: '/pages/contact' -%}
+            <li>
+              <a href="{{ footer_contact_url }}" class="pruv-footer__link">
+                <span class="pruv-footer__link-text">{{ section.settings.contact_link_label | escape }}</span>
+                <span class="pruv-footer__link-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
           {%- endif -%}
-          <ul class="pruv-footer__help-list list-unstyled">
-            {%- if section.settings.contact_link_label != blank -%}
-              {%- assign footer_contact_url = section.settings.contact_link_url | default: '/pages/contact' -%}
+          {%- if section.settings.show_policies -%}
+            {%- for policy in shop.policies -%}
+              {%- if policy != blank -%}
+                <li>
+                  <a href="{{ policy.url }}" class="pruv-footer__link">
+                    <span class="pruv-footer__link-text">{{ policy.title | escape }}</span>
+                    <span class="pruv-footer__link-arrow" aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </div>
+
+      {%- if show_contact_col -%}
+        <div class="pruv-footer__col">
+          <p class="pruv-footer__col-heading">Contact</p>
+          <ul class="pruv-footer__list list-unstyled">
+            {%- if section.settings.phone != blank -%}
               <li>
-                <a href="{{ footer_contact_url }}">
-                  {{- section.settings.contact_link_label | escape -}}
+                <a class="pruv-footer__link" href="tel:{{ section.settings.phone | remove: ' ' }}">
+                  <span class="pruv-footer__link-text">{{ section.settings.phone | escape }}</span>
                 </a>
               </li>
             {%- endif -%}
-            {%- if section.settings.show_policies -%}
-              {%- for policy in shop.policies -%}
-                {%- if policy != blank -%}
-                  <li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
-                {%- endif -%}
-              {%- endfor -%}
+            {%- if section.settings.email != blank -%}
+              <li>
+                <a class="pruv-footer__link" href="mailto:{{ section.settings.email }}">
+                  <span class="pruv-footer__link-text">{{ section.settings.email | escape }}</span>
+                </a>
+              </li>
             {%- endif -%}
           </ul>
+          {%- if section.settings.show_social and has_social_icons -%}
+            {%- render 'social-icons', class: 'pruv-footer__social' -%}
+          {%- endif -%}
         </div>
-
-        {%- if section.settings.payment_enable -%}
-          <div class="pruv-footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
-            </ul>
-          </div>
-        {%- endif -%}
+      {%- endif -%}
       </div>
     </div>
-  </div>
 
-  <div class="pruv-footer__brand page-width">
-    {%- if settings.logo != blank -%}
-      {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
-      {%- assign footer_logo_width = section.settings.logo_width | default: 280 -%}
-      <div class="pruv-footer__logo-wrapper" style="--footer-logo-width: {{ footer_logo_width }}px;">
-        {{
-          settings.logo
-          | image_url: width: 800
-          | image_tag:
-            class: 'pruv-footer__logo',
-            alt: logo_alt,
-            widths: '200, 300, 400, 600, 800',
-            style: 'width: var(--footer-logo-width, 280px); max-width: 90vw; height: auto;'
-        }}
-      </div>
-    {%- else -%}
-      <p class="pruv-footer__logo-text">{{ shop.name }}</p>
-    {%- endif -%}
-    {%- if section.settings.tagline != blank -%}
-      <p class="pruv-footer__tagline">{{ section.settings.tagline | escape }}</p>
-    {%- endif -%}
-    <p class="pruv-footer__copyright">
-      &copy; {{ 'now' | date: '%Y' }} {{ section.settings.legal_entity | default: shop.name | escape }}. All rights reserved.
-      {%- if section.settings.registration_number != blank %} {{ section.settings.registration_number | escape }}{% endif -%}
-    </p>
+    {%- comment -%} 3. Bottom bar {%- endcomment -%}
+    <div class="pruv-footer__bottom">
+      <p class="pruv-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }} {{ section.settings.legal_entity | default: shop.name | escape }}. All rights reserved.
+        {%- if section.settings.registration_number != blank %} {{ section.settings.registration_number | escape }}{% endif -%}
+      </p>
+
+      {%- if section.settings.payment_enable -%}
+        <div class="pruv-footer__payment">
+          <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
+          <ul class="list list-payment" role="list">
+            {%- for type in shop.enabled_payment_types -%}
+              <li class="list-payment__item">
+                {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <a href="#" class="pruv-footer__top" data-pruv-back-to-top>
+        <span>Back to top</span>
+        <span class="pruv-footer__top-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none">
+            <path d="M12 19V5M6 11l6-6 6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </a>
+    </div>
   </div>
 </footer>
+
+<script>
+  (function () {
+    var link = document.querySelector('[data-pruv-back-to-top]');
+    if (!link) return;
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -285,6 +323,16 @@
     },
     {
       "type": "header",
+      "content": "Links column"
+    },
+    {
+      "type": "text",
+      "id": "links_heading",
+      "label": "Heading",
+      "default": "Explore"
+    },
+    {
+      "type": "header",
       "content": "\"Need help?\" column"
     },
     {
@@ -329,12 +377,12 @@
     {
       "type": "range",
       "id": "logo_width",
-      "min": 140,
-      "max": 440,
+      "min": 80,
+      "max": 320,
       "step": 10,
       "unit": "px",
       "label": "Logo width",
-      "default": 280
+      "default": 220
     },
     {
       "type": "checkbox",
