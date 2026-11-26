@@ -59,7 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
   /* Hero image parallax */
   var heroImage = document.querySelector('.pruv-hero__image');
   var heroVisual = document.querySelector('.pruv-hero__visual');
-  if (heroImage && heroVisual && hasScrollTrigger) {
+  /* Skip it when the hero adapts to its image: those banners carry their own
+     text and layout, and the zoom would crop them. */
+  var heroRoot = heroVisual && heroVisual.closest('.pruv-hero');
+  var heroAdapts =
+    heroRoot &&
+    (window.matchMedia('(min-width: 750px)').matches
+      ? heroRoot.classList.contains('pruv-hero--desk-adapt')
+      : heroRoot.classList.contains('pruv-hero--mob-adapt'));
+  if (heroImage && heroVisual && hasScrollTrigger && !heroAdapts) {
     gsap.set(heroImage, { scale: 1.12, transformOrigin: 'center center' });
     gsap.to(heroImage, {
       yPercent: 10,

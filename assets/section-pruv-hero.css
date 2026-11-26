@@ -758,6 +758,7 @@ a.button.button--hero-solid-secondary,
     height: auto;
   }
   .pruv-hero--desk-adapt .pruv-hero__image {
+    transform: none !important;
     height: auto;
     object-fit: contain;
   }
@@ -774,6 +775,7 @@ a.button.button--hero-solid-secondary,
     height: auto;
   }
   .pruv-hero--mob-adapt .pruv-hero__image {
+    transform: none !important;
     height: auto;
     object-fit: contain;
   }
