@@ -57,6 +57,7 @@
         "bundle_upsell": {
           "type": "bundle_upsell",
           "settings": {
+            "bundle_product": "",
             "heading": "UPGRADE & SAVE MORE",
             "title_override": "The Complete Ritual Duo (Serum + Massager)",
             "badge_text": "SAVE 15%",
@@ -70,7 +71,8 @@
             "use_product_description": true,
             "heading": "Product Description",
             "icon": "none",
-            "content": ""
+            "content": "",
+            "page": ""
           }
         },
         "tab_benefits": {
@@ -80,7 +82,8 @@
             "use_product_description": false,
             "heading": "Key benefits",
             "icon": "none",
-            "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>"
+            "content": "<ul><li>Built and tested against Indian hard water, so it performs where ordinary formulas stall.</li><li>Cleans thoroughly without stripping the scalp barrier.</li><li>Colour-safe and keratin-safe, pH balanced.</li></ul>",
+            "page": ""
           }
         },
         "tab_patch_safety": {
@@ -90,7 +93,8 @@
             "use_product_description": false,
             "heading": "Patch test & safety warnings",
             "icon": "none",
-            "content": "<p><strong>24-Hour Patch Test Protocol:</strong></p><ol><li><strong>Step 1:</strong> Squeeze 2 drops onto clean skin behind your ear or inner forearm.</li><li><strong>Step 2:</strong> Allow to dry naturally and leave untouched for 24 hours.</li><li><strong>Step 3:</strong> If zero redness, burning, or itchiness occurs, proceed with daily scalp application.</li></ol><p><strong>Safety Assurance:</strong> 100% water-matrix elixir formulated without Minoxidil, Sulfates, Silicones, Parabens, or Synthetic Dyes. Safe for colour-treated and keratin-treated hair. Non-comedogenic. For external scalp use only.</p>"
+            "content": "<p><strong>24-Hour Patch Test Protocol:</strong></p><ol><li><strong>Step 1:</strong> Squeeze 2 drops onto clean skin behind your ear or inner forearm.</li><li><strong>Step 2:</strong> Allow to dry naturally and leave untouched for 24 hours.</li><li><strong>Step 3:</strong> If zero redness, burning, or itchiness occurs, proceed with daily scalp application.</li></ol><p><strong>Safety Assurance:</strong> 100% water-matrix elixir formulated without Minoxidil, Sulfates, Silicones, Parabens, or Synthetic Dyes. Safe for colour-treated and keratin-treated hair. Non-comedogenic. For external scalp use only.</p>",
+            "page": ""
           }
         },
         "tab_returns_policy": {
@@ -100,7 +104,8 @@
             "use_product_description": false,
             "heading": "Returns, replacements & guarantee",
             "icon": "none",
-            "content": "<p><strong>48-Hour Free Replacement:</strong> In the rare instance of transit damage, leakage, or pipette defect, email our care desk with an unboxing photo within 48 hours for immediate dispatch of a fresh bottle.</p><p><strong>90-Day Follicular Commitment:</strong> Hair density operates on 90-day biological cycles. If you follow the daily PM ritual for 90 days and need guidance, our trichology support team provides 1-on-1 consultation and satisfaction assistance.</p>"
+            "content": "<p><strong>48-Hour Free Replacement:</strong> In the rare instance of transit damage, leakage, or pipette defect, email our care desk with an unboxing photo within 48 hours for immediate dispatch of a fresh bottle.</p><p><strong>90-Day Follicular Commitment:</strong> Hair density operates on 90-day biological cycles. If you follow the daily PM ritual for 90 days and need guidance, our trichology support team provides 1-on-1 consultation and satisfaction assistance.</p>",
+            "page": ""
           }
         },
         "tab_risk_faqs": {
@@ -110,7 +115,8 @@
             "use_product_description": false,
             "heading": "Risk reduction FAQs",
             "icon": "none",
-            "content": "<p><strong>Q: Will I experience initial shedding (\"dread shed\")?</strong><br>A: No. Unlike drug-based vasodilators (such as Minoxidil) which can cause sudden shedding phases, Prüv is a gentle, bio-peptide water formula designed to nourish the scalp barrier without abrupt follicular shock.</p><p><strong>Q: Can I apply this if I use hair oil or styling products?</strong><br>A: Always apply Prüv first directly to a clean scalp (dry or damp). Let it absorb for 60 seconds before applying any hair creams or styling products. Heavy oils should never be applied before the elixir, as oil creates a barrier blocking water absorption.</p><p><strong>Q: Does it cause hair stiffness or sticky residue?</strong><br>A: Absolutely not. Prüv is 100% water-based and dries completely clean in under 60 seconds with natural root bounce.</p>"
+            "content": "<p><strong>Q: Will I experience initial shedding (\"dread shed\")?</strong><br>A: No. Unlike drug-based vasodilators (such as Minoxidil) which can cause sudden shedding phases, Prüv is a gentle, bio-peptide water formula designed to nourish the scalp barrier without abrupt follicular shock.</p><p><strong>Q: Can I apply this if I use hair oil or styling products?</strong><br>A: Always apply Prüv first directly to a clean scalp (dry or damp). Let it absorb for 60 seconds before applying any hair creams or styling products. Heavy oils should never be applied before the elixir, as oil creates a barrier blocking water absorption.</p><p><strong>Q: Does it cause hair stiffness or sticky residue?</strong><br>A: Absolutely not. Prüv is 100% water-based and dries completely clean in under 60 seconds with natural root bounce.</p>",
+            "page": ""
           }
         }
       },
@@ -148,27 +154,67 @@
     },
     "outcome": {
       "type": "pruv-product-outcome",
-      "settings": {}
+      "settings": {
+        "eyebrow": "THE PRÜV PROMISE",
+        "heading": "Real Results You Can Measure",
+        "subheading": "Clear answers on who this helps, what it transforms, and when you can expect real changes.",
+        "who_title": "Who This Is Built For",
+        "helps_title": "What It Transforms",
+        "timeline_title": "Expected Result Timeline",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "mechanism": {
       "type": "pruv-product-mechanism",
       "settings": {
+        "eyebrow": "THE MECHANISM OF ACTION",
+        "heading": "How Hero Actives Support The Outcome",
+        "subheading": "Every ingredient performs a specific biological mechanism to directly drive your 90-day transformation.",
         "science_link_label": "Discover the science of Hair VivinePro",
         "science_link_url": "/pages/hair-vivinepro",
-        "science_link_product": "pruv-vector-5-advanced-multi-pathway-structural-density"
+        "science_link_product": "pruv-vector-5-advanced-multi-pathway-structural-density",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "usage": {
       "type": "pruv-product-usage",
-      "settings": {}
+      "settings": {
+        "eyebrow": "THE DAILY PROTOCOL",
+        "heading": "How To Use For Peak Results",
+        "subheading": "A non-greasy, water-based ritual designed for effortless daily adherence. No rinsing required.",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     },
     "proof": {
       "type": "pruv-product-proof",
-      "settings": {}
+      "settings": {
+        "eyebrow": "VERIFIED TRICHOLOGICAL EVIDENCE",
+        "heading": "Real Biology. Compliant Proof. Zero Hype.",
+        "subheading": "We reject miracle overnight claims. Hair follicle renewal operates on 90-day biological cycles. Here is our unretouched clinical and consumer proof.",
+        "disclaimer": "<p><strong>Clinical & Regulatory Compliance:</strong> Results based on a 12-week consumer perception evaluation and trichological analysis with 120 participants adhering to once-daily PM application of Prüv Elixir. Before and after photographs are captured under standardized 5500K clinical lighting without digital retouches. Individual results vary based on follicle dormancy, age, and lifestyle factors. This cosmetic elixir is formulated without Minoxidil, Silicones, or Synthetic Fragrances, and is not intended to treat medical alopecia conditions.</p>",
+        "image_texture": "shopify://shop_images/Why_Pruv_TRISHIELD_Beats_Heavy_Oils.webp",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "cross_sell": {
       "type": "pruv-product-cross-sell",
-      "settings": {}
+      "settings": {
+        "eyebrow": "",
+        "heading": "",
+        "subheading": "",
+        "custom_target_product": "",
+        "color_scheme": "",
+        "padding_top": 48,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
