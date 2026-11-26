@@ -747,3 +747,39 @@ a.button.button--hero-solid-secondary,
     letter-spacing: 0.1em;
   }
 }
+
+/* --------------------------------------------------------------------------
+   "Adapt to image": show the whole image at its natural ratio, uncropped.
+   The image sits in normal flow and sets the height; content floats over it.
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 750px) {
+  .pruv-hero--desk-adapt .pruv-hero__media {
+    position: relative;
+    height: auto;
+  }
+  .pruv-hero--desk-adapt .pruv-hero__image {
+    height: auto;
+    object-fit: contain;
+  }
+  .pruv-hero--desk-adapt .pruv-hero__container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-hero--mob-adapt .pruv-hero__media {
+    position: relative;
+    height: auto;
+  }
+  .pruv-hero--mob-adapt .pruv-hero__image {
+    height: auto;
+    object-fit: contain;
+  }
+  .pruv-hero--mob-adapt .pruv-hero__container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+}
