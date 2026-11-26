@@ -1,10 +1,186 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Real results · Verified buyers",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "What customers say about <em>Prüv hair care</em>",
+            "heading_size": "h0",
+            "heading_tag": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every review, photo and progress diary on this page comes from a real Prüv customer and is shared with their permission. Photos are unretouched and only cropped.</p><p>See what people using the Prüv 3-step ritual (Trishield shampoo, Vector-5 density serum and the keratin-ceramide hair mask) have noticed on India's hard water, week by week.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "proof": {
+      "type": "pruv-proof",
+      "blocks": {
+        "case_1": {
+          "type": "compare",
+          "settings": {
+            "image_before": "shopify://shop_images/Pranav_before.png",
+            "image_after": "shopify://shop_images/Pranav_after.png",
+            "ratio": "4 / 5",
+            "start_position": 50,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 12",
+            "concern": "Hard-water buildup",
+            "note": "Hair stopped feeling coated by the second wash, and the ends held together for longer between trims.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "case_2": {
+          "type": "compare",
+          "settings": {
+            "image_before": "shopify://shop_images/Manisha_before.png",
+            "image_after": "shopify://shop_images/Manisha_after.png",
+            "ratio": "4 / 5",
+            "start_position": 45,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 16",
+            "concern": "Thinning at the part",
+            "note": "The part looked narrower in the same mirror, once the shedding in the shower slowed down.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "case_3": {
+          "type": "compare",
+          "settings": {
+            "image_before": "shopify://shop_images/Maneesh_before.png",
+            "image_after": "shopify://shop_images/Maneesh_after.png",
+            "ratio": "4 / 5",
+            "start_position": 55,
+            "label_before": "Before",
+            "label_after": "After",
+            "timeframe": "Week 0 to week 10",
+            "concern": "Breakage and short strands",
+            "note": "Fewer broken strands standing up along the part, and the ends stopped catching on the brush.",
+            "conditions": "Same light and framing. Unretouched.",
+            "credit": "Shared with permission"
+          }
+        },
+        "day_1": {
+          "type": "diary",
+          "settings": {
+            "image": "shopify://shop_images/Clinical_Scalp_Baseline_Portrait-1.webp",
+            "day_label": "",
+            "note": "Scalp felt clean rather than stripped.",
+            "milestone": false
+          }
+        },
+        "day_30": {
+          "type": "diary",
+          "settings": {
+            "image": "shopify://shop_images/Day_30_Haircare_Progress_Close-Up-2.webp",
+            "day_label": "",
+            "note": "Less buildup by the second day after washing.",
+            "milestone": false
+          }
+        },
+        "day_60": {
+          "type": "diary",
+          "settings": {
+            "image": "shopify://shop_images/Day_60_Hair_Quality_Improvement-3.webp",
+            "day_label": "",
+            "note": "Ends holding together between trims.",
+            "milestone": true
+          }
+        },
+        "day_90": {
+          "type": "diary",
+          "settings": {
+            "image": "shopify://shop_images/Day_90_Maintained_Hair_Results-4.webp",
+            "day_label": "",
+            "note": "Wash day lasts longer. Roots feel lighter.",
+            "milestone": true
+          }
+        },
+        "texture_1": {
+          "type": "texture",
+          "settings": {
+            "image": "shopify://shop_images/Healthy_Glossy_Center-Parted_Hair.jpg",
+            "zoom_label": "20x macro",
+            "caption": "Cuticle laid flat after four weeks of the full ritual."
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "My scalp still feels clean two days later, which has never happened with our water.",
+            "name": "Ananya S.",
+            "detail": "Bengaluru · 8 weeks in",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "quote": "Switched after years of imported brands. The difference with Delhi water showed in two washes.",
+            "name": "Kabir M.",
+            "detail": "Delhi · 12 weeks in",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "case_1",
+        "case_2",
+        "case_3",
+        "day_1",
+        "day_30",
+        "day_60",
+        "day_90",
+        "texture_1",
+        "review_1",
+        "review_2"
+      ],
+      "settings": {
+        "eyebrow": "Real results",
+        "heading": "Drag the line. <strong>Judge for yourself.</strong>",
+        "text": "<p>Same person, same light, same frame — only the weeks in between are different.</p>",
+        "drag_hint": "Drag to compare",
+        "slider_label": "Reveal the before photo",
+        "diary_heading": "The 90-day diary",
+        "wall_heading": "Up close, and in their words",
+        "verified_label": "Verified buyer",
+        "disclaimer": "<p>Real customers, shared with permission. Photos are unretouched and cropped only. Individual results vary with hair type, water and routine. These are cosmetic products and are not intended to diagnose, treat or cure any condition.</p>",
+        "color_scheme": "scheme-4",
+        "padding_top": 72,
+        "padding_bottom": 72
       }
     },
     "apps": {
@@ -12,10 +188,102 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "faqs": {
+      "type": "pruv-faqs",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Are Prüv reviews genuine?",
+            "answer": "<p>Yes. The reviews and photos here come from verified Prüv buyers and are shared with their permission. Photos are unretouched and cropped only.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "Will I get the same results?",
+            "answer": "<p>Individual results vary with hair type, water and routine. Prüv products are cosmetic products and are not intended to diagnose, treat or cure any condition.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I leave a review of Prüv?",
+            "answer": "<p>We'd love to hear from you. Email <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> with your order number, the product you used and how long you have been using it. Photos are welcome.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "Where can I buy genuine Prüv?",
+            "answer": "<p>Prüv is currently sold only on our official website, getpruv.com. <a href=\"/pages/where-to-buy\">See where to buy Prüv</a>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4"
+      ],
+      "settings": {
+        "heading": "Questions about <em>Prüv reviews</em>",
+        "open_first": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 88
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Start your own <em>Prüv results</em>",
+            "heading_size": "h1",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Trishield shampoo, Vector-5 density serum and the keratin-ceramide mask: one ritual made for hard water.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop the Prüv ritual",
+            "button_link": "/collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 52,
+        "padding_bottom": 64
+      }
     }
   },
   "order": [
-    "main",
-    "apps"
+    "intro",
+    "proof",
+    "apps",
+    "faqs",
+    "cta"
   ]
 }

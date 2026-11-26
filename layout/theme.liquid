@@ -54,6 +54,18 @@
         endcase
         assign seo_description = seo_description | strip_html | strip_newlines | replace: '  ', ' ' | strip | truncate: 160
       endif
+      if seo_description == blank and request.page_type == 'page'
+        case template.suffix
+          when 'reviews'
+            assign seo_description = "Read real Prüv (Pruv) reviews: verified buyers share before-and-after photos and results with the Prüv 3-step hard water hair care ritual."
+          when 'offers'
+            assign seo_description = 'Official Prüv (Pruv) coupon codes and offers: flat 25% off with PAYDAY, 15% off your first ritual with BEYONDDOUBT, and free shipping above ₹999.'
+          when 'where-to-buy'
+            assign seo_description = 'Where to buy genuine Prüv (Pruv) hair care: the official store getpruv.com, with delivery across India. Amazon, Flipkart and Nykaa coming soon.'
+          when 'press'
+            assign seo_description = 'Prüv (Pruv) press and media: brand facts, media enquiries and news about the Indian hair care brand made for hard water.'
+        endcase
+      endif
       if seo_description == blank or seo_description == shop.name
         assign seo_description = brand_description
       endif

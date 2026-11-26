@@ -1,14 +1,145 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Press & media",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Prüv <em>in the news</em>",
+            "heading_size": "h0",
+            "heading_tag": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Prüv is an Indian hair care brand creating science-led systems for hair and scalp, starting with a 3-step ritual made for India's hard water: Trishield Element Defense Shampoo, Vector-5 Advanced Multi-Pathway Structural Density Serum and the Breakage Repair Keratin-Ceramide Hair Mask.</p><p>Press coverage of Prüv is coming soon and will be listed on this page as it is published.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "media": {
+      "type": "multicolumn",
+      "blocks": {
+        "card_1": {
+          "type": "column",
+          "settings": {
+            "title": "Prüv in the news: coming soon",
+            "text": "<p>Articles, features and interviews about Prüv will appear here as they are published.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "card_2": {
+          "type": "column",
+          "settings": {
+            "title": "Media enquiries",
+            "text": "<p>For interviews, product samples and brand assets, email <a href=\"mailto:support@getpruv.com\">support@getpruv.com</a> with \"Press\" in the subject line.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "column",
+          "settings": {
+            "title": "Brand facts",
+            "text": "<p><strong>Name:</strong> Prüv (also written Pruv)<br><strong>Website:</strong> getpruv.com<br><strong>Category:</strong> Hair and scalp care<br><strong>Range:</strong> Trishield shampoo, Vector-5 serum, keratin-ceramide hair mask<br><strong>Availability:</strong> Online, across India</p>",
+            "link_label": "About Prüv",
+            "link": "/pages/about-us"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "title": "For <em>journalists and creators</em>",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "secondary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Discover the <em>Prüv ritual</em>",
+            "heading_size": "h1",
+            "heading_tag": "h2"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Science-led hair care built for India's hard water.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore Prüv",
+            "button_link": "/collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 52,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
-    "main"
+    "intro",
+    "media",
+    "cta"
   ]
 }

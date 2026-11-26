@@ -1,14 +1,178 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "intro": {
+      "type": "rich-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Official stockists",
+            "text_style": "subtitle",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Where to buy <em>genuine Prüv</em>",
+            "heading_size": "h0",
+            "heading_tag": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Right now the official Prüv website, getpruv.com, is the only place to buy genuine Prüv hair care. We ship to every serviceable pincode in India.</p><p>Prüv is coming soon to other platforms. We'll list each one here as it goes live.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop on getpruv.com",
+            "button_link": "/collections/all",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    },
+    "stores": {
+      "type": "multicolumn",
+      "blocks": {
+        "card_1": {
+          "type": "column",
+          "settings": {
+            "title": "getpruv.com: available now",
+            "text": "<p>Buy direct from Prüv. Free shipping on prepaid orders above ₹999.</p>",
+            "link_label": "Shop now",
+            "link": "/collections/all"
+          }
+        },
+        "card_2": {
+          "type": "column",
+          "settings": {
+            "title": "Amazon: coming soon",
+            "text": "<p>Coming soon. Until Prüv launches here, listings on this platform are not from us.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "card_3": {
+          "type": "column",
+          "settings": {
+            "title": "Flipkart: coming soon",
+            "text": "<p>Coming soon. Until Prüv launches here, listings on this platform are not from us.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "card_4": {
+          "type": "column",
+          "settings": {
+            "title": "Nykaa: coming soon",
+            "text": "<p>Coming soon. Until Prüv launches here, listings on this platform are not from us.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "title": "Buy Prüv <em>online</em>",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 4,
+        "column_alignment": "left",
+        "background_style": "secondary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "faqs": {
+      "type": "pruv-faqs",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Is Prüv available on Amazon, Flipkart or Nykaa?",
+            "answer": "<p>Not yet. Prüv is coming soon to other platforms. Until then, getpruv.com is the only official place to buy Prüv.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I buy Prüv in a store?",
+            "answer": "<p>Not at the moment. Prüv is sold online on getpruv.com and delivered across India.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "Why buy from getpruv.com?",
+            "answer": "<p>Buying direct guarantees a genuine product and full support from our team. Products bought from unauthorised sellers are not covered by our returns and replacement policy.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "Does Prüv ship internationally?",
+            "answer": "<p>We currently ship only within India. We hope to expand globally in the future.</p>"
+          }
+        },
+        "q_5": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Delivery typically takes 5 to 7 business days. Orders are processed within 24 hours before dispatch.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5"
+      ],
+      "settings": {
+        "heading": "Buying Prüv: <em>questions</em>",
+        "open_first": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 72,
+        "padding_bottom": 88
       }
     }
   },
   "order": [
-    "main"
+    "intro",
+    "stores",
+    "faqs"
   ]
 }
