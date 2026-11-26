@@ -339,6 +339,7 @@
         "day_30": {
           "type": "diary",
           "settings": {
+            "image": "shopify://shop_images/Day_30_Haircare_Progress_Close-Up-2.webp",
             "day_label": "Day 30",
             "note": "Less buildup by the second day after washing.",
             "milestone": false
@@ -347,6 +348,7 @@
         "day_60": {
           "type": "diary",
           "settings": {
+            "image": "shopify://shop_images/Day_60_Hair_Quality_Improvement-3.webp",
             "day_label": "Day 60",
             "note": "Ends holding together between trims.",
             "milestone": true
