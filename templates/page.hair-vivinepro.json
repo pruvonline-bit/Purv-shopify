@@ -226,12 +226,13 @@
         "heading": "Meet the active behind <strong>the results</strong>",
         "subheading": "",
         "spotlight_name": "Hair VivinePro™",
-        "spotlight_badge": "X% Hero active",
-        "spotlight_text": "<p>[Placeholder] What Hair VivinePro is, where it comes from and what makes it a first-of-its-kind active. Replace with supplier-approved copy.</p>",
-        "spotlight_note": "[Validated through in-vitro and in-vivo studies — confirm with supplier]",
+        "spotlight_badge": "3% Hairvivin-pro",
+        "spotlight_image": "shopify://shop_images/Hair_VivinePro_Advanced_Hair_Complex.png",
+        "spotlight_text": "<p><strong>NEXT-GENERATION HAIR-CARE ACTIVE</strong></p><p>A next-generation active designed for advanced hair and scalp-care formulations.</p><p>Hair VivinePro™ brings a science-led approach to modern hair care, supporting the development of formulations focused on healthier-looking hair, improved hair quality and scalp care.</p>",
+        "spotlight_note": "SCIENCE MEETS HAIR INNOVATION",
         "support_title": "Supported by 4 proven actives",
         "inci_label": "Full ingredient list",
-        "inci": "<p>[Placeholder] Aqua, …, Hair VivinePro™, … — paste the full INCI list from the pack.</p>",
+        "inci": "<ul><li><strong>Aminexil:</strong> Diaminopyrimidine Oxide.</li><li><strong>DHT-targeting support:</strong> Serenoa Serrulata (Saw Palmetto) and Oleanolic Acid.</li><li><strong>Follicular support:</strong> Apigenin and Biotinoyl Tripeptide-1.</li><li><strong>Plant growth-support complex:</strong> Pumpkin Seed, Baicalensis, Soybean, Wheat Germ and Pea Sprout extracts.</li><li><strong>Hair fibre support:</strong> Hydrolyzed Keratin, Panthenol and Biotin.</li><li><strong>Scalp care:</strong> Niacinamide, Caffeine and Zinc PCA.</li></ul>",
         "dark": false,
         "padding_top": 64,
         "padding_bottom": 64
@@ -243,22 +244,22 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "title": "Hair VivinePro™ reaches the follicle",
-            "text": "[Placeholder] The water-based formula carries the active to the root."
+            "title": "MULTI-ACTIVE FOLLICULAR SUPPORT",
+            "text": "Hair VivinePro™ combines Diaminopyrimidine Oxide, Apigenin and Biotinoyl Tripeptide-1 with botanical actives to support a comprehensive hair-care approach at the scalp level."
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "title": "Follicle cells are re-energised",
-            "text": "[Placeholder] The cellular pathway it activates."
+            "title": "SCALP & ROOT ENVIRONMENT",
+            "text": "Caffeine, Zinc PCA, Niacinamide, Saw Palmetto and Oleanolic Acid combine with botanical extracts to support scalp conditioning and targeted hair-care needs."
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "title": "Longer, stronger growth phase",
-            "text": "[Placeholder] More hairs stay in growth, for longer, with thicker strands."
+            "title": "STRONGER-LOOKING HAIR FIBRES",
+            "text": "Hydrolyzed Keratin, Copper Tripeptide-1, Biotin and Panthenol help condition hair fibres, improve manageability and support healthier-looking hair."
           }
         }
       },
@@ -271,9 +272,9 @@
         "anchor": "",
         "eyebrow": "Mechanism of action",
         "heading": "How <strong>Hair VivinePro™</strong> works",
-        "subheading": "<p>[Placeholder] One line on the root-cause approach.</p>",
-        "summary": "[Placeholder] Root cause → cellular response → visible result, in one sentence.",
-        "dark": true,
+        "subheading": "<p><strong>A multi-target approach combining follicular support, scalp conditioning and hair-fibre strengthening for healthier-looking hair.</strong></p>",
+        "summary": "Multi-active follicular support → Scalp conditioning → Stronger, healthier-looking hair.",
+        "dark": false,
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -284,33 +285,33 @@
         "pathway_1": {
           "type": "pathway",
           "settings": {
-            "name": "Marker 1",
-            "subtitle": "[Placeholder] What it controls",
-            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+            "name": "DHT-Related Pathway",
+            "subtitle": "Supports targeted androgen-related hair care",
+            "detail": "<p>Androgen signalling, particularly through dihydrotestosterone (DHT), plays an important role in androgenetic hair loss. Hair VivinePro™ incorporates Oleanolic Acid and Serenoa Serrulata (Saw Palmetto) as part of a targeted botanical hair-care approach.</p>"
           }
         },
         "pathway_2": {
           "type": "pathway",
           "settings": {
-            "name": "Marker 2",
-            "subtitle": "[Placeholder] What it controls",
-            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+            "name": "Follicular Support",
+            "subtitle": "Supports a healthy hair follicle environment",
+            "detail": "<p>Hair follicle function is influenced by multiple cellular and signalling processes. Hair VivinePro™ combines Diaminopyrimidine Oxide, Apigenin and Biotinoyl Tripeptide-1 to provide a multi-active approach to follicular care.</p>"
           }
         },
         "pathway_3": {
           "type": "pathway",
           "settings": {
-            "name": "Marker 3",
-            "subtitle": "[Placeholder] What it controls",
-            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+            "name": "Scalp Microenvironment",
+            "subtitle": "Helps maintain scalp balance and conditioning",
+            "detail": "<p>The scalp environment plays an important role in maintaining healthy-looking hair. Excess sebum and an imbalanced scalp environment can affect scalp comfort and hair manageability. Hair VivinePro™ combines Niacinamide, Caffeine and Zinc PCA with botanical extracts to support scalp conditioning.</p>"
           }
         },
         "pathway_4": {
           "type": "pathway",
           "settings": {
-            "name": "Marker 4",
-            "subtitle": "[Placeholder] What it controls",
-            "detail": "<p>[Placeholder] What this marker does in the follicle and what Hair VivinePro was shown to do to it.</p>"
+            "name": "Hair Fibre Integrity",
+            "subtitle": "Supports stronger, smoother-looking hair",
+            "detail": "<p>Hair fibres are exposed to mechanical, environmental and styling-related damage. Hair VivinePro™ incorporates conditioning and strengthening ingredients to improve the appearance, feel and manageability of hair.</p>"
           }
         }
       },
