@@ -114,7 +114,7 @@
 
 <section
   id="PruvHero-{{ section.id }}"
-  class="pruv-hero pruv-hero--desk-{{ section.settings.height }} pruv-hero--mob-{{ section.settings.mobile_height }} pruv-hero--mode-{{ section.settings.position_mode | default: 'grid' }} pruv-hero--mob-pos-{{ section.settings.mobile_content_position | default: 'bottom' }} color-{{ section.settings.color_scheme }}"
+  class="pruv-hero pruv-hero--desk-{{ section.settings.height }} pruv-hero--mob-{{ section.settings.mobile_height }} pruv-hero--mode-{{ section.settings.position_mode | default: 'grid' }} pruv-hero--mob-pos-{{ section.settings.mobile_content_position | default: 'bottom' }} color-{{ section.settings.color_scheme }}{% if section.settings.banner_link != blank %} pruv-hero--linked{% endif %}"
 >
   <div class="pruv-hero__visual">
     <div class="pruv-hero__media">
@@ -162,6 +162,13 @@
         {%- endif -%}
       </picture>
     </div>
+
+    {%- if section.settings.banner_link != blank -%}
+      {%- assign banner_link_label = section.settings.banner_link_label | default: seo_heading | default: shop.name -%}
+      <a href="{{ section.settings.banner_link }}" class="pruv-hero__banner-link">
+        <span class="visually-hidden">{{ banner_link_label | escape }}</span>
+      </a>
+    {%- endif -%}
 
     <div class="pruv-hero__container">
       {%- if section.settings.heading == blank or show_content == false -%}
@@ -317,6 +324,18 @@
       "id": "image_mobile",
       "label": "Mobile background image",
       "info": "Optional. Recommended: 800 x 1200px. If blank, desktop image will be used."
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner link",
+      "info": "Makes the whole banner clickable. Pick a page, product, collection or paste a URL. Buttons on the banner keep their own links."
+    },
+    {
+      "type": "text",
+      "id": "banner_link_label",
+      "label": "Banner link description",
+      "info": "Read out by screen readers, e.g. \"Shop the 3-step hair system\". Defaults to the page heading for search engines."
     },
     {
       "type": "select",

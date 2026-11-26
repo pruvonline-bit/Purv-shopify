@@ -104,6 +104,10 @@
             <div class="pruv-pproof__compare-visual" data-pproof-slider-frame>
               <!-- After Layer (Base) -->
               <div class="pruv-pproof__layer pruv-pproof__layer--after">
+                {%- if section.settings.image_after != blank -%}
+                  {%- assign proof_alt = section.settings.image_after.alt | default: 'After 90 days of consistent Prüv Elixir application - tighter hair parting line and visible density' | escape -%}
+                  {{ section.settings.image_after | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: '(min-width: 990px) 60vw, 100vw', alt: proof_alt }}
+                {%- else -%}
                 <img
                   src="{{ 'pruv-proof-after.jpg' | asset_url }}"
                   alt="After 90 days of consistent Prüv Elixir application - tighter hair parting line and visible density"
@@ -111,6 +115,7 @@
                   height="825"
                   loading="lazy"
                 >
+                {%- endif -%}
                 <div class="pruv-pproof__tag pruv-pproof__tag--after">
                   <span class="pruv-pproof__tag-dot pruv-pproof__tag-dot--green"></span>
                   DAY 90 (1× PM USE)
@@ -119,6 +124,10 @@
 
               <!-- Before Layer (Clipped) -->
               <div class="pruv-pproof__layer pruv-pproof__layer--before" data-pproof-before-layer>
+                {%- if section.settings.image_before != blank -%}
+                  {%- assign proof_alt = section.settings.image_before.alt | default: 'Baseline Day 0 - center hair parting line before starting routine' | escape -%}
+                  {{ section.settings.image_before | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: '(min-width: 990px) 60vw, 100vw', alt: proof_alt }}
+                {%- else -%}
                 <img
                   src="{{ 'pruv-proof-before.jpg' | asset_url }}"
                   alt="Baseline Day 0 - center hair parting line before starting routine"
@@ -126,6 +135,7 @@
                   height="825"
                   loading="lazy"
                 >
+                {%- endif -%}
                 <div class="pruv-pproof__tag pruv-pproof__tag--before">
                   <span class="pruv-pproof__tag-dot pruv-pproof__tag-dot--copper"></span>
                   DAY 0 (BASELINE)
@@ -209,6 +219,10 @@
       >
         <div class="pruv-pproof__texture-wrap">
           <div class="pruv-pproof__texture-media">
+            {%- if section.settings.image_texture != blank -%}
+              {%- assign proof_alt = section.settings.image_texture.alt | default: 'Lab comparison: Heavy greasy hair oil vs Prüv ultra-pure water elixir on cosmetic glass' | escape -%}
+              {{ section.settings.image_texture | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: '(min-width: 990px) 50vw, 100vw', alt: proof_alt }}
+            {%- else -%}
             <img
               src="{{ 'pruv-proof-texture.jpg' | asset_url }}"
               alt="Lab comparison: Heavy greasy hair oil vs Prüv ultra-pure water elixir on cosmetic glass"
@@ -216,6 +230,7 @@
               height="825"
               loading="lazy"
             >
+            {%- endif -%}
             <div class="pruv-pproof__texture-badge">LABORATORY TACTILE BENCHMARK</div>
           </div>
 
@@ -281,6 +296,10 @@
           <!-- UGC Card 1 -->
           <div class="pruv-pproof__ugc-card">
             <div class="pruv-pproof__ugc-media">
+              {%- if section.settings.image_ugc_1 != blank -%}
+                {%- assign proof_alt = section.settings.image_ugc_1.alt | default: 'Priya Sharma sharing her 90-day Prüv journey' | escape -%}
+                {{ section.settings.image_ugc_1 | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: '(min-width: 750px) 33vw, 80vw', alt: proof_alt }}
+              {%- else -%}
               <img
                 src="{{ 'pruv-proof-ugc-1.jpg' | asset_url }}"
                 alt="Priya Sharma sharing her 90-day Prüv journey"
@@ -288,6 +307,7 @@
                 height="800"
                 loading="lazy"
               >
+              {%- endif -%}
               <div class="pruv-pproof__ugc-play" aria-label="Customer Video Log">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3"/>
@@ -328,6 +348,10 @@
           <!-- UGC Card 2 -->
           <div class="pruv-pproof__ugc-card">
             <div class="pruv-pproof__ugc-media">
+              {%- if section.settings.image_ugc_2 != blank -%}
+                {%- assign proof_alt = section.settings.image_ugc_2.alt | default: 'Rohit V. sharing his experience with Prüv Elixir' | escape -%}
+                {{ section.settings.image_ugc_2 | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1100, 1600', sizes: '(min-width: 750px) 33vw, 80vw', alt: proof_alt }}
+              {%- else -%}
               <img
                 src="{{ 'pruv-proof-ugc-2.jpg' | asset_url }}"
                 alt="Rohit V. sharing his experience with Prüv Elixir"
@@ -335,6 +359,7 @@
                 height="800"
                 loading="lazy"
               >
+              {%- endif -%}
               <div class="pruv-pproof__ugc-play" aria-label="Customer Video Log">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
                   <polygon points="5 3 19 12 5 21 5 3"/>
@@ -433,6 +458,40 @@
       "id": "disclaimer",
       "label": "Legal & Clinical Disclaimer",
       "default": "<p><strong>Clinical & Regulatory Compliance:</strong> Results based on a 12-week consumer perception evaluation and trichological analysis with 120 participants adhering to once-daily PM application of Prüv Elixir. Before and after photographs are captured under standardized 5500K clinical lighting without digital retouches. Individual results vary based on follicle dormancy, age, and lifestyle factors. This cosmetic elixir is formulated without Minoxidil, Silicones, or Synthetic Fragrances, and is not intended to treat medical alopecia conditions.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After image (Day 90)",
+      "info": "Leave empty to keep the built-in image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before image (Day 0)",
+      "info": "Leave empty to keep the built-in image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_texture",
+      "label": "Texture comparison image",
+      "info": "Leave empty to keep the built-in image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_ugc_1",
+      "label": "Customer story 1 image",
+      "info": "Leave empty to keep the built-in image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_ugc_2",
+      "label": "Customer story 2 image",
+      "info": "Leave empty to keep the built-in image."
     },
     {
       "type": "header",

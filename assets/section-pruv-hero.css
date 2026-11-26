@@ -785,3 +785,32 @@ a.button.button--hero-solid-secondary,
     z-index: 2;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Clickable banner: a full-size link sits over the image and under the
+   content. Empty parts of the content layer let clicks fall through to it,
+   while the hero's own buttons and links stay clickable.
+   -------------------------------------------------------------------------- */
+.pruv-hero .pruv-hero__banner-link {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.pruv-hero__banner-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: -4px;
+}
+
+.pruv-hero--linked .pruv-hero__container,
+.pruv-hero--linked .pruv-hero__content {
+  pointer-events: none;
+}
+
+.pruv-hero--linked .pruv-hero__content a,
+.pruv-hero--linked .pruv-hero__content button,
+.pruv-hero--linked .pruv-hero__content input {
+  pointer-events: auto;
+}
