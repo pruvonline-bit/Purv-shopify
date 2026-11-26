@@ -602,6 +602,8 @@
 .pruv-proof__texture svg {
   display: block;
   width: 100%;
+  height: auto;
+  max-height: none;
   aspect-ratio: 3 / 2;
   object-fit: cover;
 }
