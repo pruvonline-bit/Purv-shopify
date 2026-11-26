@@ -282,6 +282,8 @@
         "case_1": {
           "type": "compare",
           "settings": {
+            "image_before": "shopify://shop_images/Pranav_before.png",
+            "image_after": "shopify://shop_images/Pranav_after.png",
             "ratio": "4 / 5",
             "start_position": 50,
             "label_before": "Before",
@@ -296,6 +298,8 @@
         "case_2": {
           "type": "compare",
           "settings": {
+            "image_before": "shopify://shop_images/Manisha_before.png",
+            "image_after": "shopify://shop_images/Manisha_after.png",
             "ratio": "4 / 5",
             "start_position": 45,
             "label_before": "Before",
@@ -310,6 +314,8 @@
         "case_3": {
           "type": "compare",
           "settings": {
+            "image_before": "shopify://shop_images/Maneesh_before.png",
+            "image_after": "shopify://shop_images/Maneesh_after.png",
             "ratio": "4 / 5",
             "start_position": 55,
             "label_before": "Before",
