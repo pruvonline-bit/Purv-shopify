@@ -437,10 +437,15 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
 }
 
+/* Show the image at its own proportions, uncropped: uploaded texture images often carry their
+   own headline, which a fixed 4:3 crop cut off. height: auto is needed because the image's
+   height attribute (e.g. 1067) otherwise sets a fixed pixel height. The built-in image is 4:3,
+   so it looks the same; the cap keeps a very tall upload from stretching the card. */
 .pruv-pproof__texture-media img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  max-height: 56rem;
+  object-fit: contain;
   border-radius: 1.4rem;
   display: block;
 }
