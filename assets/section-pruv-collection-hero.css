@@ -678,3 +678,44 @@
     letter-spacing: 0.1em;
   }
 }
+
+/* --------------------------------------------------------------------------
+   "Adapt to image": show the whole banner at its natural ratio, uncropped.
+   The media used to be absolutely positioned, so "adapt" only removed the
+   min-height and the box collapsed to the text height, cropping the artwork.
+   Here the image sits in normal flow and sets the height; content floats over
+   it. Same approach as the homepage hero (section-pruv-hero.css).
+   -------------------------------------------------------------------------- */
+@media screen and (min-width: 750px) {
+  .pruv-collection-hero--desk-adapt .pruv-collection-hero__media {
+    position: relative;
+    height: auto;
+  }
+  .pruv-collection-hero--desk-adapt .pruv-collection-hero__image {
+    transform: none !important;
+    height: auto;
+    object-fit: contain;
+  }
+  .pruv-collection-hero--desk-adapt .pruv-collection-hero__container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .pruv-collection-hero--mob-adapt .pruv-collection-hero__media {
+    position: relative;
+    height: auto;
+  }
+  .pruv-collection-hero--mob-adapt .pruv-collection-hero__image {
+    transform: none !important;
+    height: auto;
+    object-fit: contain;
+  }
+  .pruv-collection-hero--mob-adapt .pruv-collection-hero__container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+  }
+}
