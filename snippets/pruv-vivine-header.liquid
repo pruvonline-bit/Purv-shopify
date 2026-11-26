@@ -1,6 +1,7 @@
 {%- comment -%}
   Shared header + padding for the Hair VivinePro page sections (pruv-vivine-*).
   Reads eyebrow / heading / subheading / padding_top / padding_bottom from section.settings.
+  Pass heading_tag: 'h1' when the section opens the page.
 {%- endcomment -%}
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -22,7 +23,7 @@
         <p class="pruv-vivine__eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h2 class="pruv-vivine__title">{{ section.settings.heading }}</h2>
+        <{{ heading_tag | default: 'h2' }} class="pruv-vivine__title">{{ section.settings.heading }}</{{ heading_tag | default: 'h2' }}>
       {%- endif -%}
       {%- if section.settings.subheading != blank -%}
         <div class="pruv-vivine__subtitle">{{ section.settings.subheading }}</div>

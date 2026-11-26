@@ -1,0 +1,116 @@
+{%- comment -%}
+  Breadcrumb trail for products, collections, pages, blogs and articles.
+
+  Always outputs BreadcrumbList JSON-LD (helps Google show the site structure and sitelinks).
+  Pass visible: true to also print the trail on the page.
+
+  Usage:
+    {% render 'pruv-breadcrumbs' %}                 schema only (rendered once from layout/theme.liquid)
+    {% render 'pruv-breadcrumbs', visible: true %}  visible trail; schema is not repeated
+{%- endcomment -%}
+{%- liquid
+  assign show_trail = true
+  case request.page_type
+    when 'product', 'collection', 'page', 'blog', 'article'
+      assign show_trail = true
+    else
+      assign show_trail = false
+  endcase
+  if request.page_type == 'collection' and collection.handle == 'frontpage'
+    assign show_trail = false
+  endif
+-%}
+{%- if show_trail -%}
+  {%- liquid
+    assign base = request.origin
+    assign home_url = base | append: routes.root_url
+
+    assign mid_name = blank
+    assign mid_url = blank
+    assign last_name = blank
+    assign last_url = base | append: request.path
+
+    case request.page_type
+      when 'product'
+        if collection and collection.handle != 'frontpage'
+          assign mid_name = collection.title
+          assign mid_url = base | append: collection.url
+        else
+          assign mid_name = 'Shop'
+          assign mid_url = base | append: routes.all_products_collection_url
+        endif
+        assign last_name = product.title
+        assign last_url = base | append: product.url
+      when 'collection'
+        assign last_name = collection.title
+        assign last_url = base | append: collection.url
+      when 'page'
+        assign last_name = page.title
+        assign last_url = base | append: page.url
+      when 'blog'
+        assign last_name = blog.title
+        assign last_url = base | append: blog.url
+      when 'article'
+        assign mid_name = blog.title
+        assign mid_url = base | append: blog.url
+        assign last_name = article.title
+        assign last_url = base | append: article.url
+    endcase
+  -%}
+
+  {%- if visible -%}
+    <nav class="pruv-breadcrumbs" aria-label="Breadcrumb">
+      <ol class="pruv-breadcrumbs__list list-unstyled">
+        <li class="pruv-breadcrumbs__item"><a href="{{ routes.root_url }}">Home</a></li>
+        {%- if mid_name != blank -%}
+          <li class="pruv-breadcrumbs__item"><a href="{{ mid_url | remove_first: base }}">{{ mid_name | escape }}</a></li>
+        {%- endif -%}
+        <li class="pruv-breadcrumbs__item" aria-current="page">{{ last_name | escape }}</li>
+      </ol>
+    </nav>
+    <style>
+      .pruv-breadcrumbs { margin: 0 0 1.6rem; font-size: 1.3rem; line-height: 1.4; }
+      .pruv-breadcrumbs__list { display: flex; flex-wrap: wrap; gap: 0.4rem 0; margin: 0; padding: 0; }
+      .pruv-breadcrumbs__item { color: rgba(27, 29, 31, 0.6); }
+      .pruv-breadcrumbs__item + .pruv-breadcrumbs__item::before { content: '/'; margin: 0 0.8rem; color: rgba(27, 29, 31, 0.3); }
+      .pruv-breadcrumbs__item a { color: inherit; text-decoration: none; }
+      .pruv-breadcrumbs__item a:hover { color: #1B1D1F; text-decoration: underline; text-underline-offset: 0.2em; }
+      .pruv-breadcrumbs__item[aria-current] { color: #1B1D1F; }
+    </style>
+  {%- else -%}
+    {%- liquid
+      assign position = 1
+    -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": {{ home_url | json }}
+          },
+          {%- if mid_name != blank -%}
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": {{ mid_name | json }},
+              "item": {{ mid_url | json }}
+            },
+            {%- assign position = 3 -%}
+          {%- else -%}
+            {%- assign position = 2 -%}
+          {%- endif -%}
+          {
+            "@type": "ListItem",
+            "position": {{ position }},
+            "name": {{ last_name | json }},
+            "item": {{ last_url | json }}
+          }
+        ]
+      }
+    </script>
+  {%- endif -%}
+{%- endif -%}

@@ -46,6 +46,7 @@
           class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
+          {% render 'pruv-breadcrumbs', visible: true %}
           <h1
             class="article-template__title"
           >

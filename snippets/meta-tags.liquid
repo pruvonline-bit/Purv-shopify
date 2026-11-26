@@ -1,5 +1,5 @@
 {%- liquid
-  assign og_title = page_title | default: shop.name
+  assign og_title = seo_title | default: page_title | default: shop.name
   assign og_url = canonical_url | default: request.origin
   assign og_type = 'website'
   # Social previews fall back to the product/collection/article text before the generic shop text,
@@ -17,7 +17,7 @@
       assign og_fallback_description = page.content
   endcase
   assign og_fallback_description = og_fallback_description | strip_html | strip_newlines | truncate: 200
-  assign og_description = page_description | default: og_fallback_description | default: shop.description | default: shop.name
+  assign og_description = seo_description | default: page_description | default: og_fallback_description | default: shop.description | default: shop.name
 
   if request.page_type == 'product'
     assign og_type = 'product'

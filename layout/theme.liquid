@@ -15,18 +15,57 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    {%- liquid
+      # Brand SEO. Admin-set SEO titles and descriptions always win; these only fill gaps.
+      # The brand is written "Prüv"; "Pruv" (shop name, domain) is the searchable alternate spelling.
+      assign brand_name = 'Prüv'
+      assign brand_home_title = 'Prüv (Pruv) — Hard Water Hair Care for Thinning & Breakage | India'
+      assign brand_description = "Prüv (Pruv) is a 3-step hair care system made for India's hard water: Trishield shampoo, Vector-5 density serum and a keratin-ceramide mask. Free shipping on prepaid orders above ₹999."
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+      assign seo_title = page_title | strip
+      if request.page_type == 'index'
+        if seo_title == blank or seo_title == shop.name or seo_title == brand_name
+          assign seo_title = brand_home_title
+        endif
+      else
+        if current_tags
+          assign tag_list = current_tags | join: ', '
+          assign seo_title = seo_title | append: ' – tagged "' | append: tag_list | append: '"'
+        endif
+        if current_page != 1
+          assign seo_title = seo_title | append: ' – Page ' | append: current_page
+        endif
+        unless seo_title contains brand_name or seo_title contains shop.name
+          assign seo_title = seo_title | append: ' | ' | append: brand_name
+        endunless
+      endif
 
-    {% render 'meta-tags' %}
+      assign seo_description = page_description | strip
+      if seo_description == blank
+        case request.page_type
+          when 'product'
+            assign seo_description = product.description
+          when 'collection'
+            assign seo_description = collection.description
+          when 'article'
+            assign seo_description = article.excerpt_or_content
+          when 'page'
+            assign seo_description = page.content
+        endcase
+        assign seo_description = seo_description | strip_html | strip_newlines | replace: '  ', ' ' | strip | truncate: 160
+      endif
+      if seo_description == blank or seo_description == shop.name
+        assign seo_description = brand_description
+      endif
+    -%}
+
+    <title>{{ seo_title | escape }}</title>
+    <meta name="description" content="{{ seo_description | escape }}">
+
+    {% render 'meta-tags', seo_title: seo_title, seo_description: seo_description %}
+    {% render 'pruv-breadcrumbs' %}
+
+
 
     <script type="module">
       import * as StandardEvents from 'https://cdn.shopify.com/storefront/standard-events.js';
