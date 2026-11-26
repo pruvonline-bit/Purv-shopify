@@ -53,6 +53,8 @@
       "settings": {
         "image": "shopify://shop_images/PRUV_Hair_Care_Collection_Banner.png",
         "image_mobile": "shopify://shop_images/Pruv_Beyond_Doubt_Haircare_Collection_ee7da73e-6130-4683-87a0-0995ad7b3d7b.png",
+        "banner_link": "",
+        "banner_link_label": "",
         "height": "adapt",
         "mobile_height": "adapt",
         "overlay_opacity": 0,
@@ -73,6 +75,7 @@
         "show_content": true,
         "eyebrow": "",
         "heading": "",
+        "seo_heading": "Hair care made for India's hard water",
         "heading_size": "large",
         "subheading": "",
         "coupon_code": "",
@@ -120,22 +123,6 @@
             "button_link": "shopify://products/pruv-trishield-element-defense-shampoo"
           }
         },
-        "step-support": {
-          "type": "step",
-          "settings": {
-            "step_number": "3",
-            "title": "SUPPORT",
-            "tagline": "Phase 03 · Support the Follicle. Build Visible Density.",
-            "description": "Fuller-looking hair starts at the scalp. Formulated for thinning appearance, low density confidence, and scalp uncertainty. Acts across multiple pathways with HairVive Pro®, Procapil®, Baicapil®, AnaGain®, and Aminexil to reinforce anchoring and support fuller growth.",
-            "product_role": "Vector-5 Advance Multi Pathway Structural Density Serum",
-            "key_actives": "HairVive Pro® (3%) · Procapil® (3%) · Baicapil® (3%) · AnaGain® (2%) · Aminexil (1.5%)",
-            "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_20260912153032.mp4",
-            "media_file": "",
-            "viz": "support",
-            "button_label": "Shop Serum",
-            "button_link": "shopify://products/pruv-vector-5-advanced-multi-pathway-structural-density"
-          }
-        },
         "step-repair": {
           "type": "step",
           "settings": {
@@ -145,11 +132,27 @@
             "description": "For hair that snaps before it shines. Targeted recovery for breakage-prone, weak, rough or overworked lengths. A concentrated matrix of Ceramides and Hydrolyzed Keratin rebuilds damaged protein bonds while shielding lengths against friction and heat.",
             "product_role": "Breakage Repair Keratin-Ceramide Mask",
             "key_actives": "Ceramides · Keratin · Silk Protein · Panthenol · Argan Oil",
-            "video": "shopify://files/videos/Hair_mask_repair_animation_20260912153036.mp4",
+            "video": "shopify://files/videos/Hair_mask_repair_animation_bf0e0dc1.mp4",
             "media_file": "",
             "viz": "repair",
             "button_label": "Shop Mask",
             "button_link": "shopify://products/pruv-breakage-repair-keratin-ceramide-hair-mask"
+          }
+        },
+        "step-support": {
+          "type": "step",
+          "settings": {
+            "step_number": "3",
+            "title": "SUPPORT",
+            "tagline": "Phase 03 · Support the Follicle. Build Visible Density.",
+            "description": "Fuller-looking hair starts at the scalp. Formulated for thinning appearance, low density confidence, and scalp uncertainty. Acts across multiple pathways with HairVive Pro®, Procapil®, Baicapil®, AnaGain®, and Aminexil to reinforce anchoring and support fuller growth.",
+            "product_role": "Vector-5 Advance Multi Pathway Structural Density Serum",
+            "key_actives": "HairVive Pro® (3%) · Procapil® (3%) · Baicapil® (3%) · AnaGain® (2%) · Aminexil (1.5%)",
+            "video": "shopify://files/videos/Vector_hair_serum_animation_prompt_36c1b72d.mp4",
+            "media_file": "",
+            "viz": "support",
+            "button_label": "Shop Serum",
+            "button_link": "shopify://products/pruv-vector-5-advanced-multi-pathway-structural-density"
           }
         }
       },
